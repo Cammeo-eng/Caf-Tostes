@@ -1,0 +1,10 @@
+# Referências visuais de terceiros (imagens de outros designers) e fotos de trabalho: ficam só no computador
+/referencias/
+*.jfif
+
+# Cópia antiga dos dados, substituída pelos arquivos da raiz
+/tostes-cardapio-digital/PROMPT.md
+/tostes-cardapio-digital/cardapio-dados.md
+
+node_modules/
+.DS_Store

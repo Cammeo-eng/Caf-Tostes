@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+:root {
+  --creme: #f3ebdd;
+  --creme-escuro: #e9ddc9;
+  --marrom-escuro: #3b2a1e;
+  --marrom-terra: #6b4226;
+  --verde-musgo: #2f3b26;
+  --vinho: #6e1f2a;
+  --salvia: #c5cdb2;
+  --cafe-claro: #b8926f;
+  --vinho-claro: #ebd5d0;
+  --creme-claro: #fbf7ef;
+}
+
+@theme inline {
+  --color-creme: var(--creme);
+  --color-creme-escuro: var(--creme-escuro);
+  --color-marrom-escuro: var(--marrom-escuro);
+  --color-marrom-terra: var(--marrom-terra);
+  --color-verde-musgo: var(--verde-musgo);
+  --color-vinho: var(--vinho);
+  --color-salvia: var(--salvia);
+  --color-cafe-claro: var(--cafe-claro);
+  --color-vinho-claro: var(--vinho-claro);
+  --color-creme-claro: var(--creme-claro);
+  --font-titulo: var(--font-darumadrop);
+  --font-sans: var(--font-figtree);
+
+  /* escala de texto: 40/28/20/16/14/12 (+56 só no hero em desktop) */
+  --text-hero: 56px;
+  --text-hero--line-height: 1;
+  --text-h1: 40px;
+  --text-h1--line-height: 1.05;
+  --text-h2: 28px;
+  --text-h2--line-height: 1.15;
+  --text-h3: 20px;
+  --text-h3--line-height: 1.25;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-small: 14px;
+  --text-small--line-height: 1.45;
+  --text-label: 12px;
+  --text-label--line-height: 1.3;
+
+  --animate-pula: pula 220ms ease-out;
+  --animate-sobe: sobe 200ms ease-out;
+  --animate-aparece: aparece 240ms ease-out both;
+}
+
+body {
+  background-color: var(--creme);
+  /* textura de papel: ruído fino, quase imperceptível */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .26 0 0 0 0 .15 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--marrom-escuro);
+  font-family: var(--font-figtree), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1, h2, .titulo {
+  font-family: var(--font-darumadrop), sans-serif;
+  font-weight: 400;
+  color: var(--marrom-terra);
+}
+
+h3 {
+  font-weight: 700;
+  color: var(--marrom-escuro);
+}
+
+.preco {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--vinho);
+}
+
+/* listras verticais vinho e creme da capa do livreto */
+.listras {
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='14'%3E%3Crect width='12' height='14' fill='%236e1f2a'/%3E%3Crect x='12' width='12' height='14' fill='%23f3ebdd'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}
+
+.sem-scrollbar { scrollbar-width: none; }
+.sem-scrollbar::-webkit-scrollbar { display: none; }
+
+:focus-visible {
+  outline: 3px solid var(--verde-musgo);
+  outline-offset: 2px;
+}
+
+/* ---- componentes compartilhados: um só estilo de cartão, botão e rótulo ---- */
+.miolo { margin-inline: auto; max-width: 72rem; padding-inline: 20px; }
+@media (min-width: 768px) { .miolo { padding-inline: 24px; } }
+
+.secao { padding-block: 64px; }
+@media (min-width: 768px) { .secao { padding-block: 96px; } }
+
+.rotulo {
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cartao {
+  background: var(--creme-claro);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(59, 42, 30, 0.06);
+}
+
+.botao {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding-inline: 32px;
+  font-weight: 600;
+  transition: transform 150ms ease-out, background-color 150ms ease-out;
+}
+.botao:active { transform: scale(0.97); }
+.botao-vinho { background: var(--vinho); color: var(--creme); }
+.botao-contorno { border: 1.5px solid currentColor; }
+
+/* ilustrações: mesmo traço fino em qualquer tamanho */
+.ilu * { vector-effect: non-scaling-stroke; }
+
+@keyframes pula { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-4px); } }
+@keyframes sobe { from { transform: translateY(4px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+@keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
