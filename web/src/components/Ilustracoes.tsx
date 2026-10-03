@@ -119,3 +119,26 @@ export function Ambiente({ className }: P) {
     </svg>
   );
 }
+
+/** Desenho de cada categoria; ocupa o lugar da foto até a foto do item chegar. */
+export function IlustracaoDaCategoria({ slug, className }: { slug: string; className?: string }) {
+  switch (slug) {
+    case "chocolate-quente":
+    case "matchas-e-chai":
+      return <Caneca className={className} />;
+    case "gelados-de-cafe":
+    case "drinks":
+      return <Copo className={className} />;
+    case "croissants":
+      return <Croissant className={className} />;
+    case "sanduiches":
+    case "gratinados":
+      return <Sanduiche className={className} />;
+    case "brunches-e-rabanadas":
+      return <Prato className={className} />;
+    case "waffles":
+      return <Waffle className={className} />;
+    default:
+      return <XicaraLatte className={className} />;
+  }
+}

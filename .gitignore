@@ -8,3 +8,8 @@
 
 node_modules/
 .DS_Store
+
+# gerado no build a partir de fotos-originais/
+/web/public/img/
+/web/public/og/
+/web/src/data/fotos-geradas.json

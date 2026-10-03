@@ -4,8 +4,9 @@ import { CategoryBar } from "@/components/CategoryBar";
 import { Header } from "@/components/Header";
 import { Chapeu, Graos } from "@/components/Ilustracoes";
 import { ItemRow } from "@/components/ItemRow";
-import { categorias } from "@/data/categorias";
-import { itens } from "@/data/itens";
+import { avisoAlergenos, categorias, itens } from "@/data/cardapio";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return categorias.map((c) => ({ categoria: c.slug }));
@@ -61,7 +62,7 @@ export default async function Categoria({ params }: PageProps<"/cardapio/[catego
           <Chapeu className="w-12" />
         </div>
         <p className="mt-2 px-4 text-center text-sm">
-          Podemos ter traços de leite, glúten e oleaginosas em todos os preparos.
+          {avisoAlergenos}
         </p>
         <div className="listras mt-6" aria-hidden="true" />
       </footer>

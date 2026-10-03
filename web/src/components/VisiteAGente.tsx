@@ -1,6 +1,6 @@
-import { AVALIACAO_GOOGLE, ENDERECO } from "./Rodape";
+import { config } from "@/data/config";
 
-const q = encodeURIComponent(ENDERECO);
+const q = encodeURIComponent(config.endereco);
 
 export function VisiteAGente() {
   return (
@@ -13,7 +13,7 @@ export function VisiteAGente() {
       <div className="grid gap-8 md:grid-cols-2 md:gap-16">
         <div>
           <p className="rotulo text-verde-musgo">Onde fica</p>
-          <p className="mt-2 text-body">{ENDERECO}</p>
+          <p className="mt-2 text-body">{config.endereco}</p>
 
           <p className="rotulo mt-8 text-verde-musgo">Quando abrimos</p>
           <ul className="mt-2 max-w-xs space-y-1 text-body [font-variant-numeric:tabular-nums]">
@@ -26,7 +26,7 @@ export function VisiteAGente() {
             <a href={`https://www.google.com/maps/dir/?api=1&destination=${q}`} className="botao botao-vinho">
               Como chegar
             </a>
-            <a href={AVALIACAO_GOOGLE} className="botao botao-contorno text-verde-musgo">
+            <a href={config.avaliacaoGoogle} className="botao botao-contorno text-verde-musgo">
               Avalie a gente no Google
             </a>
           </div>

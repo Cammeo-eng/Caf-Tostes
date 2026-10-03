@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { statusDaLoja } from "@/data/horario";
+import { statusDaLoja } from "@/lib/horario";
+import { asset } from "@/lib/base";
 import { useBag } from "./BagProvider";
 
 // claro = no celular, flutua sobre a foto do hero (o estado da loja vira uma pílula creme);
@@ -22,14 +22,8 @@ export function Header({ claro = false }: { claro?: boolean }) {
   const conteudo = (
     <header className="mx-auto flex max-w-6xl items-center gap-4 px-5 pt-4 pb-2 md:px-6">
       <Link href="/" aria-label="TOSTES&CO, início" className="shrink-0 overflow-hidden rounded-full">
-        <Image
-          src="/logo.jpg"
-          alt="TOSTES&CO Cafeteria, desde 2024"
-          width={56}
-          height={56}
-          className="mix-blend-multiply"
-          priority
-        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={asset("/logo.jpg")} alt="TOSTES&CO Cafeteria, desde 2024" width={56} height={56} className="mix-blend-multiply" />
       </Link>
       <nav aria-label="Principal" className="hidden flex-1 justify-center gap-8 text-small font-semibold md:flex">
         <Link href="/cardapio/espresso-bar" className="py-3">Cardápio</Link>

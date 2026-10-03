@@ -1,42 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CombosDoDia } from "@/components/CombosDoDia";
 import { FavoritosCarrossel } from "@/components/FavoritosCarrossel";
 import { FotoAqui } from "@/components/FotoAqui";
+import { Foto } from "@/components/Foto";
 import { Header } from "@/components/Header";
-import {
-  Caneca, Chapeu, Copo, Croissant, Graos, Prato, Sanduiche, Waffle, XicaraLatte,
-} from "@/components/Ilustracoes";
+import { Caneca, Chapeu, Croissant, Graos, IlustracaoDaCategoria, Sanduiche, XicaraLatte } from "@/components/Ilustracoes";
 import { Rodape } from "@/components/Rodape";
 import { VisiteAGente } from "@/components/VisiteAGente";
-import { categorias } from "@/data/categorias";
-import { brl } from "@/data/itens";
-
-// ---- Amostra: combos fixos só para mostrar o layout. O sorteio real é a Fase 3. ----
-const centavos = (v: number) => Math.round(v * 100);
-const combos = [
-  { bebida: "Cappuccino", comida: "Croissant de doce de leite", precoBebida: 12, precoComida: 15 },
-  { bebida: "Latte Vanilla", comida: "Croissant de creme de avelã", precoBebida: 14, precoComida: 16 },
-].map((c) => {
-  const cheio = centavos(c.precoBebida) + centavos(c.precoComida);
-  const final = (cheio * 90) / 100; // 10% off, sem arredondar
-  return { ...c, cheio: cheio / 100, final: final / 100, economiza: (cheio - final) / 100 };
-});
-
-const icones: Record<string, ReactNode> = {
-  "espresso-bar": <XicaraLatte className="w-12" />,
-  coados: <XicaraLatte className="w-12" />,
-  "cafes-docinhos": <XicaraLatte className="w-12" />,
-  "chocolate-quente": <Caneca className="w-10" />,
-  "gelados-de-cafe": <Copo className="h-12" />,
-  "matchas-e-chai": <Caneca className="w-10" />,
-  drinks: <Copo className="h-12" />,
-  croissants: <Croissant className="w-14" />,
-  sanduiches: <Sanduiche className="w-12" />,
-  gratinados: <Sanduiche className="w-12" />,
-  "brunches-e-rabanadas": <Prato className="w-14" />,
-  waffles: <Waffle className="w-10" />,
-};
+import { categorias } from "@/data/cardapio";
+import { config } from "@/data/config";
 
 const porQue = [
   { icone: <Graos className="w-12" />, titulo: "Café selecionado", texto: "Grãos especiais escolhidos a dedo." },
@@ -70,13 +43,14 @@ export default function Home() {
         <Header claro />
         <div className="md:grid md:flex-1 md:grid-cols-2">
           <div className="relative h-[65svh] md:order-2 md:h-auto">
-            <Image
-              src="/fotos/capa.webp"
+            <Foto
+              nome="capa-latte-art"
+              razao="livre"
               alt="Latte art em forma de folha, vista de cima, cercada por copos de papel com o chapéu da TOSTES&CO"
-              fill
-              priority
               sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover object-[50%_47%]"
+              prioridade
+              className="absolute inset-0 !rounded-none"
+              fallback={<div className="absolute inset-0 bg-creme-escuro" />}
             />
           </div>
           <div className="px-5 py-12 md:order-1 md:flex md:flex-col md:justify-center md:py-16 md:pr-16 md:pl-[max(24px,calc((100vw-72rem)/2+24px))]">
@@ -99,24 +73,7 @@ export default function Home() {
               <Titulo etiqueta="Promoção do dia" claro>Dois combos novos, todo dia</Titulo>
               <p className="mb-8 max-w-sm text-small">Todo dia, dois combos novos com 10% off. Volte amanhã para ver os próximos.</p>
             </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              {combos.map((c) => (
-                <article key={c.bebida} className="cartao p-4 text-marrom-escuro">
-                  <div className="grid grid-cols-2 gap-2">
-                    <FotoAqui rotulo={c.bebida} desenho={<XicaraLatte className="w-2/5" />} proporcao="4:5" fundo="bg-salvia/60" cor="text-verde-musgo" />
-                    <FotoAqui rotulo={c.comida} desenho={<Croissant className="w-1/2" />} proporcao="4:5" fundo="bg-vinho-claro" cor="text-vinho" />
-                  </div>
-                  <h3 className="mt-4 text-h3">{c.bebida} + {c.comida}</h3>
-                  <p className="mt-2 text-small">
-                    de <s className="[font-variant-numeric:tabular-nums]">{brl(c.cheio)}</s> por{" "}
-                    <span className="preco text-h2">{brl(c.final)}</span>
-                  </p>
-                  <p className="text-small font-semibold text-verde-musgo">Você economiza {brl(c.economiza)}</p>
-                  <button type="button" className="botao botao-vinho mt-4 w-full">Quero esse combo</button>
-                </article>
-              ))}
-            </div>
+            <CombosDoDia />
           </div>
         </section>
 
@@ -132,7 +89,9 @@ export default function Home() {
                     i % 3 === 0 ? "bg-creme-escuro" : i % 3 === 1 ? "bg-salvia/60" : "bg-vinho-claro"
                   }`}
                 >
-                  <span className="grid h-12 place-items-center">{icones[c.slug]}</span>
+                  <span className="grid h-12 place-items-center">
+                    <IlustracaoDaCategoria slug={c.slug} className="h-12 w-auto max-w-16" />
+                  </span>
                   <span className="text-body font-bold text-marrom-escuro">{c.nome}</span>
                 </Link>
               </li>
@@ -181,12 +140,8 @@ export default function Home() {
             <Titulo etiqueta="Nossa casa">Um cantinho de 12 lugares</Titulo>
             <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-16">
               <div className="grid grid-cols-2 gap-2">
-                <div className="relative aspect-[4/5] animate-aparece overflow-hidden rounded-lg">
-                  <Image src="/fotos/espaco-salao.webp" alt="Salão da TOSTES&CO, com mesas altas de madeira e banquetas pretas" fill sizes="(min-width: 768px) 25vw, 45vw" className="object-cover object-bottom" />
-                </div>
-                <div className="relative aspect-[4/5] animate-aparece overflow-hidden rounded-lg">
-                  <Image src="/fotos/espaco-balcao.webp" alt="Balcão da TOSTES&CO, com a máquina de espresso, a chaleira e os métodos de coado" fill sizes="(min-width: 768px) 25vw, 45vw" className="object-cover" />
-                </div>
+                <Foto nome="espaco-salao" razao="4x5" alt="Salão da TOSTES&CO, com mesas altas de madeira e banquetas pretas" sizes="(min-width: 768px) 25vw, 45vw" />
+                <Foto nome="espaco-balcao" razao="4x5" alt="Balcão da TOSTES&CO, com a máquina de espresso, a chaleira e os métodos de coado" sizes="(min-width: 768px) 25vw, 45vw" />
                 <FotoAqui rotulo="a equipe" desenho={<Chapeu className="w-14" />} proporcao="livre" fundo="bg-vinho-claro" cor="text-vinho" className="col-span-2 aspect-[16/7]" />
               </div>
               <div className="self-center">
@@ -209,10 +164,8 @@ export default function Home() {
           <div className="grid items-center gap-6 rounded-lg bg-vinho p-8 text-creme md:grid-cols-[1.4fr_1fr] md:p-16">
             <div>
               <p className="rotulo mb-2 text-vinho-claro">Programa de fidelidade</p>
-              <h2 className="text-h2 !text-creme md:text-h1">A cada 10 pedidos, um mimo por nossa conta.</h2>
-              <p className="mt-4 max-w-xl text-body">
-                Escolha qualquer café quente do cardápio ou uma fatia da torta do dia. É só informar seu telefone no caixa: a gente marca tudo pra você.
-              </p>
+              <h2 className="text-h2 !text-creme md:text-h1">{config.fidelidade.titulo}</h2>
+              <p className="mt-4 max-w-xl text-body">{config.fidelidade.texto}</p>
             </div>
             <div className="hidden justify-center text-vinho-claro md:flex">
               <Caneca className="w-32" />

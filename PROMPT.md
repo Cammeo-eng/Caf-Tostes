@@ -1,5 +1,11 @@
 # Cardápio digital TOSTES&CO — briefing para o Claude Code
 
+> **ATUALIZAÇÃO (2026-10-03) — vale mais que o resto deste documento.**
+> O site **não terá painel admin, login nem Supabase**, e **não usa Vercel**. É 100% estático (Next.js com `output: 'export'`), hospedado no **GitHub Pages**
+> em https://cammeo-eng.github.io/Caf-Tostes/. Todo o conteúdo fica em arquivos do repositório (`web/src/data/`, `fotos-originais/`);
+> quando o dono quiser mudar algo (preço, item, texto, foto), pede ao Claude, que edita os arquivos e publica. Onde este documento fala em
+> admin, Supabase, banco, upload ou RLS, leia: arquivo no repositório. Veja `COMO-USAR.md` e `DECISOES.md`.
+
 Antes de qualquer coisa:
 1. Leia este arquivo inteiro, `cardapio-dados.md` e a skill `.claude/skills/tostes-sem-pontas-soltas/SKILL.md`. Siga a skill durante todo o projeto: **na dúvida, pergunte; nunca invente.**
 2. Crie `DECISOES.md` e um `CLAUDE.md` curto que diga: "Siga a skill tostes-sem-pontas-soltas e consulte PROMPT.md, cardapio-dados.md e DECISOES.md antes de decidir qualquer coisa."
@@ -63,11 +69,11 @@ Confira o contraste: texto sobre creme em marrom-escuro; texto sobre verde ou vi
 
 ## 4. Stack e custos
 
-- **Next.js** (App Router) + **TypeScript** + **Tailwind CSS**.
-- **Supabase** (plano grátis): banco de dados, login do admin e armazenamento das fotos.
-- **Deploy na Vercel** (plano grátis). O domínio será definido depois; por enquanto, usar o endereço da Vercel.
+- **Next.js** (App Router) + **TypeScript** + **Tailwind CSS**, exportado como site estático (`output: 'export'`). Sem API routes, server actions nem middleware.
+- **Sem Supabase, sem admin, sem login, sem Vercel.** Dados em arquivos versionados (`web/src/data/cardapio.ts`, `config.ts`, `combos-fixos.ts`, `conteudos/*.md`).
+- **Hospedagem:** GitHub Pages, publicado por GitHub Actions a cada push na `main` (`.github/workflows/pages.yml`). Repositório público: https://github.com/Cammeo-eng/Caf-Tostes
 - **Sem nenhum serviço pago e sem IA.** O pedido pelo WhatsApp usa link `wa.me`, sem API paga.
-- Imagens otimizadas (`next/image`, WebP), site rápido no 4G.
+- **Imagens:** fotos originais em `fotos-originais/`; o script `web/scripts/gerar-imagens.mjs` (sharp) gera WebP/AVIF nos recortes 1:1 e 4:5 e em tamanhos responsivos a cada build.
 - SEO local: título, descrição, Open Graph e schema.org `CafeOrCoffeeShop` com o horário.
 
 ## 5. Estrutura de páginas
@@ -103,7 +109,7 @@ Confira o contraste: texto sobre creme em marrom-escuro; texto sobre verde ou vi
 
 **Sacola e pedido (`/pedido`)**, ver seção 11.
 
-**Admin (`/admin`)**, ver seção 12.
+**Admin: removido** (ver seção 12); no lugar, `/combos-de-hoje` para o barista.
 
 ## 6. Promoção do dia: 2 combos sorteados (requisito inegociável)
 
@@ -116,7 +122,7 @@ Confira o contraste: texto sobre creme em marrom-escuro; texto sobre verde ou vi
   - adicionais nunca entram no sorteio.
 - **Preço:** soma dos preços originais com **10% de desconto, sem arredondamento**, com duas casas decimais. Exemplo: R$ 28,00 vira R$ 25,20. Mostrar "de ~~R$ 28,00~~ por **R$ 25,20**" e "Você economiza R$ 2,80".
 - **Cartão do combo:** fotos dos 2 itens, nomes, preço riscado, preço final e o botão "Quero esse combo", que adiciona o combo à sacola como uma unidade, com o desconto aplicado.
-- **No admin:** a tela "Combos de hoje" mostra os combos e os preços de forma clara para o barista registrar no Loyverse. O dono pode **trocar** um combo (sortear de novo ou escolher os itens) e **travar** o combo do dia. Se um item do combo for marcado como esgotado, o sistema oferece ressortear aquele combo.
+- **Para o barista:** a página `/combos-de-hoje` mostra os combos e os preços de forma clara para registrar no Loyverse. Para **trocar ou travar** o combo de uma data, o dono pede ao Claude, que cria a entrada em `combos-fixos.ts`. Item marcado como esgotado sai do sorteio.
 - Texto de apoio: "Todo dia, dois combos novos com 10% off. Volte amanhã para ver os próximos."
 
 ## 7. Categorias, nesta ordem
@@ -140,7 +146,7 @@ Os **adicionais** não são uma categoria: aparecem como opções em "Personaliz
 
 ## 8. Enquanto você espera: conteúdos curtos sobre café
 
-Uma seção com cartões ilustrados e textos de 1 a 2 minutos de leitura, escritos no tom da marca. **Escreva os textos a partir dos tópicos abaixo, com informação correta**, e marque cada um como "rascunho — revisar" até o dono aprovar. Tudo pode ser editado no admin.
+Uma seção com cartões ilustrados e textos de 1 a 2 minutos de leitura, escritos no tom da marca. **Escreva os textos a partir dos tópicos abaixo, com informação correta**, e marque cada um como "rascunho — revisar" até o dono aprovar. Os textos ficam em `web/src/data/conteudos/*.md` e são editados pelo Claude a pedido do dono.
 
 1. **Arábica x Robusta:** origem, sabor, acidez, cafeína (o robusta tem cerca de o dobro), por que o café especial costuma ser arábica, e o conilon/robusta amazônico brasileiro.
 2. **O que é café especial:** a pontuação de 80+ pontos na escala da SCA, a colheita seletiva, a rastreabilidade e a torra fresca.
@@ -194,18 +200,18 @@ Pagamento na retirada.
 ```
 
 - Depois do envio, mostrar uma tela de confirmação e limpar a sacola.
-- O número do WhatsApp fica nas configurações do admin.
+- O número do WhatsApp fica em `web/src/data/config.ts`.
 
-## 12. Painel admin (`/admin`)
+## 12. Painel admin — REMOVIDO
 
-- Login com e-mail e senha pelo Supabase Auth, com um único usuário, o dono.
-- **Itens:** criar, editar, excluir e reordenar. Campos: todos os de `cardapio-dados.md` mais foto (upload), disponível (sim/não), selo (nenhum / Novo / Favorito da casa) e "pode entrar no combo".
-- **Categorias:** renomear e reordenar.
-- **Combos de hoje:** ver, sortear de novo, escolher manualmente e travar.
-- **Enquanto você espera:** criar e editar textos, com status rascunho ou publicado.
-- **Configurações:** número do WhatsApp, horário de funcionamento, texto da fidelidade e endereço.
-- Interface simples, grande e em português. O dono vai usar pelo celular, então precisa ser rápida.
-- Todas as permissões configuradas com RLS no Supabase: o público só lê; só o admin escreve.
+Não existe painel admin. O que o admin faria agora é feito pelo Claude a pedido do dono, editando arquivos:
+
+- itens, preços, selos, disponibilidade ("esgotado hoje"), escalas e notas de sabor: `web/src/data/cardapio.ts`
+- WhatsApp, horário, **feriados**, endereço, texto da fidelidade, favoritos da home: `web/src/data/config.ts`
+- combos fixos para uma data: `web/src/data/combos-fixos.ts` (sem entrada para o dia, vale o sorteio)
+- textos do "Enquanto você espera": `web/src/data/conteudos/*.md`
+- fotos: `fotos-originais/<slug-do-item>.jpg`
+- o barista confere os combos do dia em `/combos-de-hoje` (página aberta, só leitura)
 
 ## 13. Perguntas iniciais (faça antes de começar)
 
@@ -220,10 +226,10 @@ Pagamento na retirada.
 ## 14. Fases (pare e mostre ao dono ao fim de cada uma)
 
 1. **Base:** projeto, tokens de cor e fonte, textura, ilustrações SVG, cabeçalho e rodapé.
-2. **Cardápio:** dados no Supabase a partir de `cardapio-dados.md` (script de importação), páginas de categoria e de item.
+2. **Cardápio:** dados em `web/src/data/cardapio.ts` (gerado de `cardapio-dados.md`), páginas de categoria e de item (`/item/[slug]` geradas no build).
 3. **Promoção do dia:** algoritmo de sorteio com testes (mesma data gera o mesmo resultado; sem repetição; desconto correto).
 4. **Sacola e pedido pelo WhatsApp.**
 5. **Início completo:** Por que a Tostes, fidelidade, avaliação no Google.
 6. **Enquanto você espera.**
-7. **Painel admin.**
-8. **Revisão final:** acessibilidade, velocidade, teste no celular, SEO, deploy na Vercel e um guia curto em português (`COMO-USAR.md`) de como editar o cardápio pelo admin.
+7. **Publicação:** migração para site estático, GitHub Actions e GitHub Pages (no lugar do painel admin).
+8. **Revisão final:** acessibilidade, velocidade, teste no celular, SEO, publicação no GitHub Pages e um guia curto em português (`COMO-USAR.md`) de como pedir mudanças ao Claude.

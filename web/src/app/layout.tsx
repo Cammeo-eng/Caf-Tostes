@@ -18,6 +18,7 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cammeo-eng.github.io/Caf-Tostes/"),
   title: "TOSTES&CO — Cafeteria em Fazenda Rio Grande",
   description: "Seu refúgio de café em Fazenda Rio Grande. Cafeteria artesanal: cardápio, combos do dia e pedido para retirada.",
   openGraph: {
@@ -25,7 +26,9 @@ export const metadata: Metadata = {
     description: "Seu refúgio de café em Fazenda Rio Grande.",
     locale: "pt_BR",
     type: "website",
+    images: [{ url: "og/capa-latte-art.jpg", width: 1200, height: 630, alt: "Latte art na TOSTES&CO" }],
   },
+  twitter: { card: "summary_large_image" },
   appleWebApp: { capable: true, title: "TOSTES&CO", statusBarStyle: "default" },
 };
 

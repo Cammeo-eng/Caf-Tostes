@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { brl } from "@/data/itens";
+import { brl } from "@/lib/formato";
 import { useBag } from "./BagProvider";
 
 // Faixa fixa acima da barra inferior (celular) com o resumo do pedido.

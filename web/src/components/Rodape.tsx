@@ -1,9 +1,5 @@
+import { config } from "@/data/config";
 import { Chapeu } from "./Ilustracoes";
-
-export const WHATSAPP = "5541988883470";
-export const INSTAGRAM = "https://www.instagram.com/tostes_co";
-export const AVALIACAO_GOOGLE = "https://g.page/r/CXD8XVyDVQdyEBM/review";
-export const ENDERECO = "R. Jequitibá - Eucaliptos, Fazenda Rio Grande - PR, 83823-004";
 
 export function Rodape() {
   return (
@@ -20,12 +16,12 @@ export function Rodape() {
 
         <div className="flex flex-col items-start gap-3 text-small md:items-end">
           <a
-            href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá, Tostes!")}`}
+            href={`https://wa.me/${config.whatsapp}?text=${encodeURIComponent("Olá, Tostes!")}`}
             className="botao bg-creme text-verde-musgo"
           >
             Chamar no WhatsApp
           </a>
-          <a href={INSTAGRAM} className="flex min-h-11 items-center underline underline-offset-4">
+          <a href={config.instagram} className="flex min-h-11 items-center underline underline-offset-4">
             @tostes_co no Instagram
           </a>
         </div>

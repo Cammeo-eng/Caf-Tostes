@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { categorias } from "@/data/categorias";
+import { categorias } from "@/data/cardapio";
 
 export function CategoryBar({ atual }: { atual: string }) {
   const ativa = useRef<HTMLAnchorElement>(null);
