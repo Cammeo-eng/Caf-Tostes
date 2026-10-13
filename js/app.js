@@ -1,4 +1,4 @@
-/* TOSTES to go — inicialização. */
+/* TOSTES café — inicialização. */
 "use strict";
 
 (function () {
@@ -11,6 +11,7 @@
   T.v.cardapio("bebidas");
   T.v.cardapio("comidas");
   T.v.aulas();
+  T.v.insta();
   T.v.rodape();
   T.v.observaBebidas();
   T.v.bag();

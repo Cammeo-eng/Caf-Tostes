@@ -1,4 +1,4 @@
-/* TOSTES to go — telas sobrepostas (detalhe do item, pedido, menu, quiz, aulas, chapéu)
+/* TOSTES café — telas sobrepostas (detalhe do item, pedido, menu, quiz, aulas, chapéu)
    e o histórico: o botão "voltar" do celular fecha a tela de cima. */
 "use strict";
 
@@ -26,7 +26,7 @@ T.L = (function () {
     const it = T.item(id);
     if (!it) return null;
     const el = camada("item/" + id, "layer-item", T.nome(it));
-    const S = { it, tam: 0, sel: T.padroes(it), qtd: 1 };
+    const S = { it, tam: T.tamRec(it), sel: T.padroes(it), qtd: 1 };
     el._S = S;
     el.innerHTML = `
       <div class="sheet">
@@ -60,13 +60,20 @@ T.L = (function () {
         h += `<p class="aviso-balcao">Consulte o sabor no balcão</p>`;
       } else {
         if (it.tamanhos.length > 1) {
+          const rec = T.temRec(it) ? T.tamRec(it) : -1;
           h += `<div class="grupo"><h3>Tamanho</h3><div class="tamanhos" role="radiogroup" aria-label="Tamanho">${it.tamanhos.map((t, k) =>
-            `<button type="button" role="radio" aria-checked="${k === S.tam}" class="tam" data-act="sheet-tam" data-i="${k}"><b>${E(t.rotulo)}</b><small>${t.ml ? t.ml + " ml" : "&nbsp;"}</small><span>${T.money(t.preco)}</span></button>`).join("")}</div></div>`;
+            `<div class="tam-col"><em class="rec">${k === rec ? "Recomendado" : "&nbsp;"}</em><button type="button" role="radio" aria-checked="${k === S.tam}" class="tam" data-act="sheet-tam" data-i="${k}"><b>${E(t.rotulo)}</b><small>${t.ml ? t.ml + " ml" : "&nbsp;"}</small><span>${T.money(t.preco)}</span></button></div>`).join("")}</div></div>`;
         }
         it.opcoes.forEach((g) => {
           const gr = OPCOES[g], escolhidos = S.sel[g] || [], max = T.maximo(gr);
           h += `<div class="grupo"><h3>${E(gr.titulo)}${gr.tipo === "multipla" && max !== Infinity ? ` <em>${escolhidos.length} de ${max}</em>` : ""}</h3>`;
-          if (gr.tipo === "unica") {
+          if (g === "leite") h += `<p class="nota-grupo">Zero lactose e vegetal sem custo extra.</p>`;
+          if (g === "complementos-cappuccino") {
+            h += `<div class="chips chips-gd" role="group" aria-label="${E(gr.titulo)}">${gr.itens.map((o) => {
+              const on = escolhidos.includes(o.id), trava = !on && escolhidos.length >= max;
+              return `<button type="button" class="chip chip-gd" aria-pressed="${on}" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${trava ? "disabled" : ""}>${E(o.nome)}</button>`;
+            }).join("")}</div>`;
+          } else if (gr.tipo === "unica") {
             h += `<div class="chips" role="radiogroup" aria-label="${E(gr.titulo)}">${gr.itens.map((o) =>
               `<button type="button" role="radio" aria-checked="${escolhidos.includes(o.id)}" class="chip" data-act="sheet-opt" data-g="${g}" data-o="${o.id}">${E(o.nome)}${o.valor > 0 ? ` <small>+ ${T.money(o.valor)}</small>` : ""}</button>`).join("")}</div>`;
           } else {
@@ -89,10 +96,10 @@ T.L = (function () {
       corpo.innerHTML = h;
       if (!pedivel) { barra.innerHTML = ""; barra.hidden = true; }
       else {
-        const falta = T.faltando(it, S.sel);
+        const falta = T.faltaTexto(it, S.sel);
         barra.hidden = false;
         barra.innerHTML = `
-          ${falta.length ? `<p class="falta">Falta escolher: ${E(falta.join(", "))}.</p>` : ""}
+          ${falta.length ? `<p class="falta">${E(falta.join(". "))}.</p>` : ""}
           <div class="barra-linha">
             <div class="stepper" role="group" aria-label="Quantidade">
               <button type="button" data-act="sheet-qtd" data-d="-1" aria-label="Diminuir" ${S.qtd <= 1 ? "disabled" : ""}>−</button>
@@ -162,7 +169,7 @@ T.L = (function () {
           let nome, det;
           if (l.tipo === "combo") {
             nome = l.prefixo;
-            det = l.partes.map((p) => { const it = T.item(p.id), o = T.textoOpcoes(it, p.sel); return T.nomeParte(p) + (o.length ? " · " + o.join(" · ") : ""); }).join("<br>+ ");
+            det = l.partes.map((p) => { const it = T.item(p.id), o = T.textoOpcoes(it, p.sel, true); return T.nomeParte(p) + (o.length ? " · " + o.join(" · ") : ""); }).join("<br>+ ");
             det = det.split("<br>").map((s, k) => (k ? "<br>" : "") + E(s).replace(/^\+ /, "+ ")).join("");
           } else {
             const it = T.item(l.id), o = T.textoOpcoes(it, l.sel);
@@ -203,6 +210,7 @@ T.L = (function () {
       el.innerHTML = h;
       const ns = $(".tela-scroll", el);
       if (ns) ns.scrollTop = y;
+      if (el._enviado && st.linhas.length) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status"><strong>Pedido aberto no WhatsApp.</strong> É só enviar a mensagem.<small>${E(CONFIG.instagramConvite.aposPedido)}</small></div>`);
       const n = $("#c-nome", el), o = $("#c-obs", el);
       if (n) n.addEventListener("input", () => c.set("nome", n.value, true));
       if (o) o.addEventListener("input", () => { c.set("obs", o.value.slice(0, 140), true); $("#c-cont", el).textContent = o.value.length + "/140"; });
@@ -211,8 +219,9 @@ T.L = (function () {
     render();
     return el;
   };
-  T.acts["c-qtd"] = (b) => T.cart.setQtd(+b.dataset.i, +b.dataset.d);
-  T.acts["c-rm"] = (b) => T.cart.remover(+b.dataset.i);
+  const semEnviado = () => { const el = $('.layer[data-name="pedido"]'); if (el) el._enviado = false; };
+  T.acts["c-qtd"] = (b) => { semEnviado(); T.cart.setQtd(+b.dataset.i, +b.dataset.d); };
+  T.acts["c-rm"] = (b) => { semEnviado(); T.cart.remover(+b.dataset.i); };
   T.acts["c-modo"] = (b) => { T.cart.st.modo = b.dataset.m; if (b.dataset.m === "balcao") T.cart.st.mesa = null; T.cart.set("modo", b.dataset.m); };
   T.acts["c-mesa"] = (b) => T.cart.set("mesa", +b.dataset.n);
   T.acts["c-limpar"] = () => { if (confirm("Limpar todo o pedido?")) T.cart.limpar(); };
@@ -220,7 +229,8 @@ T.L = (function () {
     if (!T.cart.podeEnviar()) return;
     window.open(T.cart.urlWhatsApp(), "_blank", "noopener");
     T.v.confete();
-    T.toast("Pedido aberto no WhatsApp. É só enviar a mensagem.");
+    const el = $('.layer[data-name="pedido"]');
+    if (el) { el._enviado = true; el._render(); const sc = $(".tela-scroll", el); if (sc) sc.scrollTop = 0; }
   };
   T.acts["ver-cardapio"] = () => api.irPara("bebidas");
 
@@ -304,7 +314,7 @@ T.L = (function () {
     lista.sort((a, b) => b.pts - a.pts || b.cafe - a.cafe || a.ordem - b.ordem);
     const n = Math.max(R.minimo, Math.min(R.maximo, lista.length));
     return lista.slice(0, n).map((x) => {
-      let tam = 0;
+      let tam = T.tamRec(x.i);                        // tamanho recomendado (M)
       escolhas.forEach((e) => {
         const alvo = R.tamanhoPorEtiqueta[e];
         const k = alvo ? x.i.tamanhos.findIndex((t) => t.rotulo === alvo) : -1;
@@ -314,30 +324,54 @@ T.L = (function () {
     });
   };
 
-  /* ===== aulas (cards de stories) ===== */
+  /* ===== aulas (stories) =====
+     Toque à direita avança, à esquerda volta; segurar pausa (não navega); deslizar para baixo ou o X fecha.
+     Os slides nunca avançam sozinhos. Ao fim da aula, segue para a próxima da mesma trilha. */
   build.aula = (id) => {
-    const aula = AULAS.find((a) => a.id === id);
+    let aula = AULAS.find((a) => a.id === id);
     if (!aula) return null;
     const el = camada("aula/" + id, "layer-aula", aula.titulo);
     let k = 0;
-    const n = aula.cards.length;
+    const abre = () => { T.vistas.marca(aula.id); T.v.atualizaVistas(); el.setAttribute("aria-label", aula.titulo); };
     const render = () => {
-      const c = aula.cards[k], ultimo = k === n - 1, it = aula.itemId && T.item(aula.itemId);
+      const n = aula.slides.length, s = aula.slides[k], ultimo = k === n - 1;
+      const botoes = [];
+      if (ultimo && aula.item && T.item(aula.item)) botoes.push(`<button type="button" class="btn btn-creme story-link" data-act="s-item" data-id="${E(aula.item)}">Ver no cardápio</button>`);
+      if (ultimo && aula.link) botoes.push(`<button type="button" class="btn btn-creme story-link" data-act="s-link" data-h="${E(aula.link.replace(/^#/, ""))}">Conhecer a história</button>`);
       el.innerHTML = `
-        <div class="story-barras" aria-hidden="true">${aula.cards.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
+        <div class="story-barras" aria-hidden="true">${aula.slides.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
         <div class="story-topo"><span>${E(aula.titulo)}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
-        <button type="button" class="zona zona-esq" data-act="s-ant" aria-label="Anterior" ${k === 0 ? "tabindex=-1" : ""}></button>
-        <button type="button" class="zona zona-dir" data-act="s-prox" aria-label="Próximo"></button>
-        <div class="story-corpo">${T.ilus(aula.ilustracao, "story-ilus")}<p class="story-n">${k + 1} de ${n}</p><h2 class="titulo">${E(c.titulo)}</h2><p>${E(c.texto)}</p>
-          ${ultimo && it ? `<button type="button" class="btn btn-creme story-link" data-act="open-item" data-id="${E(it.id)}">${E(aula.itemRotulo || "Ver no cardápio")}</button>` : ""}
+        <button type="button" class="zona zona-esq" data-act="s-ant" aria-label="Slide anterior"></button>
+        <button type="button" class="zona zona-dir" data-act="s-prox" aria-label="Próximo slide"></button>
+        <div class="story-corpo">${T.icone(aula.icone, "story-ilus")}<p class="story-n">${k + 1} de ${n}</p>${s.titulo ? `<h2 class="titulo">${E(s.titulo)}</h2>` : ""}<p>${E(s.texto)}</p>
+          ${botoes.length ? `<div class="story-botoes">${botoes.join("")}</div>` : ""}
         </div>`;
     };
-    el._story = { prox() { if (k < n - 1) { k++; render(); } else api.voltar(); }, ant() { if (k > 0) { k--; render(); } } };
+    const proximaAula = () => {
+      const irmas = AULAS.filter((a) => a.trilha === aula.trilha), j = irmas.indexOf(aula);
+      if (j < irmas.length - 1) { aula = irmas[j + 1]; k = 0; abre(); render(); } else api.voltar();
+    };
+    el._story = {
+      prox() { if (k < aula.slides.length - 1) { k++; render(); } else proximaAula(); },
+      ant() { if (k > 0) { k--; render(); } }
+    };
+    // segurar pausa: um toque longo não navega
+    let t0 = 0, x0 = 0, y0 = 0;
+    el.addEventListener("pointerdown", (e) => { t0 = Date.now(); x0 = e.clientX; y0 = e.clientY; });
+    el._longo = () => Date.now() - t0 > 350;
+    el.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    el.addEventListener("touchend", (e) => {
+      const t = e.changedTouches[0];
+      if (t.clientY - y0 > 110 && Math.abs(t.clientX - x0) < 70) api.voltar();     // deslizar para baixo fecha
+    }, { passive: true });
+    abre();
     render();
     return el;
   };
-  T.acts["s-prox"] = (b) => b.closest(".layer")._story.prox();
-  T.acts["s-ant"] = (b) => b.closest(".layer")._story.ant();
+  T.acts["s-prox"] = (b) => { const l = b.closest(".layer"); if (!l._longo()) l._story.prox(); };
+  T.acts["s-ant"] = (b) => { const l = b.closest(".layer"); if (!l._longo()) l._story.ant(); };
+  T.acts["s-item"] = (b) => api.fechaTudo(() => api.abrir("item/" + b.dataset.id));
+  T.acts["s-link"] = (b) => api.fechaTudo(() => api.abrir(b.dataset.h));
 
   /* ===== por trás do chapéu ===== */
   build.chapeu = () => {
@@ -385,7 +419,11 @@ T.L = (function () {
     });
     document.body.classList.toggle("trava", pilha.length > 0);
     T.v.bag();
-    if (!pilha.length && pendente) { const f = pendente; pendente = null; f(); }
+    if (!pilha.length && pendente) {
+      // espera o navegador terminar de voltar no histórico: ele restaura a rolagem antiga logo após o popstate
+      const f = pendente; pendente = null;
+      setTimeout(f, 60);
+    }
   }
 
   const api = {
@@ -405,6 +443,8 @@ T.L = (function () {
       if (!pilha.length) { if (cb) cb(); return; }
       pendente = cb || null;
       history.go(-pilha.length);
+      // se o navegador não avisar o popstate (acontece em alguns celulares), fecha à força
+      setTimeout(() => { if (pendente) { pilha = []; sincroniza(); } }, 400);
     },
     irPara(id) {                         // fecha as telas e rola até a seção
       api.fechaTudo(() => {
@@ -413,6 +453,7 @@ T.L = (function () {
       });
     },
     iniciar() {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";   // senão o navegador desfaz a rolagem do menu
       const hash = decodeURIComponent(location.hash.replace(/^#/, ""));
       history.replaceState({ pilha: [] }, "", limpa());
       if (hash && cria(hash)) {           // abriu direto por um link (#item/cappuccino, #chapeu...)

@@ -1,4 +1,4 @@
-# TOSTES to go — cardápio digital
+# TOSTES café — cardápio digital
 
 Site 100% estático (HTML, CSS e JavaScript puros, sem build), feito para celular. Abre direto pelo `index.html` ou em qualquer hospedagem estática.
 
@@ -12,8 +12,14 @@ Coloque em `assets/fotos/<id>.jpg`, onde `<id>` é o `id` do item em `data/menu.
 Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, `horarios`, `mesas`, texto da fidelidade, promoção do dia e o pedido favorito.
 
 ## Outros arquivos de dados
-- `data/aulas.js`: aulas "Enquanto seu café fica pronto" (textos provisórios).
+- `data/aulas.js`: trilhas (`AULAS_TRILHAS`) e aulas em formato stories (`slides`, `icone`, `item`, `link`).
 - `data/quiz.js`: perguntas e regras do quiz "Descubra seu café".
+
+## Marca, tamanho e fontes
+- Nome: **TOSTES café**.
+- `CONFIG.tamanhoRecomendado` define o tamanho recomendado (M).
+- Fonte Parisienne só nos títulos "O pedido favorito" e "Promoção do dia".
+- `CONFIG.mapa` (botão "Como chegar") e `CONFIG.instagramConvite` (bloco antes do rodapé).
 
 ## Mesas
 O QR code de cada mesa abre `.../index.html?mesa=3` (de 1 a 6). O pedido já vem com "Comer na mesa → Mesa 3".

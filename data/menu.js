@@ -1,7 +1,7 @@
 /* ==========================================================
-   TOSTES to go — Cardápio
+   TOSTES café — Cardápio
    Arquivo de dados. Para alterar preços, nomes ou itens, edite SÓ este arquivo.
-   Atualizado em: 2026-10-09
+   Atualizado em: 2026-10-12
 
    ITEM
    - id ............ identificador único. A foto do item é assets/fotos/<id>.jpg
@@ -9,19 +9,17 @@
    - categoria ..... id de uma categoria de CATEGORIAS (abaixo)
    - nome .......... nome curto exibido no card
    - nomeCompleto .. (opcional) nome usado no carrinho e na tela de detalhe
-   - subgrupo ...... (opcional) subtítulo dentro da categoria, ex.: "Salgados"
    - descricaoCurta  1 linha, aparece no card
    - descricao ..... (opcional) texto completo da tela de detalhe; vazio = usa a curta
    - ingredientes .. lista do que vai no item
    - tamanhos ...... lista { rotulo, ml, preco }. 1 tamanho = preço único.
-                     Mais de 1 = cliente escolhe (P, M, G, Gelado)
-   - opcoes ........ ids de OPCOES (leite, extras, pao, sabores-soda)
+                     Mais de 1 = cliente escolhe. O tamanho recomendado (M) vem
+                     definido em CONFIG.tamanhoRecomendado
+   - opcoes ........ ids de OPCOES (leite, extras, complementos-cappuccino, pao, sabores-soda)
    - preparo ....... (opcional) como é preparado; vazio = seção não aparece
    - fichaTecnica .. (opcional) { dose: "18 g", extracao: "28 s", temperatura: "65 °C" }
                      null = não aparece
-   - etiquetas ..... usadas no quiz "Descubra seu café":
-                     doce|amargo · leite|sem-leite · quente|gelado · intenso|leve · cafe|sem-cafe
-                     (amargo = não adoçado)
+   - etiquetas ..... usadas no quiz "Descubra seu café" (lista completa em data/quiz.js)
    - promocaoElegivel  false = fica fora do sorteio da Promoção do dia
    - selo .......... (opcional) "favorito" = etiqueta "Favorito da casa"
    - serve ......... (opcional) número de pessoas
@@ -34,7 +32,7 @@ const CATEGORIAS = [
     "id": "espresso-bar",
     "grupo": "bebidas",
     "nome": "Espresso Bar",
-    "nota": "Bebidas com leite: P 170 ml · M 200 ml · G 250 ml"
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
   },
   {
     "id": "coados",
@@ -45,26 +43,26 @@ const CATEGORIAS = [
   {
     "id": "docinhos",
     "grupo": "bebidas",
-    "nome": "Cafés Docinhos",
-    "nota": "P 170 ml · M 200 ml · G 250 ml"
+    "nome": "Cafés com Sabor",
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
   },
   {
     "id": "autorais",
     "grupo": "bebidas",
     "nome": "Autorais da Casa",
-    "nota": "Receitas criadas na TOSTES."
+    "nota": "Receitas criadas aqui."
+  },
+  {
+    "id": "chocolate-quente",
+    "grupo": "bebidas",
+    "nome": "Chocolate Quente",
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
   },
   {
     "id": "gelados",
     "grupo": "bebidas",
     "nome": "Gelados de Café",
     "nota": ""
-  },
-  {
-    "id": "chocolate-quente",
-    "grupo": "bebidas",
-    "nome": "Chocolate Quente",
-    "nota": "P 170 ml · M 200 ml · G 250 ml"
   },
   {
     "id": "matcha",
@@ -85,9 +83,15 @@ const CATEGORIAS = [
     "nota": ""
   },
   {
-    "id": "croissants",
+    "id": "croissants-salgados",
     "grupo": "comidas",
-    "nome": "Croissants",
+    "nome": "Croissants Salgados",
+    "nota": "Feitos todos os dias."
+  },
+  {
+    "id": "croissants-doces",
+    "grupo": "comidas",
+    "nome": "Croissants Doces",
     "nota": "Feitos todos os dias."
   },
   {
@@ -106,12 +110,6 @@ const CATEGORIAS = [
     "id": "brunches",
     "grupo": "comidas",
     "nome": "Brunches",
-    "nota": ""
-  },
-  {
-    "id": "rabanadas",
-    "grupo": "comidas",
-    "nome": "Rabanadas",
     "nota": ""
   },
   {
@@ -147,16 +145,14 @@ const OPCOES = {
         "padrao": true
       },
       {
-        "id": "sem-lactose",
-        "nome": "Sem lactose",
-        "valor": 3.0,
-        "precoAConfirmar": true
+        "id": "zero-lactose",
+        "nome": "Zero lactose",
+        "valor": 0
       },
       {
         "id": "aveia",
         "nome": "Vegetal de aveia",
-        "valor": 5.0,
-        "precoAConfirmar": true
+        "valor": 0
       }
     ]
   },
@@ -166,30 +162,6 @@ const OPCOES = {
     "obrigatoria": false,
     "itens": [
       {
-        "id": "shot-extra",
-        "nome": "Shot extra de espresso",
-        "valor": 4.0,
-        "precoAConfirmar": true
-      },
-      {
-        "id": "calda-caramelo",
-        "nome": "Calda de caramelo",
-        "valor": 2.0,
-        "precoAConfirmar": true
-      },
-      {
-        "id": "calda-baunilha",
-        "nome": "Calda de baunilha",
-        "valor": 2.0,
-        "precoAConfirmar": true
-      },
-      {
-        "id": "calda-avela",
-        "nome": "Calda de avelã",
-        "valor": 2.0,
-        "precoAConfirmar": true
-      },
-      {
         "id": "chantilly",
         "nome": "Chantilly",
         "valor": 2.0
@@ -198,6 +170,41 @@ const OPCOES = {
         "id": "marshmallows",
         "nome": "Marshmallows",
         "valor": 2.0
+      },
+      {
+        "id": "chocolate",
+        "nome": "Chocolate",
+        "valor": 2.0,
+        "precoAConfirmar": true
+      }
+    ]
+  },
+  "complementos-cappuccino": {
+    "titulo": "Monte o seu (escolha de 1 a 4)",
+    "tipo": "multipla",
+    "obrigatoria": true,
+    "min": 1,
+    "max": 4,
+    "itens": [
+      {
+        "id": "cacau",
+        "nome": "Cacau",
+        "valor": 0
+      },
+      {
+        "id": "chocolate",
+        "nome": "Chocolate",
+        "valor": 0
+      },
+      {
+        "id": "canela",
+        "nome": "Canela",
+        "valor": 0
+      },
+      {
+        "id": "acucar-baunilha",
+        "nome": "Açúcar de baunilha",
+        "valor": 0
       }
     ]
   },
@@ -289,7 +296,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "encorpado",
+      "cafeina-alta",
+      "classico",
+      "notas-do-grao"
     ],
     "promocaoElegivel": true
   },
@@ -321,7 +332,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "encorpado",
+      "cafeina-alta",
+      "classico",
+      "notas-do-grao"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -354,7 +369,10 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "encorpado",
+      "cafeina-alta",
+      "classico"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -388,7 +406,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "liquido",
+      "cafeina-alta",
+      "classico",
+      "notas-do-grao"
     ],
     "promocaoElegivel": true
   },
@@ -422,7 +444,10 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "espumoso",
+      "cafeina-alta",
+      "classico"
     ],
     "promocaoElegivel": true
   },
@@ -456,7 +481,10 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-alta",
+      "classico"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -492,7 +520,10 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-alta",
+      "classico"
     ],
     "promocaoElegivel": true
   },
@@ -500,7 +531,7 @@ const MENU = [
     "id": "cappuccino",
     "grupo": "bebidas",
     "categoria": "espresso-bar",
-    "nome": "Cappuccino",
+    "nome": "Cappuccino Italiano",
     "descricaoCurta": "Espresso, leite vaporizado e espuma.",
     "descricao": "",
     "ingredientes": [
@@ -537,9 +568,66 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "espumoso",
+      "cafeina-media",
+      "classico"
     ],
     "promocaoElegivel": true
+  },
+  {
+    "id": "monte-seu-cappuccino",
+    "grupo": "bebidas",
+    "categoria": "espresso-bar",
+    "nome": "Monte seu Cappuccino",
+    "descricaoCurta": "Cappuccino com os complementos que você escolher.",
+    "descricao": "",
+    "ingredientes": [
+      "Espresso",
+      "Leite vaporizado",
+      "Espuma de leite",
+      "Complementos à escolha: cacau, chocolate, canela, açúcar de baunilha"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "P",
+        "ml": 170,
+        "preco": 12.0
+      },
+      {
+        "rotulo": "M",
+        "ml": 200,
+        "preco": 13.0
+      },
+      {
+        "rotulo": "G",
+        "ml": 250,
+        "preco": 14.0
+      }
+    ],
+    "opcoes": [
+      "leite",
+      "complementos-cappuccino",
+      "extras"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/monte-seu-cappuccino.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "quente",
+      "leve",
+      "cafe",
+      "espumoso",
+      "cafeina-media",
+      "diferente",
+      "chocolate",
+      "cacau",
+      "canela",
+      "baunilha"
+    ],
+    "promocaoElegivel": false
   },
   {
     "id": "cafe-latte",
@@ -581,7 +669,10 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico"
     ],
     "promocaoElegivel": true
   },
@@ -627,7 +718,12 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico",
+      "chocolate",
+      "cacau"
     ],
     "promocaoElegivel": true
   },
@@ -658,7 +754,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "liquido",
+      "cafeina-alta",
+      "classico",
+      "notas-do-grao"
     ],
     "promocaoElegivel": true
   },
@@ -691,7 +791,10 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "liquido",
+      "cafeina-alta",
+      "classico"
     ],
     "promocaoElegivel": true
   },
@@ -721,7 +824,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "liquido",
+      "cafeina-alta",
+      "diferente",
+      "notas-do-grao"
     ],
     "promocaoElegivel": false,
     "serve": 2
@@ -752,7 +859,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "encorpado",
+      "cafeina-alta",
+      "diferente",
+      "notas-do-grao"
     ],
     "promocaoElegivel": false,
     "serve": 2
@@ -798,7 +909,12 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "espumoso",
+      "cafeina-media",
+      "classico",
+      "caramelo",
+      "sobremesa"
     ],
     "promocaoElegivel": true
   },
@@ -843,7 +959,11 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico",
+      "avela"
     ],
     "promocaoElegivel": true
   },
@@ -888,7 +1008,11 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico",
+      "chocolate"
     ],
     "promocaoElegivel": true
   },
@@ -933,7 +1057,13 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-alta",
+      "diferente",
+      "condensado",
+      "sobremesa",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true
   },
@@ -978,7 +1108,11 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico",
+      "baunilha"
     ],
     "promocaoElegivel": true
   },
@@ -1023,7 +1157,11 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "classico",
+      "caramelo"
     ],
     "promocaoElegivel": true
   },
@@ -1069,7 +1207,11 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "espumoso",
+      "cafeina-media",
+      "classico",
+      "avela"
     ],
     "promocaoElegivel": true
   },
@@ -1114,7 +1256,14 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "doce-de-leite",
+      "caramelo",
+      "sobremesa",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true
   },
@@ -1167,7 +1316,17 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "autoral",
+      "diferente",
+      "canela",
+      "cereja",
+      "frutado",
+      "condensado",
+      "sobremesa",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true
   },
@@ -1213,7 +1372,12 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "cafe"
+      "cafe",
+      "espumoso",
+      "cafeina-media",
+      "autoral",
+      "diferente",
+      "citrico"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -1248,7 +1412,12 @@ const MENU = [
       "sem-leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "refrescante",
+      "cafeina-media",
+      "autoral",
+      "diferente",
+      "citrico"
     ],
     "promocaoElegivel": true
   },
@@ -1293,7 +1462,12 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "classico",
+      "chocolate",
+      "sobremesa"
     ],
     "promocaoElegivel": true
   },
@@ -1338,7 +1512,12 @@ const MENU = [
       "leite",
       "quente",
       "intenso",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "classico",
+      "chocolate",
+      "cacau"
     ],
     "promocaoElegivel": true
   },
@@ -1384,7 +1563,13 @@ const MENU = [
       "leite",
       "quente",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "classico",
+      "chocolate",
+      "avela",
+      "sobremesa"
     ],
     "promocaoElegivel": true
   },
@@ -1419,7 +1604,11 @@ const MENU = [
       "leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico"
     ],
     "promocaoElegivel": true
   },
@@ -1455,7 +1644,12 @@ const MENU = [
       "leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico",
+      "baunilha"
     ],
     "promocaoElegivel": true
   },
@@ -1491,7 +1685,12 @@ const MENU = [
       "leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico",
+      "avela"
     ],
     "promocaoElegivel": true
   },
@@ -1527,7 +1726,12 @@ const MENU = [
       "leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico",
+      "caramelo"
     ],
     "promocaoElegivel": true
   },
@@ -1563,7 +1767,12 @@ const MENU = [
       "leite",
       "gelado",
       "leve",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico",
+      "chocolate"
     ],
     "promocaoElegivel": true
   },
@@ -1599,7 +1808,12 @@ const MENU = [
       "leite",
       "gelado",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "refrescante",
+      "cafeina-media",
+      "classico",
+      "chocolate"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -1631,7 +1845,12 @@ const MENU = [
       "sem-leite",
       "gelado",
       "intenso",
-      "cafe"
+      "cafe",
+      "liquido",
+      "refrescante",
+      "cafeina-alta",
+      "diferente",
+      "notas-do-grao"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -1654,7 +1873,9 @@ const MENU = [
         "preco": 16.0
       }
     ],
-    "opcoes": [],
+    "opcoes": [
+      "extras"
+    ],
     "preparo": "",
     "fichaTecnica": null,
     "foto": "assets/fotos/affogato.jpg",
@@ -1663,7 +1884,13 @@ const MENU = [
       "leite",
       "gelado",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "baunilha",
+      "sobremesa",
+      "lactose-fixa"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true
@@ -1695,7 +1922,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "sem-cafe"
+      "sem-cafe",
+      "liquido",
+      "cafeina-media",
+      "diferente",
+      "herbal"
     ],
     "promocaoElegivel": true
   },
@@ -1744,7 +1975,11 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal"
     ],
     "promocaoElegivel": true
   },
@@ -1794,7 +2029,14 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "condensado",
+      "favorito-da-casa",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true,
     "selo": "favorito"
@@ -1845,7 +2087,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "mel"
     ],
     "promocaoElegivel": true
   },
@@ -1895,7 +2142,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "baunilha"
     ],
     "promocaoElegivel": true
   },
@@ -1945,7 +2197,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "caramelo"
     ],
     "promocaoElegivel": true
   },
@@ -1995,7 +2252,12 @@ const MENU = [
       "quente",
       "gelado",
       "intenso",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "chocolate"
     ],
     "promocaoElegivel": true
   },
@@ -2042,7 +2304,14 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "morango",
+      "frutado",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true
   },
@@ -2082,7 +2351,12 @@ const MENU = [
       "sem-leite",
       "quente",
       "intenso",
-      "sem-cafe"
+      "sem-cafe",
+      "liquido",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "canela"
     ],
     "promocaoElegivel": true
   },
@@ -2131,7 +2405,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "canela"
     ],
     "promocaoElegivel": true
   },
@@ -2181,7 +2460,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "baunilha"
     ],
     "promocaoElegivel": true
   },
@@ -2231,7 +2515,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "mel"
     ],
     "promocaoElegivel": true
   },
@@ -2281,7 +2570,12 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "caramelo"
     ],
     "promocaoElegivel": true
   },
@@ -2331,7 +2625,13 @@ const MENU = [
       "quente",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "cremoso",
+      "cafeina-baixa",
+      "diferente",
+      "especiarias",
+      "condensado",
+      "lactose-fixa"
     ],
     "promocaoElegivel": true
   },
@@ -2382,7 +2682,12 @@ const MENU = [
       "quente",
       "gelado",
       "intenso",
-      "cafe"
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "especiarias",
+      "canela"
     ],
     "promocaoElegivel": true
   },
@@ -2412,7 +2717,12 @@ const MENU = [
       "sem-leite",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "classico",
+      "citrico",
+      "frutado"
     ],
     "promocaoElegivel": true
   },
@@ -2442,7 +2752,11 @@ const MENU = [
       "sem-leite",
       "quente",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "liquido",
+      "cafeina-baixa",
+      "classico",
+      "herbal"
     ],
     "promocaoElegivel": true
   },
@@ -2474,7 +2788,11 @@ const MENU = [
       "sem-leite",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "refrescante",
+      "cafeina-baixa",
+      "classico",
+      "citrico"
     ],
     "promocaoElegivel": true
   },
@@ -2506,7 +2824,12 @@ const MENU = [
       "sem-leite",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "refrescante",
+      "cafeina-baixa",
+      "diferente",
+      "morango",
+      "frutado"
     ],
     "promocaoElegivel": true
   },
@@ -2540,17 +2863,20 @@ const MENU = [
       "sem-leite",
       "gelado",
       "leve",
-      "sem-cafe"
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "diferente",
+      "frutado"
     ],
     "promocaoElegivel": false
   },
   {
     "id": "croissants-na-chapa-com-manteiga",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Na chapa com manteiga",
     "nomeCompleto": "Croissant — Na chapa com manteiga",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Croissant aquecido na chapa com manteiga.",
     "descricao": "",
     "ingredientes": [
@@ -2576,10 +2902,9 @@ const MENU = [
   {
     "id": "croissants-frango-com-requeijao-e-queijo",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Frango com requeijão e queijo",
     "nomeCompleto": "Croissant — Frango com requeijão e queijo",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com frango, requeijão e queijo.",
     "descricao": "",
     "ingredientes": [
@@ -2607,10 +2932,9 @@ const MENU = [
   {
     "id": "croissants-presunto-com-queijo",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Presunto com queijo",
     "nomeCompleto": "Croissant — Presunto com queijo",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com presunto e queijo.",
     "descricao": "",
     "ingredientes": [
@@ -2637,10 +2961,9 @@ const MENU = [
   {
     "id": "croissants-presunto-queijo-e-tomate",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Presunto, queijo e tomate",
     "nomeCompleto": "Croissant — Presunto, queijo e tomate",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com presunto, queijo e tomate.",
     "descricao": "",
     "ingredientes": [
@@ -2668,10 +2991,9 @@ const MENU = [
   {
     "id": "croissants-2-queijos-gratinado",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "2 queijos gratinado",
     "nomeCompleto": "Croissant — 2 queijos gratinado",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com dois queijos e gratinado.",
     "descricao": "",
     "ingredientes": [
@@ -2698,10 +3020,9 @@ const MENU = [
   {
     "id": "croissants-ovos-com-queijo",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Ovos com queijo",
     "nomeCompleto": "Croissant — Ovos com queijo",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com ovos e queijo.",
     "descricao": "",
     "ingredientes": [
@@ -2728,10 +3049,9 @@ const MENU = [
   {
     "id": "croissants-requeijao-com-queijo",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Requeijão com queijo",
     "nomeCompleto": "Croissant — Requeijão com queijo",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com requeijão e queijo.",
     "descricao": "",
     "ingredientes": [
@@ -2758,10 +3078,9 @@ const MENU = [
   {
     "id": "croissants-ovos-bacon-queijo-e-requeijao",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-salgados",
     "nome": "Ovos, bacon, queijo e requeijão",
     "nomeCompleto": "Croissant — Ovos, bacon, queijo e requeijão",
-    "subgrupo": "Salgados",
     "descricaoCurta": "Recheado com ovos, bacon, queijo e requeijão.",
     "descricao": "",
     "ingredientes": [
@@ -2790,10 +3109,9 @@ const MENU = [
   {
     "id": "croissants-creme-de-avela",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-doces",
     "nome": "Creme de avelã",
     "nomeCompleto": "Croissant — Creme de avelã",
-    "subgrupo": "Doces",
     "descricaoCurta": "Recheado com creme de avelã.",
     "descricao": "",
     "ingredientes": [
@@ -2819,10 +3137,9 @@ const MENU = [
   {
     "id": "croissants-creme-de-avela-e-morangos",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-doces",
     "nome": "Creme de avelã e morangos",
     "nomeCompleto": "Croissant — Creme de avelã e morangos",
-    "subgrupo": "Doces",
     "descricaoCurta": "Recheado com creme de avelã e morangos.",
     "descricao": "",
     "ingredientes": [
@@ -2849,10 +3166,9 @@ const MENU = [
   {
     "id": "croissants-doce-de-leite",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-doces",
     "nome": "Doce de leite",
     "nomeCompleto": "Croissant — Doce de leite",
-    "subgrupo": "Doces",
     "descricaoCurta": "Recheado com doce de leite.",
     "descricao": "",
     "ingredientes": [
@@ -2878,10 +3194,9 @@ const MENU = [
   {
     "id": "croissants-doce-de-leite-com-banana",
     "grupo": "comidas",
-    "categoria": "croissants",
+    "categoria": "croissants-doces",
     "nome": "Doce de leite com banana",
     "nomeCompleto": "Croissant — Doce de leite com banana",
-    "subgrupo": "Doces",
     "descricaoCurta": "Recheado com doce de leite e banana.",
     "descricao": "",
     "ingredientes": [
@@ -3385,65 +3700,6 @@ const MENU = [
     "foto": "assets/fotos/brunches-omelete-de-frango-cremoso.jpg",
     "etiquetas": [
       "salgado"
-    ],
-    "promocaoElegivel": false,
-    "precoAConfirmar": true
-  },
-  {
-    "id": "rabanadas-doce-de-leite-e-banana",
-    "grupo": "comidas",
-    "categoria": "rabanadas",
-    "nome": "Doce de leite e banana",
-    "nomeCompleto": "Rabanada — Doce de leite e banana",
-    "descricaoCurta": "Rabanada com doce de leite e banana.",
-    "descricao": "",
-    "ingredientes": [
-      "Rabanada",
-      "Doce de leite",
-      "Banana"
-    ],
-    "tamanhos": [
-      {
-        "rotulo": "Único",
-        "ml": null,
-        "preco": 16.0
-      }
-    ],
-    "opcoes": [],
-    "preparo": "",
-    "fichaTecnica": null,
-    "foto": "assets/fotos/rabanadas-doce-de-leite-e-banana.jpg",
-    "etiquetas": [
-      "doce"
-    ],
-    "promocaoElegivel": false,
-    "precoAConfirmar": true
-  },
-  {
-    "id": "rabanadas-avela",
-    "grupo": "comidas",
-    "categoria": "rabanadas",
-    "nome": "Avelã",
-    "nomeCompleto": "Rabanada — Avelã",
-    "descricaoCurta": "Rabanada com creme de avelã.",
-    "descricao": "",
-    "ingredientes": [
-      "Rabanada",
-      "Creme de avelã"
-    ],
-    "tamanhos": [
-      {
-        "rotulo": "Único",
-        "ml": null,
-        "preco": 16.0
-      }
-    ],
-    "opcoes": [],
-    "preparo": "",
-    "fichaTecnica": null,
-    "foto": "assets/fotos/rabanadas-avela.jpg",
-    "etiquetas": [
-      "doce"
     ],
     "promocaoElegivel": false,
     "precoAConfirmar": true

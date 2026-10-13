@@ -1,4 +1,4 @@
-/* TOSTES to go — carrinho e mensagem do WhatsApp. */
+/* TOSTES café — carrinho e mensagem do WhatsApp. */
 "use strict";
 
 T.cart = (function () {

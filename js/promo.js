@@ -1,4 +1,4 @@
-/* TOSTES to go — Promoção do dia e O pedido favorito.
+/* TOSTES café — Promoção do dia e O pedido favorito.
    O sorteio usa a data (America/Sao_Paulo) como semente. Nunca usa Math.random(). */
 "use strict";
 
@@ -25,10 +25,10 @@ function _embaralha(lista, rnd) {
   return a;
 }
 
-/* Um "pedaço" de combo: item, primeiro tamanho (ou o indicado), opções padrão */
+/* Um "pedaço" de combo: item, tamanho recomendado (ou o indicado), opções padrão */
 T.parte = (id, tamRotulo) => {
   const item = T.item(id);
-  let tam = 0;
+  let tam = T.tamRec(item);                       // tamanho recomendado (M); sem ele, o primeiro
   if (tamRotulo) { const k = item.tamanhos.findIndex((t) => t.rotulo === tamRotulo); if (k >= 0) tam = k; }
   const sel = T.padroes(item);
   return { id, tam, sel, preco: T.precoUnit(item, tam, sel) };

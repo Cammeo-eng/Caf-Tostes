@@ -1,4 +1,4 @@
-/* TOSTES to go — núcleo: formatação, dados, regras de item, tempo.
+/* TOSTES café — núcleo: formatação, dados, regras de item, tempo.
    Tudo fica no objeto global T. Não há dependências externas. */
 "use strict";
 
@@ -125,13 +125,31 @@ T.precoUnit = (item, tam, sel) => {
 
 T.menorPreco = (item) => Math.min(...item.tamanhos.map((t) => t.preco));
 
-T.textoOpcoes = (item, sel) => {              // só o que foge do padrão
+// Tamanho recomendado (CONFIG.tamanhoRecomendado, "M"); sem ele, o primeiro da lista
+T.tamRec = (item) => { const k = item.tamanhos.findIndex((t) => t.rotulo === CONFIG.tamanhoRecomendado); return k >= 0 ? k : 0; };
+T.temRec = (item) => item.tamanhos.length > 1 && item.tamanhos.some((t) => t.rotulo === CONFIG.tamanhoRecomendado);
+
+// Frase curta do que falta escolher (botão de adicionar desabilitado)
+T.faltaTexto = (item, sel) => {
+  const f = [];
+  item.opcoes.forEach((g) => {
+    const grupo = OPCOES[g];
+    if ((sel[g] || []).length >= T.minimo(grupo)) return;
+    if (g === "complementos-cappuccino") f.push("Escolha pelo menos 1 complemento");
+    else f.push("Falta escolher: " + grupo.titulo.replace(/\s*\(.*\)/, ""));
+  });
+  return f;
+};
+
+// Opções escolhidas, na ordem dos grupos e, dentro de cada grupo, na ordem em que a pessoa tocou.
+// semPadrao = true omite as opções padrão (usado nos combos, que sempre levam o padrão).
+T.textoOpcoes = (item, sel, semPadrao) => {
   const out = [];
   item.opcoes.forEach((g) => {
     const grupo = OPCOES[g];
     (sel[g] || []).forEach((id) => {
       const o = grupo.itens.find((x) => x.id === id);
-      if (o && !(grupo.tipo === "unica" && o.padrao)) out.push(o.nome);
+      if (o && !(semPadrao && grupo.tipo === "unica" && o.padrao)) out.push(o.nome);
     });
   });
   return out;
@@ -142,6 +160,7 @@ T.nomeComTam = (item, tam) => { const r = T.rotuloTam(item, tam); return r ? `${
 
 /* ---------- imagens com placeholder ---------- */
 T.ilus = (nome, classe) => `<img class="${classe || "ilus"}" src="assets/ilustracoes/${nome}.svg" alt="" width="120" height="120">`;
+T.icone = (caminho, classe) => `<img class="${classe || "ilus"}" src="${T.esc(caminho)}" alt="" width="120" height="120">`;
 T.foto = (src, alt, grupo, w, h, classe) =>
   `<img class="${classe || "foto-img"}" src="${T.esc(src)}" alt="${T.esc(alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" data-ph="${grupo === "comidas" ? "croissant" : "xicara"}">`;
 
@@ -181,7 +200,11 @@ T.checarDados = () => {
     if (!it) erros.push(`Favorito aponta para o item inexistente "${f.id}".`);
     else if (f.tamanho && !it.tamanhos.some((t) => t.rotulo === f.tamanho)) erros.push(`Favorito: "${f.id}" não tem o tamanho "${f.tamanho}".`);
   });
-  AULAS.forEach((a) => { if (a.itemId && !T.itens[a.itemId]) erros.push(`Aula "${a.id}" aponta para o item inexistente "${a.itemId}".`); });
+  const trilhas = new Set(AULAS_TRILHAS.map((t) => t.id));
+  AULAS.forEach((a) => {
+    if (a.item && !T.itens[a.item]) erros.push(`Aula "${a.id}" aponta para o item inexistente "${a.item}".`);
+    if (!trilhas.has(a.trilha)) erros.push(`Aula "${a.id}" aponta para a trilha inexistente "${a.trilha}".`);
+  });
   if (erros.length) { console.warn("[TOSTES] Problemas nos dados:\n- " + erros.join("\n- ")); }
   else console.info(`[TOSTES] Dados ok: ${MENU.length} itens, ${CATEGORIAS.length} categorias.`);
   return erros;

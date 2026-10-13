@@ -1,5 +1,5 @@
 /* ==========================================================
-   TOSTES to go — estilos. Mobile-first; no computador, coluna de até 480 px.
+   TOSTES café — estilos. Mobile-first; no computador, coluna de até 480 px.
    Paleta fixa (não usar outras cores): creme, vinho, verde musgo, marrom terra.
    ========================================================== */
 :root {
@@ -54,9 +54,9 @@ h2.titulo { font-size: 32px; }
   top: 0; height: var(--topo); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 16px;
   background: var(--creme) var(--papel); border-bottom: 1px solid var(--linha);
 }
-.logo img { height: 30px; width: auto; }
+.logo img { height: 26px; width: auto; }
 .logo { flex: none; }
-.status { font-size: 11.5px; font-weight: 600; padding: 4px 8px; flex: 0 1 auto; border-radius: 99px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.status { font-size: 11px; font-weight: 600; padding: 4px 8px; flex: 0 1 auto; border-radius: 99px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .status::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; background: currentColor; }
 .status.on { color: var(--musgo); background: var(--musgo-claro); }
 .status.off { color: var(--vinho); background: color-mix(in srgb, var(--vinho) 12%, var(--creme)); }
@@ -101,7 +101,6 @@ h2.titulo { font-size: 32px; }
 .fav-card { background: #fff0; border-radius: 28px; overflow: hidden; box-shadow: var(--sombra); background: var(--creme); border: 1px solid var(--linha); }
 .fav-foto { aspect-ratio: 4 / 3; background: var(--musgo-claro); }
 .fav-corpo { padding: 20px; }
-.fav-corpo h2 { color: var(--vinho); font-size: 36px; }
 .fav-nome { font-weight: 700; margin: 10px 0 6px; font-size: 18px; line-height: 1.3; }
 .fav-texto { margin: 0 0 16px; opacity: .9; }
 .fav-rodape, .combo-rodape { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
@@ -155,8 +154,6 @@ h2.titulo { font-size: 32px; }
 .titulo-cat { font-size: 30px; }
 .nota { font-size: 13.5px; margin: 6px 0 0; opacity: .85; }
 .lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 18px; }
-.subgrupo { margin: 10px 0 -2px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--musgo); }
-.subgrupo::before { content: "✦ "; }
 
 .card { position: relative; background: var(--creme); border: 1px solid var(--linha); border-radius: var(--raio); box-shadow: var(--sombra); }
 .card-hit { min-width: 0; display: flex; gap: 14px; width: 100%; text-align: left; background: none; border: 0; padding: 12px 64px 12px 12px; border-radius: var(--raio); align-items: stretch; }
@@ -174,21 +171,15 @@ h2.titulo { font-size: 32px; }
 }
 .add:active { transform: scale(.9); }
 
-/* ----- aulas ----- */
-.aulas-grade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
-.aula-card { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; padding: 16px; border-radius: var(--raio); border: 0; background: var(--creme); color: var(--terra); min-height: 172px; }
-.aula-card strong { font-size: 16px; line-height: 1.25; }
-.aula-card span { font-size: 13px; opacity: .85; }
-.aula-ilus { width: 52px; height: 52px; }
 
 /* ----- rodapé ----- */
 #rodape { padding-bottom: 20px; }
-.fidelidade { background: var(--musgo-claro); margin: 0 20px; border-radius: 28px; padding: 26px 20px; }
+.fidelidade { background: var(--musgo-claro); margin: 0 20px; border-radius: 28px; padding: 26px 20px; overflow: hidden; }
 .fidelidade h2 { color: var(--musgo); }
-.carimbos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 18px 0; }
-.carimbo { position: relative; aspect-ratio: 1; border: 2px dashed var(--musgo); border-radius: 50%; display: grid; place-items: center; background: var(--creme); }
-.carimbo img { width: 56%; opacity: .75; }
-.carimbo b { position: absolute; bottom: -2px; right: -2px; font-size: 11px; background: var(--musgo); color: var(--creme); width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; }
+.carimbos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 18px 0; justify-items: center; }
+.carimbo { position: relative; box-sizing: border-box; width: 100%; max-width: 56px; aspect-ratio: 1; border: 2px dashed var(--musgo); border-radius: 50%; display: grid; place-items: center; background: var(--creme); }
+.carimbo img { width: 60%; max-width: 60%; height: auto; opacity: .75; }
+.carimbo b { position: absolute; bottom: 0; right: 0; font-size: 11px; background: var(--musgo); color: var(--creme); width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; }
 .fidelidade p { margin: 0; }
 .info h2 { font-size: 28px; }
 .horarios { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 6px; }
@@ -377,3 +368,44 @@ h2.titulo { font-size: 32px; }
   .logo img { height: 28px; }
   .status { font-size: 11px; padding: 4px 8px; }
 }
+
+/* ----- títulos em letra cursiva (só "O pedido favorito" e "Promoção do dia") ----- */
+.titulo-script { font-family: "Parisienne", "Brush Script MT", cursive; font-weight: 400; font-size: clamp(34px, 9vw, 44px); line-height: 1.1; letter-spacing: 0; text-transform: none; margin: 0; }
+.fav-corpo .titulo-script { color: var(--vinho); }
+.bloco-vinho .titulo-script { color: var(--creme); }
+.bloco-vinho .sub { margin-top: 10px; }
+
+/* ----- aulas: trilhas e bolinhas ----- */
+.bloco-musgo h2 + .sub { margin-bottom: 8px; }
+.trilha { margin-top: 24px; }
+.trilha-nome { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: .85; }
+.bolinhas { list-style: none; margin: 0 -20px; padding: 0 20px 6px; display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.bolinhas::-webkit-scrollbar { display: none; }
+.bolinha { width: 84px; flex: none; background: none; border: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--creme); }
+.anel { width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--vinho); background: var(--creme); display: grid; place-items: center; box-shadow: 0 0 0 3px var(--musgo) inset; }
+.bolinha.vista .anel { border-color: #C9B79A; }
+.bolinha-ilus { width: 48px; height: 48px; }
+.bolinha-titulo { font-size: 12.5px; line-height: 1.25; text-align: center; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ----- convite do Instagram ----- */
+.insta-card { background: var(--musgo-claro); border-radius: 28px; padding: 26px 20px; text-align: center; display: grid; justify-items: center; gap: 10px; }
+.insta-card h2 { font-size: 28px; color: var(--musgo); }
+.insta-card p { margin: 0 0 6px; }
+.insta-ilus { width: 56px; height: 56px; }
+
+/* ----- detalhe: tamanho recomendado, leite, complementos ----- */
+.tam-col { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tam-col .tam { flex: 1; }
+.rec { font-style: normal; font-size: 10.5px; line-height: 1; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--vinho); text-align: center; min-height: 11px; }
+.nota-grupo { font-size: 12.5px; opacity: .85; margin: -4px 0 10px !important; }
+.chips-gd { gap: 10px; }
+.chip-gd { min-height: 56px; padding: 0 22px; font-size: 17px; }
+.chip-gd[aria-pressed="true"] { background: var(--musgo); border-color: var(--musgo); color: var(--creme); }
+.chip-gd[disabled] { opacity: .4; }
+.enviado { background: var(--musgo-claro); border-radius: var(--raio); padding: 14px 16px; margin-bottom: 16px; display: grid; gap: 4px; }
+.enviado small { font-size: 12.5px; opacity: .9; }
+.story-botoes { display: grid; gap: 10px; margin-top: 12px; pointer-events: auto; position: relative; z-index: 4; }
+.story-botoes .story-link { margin-top: 0; align-self: auto; }
+
+/* destinos do menu: param abaixo do topo fixo */
+#aulas, #fidelidade, #horarios, #bebidas, #comidas { scroll-margin-top: calc(var(--topo) + 8px); }
