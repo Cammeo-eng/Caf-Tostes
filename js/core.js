@@ -167,6 +167,7 @@ T.foto = (src, alt, grupo, w, h, classe) =>
 // Foto que não carrega vira o placeholder do site (nunca ícone quebrado). O evento error não borbulha, por isso captura.
 document.addEventListener("error", (e) => {
   const el = e.target;
+  if (el && el.tagName === "IMG" && el.dataset.removeSeFalhar) { el.remove(); return; }   // foto do story que falha: some, sem ícone quebrado
   if (!el || el.tagName !== "IMG" || !(el.dataset.ph || el.dataset.phSrc)) return;
   if (el.dataset.phSrc) {                          // foto da aula: volta para o ícone da aula
     const ic = document.createElement("img");

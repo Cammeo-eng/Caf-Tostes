@@ -16,6 +16,7 @@
    - slides ........ lista de telas do story:
        titulo ...... título do slide
        texto ....... texto do slide (2 a 4 frases)
+       imagem ...... (opcional) foto vertical 4:5 exibida no topo deste slide
        destaque .... (opcional) { valor, legenda } — número ou dado em destaque,
                      exibido grande acima do texto. Ex.: { valor: "9 bar",
                      legenda: "pressão do espresso" }
@@ -42,6 +43,7 @@ const AULAS = [
     titulo: "Como o café chegou aqui",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/historia.jpg",
     slides: [
       { titulo: "Nasceu na Etiópia", texto: "O café arábica é nativo das florestas de altitude da Etiópia, na África. A lenda mais conhecida fala de um pastor, Kaldi, que notou suas cabras agitadas depois de comerem os frutos de um arbusto." },
       { titulo: "Do Iêmen para o mundo", texto: "Foi no Iêmen que o café começou a ser cultivado e preparado como bebida, por volta do século 15. O porto de Mokha exportava os grãos para o mundo árabe e, depois, para a Europa. Daí vem a palavra \"moca\"." },
@@ -62,10 +64,10 @@ const AULAS = [
     slides: [
       { titulo: "Uma planta paciente", destaque: { valor: "3 a 4 anos", legenda: "até a primeira boa safra" }, texto: "O cafeeiro é um arbusto que leva de 3 a 4 anos para produzir uma safra de verdade. Bem cuidado, produz por décadas." },
       { titulo: "A florada", texto: "Depois das primeiras chuvas da primavera, a planta se cobre de flores brancas com perfume de jasmim. A florada dura só 2 ou 3 dias, e cada flor pode virar um fruto." },
-      { titulo: "Da flor à cereja", destaque: { valor: "7 a 9 meses", legenda: "da flor ao fruto maduro (arábica)" }, texto: "O fruto nasce verde, amadurece até ficar vermelho ou amarelo, conforme a variedade, e se chama cereja. Dentro dele costumam estar duas sementes: os grãos de café." },
+      { imagem: "assets/aulas/cultivo-colheita-flor.jpg", titulo: "Da flor à cereja", destaque: { valor: "7 a 9 meses", legenda: "da flor ao fruto maduro (arábica)" }, texto: "O fruto nasce verde, amadurece até ficar vermelho ou amarelo, conforme a variedade, e se chama cereja. Dentro dele costumam estar duas sementes: os grãos de café." },
       { titulo: "Altitude faz diferença", texto: "Em regiões mais altas e frias, o fruto amadurece mais devagar. O grão fica mais denso e desenvolve mais açúcares e acidez, o que dá mais complexidade à xícara." },
-      { titulo: "Três jeitos de colher", texto: "Na derriça, todos os frutos do galho são puxados de uma vez sobre um pano. Na colheita seletiva, só os maduros são colhidos à mão, em várias passadas. Em terrenos planos, como no Cerrado Mineiro, colhedoras vibram a planta para soltar os frutos." },
-      { titulo: "Quem está por trás", texto: "No Brasil, a colheita vai principalmente de maio a setembro. Em regiões de montanha, ainda é quase toda manual, sob o sol. O chapéu da nossa marca é uma homenagem a essas pessoas." }
+      { imagem: "assets/aulas/cultivo-colheita-peneira.jpg", titulo: "Três jeitos de colher", texto: "Na derriça, todos os frutos do galho são puxados de uma vez sobre um pano. Na colheita seletiva, só os maduros são colhidos à mão, em várias passadas. Em terrenos planos, como no Cerrado Mineiro, colhedoras vibram a planta para soltar os frutos." },
+      { imagem: "assets/aulas/cultivo-colheita-pessoas.jpg", titulo: "Quem está por trás", texto: "No Brasil, a colheita vai principalmente de maio a setembro. Em regiões de montanha, ainda é quase toda manual, sob o sol. O chapéu da nossa marca é uma homenagem a essas pessoas." }
     ]
   },
 
@@ -75,6 +77,7 @@ const AULAS = [
     titulo: "Natural, lavado ou descascado",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "3 min",
+    imagem: "assets/aulas/pos-colheita.jpg",
     slides: [
       { titulo: "O que é pós-colheita", texto: "Depois de colhido, o fruto precisa ser seco e separado da semente. A forma como isso é feito muda muito o sabor final. É uma das etapas mais importantes para um café especial." },
       { titulo: "Separação", texto: "Os frutos passam por um lavador. Os mais leves, secos ou defeituosos, boiam e são separados. Os maduros e densos afundam e seguem para o processo escolhido." },
@@ -91,6 +94,7 @@ const AULAS = [
     titulo: "Do grão cru à seleção",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/beneficiamento.jpg",
     slides: [
       { titulo: "Beneficiamento", texto: "Antes de ser vendido, o café seco passa por máquinas que retiram as camadas que ainda envolvem a semente. O que sobra é o café verde, ou café cru." },
       { titulo: "Café verde", texto: "O grão cru é verde-claro, duro e quase sem aroma. Ele aguenta meses armazenado em sacas. Todo o sabor que você conhece só vai aparecer na torra." },
@@ -113,7 +117,7 @@ const AULAS = [
       { titulo: "Reação de Maillard", texto: "Açúcares e proteínas reagem e o grão fica dourado e depois marrom. É a mesma reação que doura o pão e a carne, e cria as notas de caramelo, nozes e chocolate." },
       { titulo: "O primeiro crack", texto: "O vapor e o gás acumulados dentro do grão fazem ele estalar, como pipoca. A partir daí, o mestre de torra decide quanto desenvolver o café até tirá-lo do tambor." },
       { titulo: "Clara, média ou escura", texto: "Torras mais claras preservam acidez e notas de fruta. Torras mais escuras trazem amargor, corpo e notas de tostado. Cafés especiais costumam ter torras claras a médias, para mostrar o que o grão tem de melhor." },
-      { titulo: "Descanso", destaque: { valor: "15 a 20%", legenda: "do peso que o grão perde na torra" }, texto: "Depois de torrado, o café libera gás carbônico por alguns dias. Por isso as embalagens têm uma válvula, e o espresso costuma ficar melhor depois de alguns dias de descanso." }
+      { imagem: "assets/aulas/torra-graos.jpg", titulo: "Descanso", destaque: { valor: "15 a 20%", legenda: "do peso que o grão perde na torra" }, texto: "Depois de torrado, o café libera gás carbônico por alguns dias. Por isso as embalagens têm uma válvula, e o espresso costuma ficar melhor depois de alguns dias de descanso." }
     ]
   },
 
@@ -139,6 +143,7 @@ const AULAS = [
     titulo: "Arábica, robusta e variedades",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "3 min",
+    imagem: "assets/aulas/especies-variedades.jpg",
     slides: [
       { titulo: "Duas espécies", texto: "Quase todo o café do mundo vem de duas espécies: Coffea arabica, o arábica, e Coffea canephora, conhecida como robusta ou conilon." },
       { titulo: "Arábica", destaque: { valor: "~1,2%", legenda: "de cafeína no grão de arábica" }, texto: "Prefere altitude e clima ameno. Tem mais açúcares e acidez, aroma complexo e menos cafeína. É a base dos cafés especiais e a maior parte do café brasileiro." },
@@ -157,6 +162,7 @@ const AULAS = [
     titulo: "O espresso",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/espresso.jpg",
     item: "espresso",
     slides: [
       { titulo: "Café sob pressão", destaque: { valor: "9 bar", legenda: "pressão de extração" }, texto: "No espresso, a água quente atravessa o café moído bem fino sob pressão de cerca de 9 bar, nove vezes a pressão atmosférica." },
@@ -173,11 +179,12 @@ const AULAS = [
     titulo: "V60 e prensa francesa",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/filtrados.jpg",
     item: "metodo-v60",
     slides: [
       { titulo: "Café filtrado", texto: "Nos métodos filtrados, não há pressão: a água passa pelo café pela gravidade ou fica em infusão. O resultado é uma bebida mais leve e aromática que o espresso." },
       { titulo: "V60", destaque: { valor: "60°", legenda: "ângulo do cone que dá nome ao V60" }, texto: "Funil japonês com nervuras em espiral e um furo grande no fundo. O barista controla o fluxo despejando a água em etapas. O filtro de papel segura os óleos, então a xícara fica limpa e mostra a acidez e as notas do grão." },
-      { titulo: "Prensa francesa", destaque: { valor: "4 min", legenda: "tempo de infusão" }, texto: "O café, moído grosso, fica em infusão na água por cerca de 4 minutos e é separado por uma tela de metal. Os óleos passam para a xícara: a bebida tem mais corpo e textura. Apesar do nome, foi patenteada por um italiano, em 1929." },
+      { imagem: "assets/aulas/filtrados-prensa.jpg", titulo: "Prensa francesa", destaque: { valor: "4 min", legenda: "tempo de infusão" }, texto: "O café, moído grosso, fica em infusão na água por cerca de 4 minutos e é separado por uma tela de metal. Os óleos passam para a xícara: a bebida tem mais corpo e textura. Apesar do nome, foi patenteada por um italiano, em 1929." },
       { titulo: "Coado do dia", texto: "O coado tradicional, no filtro de papel ou de pano, segue o mesmo princípio do V60. É o jeito mais brasileiro de tomar café." },
       { titulo: "Para dividir", texto: "Aqui, V60 e prensa francesa servem 2 pessoas. Pedir os dois com o mesmo grão é um jeito simples de sentir como o método muda a bebida." }
     ]
@@ -189,6 +196,7 @@ const AULAS = [
     titulo: "Moka e cold brew",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/moka-cold-brew.jpg",
     item: "cold-brew",
     slides: [
       { titulo: "Moka italiana", destaque: { valor: "1933", legenda: "ano em que a moka foi lançada" }, texto: "A cafeteira de alumínio de Alfonso Bialetti se tornou símbolo da Itália. A água ferve no compartimento de baixo e o vapor empurra a água pelo café até o de cima." },
@@ -204,6 +212,7 @@ const AULAS = [
     titulo: "Moagem, água e temperatura",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/moagem-agua.jpg",
     slides: [
       { titulo: "Moído na hora", texto: "Depois de moído, o café perde aromas rapidamente, em questão de minutos. Por isso moemos o grão na hora de preparar cada bebida." },
       { titulo: "Cada método, uma moagem", texto: "Bem fina, quase como talco, para espresso. Média, como areia, para V60 e coado. Grossa, como sal grosso, para prensa francesa. Moagem fina demais deixa o café amargo; grossa demais, aguado." },
@@ -219,6 +228,7 @@ const AULAS = [
     titulo: "O leite vaporizado",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/leite.jpg",
     item: "flat-white",
     slides: [
       { titulo: "O que o vapor faz", texto: "O vapor da máquina aquece o leite e, ao mesmo tempo, incorpora ar. As proteínas do leite seguram as bolhas e formam a espuma; a gordura deixa tudo cremoso." },
@@ -269,6 +279,7 @@ const AULAS = [
     titulo: "Cappuccino, latte ou flat white?",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/cappuccino-latte.jpg",
     item: "cappuccino",
     slides: [
       { titulo: "A mesma base", texto: "Todas começam com espresso e leite vaporizado. O que muda é a quantidade de leite e de espuma." },
@@ -286,6 +297,7 @@ const AULAS = [
     titulo: "Matcha",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/matcha.jpg",
     item: "vietnamita-matcha",
     slides: [
       { titulo: "Chá verde em pó", texto: "Matcha é um chá verde japonês, tradicional nas regiões de Uji, em Kyoto, e Nishio. É a base da cerimônia do chá no Japão." },
@@ -302,6 +314,7 @@ const AULAS = [
     titulo: "Chai",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/chai.jpg",
     item: "chai-latte",
     slides: [
       { titulo: "Chai é chá", texto: "Chai quer dizer \"chá\" em hindi e em várias outras línguas. O que conhecemos como chai é o masala chai: chá preto preparado com especiarias." },
@@ -319,6 +332,7 @@ const AULAS = [
     titulo: "Peça do seu jeito",
     icone: "assets/ilustracoes/chapeu.svg",
     leitura: "1 min",
+    imagem: "assets/aulas/peca-do-seu-jeito.jpg",
     item: "monte-seu-cappuccino",
     slides: [
       { titulo: "Leite", texto: "Toda bebida com leite pode ser feita com leite zero lactose ou vegetal de aveia, sem custo extra." },
@@ -335,6 +349,7 @@ const AULAS = [
     titulo: "Curiosidades",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/curiosidades.jpg",
     item: "bala-de-canela",
     slides: [
       { titulo: "O grão moca", texto: "Às vezes a cereja tem uma única semente, que cresce arredondada. No Brasil, esse grão é chamado de moca e costuma ser separado e vendido à parte." },

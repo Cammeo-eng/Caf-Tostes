@@ -447,4 +447,4 @@ h2.titulo { font-size: 32px; }
 /* ----- imagem da aula (foto 4:5): bolinha e primeiro slide ----- */
 .anel { overflow: hidden; }
 .bolinha-foto { width: calc(100% - 6px); height: calc(100% - 6px); border-radius: 50%; object-fit: cover; }
-.story-img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; background: var(--musgo-claro); margin-bottom: 4px; }
+.story-img { width: 100%; height: auto; max-height: 45vh; max-height: 45dvh; aspect-ratio: 4 / 5; object-fit: cover; flex: none; border-radius: 20px; background: var(--musgo-claro); margin-bottom: 4px; }

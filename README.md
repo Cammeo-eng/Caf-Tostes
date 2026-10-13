@@ -12,7 +12,7 @@ Coloque em `assets/fotos/<id>.jpg`, onde `<id>` é o `id` do item em `data/menu.
 Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, `horarios`, `mesas`, texto da fidelidade, promoção do dia e o pedido favorito.
 
 ## Fotos das aulas
-Foto vertical 4:5 (ex.: 720×900) em `assets/aulas/<id-da-aula>.jpg` e o campo `imagem` na aula em `data/aulas.js`. Aparece na bolinha e no topo do primeiro slide; aulas sem `imagem` ficam com o ícone.
+Foto vertical 4:5 (ex.: 720×900) em `assets/aulas/<id-da-aula>.jpg` e o campo `imagem` na aula em `data/aulas.js`. Aparece na bolinha e no topo do primeiro slide; aulas sem `imagem` ficam com o ícone. Um slide também pode ter `imagem` (4:5), que aparece no topo dele e tem prioridade sobre a capa. As imagens do story ocupam no máximo 45% da altura da tela.
 
 ## Outros arquivos de dados
 - `data/aulas.js`: trilhas (`AULAS_TRILHAS` com `descricao`) e aulas em formato stories (`leitura`, `slides` com `destaque` opcional, `item`, `link`).
