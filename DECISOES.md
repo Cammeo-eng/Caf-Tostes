@@ -77,3 +77,4 @@ Formato: data · assunto · decisão · quem decidiu.
 - 2026-10-13 · Pedido · "Retirar no balcão" vira "Levar pra viagem"; nome obrigatório (botão fica desabilitado até preencher; tocar nele leva ao campo); mensagem do WhatsApp com `*Para viagem*`/`*Mesa N*` e `Nome:` sempre presente · dono
 - 2026-10-13 · Mensagem do WhatsApp · Seguindo o exemplo do prompt, as linhas Subtotal e Desconto só aparecem quando há combo com desconto; sem desconto, só o Total · Claude
 - 2026-10-13 · Quiz: "Adicionar os dois" · Quando a bebida exige escolha (Monte seu Cappuccino, Soda Italiana), o acompanhamento é adicionado e o detalhe da bebida abre com tamanho e leite já escolhidos · Claude
+- 2026-10-13 · Fotos de teste · 15 fotos 720×720 (14 itens do Espresso Bar e Cafés com Sabor + `favorito.jpg`, 23 a 103 KB) adicionadas em `assets/fotos/` com o id do item; itens sem foto seguem com o desenho provisório · dono
