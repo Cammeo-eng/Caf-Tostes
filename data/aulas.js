@@ -314,16 +314,17 @@ const AULAS = [
     trilha: "bebidas",
     titulo: "Matcha",
     icone: "assets/ilustracoes/xicara.svg",
-    leitura: "2 min",
+    leitura: "3 min",
     imagem: "assets/aulas/matcha.jpg",
-    foco: "50% 30%",
+    foco: "45% 50%",
     item: "vietnamita-matcha",
     slides: [
-      { titulo: "Chá verde em pó", texto: "Matcha é um chá verde japonês, tradicional nas regiões de Uji, em Kyoto, e Nishio. É a base da cerimônia do chá no Japão." },
-      { titulo: "Cultivado na sombra", destaque: { valor: "3 a 4 semanas", legenda: "de sombra antes da colheita" }, texto: "Antes da colheita, as plantas são cobertas. Com menos sol, as folhas produzem mais clorofila e aminoácidos: ficam verde-intenso e com sabor mais doce e menos amargo." },
-      { titulo: "A folha inteira", texto: "As folhas são cozidas no vapor, secas, separadas dos talos e moídas em moinhos de pedra até virar pó. No matcha, você bebe a folha inteira, e não só a infusão." },
+      { imagem: "assets/aulas/matcha-po.jpg", foco: "50% 40%", titulo: "Chá verde em pó", texto: "Matcha é um chá verde japonês, tradicional nas regiões de Uji, em Kyoto, e Nishio. É a base da cerimônia do chá no Japão." },
+      { imagem: "assets/aulas/matcha-sombra.jpg", foco: "50% 65%", titulo: "Cultivado na sombra", destaque: { valor: "3 a 4 semanas", legenda: "de sombra antes da colheita" }, texto: "Antes da colheita, as plantas são cobertas. Com menos sol, as folhas produzem mais clorofila e aminoácidos: ficam verde-intenso e com sabor mais doce e menos amargo." },
+      { imagem: "assets/aulas/matcha-colheita.jpg", foco: "50% 40%", titulo: "A colheita", destaque: { valor: "abril e maio", legenda: "a primeira colheita do ano no Japão" }, texto: "Para o matcha, são usadas as folhas mais novas e macias, do topo da planta. As mais valorizadas vêm da primeira colheita do ano, na primavera japonesa." },
+      { imagem: "assets/aulas/matcha-moinho.jpg", foco: "40% 55%", titulo: "A folha inteira", texto: "As folhas são cozidas no vapor, secas, separadas dos talos e moídas em moinhos de pedra até virar pó. No matcha, você bebe a folha inteira, e não só a infusão." },
       { titulo: "Energia diferente", texto: "O matcha tem cafeína e também L-teanina, um aminoácido do chá. Muita gente descreve a energia como mais estável que a do café." },
-      { titulo: "Preparo", destaque: { valor: "~80 °C", legenda: "temperatura da água" }, texto: "O pó é batido com água abaixo da fervura, com um batedor de bambu chamado chasen, até formar espuma. Água fervendo deixa o matcha amargo." }
+      { imagem: "assets/aulas/matcha.jpg", foco: "45% 75%", titulo: "Preparo", destaque: { valor: "~80 °C", legenda: "temperatura da água" }, texto: "O pó é batido com água abaixo da fervura, com um batedor de bambu chamado chasen, até formar espuma. Água fervendo deixa o matcha amargo." }
     ]
   },
 
@@ -334,13 +335,13 @@ const AULAS = [
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
     imagem: "assets/aulas/chai.jpg",
-    foco: "55% 55%",
+    foco: "40% 40%",
     item: "chai-latte",
     slides: [
       { titulo: "Chai é chá", texto: "Chai quer dizer \"chá\" em hindi e em várias outras línguas. O que conhecemos como chai é o masala chai: chá preto preparado com especiarias." },
-      { titulo: "Na Índia", texto: "Na Índia, o masala chai é fervido com leite e açúcar e vendido em cada esquina pelos chaiwalas. Cada família tem a sua receita." },
-      { titulo: "As especiarias", texto: "As mais comuns são canela, cardamomo, gengibre, cravo e pimenta-do-reino. Juntas, deixam a bebida quente, aromática e levemente picante." },
-      { titulo: "Chai latte e dirty chai", texto: "Chai latte é o chai com leite vaporizado, no estilo das cafeterias. O dirty chai leva também uma dose de espresso: especiarias e café na mesma xícara." }
+      { imagem: "assets/aulas/chai-india.jpg", foco: "40% 40%", titulo: "Na Índia", texto: "Na Índia, o masala chai é fervido com leite e açúcar e vendido em cada esquina pelos chaiwalas. Cada família tem a sua receita." },
+      { imagem: "assets/aulas/chai-especiarias.jpg", foco: "50% 50%", titulo: "As especiarias", texto: "As mais comuns são canela, cardamomo, gengibre, cravo e pimenta-do-reino. Juntas, deixam a bebida quente, aromática e levemente picante." },
+      { imagem: "assets/aulas/chai-latte-xicara.jpg", foco: "55% 55%", titulo: "Chai latte e dirty chai", texto: "Chai latte é o chai com leite vaporizado, no estilo das cafeterias. O dirty chai leva também uma dose de espresso: especiarias e café na mesma xícara." }
     ]
   },
 

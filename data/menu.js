@@ -15,7 +15,7 @@
    - tamanhos ...... lista { rotulo, ml, preco }. 1 tamanho = preço único.
                      Mais de 1 = cliente escolhe. O tamanho recomendado (M) vem
                      definido em CONFIG.tamanhoRecomendado
-   - opcoes ........ ids de OPCOES (leite, extras, complementos-cappuccino, estilo-pingado, pao, sabores-soda)
+   - opcoes ........ ids de OPCOES (leite, extras, complementos-cappuccino, estilo-pingado, amendoim, pao, sabores-soda)
    - preparo ....... (opcional) como é preparado; vazio = seção não aparece
    - fichaTecnica .. (opcional) { dose: "18 g", extracao: "28 s", temperatura: "65 °C" }
                      null = não aparece
@@ -211,6 +211,18 @@ const OPCOES = {
       {
         "id": "acucar-baunilha",
         "nome": "Açúcar de baunilha",
+        "valor": 0
+      }
+    ]
+  },
+  "amendoim": {
+    "titulo": "Amendoim",
+    "tipo": "multipla",
+    "obrigatoria": false,
+    "itens": [
+      {
+        "id": "amendoim-moido",
+        "nome": "Com amendoim moído por cima",
         "valor": 0
       }
     ]
@@ -1214,14 +1226,14 @@ const MENU = [
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Cappuccino Avelã",
-    "descricaoCurta": "Cappuccino com creme de avelã por toda a borda da xícara e amendoim moído. Contém amendoim.",
+    "descricaoCurta": "Cappuccino com creme de avelã por toda a borda da xícara. Amendoim moído por cima é opcional.",
     "descricao": "",
     "ingredientes": [
       "Espresso",
       "Leite vaporizado",
       "Espuma de leite",
       "Creme de avelã na borda da xícara",
-      "Amendoim moído"
+      "Amendoim moído (opcional)"
     ],
     "tamanhos": [
       {
@@ -1242,6 +1254,7 @@ const MENU = [
     ],
     "opcoes": [
       "leite",
+      "amendoim",
       "extras"
     ],
     "preparo": "",
