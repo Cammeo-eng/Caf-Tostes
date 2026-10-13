@@ -77,9 +77,9 @@ T.v.quizCard = () => {
     <div class="quiz-card">
       ${T.ilus("xicara", "quiz-ilus")}
       <div>
-        <h2 class="titulo">${E(QUIZ.titulo)}</h2>
-        <p>${E(QUIZ.chamada)}</p>
-        <button type="button" class="btn btn-musgo" data-act="open" data-name="quiz">Fazer o quiz</button>
+        <h2 class="titulo">Não sabe o que pedir?</h2>
+        <p>Responda às perguntas e a gente sugere a bebida certa para você.</p>
+        <button type="button" class="btn btn-creme" data-act="open" data-name="quiz">Descobrir meu café</button>
       </div>
     </div>`;
 };
@@ -175,6 +175,7 @@ T.v.aulas = () => {
     ${AULAS_TRILHAS.map((t) => `
       <div class="trilha">
         <h3 class="trilha-nome">${E(t.nome)}</h3>
+        <p class="trilha-desc">${E(t.descricao)}</p>
         <ul class="bolinhas">
           ${AULAS.filter((a) => a.trilha === t.id).map((a) => `
             <li><button type="button" class="bolinha${T.vistas.tem(a.id) ? " vista" : ""}" data-act="open" data-name="aula/${E(a.id)}" data-aula="${E(a.id)}">
@@ -202,10 +203,11 @@ T.v.insta = () => {
 T.v.rodape = () => {
   $("#rodape").innerHTML = `
     <section id="fidelidade" class="secao fidelidade" aria-labelledby="fid-titulo">
-      <h2 id="fid-titulo" class="titulo">Cartão fidelidade</h2>
-      <div class="carimbos" aria-hidden="true">${Array.from({ length: 10 }, (_, k) => `<span class="carimbo">${T.ilus("xicara")}<b>${k + 1}</b></span>`).join("")}</div>
-      <p>${E(CONFIG.fidelidade)}</p>
-      <p class="mini">O controle dos carimbos é feito no balcão.</p>
+      <p class="fid-gancho">✦ ${E(CONFIG.fidelidade.gancho)}</p>
+      <h2 id="fid-titulo" class="titulo">${E(CONFIG.fidelidade.titulo)}</h2>
+      <p class="fid-texto">${E(CONFIG.fidelidade.texto)}</p>
+      <div class="carimbos" aria-hidden="true">${Array.from({ length: 10 }, (_, k) => `<span class="carimbo${k === 0 ? " carimbado" : ""}">${T.ilus("xicara")}<b>${k + 1}</b></span>`).join("")}</div>
+      <p class="mini">${E(CONFIG.fidelidade.rodape)}</p>
     </section>
     <section class="secao">
       <a class="btn btn-vinho btn-bloco" href="${E(CONFIG.avaliacaoGoogle)}" target="_blank" rel="noopener">Avalie a gente no Google</a>

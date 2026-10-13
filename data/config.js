@@ -36,7 +36,12 @@ const CONFIG = {
 
   marquee: "café no milímetro ✦ grãos 84+ ✦ feito na hora ✦ Fazenda Rio Grande ✦",
 
-  fidelidade: "A cada 10 pedidos, você ganha um café quente à sua escolha ou uma fatia da torta do dia.",
+  fidelidade: {
+    gancho: "Você sabia?",
+    titulo: "Seu próximo café pode ser por nossa conta.",
+    texto: "A cada 10 pedidos, você escolhe um café quente ou uma fatia da torta do dia. É só informar seu telefone no balcão.",
+    rodape: "Os carimbos são marcados pelo barista no balcão."
+  },
 
   // Promoção do dia: 2 combos (1 bebida + 1 comida), sorteados com a data como semente
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
