@@ -453,6 +453,7 @@ T.L = (function () {
         <div class="story-barras" aria-hidden="true">${aula.slides.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
         <div class="story-topo"><span>${E(aula.titulo)}${aula.leitura ? ` <em>· ${E(aula.leitura)}</em>` : ""}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
         <div class="story-corpo" tabindex="0"><div class="story-miolo">
+          ${k === 0 && aula.imagem ? `<img class="story-img" src="${E(aula.imagem)}" alt="${E(aula.titulo)}" width="720" height="900" decoding="async">` : ""}
           <p class="story-n">${k + 1} de ${n}</p>
           ${s.destaque ? `<p class="story-destaque"><strong>${E(s.destaque.valor)}</strong><span>${E(s.destaque.legenda)}</span></p>` : ""}
           <h2 class="titulo">${E(s.titulo)}</h2><p class="story-texto">${E(s.texto)}</p>

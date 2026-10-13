@@ -179,7 +179,9 @@ T.v.aulas = () => {
         <ul class="bolinhas">
           ${AULAS.filter((a) => a.trilha === t.id).map((a) => `
             <li><button type="button" class="bolinha${T.vistas.tem(a.id) ? " vista" : ""}" data-act="open" data-name="aula/${E(a.id)}" data-aula="${E(a.id)}">
-              <span class="anel">${T.icone(a.icone, "bolinha-ilus")}</span>
+              <span class="anel">${a.imagem
+                ? `<img class="bolinha-foto" src="${E(a.imagem)}" alt="" width="72" height="72" loading="lazy" decoding="async" data-ph-src="${E(a.icone)}">`
+                : T.icone(a.icone, "bolinha-ilus")}</span>
               <span class="bolinha-titulo">${E(a.titulo)}</span>
             </button></li>`).join("")}
         </ul>

@@ -443,3 +443,8 @@ h2.titulo { font-size: 32px; }
 .card-gd .foto { width: 112px; height: 112px; }
 .quiz-corpo .btn + .btn { margin-top: 10px; }
 .quiz-corpo .card + .btn { margin-top: 12px; }
+
+/* ----- imagem da aula (foto 4:5): bolinha e primeiro slide ----- */
+.anel { overflow: hidden; }
+.bolinha-foto { width: calc(100% - 6px); height: calc(100% - 6px); border-radius: 50%; object-fit: cover; }
+.story-img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; background: var(--musgo-claro); margin-bottom: 4px; }

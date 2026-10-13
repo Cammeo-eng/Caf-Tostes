@@ -10,6 +10,9 @@
    - titulo ........ aparece na bolinha e no topo do story
    - icone ......... ilustração da bolinha (assets/ilustracoes/...)
    - leitura ....... tempo estimado de leitura
+   - imagem ........ (opcional) foto da aula, vertical 4:5 (assets/aulas/<id>.jpg).
+                     Aparece dentro da bolinha (no lugar do ícone) e no topo do
+                     primeiro slide do story
    - slides ........ lista de telas do story:
        titulo ...... título do slide
        texto ....... texto do slide (2 a 4 frases)
@@ -54,6 +57,7 @@ const AULAS = [
     titulo: "Plantio e colheita",
     icone: "assets/ilustracoes/chapeu.svg",
     leitura: "3 min",
+    imagem: "assets/aulas/cultivo-colheita.jpg",
     link: "#chapeu",
     slides: [
       { titulo: "Uma planta paciente", destaque: { valor: "3 a 4 anos", legenda: "até a primeira boa safra" }, texto: "O cafeeiro é um arbusto que leva de 3 a 4 anos para produzir uma safra de verdade. Bem cuidado, produz por décadas." },
@@ -102,6 +106,7 @@ const AULAS = [
     titulo: "A torra",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "3 min",
+    imagem: "assets/aulas/torra.jpg",
     slides: [
       { titulo: "Onde o sabor nasce", destaque: { valor: "10 a 15 min", legenda: "duração típica de uma torra" }, texto: "Na torra, o grão verde é aquecido num tambor giratório. Em poucos minutos, centenas de compostos de aroma e sabor se formam. A mesma saca pode ficar ótima ou ruim dependendo de como é torrada." },
       { titulo: "Secagem", texto: "Na primeira fase, o grão perde a água que ainda tem. A cor vai do verde ao amarelo, e o cheiro lembra feno e pão." },
@@ -231,6 +236,7 @@ const AULAS = [
     titulo: "Como provar um café",
     icone: "assets/ilustracoes/xicara.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/como-provar.jpg",
     slides: [
       { titulo: "Primeiro, o aroma", texto: "Antes do primeiro gole, sinta o cheiro. A maior parte do que chamamos de sabor, na verdade, é percebida pelo olfato." },
       { titulo: "Acidez", texto: "Acidez não é azedo. É a sensação viva e brilhante que lembra frutas, como laranja, maçã ou frutas vermelhas. Ela deixa o café mais interessante." },
