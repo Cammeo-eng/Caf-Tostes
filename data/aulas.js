@@ -47,15 +47,16 @@ const AULAS = [
     trilha: "origem",
     titulo: "Como o café chegou aqui",
     icone: "assets/ilustracoes/grao.svg",
-    leitura: "2 min",
+    leitura: "3 min",
     imagem: "assets/aulas/historia.jpg",
-    foco: "50% 45%",
+    foco: "50% 60%",
     slides: [
       { titulo: "Nasceu na Etiópia", texto: "O café arábica é nativo das florestas de altitude da Etiópia, na África. A lenda mais conhecida fala de um pastor, Kaldi, que notou suas cabras agitadas depois de comerem os frutos de um arbusto." },
-      { titulo: "Do Iêmen para o mundo", texto: "Foi no Iêmen que o café começou a ser cultivado e preparado como bebida, por volta do século 15. O porto de Mokha exportava os grãos para o mundo árabe e, depois, para a Europa. Daí vem a palavra \"moca\"." },
-      { titulo: "Chegada ao Brasil", destaque: { valor: "1727", legenda: "primeiras mudas no Brasil" }, texto: "As primeiras mudas chegaram ao Pará, trazidas da Guiana Francesa por Francisco de Melo Palheta. Do Norte, o café desceu para o Rio de Janeiro, o Vale do Paraíba, São Paulo, Minas Gerais e o Paraná." },
+      { imagem: "assets/aulas/historia-iemen.jpg", foco: "50% 35%", titulo: "Do Iêmen para o mundo", texto: "Foi no Iêmen que o café começou a ser cultivado e preparado como bebida, por volta do século 15. O porto de Mokha exportava os grãos para o mundo árabe e, depois, para a Europa. Daí vem a palavra \"moca\"." },
+      { imagem: "assets/aulas/historia-colheita-antiga.jpg", foco: "45% 50%", titulo: "Chegada ao Brasil", destaque: { valor: "1727", legenda: "primeiras mudas no Brasil" }, texto: "As primeiras mudas chegaram ao Pará, trazidas da Guiana Francesa por Francisco de Melo Palheta. Do Norte, o café desceu para o Rio de Janeiro, o Vale do Paraíba, São Paulo, Minas Gerais e o Paraná." },
+      { imagem: "assets/aulas/historia-trabalho.jpg", foco: "50% 50%", titulo: "Quem fez essa história", texto: "Durante a maior parte do século 19, a produção de café no Brasil dependeu do trabalho de pessoas escravizadas. Depois da abolição, em 1888, milhares de imigrantes, sobretudo italianos, foram trabalhar nas fazendas." },
       { titulo: "O país do café", destaque: { valor: "1/3", legenda: "do café do mundo vem do Brasil" }, texto: "O Brasil é o maior produtor de café do mundo desde o século 19 e responde por cerca de um terço da produção mundial. Também é um dos maiores consumidores." },
-      { titulo: "Ciclo do café", texto: "Entre o fim do século 19 e o começo do 20, o café foi o principal produto da economia brasileira. Ferrovias, cidades e portos inteiros nasceram para escoar a produção." }
+      { imagem: "assets/aulas/historia-ferrovia.jpg", foco: "50% 50%", titulo: "Ciclo do café", texto: "Entre o fim do século 19 e o começo do 20, o café foi o principal produto da economia brasileira. Ferrovias, cidades e portos inteiros nasceram para escoar a produção." }
     ]
   },
 
@@ -70,7 +71,7 @@ const AULAS = [
     link: "#chapeu",
     slides: [
       { titulo: "Uma planta paciente", destaque: { valor: "3 a 4 anos", legenda: "até a primeira boa safra" }, texto: "O cafeeiro é um arbusto que leva de 3 a 4 anos para produzir uma safra de verdade. Bem cuidado, produz por décadas." },
-      { titulo: "A florada", texto: "Depois das primeiras chuvas da primavera, a planta se cobre de flores brancas com perfume de jasmim. A florada dura só 2 ou 3 dias, e cada flor pode virar um fruto." },
+      { imagem: "assets/aulas/cultivo-colheita-florada.jpg", foco: "40% 50%", titulo: "A florada", texto: "Depois das primeiras chuvas da primavera, a planta se cobre de flores brancas com perfume de jasmim. A florada dura só 2 ou 3 dias, e cada flor pode virar um fruto." },
       { imagem: "assets/aulas/cultivo-colheita-flor.jpg", foco: "40% 62%", titulo: "Da flor à cereja", destaque: { valor: "7 a 9 meses", legenda: "da flor ao fruto maduro (arábica)" }, texto: "O fruto nasce verde, amadurece até ficar vermelho ou amarelo, conforme a variedade, e se chama cereja. Dentro dele costumam estar duas sementes: os grãos de café." },
       { titulo: "Altitude faz diferença", texto: "Em regiões mais altas e frias, o fruto amadurece mais devagar. O grão fica mais denso e desenvolve mais açúcares e acidez, o que dá mais complexidade à xícara." },
       { imagem: "assets/aulas/cultivo-colheita-peneira.jpg", foco: "50% 40%", titulo: "Três jeitos de colher", texto: "Na derriça, todos os frutos do galho são puxados de uma vez sobre um pano. Na colheita seletiva, só os maduros são colhidos à mão, em várias passadas. Em terrenos planos, como no Cerrado Mineiro, colhedoras vibram a planta para soltar os frutos." },
@@ -89,9 +90,9 @@ const AULAS = [
     slides: [
       { titulo: "O que é pós-colheita", texto: "Depois de colhido, o fruto precisa ser seco e separado da semente. A forma como isso é feito muda muito o sabor final. É uma das etapas mais importantes para um café especial." },
       { titulo: "Separação", texto: "Os frutos passam por um lavador. Os mais leves, secos ou defeituosos, boiam e são separados. Os maduros e densos afundam e seguem para o processo escolhido." },
-      { titulo: "Natural", texto: "O fruto inteiro seca ao sol, com casca e polpa, em terreiros ou camas suspensas, por 15 a 30 dias. Os açúcares da polpa influenciam o grão: o café fica mais encorpado, doce e com notas de fruta. É o processo mais tradicional do Brasil." },
+      { imagem: "assets/aulas/pos-colheita-natural.jpg", foco: "50% 55%", titulo: "Natural", texto: "O fruto inteiro seca ao sol, com casca e polpa, em terreiros ou camas suspensas, por 15 a 30 dias. Os açúcares da polpa influenciam o grão: o café fica mais encorpado, doce e com notas de fruta. É o processo mais tradicional do Brasil." },
       { titulo: "Cereja descascado", texto: "A casca é retirada, mas parte da mucilagem, a camada doce e grudenta sobre o grão, fica. Resultado: doçura do natural com uma xícara mais limpa. É um processo muito usado no Brasil." },
-      { titulo: "Lavado", texto: "A casca e a mucilagem são removidas com água e fermentação antes da secagem. O café fica mais limpo e com acidez mais evidente. É comum na Colômbia, no Quênia e na América Central." },
+      { imagem: "assets/aulas/pos-colheita-lavado.jpg", foco: "50% 45%", titulo: "Lavado", texto: "A casca e a mucilagem são removidas com água e fermentação antes da secagem. O café fica mais limpo e com acidez mais evidente. É comum na Colômbia, no Quênia e na América Central." },
       { titulo: "Secagem no ponto", destaque: { valor: "11%", legenda: "umidade ideal do grão seco" }, texto: "Seja qual for o processo, o grão é seco até cerca de 11% de umidade. Seco demais, perde qualidade; úmido demais, pode mofar. Depois, descansa em armazéns por semanas para estabilizar." }
     ]
   },
@@ -106,7 +107,7 @@ const AULAS = [
     foco: "50% 50%",
     slides: [
       { titulo: "Beneficiamento", texto: "Antes de ser vendido, o café seco passa por máquinas que retiram as camadas que ainda envolvem a semente. O que sobra é o café verde, ou café cru." },
-      { titulo: "Café verde", texto: "O grão cru é verde-claro, duro e quase sem aroma. Ele aguenta meses armazenado em sacas. Todo o sabor que você conhece só vai aparecer na torra." },
+      { imagem: "assets/aulas/beneficiamento-cafe-verde.jpg", foco: "50% 40%", titulo: "Café verde", texto: "O grão cru é verde-claro, duro e quase sem aroma. Ele aguenta meses armazenado em sacas. Todo o sabor que você conhece só vai aparecer na torra." },
       { titulo: "Peneiras", texto: "Os grãos são separados por tamanho em peneiras com furos padronizados. Lotes de tamanho uniforme torram por igual, o que é essencial para um café de qualidade." },
       { titulo: "Caça aos defeitos", texto: "Grãos pretos, ardidos, quebrados ou furados por insetos são retirados por máquinas e, em cafés especiais, também à mão. Poucos defeitos estragam o sabor de uma xícara inteira." },
       { titulo: "Saca de café", destaque: { valor: "60 kg", legenda: "uma saca de café verde" }, texto: "O café é comercializado em sacas de 60 kg. É a unidade usada para medir safras e exportações no mundo todo." }
@@ -137,6 +138,8 @@ const AULAS = [
     titulo: "Regiões do Brasil",
     icone: "assets/ilustracoes/grao.svg",
     leitura: "2 min",
+    imagem: "assets/aulas/regioes.jpg",
+    foco: "50% 55%",
     slides: [
       { titulo: "Terroir", texto: "Clima, solo, altitude e o jeito de produzir de cada lugar mudam o sabor do café. É o mesmo conceito usado para vinhos, chamado de terroir." },
       { titulo: "Sul de Minas e Mantiqueira", texto: "A maior região produtora do país. Montanhas, clima ameno e muita colheita manual. Cafés doces, equilibrados, com notas de chocolate e caramelo." },
