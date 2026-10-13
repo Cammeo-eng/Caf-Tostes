@@ -1,4 +1,4 @@
-# A cada push na main: testa, gera o site estático e publica no GitHub Pages.
+# A cada push na main: copia o site estático (sem build) e publica no GitHub Pages.
 name: Publicar no GitHub Pages
 
 on:
@@ -18,22 +18,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: web/package-lock.json
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Montar a pasta do site
+        run: |
+          mkdir _site
+          cp -r index.html css js data assets _site/
+          touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: web/out
+          path: _site
 
   deploy:
     needs: build

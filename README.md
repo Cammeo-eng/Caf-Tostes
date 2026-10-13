@@ -26,4 +26,4 @@ O QR code de cada mesa abre `.../index.html?mesa=3` (de 1 a 6). O pedido já vem
 2. Em "Build and deployment", escolha "Deploy from a branch", a branch principal e a pasta `/ (root)`.
 3. O site fica em `https://<usuario>.github.io/<repositorio>/`. Todos os caminhos são relativos.
 
-Obs.: a pasta `web/` guarda a versão anterior (Next.js) e o workflow `.github/workflows/pages.yml` ainda publica essa versão. Veja `DECISOES.md`.
+Obs.: o workflow `.github/workflows/pages.yml` publica este site a cada push na main (em Settings → Pages, a fonte deve ser "GitHub Actions"). A pasta `web/` guarda a versão anterior (Next.js), só como histórico.
