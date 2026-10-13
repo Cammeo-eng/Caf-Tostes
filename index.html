@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TOSTES to go · Cardápio</title>
+  <meta name="description" content="Cardápio digital da TOSTES to go, cafeteria artesanal em Fazenda Rio Grande (PR). Veja o cardápio e faça seu pedido pelo WhatsApp.">
+  <meta name="theme-color" content="#F4EBDD">
+  <link rel="icon" href="assets/ilustracoes/chapeu.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="splash" aria-hidden="true">
+    <img src="assets/ilustracoes/chapeu.svg" alt="" width="120" height="120">
+    <p>TOSTES to go</p>
+  </div>
+
+  <div id="app">
+    <header id="topo" class="col-fixo">
+      <a class="logo" href="./" aria-label="TOSTES to go, início"><img src="assets/logo/logo.svg" alt="TOSTES to go" width="132" height="34"></a>
+      <span id="status" class="status" role="status"></span>
+      <button type="button" class="btn-menu" data-act="open" data-name="menu" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </header>
+    <div id="marquee" class="marquee" aria-hidden="true"><div class="marquee-trilho"></div></div>
+    <p id="mesa-linha" class="mesa-linha" hidden></p>
+
+    <main id="conteudo">
+      <section id="favorito" class="secao-favorito" aria-labelledby="fav-titulo"></section>
+      <section id="promo" class="bloco bloco-vinho" aria-labelledby="promo-titulo"></section>
+      <section id="quiz-card" class="secao"></section>
+
+      <section id="bebidas" class="cardapio" aria-labelledby="bebidas-titulo"></section>
+      <section id="comidas" class="cardapio" aria-labelledby="comidas-titulo"></section>
+
+      <section id="aulas" class="bloco bloco-musgo" aria-labelledby="aulas-titulo"></section>
+    </main>
+    <footer id="rodape"></footer>
+  </div>
+
+  <button type="button" id="bag-bar" class="bag-bar col-fixo" data-act="open" data-name="pedido" hidden></button>
+  <div id="layers"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="data/config.js"></script>
+  <script src="data/menu.js"></script>
+  <script src="data/aulas.js"></script>
+  <script src="data/quiz.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/promo.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/layers.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
