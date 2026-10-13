@@ -12,7 +12,7 @@ Coloque em `assets/fotos/<id>.jpg`, onde `<id>` é o `id` do item em `data/menu.
 Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, `horarios`, `mesas`, texto da fidelidade, promoção do dia e o pedido favorito.
 
 ## Outros arquivos de dados
-- `data/aulas.js`: trilhas (`AULAS_TRILHAS`) e aulas em formato stories (`slides`, `icone`, `item`, `link`).
+- `data/aulas.js`: trilhas (`AULAS_TRILHAS` com `descricao`) e aulas em formato stories (`leitura`, `slides` com `destaque` opcional, `item`, `link`).
 - `data/quiz.js`: perguntas e regras do quiz "Descubra seu café".
 
 ## Marca, tamanho e fontes

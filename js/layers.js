@@ -325,51 +325,77 @@ T.L = (function () {
   };
 
   /* ===== aulas (stories) =====
-     Toque à direita avança, à esquerda volta; segurar pausa (não navega); deslizar para baixo ou o X fecha.
-     Os slides nunca avançam sozinhos. Ao fim da aula, segue para a próxima da mesma trilha. */
+     Toque no terço esquerdo volta; no resto da tela avança. Segurar pausa (não navega).
+     Deslizar para baixo ou o X fecha. Os slides nunca avançam sozinhos; o texto rola dentro do slide.
+     Ao fim da aula segue para a próxima da trilha; na última da trilha, mostra "Você terminou a trilha". */
   build.aula = (id) => {
     let aula = AULAS.find((a) => a.id === id);
     if (!aula) return null;
     const el = camada("aula/" + id, "layer-aula", aula.titulo);
-    let k = 0;
+    let k = 0, fim = false;
+    const trilhaDe = (a) => AULAS_TRILHAS.find((t) => t.id === a.trilha);
+    const proximaTrilha = () => {
+      const i = AULAS_TRILHAS.findIndex((t) => t.id === aula.trilha);
+      for (let j = i + 1; j < AULAS_TRILHAS.length; j++) { const a = AULAS.find((x) => x.trilha === AULAS_TRILHAS[j].id); if (a) return a; }
+      return null;
+    };
     const abre = () => { T.vistas.marca(aula.id); T.v.atualizaVistas(); el.setAttribute("aria-label", aula.titulo); };
     const render = () => {
-      const n = aula.slides.length, s = aula.slides[k], ultimo = k === n - 1;
+      const n = aula.slides.length;
+      if (fim) {
+        const prox = proximaTrilha();
+        el.innerHTML = `
+          <div class="story-topo"><span>${E(aula.titulo)}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
+          <div class="story-corpo story-fim">${T.icone(aula.icone, "story-ilus")}<h2 class="titulo">Você terminou a trilha ${E(trilhaDe(aula).nome)}</h2>
+            <div class="story-botoes">${prox ? `<button type="button" class="btn btn-vinho" data-act="s-trilha">Próxima trilha</button>` : ""}<button type="button" class="btn btn-contorno" data-act="back">Fechar</button></div></div>`;
+        return;
+      }
+      const s = aula.slides[k], ultimo = k === n - 1;
       const botoes = [];
-      if (ultimo && aula.item && T.item(aula.item)) botoes.push(`<button type="button" class="btn btn-creme story-link" data-act="s-item" data-id="${E(aula.item)}">Ver no cardápio</button>`);
-      if (ultimo && aula.link) botoes.push(`<button type="button" class="btn btn-creme story-link" data-act="s-link" data-h="${E(aula.link.replace(/^#/, ""))}">Conhecer a história</button>`);
+      if (ultimo && aula.item && T.item(aula.item)) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-item" data-id="${E(aula.item)}">Ver no cardápio</button>`);
+      if (ultimo && aula.link) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-link" data-h="${E(aula.link.replace(/^#/, ""))}">Conhecer a história</button>`);
       el.innerHTML = `
         <div class="story-barras" aria-hidden="true">${aula.slides.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
-        <div class="story-topo"><span>${E(aula.titulo)}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
-        <button type="button" class="zona zona-esq" data-act="s-ant" aria-label="Slide anterior"></button>
-        <button type="button" class="zona zona-dir" data-act="s-prox" aria-label="Próximo slide"></button>
-        <div class="story-corpo">${T.icone(aula.icone, "story-ilus")}<p class="story-n">${k + 1} de ${n}</p>${s.titulo ? `<h2 class="titulo">${E(s.titulo)}</h2>` : ""}<p>${E(s.texto)}</p>
+        <div class="story-topo"><span>${E(aula.titulo)}${aula.leitura ? ` <em>· ${E(aula.leitura)}</em>` : ""}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
+        <div class="story-corpo" tabindex="0"><div class="story-miolo">
+          <p class="story-n">${k + 1} de ${n}</p>
+          ${s.destaque ? `<p class="story-destaque"><strong>${E(s.destaque.valor)}</strong><span>${E(s.destaque.legenda)}</span></p>` : ""}
+          <h2 class="titulo">${E(s.titulo)}</h2><p class="story-texto">${E(s.texto)}</p>
           ${botoes.length ? `<div class="story-botoes">${botoes.join("")}</div>` : ""}
+          </div>
+          <div class="sr-nav"><button type="button" data-act="s-ant">Slide anterior</button><button type="button" data-act="s-prox">Próximo slide</button></div>
         </div>`;
     };
     const proximaAula = () => {
       const irmas = AULAS.filter((a) => a.trilha === aula.trilha), j = irmas.indexOf(aula);
-      if (j < irmas.length - 1) { aula = irmas[j + 1]; k = 0; abre(); render(); } else api.voltar();
+      if (j < irmas.length - 1) { aula = irmas[j + 1]; k = 0; abre(); render(); } else { fim = true; render(); }
     };
     el._story = {
       prox() { if (k < aula.slides.length - 1) { k++; render(); } else proximaAula(); },
-      ant() { if (k > 0) { k--; render(); } }
+      ant() { if (k > 0) { k--; render(); } },
+      trilha() { const a = proximaTrilha(); if (a) { aula = a; k = 0; fim = false; abre(); render(); } }
     };
-    // segurar pausa: um toque longo não navega
+    // toque na tela: terço esquerdo volta, o resto avança; toque longo pausa; arrastar rola o texto (o navegador não gera clique)
     let t0 = 0, x0 = 0, y0 = 0;
-    el.addEventListener("pointerdown", (e) => { t0 = Date.now(); x0 = e.clientX; y0 = e.clientY; });
-    el._longo = () => Date.now() - t0 > 350;
+    el.addEventListener("pointerdown", (e) => { t0 = Date.now(); });
+    el.addEventListener("click", (e) => {
+      if (fim || e.target.closest("button, a") || !e.target.closest(".story-corpo")) return;
+      if (Date.now() - t0 > 350) return;
+      const r = el.getBoundingClientRect();
+      if (e.clientX - r.left < r.width / 3) el._story.ant(); else el._story.prox();
+    });
     el.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
     el.addEventListener("touchend", (e) => {
-      const t = e.changedTouches[0];
-      if (t.clientY - y0 > 110 && Math.abs(t.clientX - x0) < 70) api.voltar();     // deslizar para baixo fecha
+      const t = e.changedTouches[0], sc = $(".story-corpo", el);
+      if (t.clientY - y0 > 110 && Math.abs(t.clientX - x0) < 70 && (!sc || sc.scrollTop <= 0)) api.voltar();     // deslizar para baixo fecha
     }, { passive: true });
     abre();
     render();
     return el;
   };
-  T.acts["s-prox"] = (b) => { const l = b.closest(".layer"); if (!l._longo()) l._story.prox(); };
-  T.acts["s-ant"] = (b) => { const l = b.closest(".layer"); if (!l._longo()) l._story.ant(); };
+  T.acts["s-prox"] = (b) => b.closest(".layer")._story.prox();
+  T.acts["s-ant"] = (b) => b.closest(".layer")._story.ant();
+  T.acts["s-trilha"] = (b) => b.closest(".layer")._story.trilha();
   T.acts["s-item"] = (b) => api.fechaTudo(() => api.abrir("item/" + b.dataset.id));
   T.acts["s-link"] = (b) => api.fechaTudo(() => api.abrir(b.dataset.h));
 
