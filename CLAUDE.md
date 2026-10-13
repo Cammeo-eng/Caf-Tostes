@@ -14,3 +14,4 @@ Siga a skill tostes-sem-pontas-soltas e consulte PROMPT.md, cardapio-dados.md e 
 - **Estrutura:** `css/`, `js/`, `data/`, `assets/{fotos,ilustracoes,logo}`. A pasta `web/` é a versão antiga (Next.js), mantida só como histórico.
 - **Não fazer:** imagem quebrada (usar placeholder), `fetch`, `Math.random()` no sorteio, texto exagerado, botões menores que 44 px, animações sem respeitar `prefers-reduced-motion`.
 - Registrar decisões em `DECISOES.md`.
+- **Sempre que terminar qualquer alteração, abrir a visualização do site em tamanho de celular para o Fabrício conferir.**
