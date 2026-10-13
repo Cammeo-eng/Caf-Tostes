@@ -437,6 +437,7 @@ T.L = (function () {
     const abre = () => { T.vistas.marca(aula.id); T.v.atualizaVistas(); el.setAttribute("aria-label", aula.titulo); };
     // imagem do slide tem prioridade; no primeiro slide, sem imagem própria, vale a capa da aula
     const imagemDoSlide = (s) => s.imagem || (k === 0 ? aula.imagem : null);
+    const focoDoSlide = (s) => (s.imagem ? s.foco : aula.foco) || "50% 50%";      // foco da aula na capa; do slide na imagem do slide
     const render = () => {
       const n = aula.slides.length;
       if (fim) {
@@ -455,7 +456,7 @@ T.L = (function () {
         <div class="story-barras" aria-hidden="true">${aula.slides.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
         <div class="story-topo"><span>${E(aula.titulo)}${aula.leitura ? ` <em>· ${E(aula.leitura)}</em>` : ""}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
         <div class="story-corpo" tabindex="0"><div class="story-miolo">
-          ${imagemDoSlide(s) ? `<img class="story-img" src="${E(imagemDoSlide(s))}" alt="${E(s.titulo)}" width="720" height="900" decoding="async" data-remove-se-falhar="1">` : ""}
+          ${imagemDoSlide(s) ? `<div class="story-img-bloco"><img class="story-img" src="${E(imagemDoSlide(s))}" alt="${E(s.titulo)}" width="720" height="900" decoding="async" style="object-position:${E(focoDoSlide(s))}" data-remove-se-falhar="1"></div>` : ""}
           <p class="story-n">${k + 1} de ${n}</p>
           ${s.destaque ? `<p class="story-destaque"><strong>${E(s.destaque.valor)}</strong><span>${E(s.destaque.legenda)}</span></p>` : ""}
           <h2 class="titulo">${E(s.titulo)}</h2><p class="story-texto">${E(s.texto)}</p>
