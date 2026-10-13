@@ -6,7 +6,7 @@ T.cart = (function () {
   const salvo = T.store.get(KEY) || {};
   const st = {
     linhas: Array.isArray(salvo.linhas) ? salvo.linhas.filter((l) => linhaValida(l)) : [],
-    modo: salvo.modo === "mesa" ? "mesa" : "balcao",
+    modo: salvo.modo === "mesa" ? "mesa" : "viagem",         // "viagem" = Levar pra viagem
     mesa: salvo.mesa || null,
     nome: salvo.nome || "",
     obs: salvo.obs || ""
@@ -30,7 +30,7 @@ T.cart = (function () {
   const daUrl = mesaDaUrl();
   if (daUrl) { st.modo = "mesa"; st.mesa = daUrl; }
   if (st.mesa && (st.mesa < 1 || st.mesa > CONFIG.mesas)) st.mesa = null;
-  if (st.modo === "mesa" && !st.mesa) st.modo = "balcao";
+  if (st.modo === "mesa" && !st.mesa) st.modo = "viagem";
 
   const chaveItem = (id, tam, sel) => "i|" + id + "|" + tam + "|" + Object.keys(sel).sort().map((g) => g + ":" + sel[g].slice().sort().join(",")).join(";");
   const chaveCombo = (pref, partes) => "c|" + pref + "|" + partes.map((p) => p.id + ":" + p.tam).join("+");
@@ -80,14 +80,21 @@ T.cart = (function () {
       sub = T.r2(sub); desc = T.r2(desc);
       return { subtotal: sub, desconto: desc, total: T.r2(sub - desc), qtd: n };
     },
-    podeEnviar() { return st.linhas.length > 0 && (st.modo !== "mesa" || !!st.mesa); },
+    // O que falta para enviar (texto curto) ou null. O nome é obrigatório.
+    pendencia() {
+      if (!st.linhas.length) return "Seu pedido está vazio.";
+      if (!st.nome.trim()) return "Preencha seu nome para enviar o pedido.";
+      if (st.modo === "mesa" && !st.mesa) return "Escolha o número da mesa.";
+      return null;
+    },
+    podeEnviar() { return api.pendencia() === null; },
 
     mensagem() {
       const t = api.totais();
       const L = [];
       L.push("*Pedido — " + CONFIG.nome + "*");
-      L.push(st.modo === "mesa" ? "*Mesa " + st.mesa + "*" : "*Retirada no balcão*");
-      if (st.nome.trim()) L.push("Nome: " + st.nome.trim());
+      L.push(st.modo === "mesa" ? "*Mesa " + st.mesa + "*" : "*Para viagem*");
+      L.push("Nome: " + st.nome.trim());
       L.push("");
       st.linhas.forEach((l) => {
         const v = api.valores(l);
@@ -101,8 +108,10 @@ T.cart = (function () {
         }
       });
       L.push("");
-      L.push("Subtotal: " + T.moneyWA(t.subtotal));
-      if (t.desconto > 0) L.push("Desconto: −" + T.moneyWA(t.desconto));
+      if (t.desconto > 0) {                       // Subtotal e Desconto só aparecem quando há combo com desconto
+        L.push("Subtotal: " + T.moneyWA(t.subtotal));
+        L.push("Desconto: −" + T.moneyWA(t.desconto));
+      }
       L.push("*Total: " + T.moneyWA(t.total) + "*");
       L.push("");
       if (st.obs.trim()) L.push("Obs.: " + st.obs.trim());

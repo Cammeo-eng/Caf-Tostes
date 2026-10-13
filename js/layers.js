@@ -26,7 +26,8 @@ T.L = (function () {
     const it = T.item(id);
     if (!it) return null;
     const el = camada("item/" + id, "layer-item", T.nome(it));
-    const S = { it, tam: T.tamRec(it), sel: T.padroes(it), qtd: 1 };
+    const pre = T.preset[id]; delete T.preset[id];
+    const S = { it, tam: pre ? pre.tam : T.tamRec(it), sel: pre ? pre.sel : T.padroes(it), qtd: 1 };
     el._S = S;
     el.innerHTML = `
       <div class="sheet">
@@ -194,16 +195,16 @@ T.L = (function () {
         </dl>
         <fieldset class="modo"><legend>Como você quer receber?</legend>
           <div class="chips">
-            <button type="button" role="radio" aria-checked="${st.modo === "balcao"}" class="chip" data-act="c-modo" data-m="balcao">Retirar no balcão</button>
+            <button type="button" role="radio" aria-checked="${st.modo === "viagem"}" class="chip" data-act="c-modo" data-m="viagem">Levar pra viagem</button>
             <button type="button" role="radio" aria-checked="${st.modo === "mesa"}" class="chip" data-act="c-modo" data-m="mesa">Comer na mesa</button>
           </div>
           ${st.modo === "mesa" ? `<p class="mesa-rot">Qual é a sua mesa?</p><div class="mesas">${Array.from({ length: CONFIG.mesas }, (_, k) => `<button type="button" role="radio" aria-checked="${st.mesa === k + 1}" class="mesa-n" data-act="c-mesa" data-n="${k + 1}" aria-label="Mesa ${k + 1}">${k + 1}</button>`).join("")}</div>` : ""}
         </fieldset>
-        <label class="campo">Seu nome (opcional)<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" value="${E(st.nome)}"></label>
+        <label class="campo">Seu nome<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" required value="${E(st.nome)}"></label>
         <label class="campo">Observações (opcional)<textarea id="c-obs" maxlength="140" rows="2">${E(st.obs)}</textarea><small id="c-cont">${st.obs.length}/140</small></label>
         <p class="mini">Fazer o pedido por aqui é opcional: você também pode pedir no balcão. O pagamento é feito no balcão.</p>
-        <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" ${c.podeEnviar() ? "" : "disabled"}>Enviar pedido pelo WhatsApp</button>
-        ${st.modo === "mesa" && !st.mesa ? `<p class="falta">Escolha o número da mesa.</p>` : ""}
+        <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" id="c-enviar" aria-disabled="${c.podeEnviar() ? "false" : "true"}">Enviar pedido pelo WhatsApp</button>
+        <p class="falta" id="c-falta" role="status" ${c.pendencia() ? "" : "hidden"}>${E(c.pendencia() || "")}</p>
         <button type="button" class="link-rm limpar" data-act="c-limpar">Limpar pedido</button>`;
       }
       h += `</div>`;
@@ -212,7 +213,12 @@ T.L = (function () {
       if (ns) ns.scrollTop = y;
       if (el._enviado && st.linhas.length) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status"><strong>Pedido aberto no WhatsApp.</strong> É só enviar a mensagem.<small>${E(CONFIG.instagramConvite.aposPedido)}</small></div>`);
       const n = $("#c-nome", el), o = $("#c-obs", el);
-      if (n) n.addEventListener("input", () => c.set("nome", n.value, true));
+      if (n) n.addEventListener("input", () => {
+        c.set("nome", n.value, true);                          // digitando não redesenha a tela; só atualiza o botão
+        const btn = $("#c-enviar", el), f = $("#c-falta", el), p = c.pendencia();
+        btn.setAttribute("aria-disabled", p ? "true" : "false");
+        f.hidden = !p; f.textContent = p || "";
+      });
       if (o) o.addEventListener("input", () => { c.set("obs", o.value.slice(0, 140), true); $("#c-cont", el).textContent = o.value.length + "/140"; });
     };
     el._render = render;
@@ -222,11 +228,17 @@ T.L = (function () {
   const semEnviado = () => { const el = $('.layer[data-name="pedido"]'); if (el) el._enviado = false; };
   T.acts["c-qtd"] = (b) => { semEnviado(); T.cart.setQtd(+b.dataset.i, +b.dataset.d); };
   T.acts["c-rm"] = (b) => { semEnviado(); T.cart.remover(+b.dataset.i); };
-  T.acts["c-modo"] = (b) => { T.cart.st.modo = b.dataset.m; if (b.dataset.m === "balcao") T.cart.st.mesa = null; T.cart.set("modo", b.dataset.m); };
+  T.acts["c-modo"] = (b) => { T.cart.st.modo = b.dataset.m; if (b.dataset.m === "viagem") T.cart.st.mesa = null; T.cart.set("modo", b.dataset.m); };
   T.acts["c-mesa"] = (b) => T.cart.set("mesa", +b.dataset.n);
   T.acts["c-limpar"] = () => { if (confirm("Limpar todo o pedido?")) T.cart.limpar(); };
   T.acts["c-enviar"] = () => {
-    if (!T.cart.podeEnviar()) return;
+    const falta = T.cart.pendencia();
+    if (falta) {                                        // botão desabilitado: leva até o campo que falta
+      const el = $('.layer[data-name="pedido"]');
+      const alvo = !T.cart.st.nome.trim() ? $("#c-nome", el) : $(".mesas", el);
+      if (alvo) { alvo.scrollIntoView({ block: "center", behavior: T.reduzMovimento() ? "auto" : "smooth" }); if (alvo.focus) alvo.focus({ preventScroll: true }); }
+      return;
+    }
     window.open(T.cart.urlWhatsApp(), "_blank", "noopener");
     T.v.confete();
     const el = $('.layer[data-name="pedido"]');
@@ -255,31 +267,114 @@ T.L = (function () {
   T.acts["m-ir"] = (b) => api.irPara(b.dataset.arg);
   T.acts["m-abrir"] = (b) => api.fechaTudo(() => api.abrir(b.dataset.arg));
 
-  /* ===== quiz ===== */
+  /* ===== quiz "Descubra seu café" (regras em data/quiz.js) ===== */
+  T.quiz = {
+    // Motor: filtros nunca são removidos; pontua por resposta; desempata; evita 3 itens da mesma categoria.
+    calcula(resp) {                                   // resp: lista de índices de resposta, um por pergunta
+      const escolhidas = QUIZ_PERGUNTAS.map((p, i) => p.respostas[resp[i]]);
+      let cands = MENU.filter((i) => i.grupo === "bebidas" && i.pedido !== false && i.tamanhos.length);
+      escolhidas.forEach((r) => {
+        const f = r.filtro; if (!f) return;
+        cands = cands.filter((it) => (f.exigir || []).every((t) => it.etiquetas.includes(t)) && !(f.excluir || []).some((t) => it.etiquetas.includes(t)));
+      });
+      const lista = cands.map((it, ordem) => {
+        const porResposta = escolhidas.map((r) => (r.pesos ? it.etiquetas.reduce((s, t) => s + (r.pesos[t] || 0), 0) : 0));
+        return { it, ordem, pts: porResposta.reduce((a, b) => a + b, 0), porResposta };
+      });
+      const preco = (it) => it.tamanhos[T.tamRec(it)].preco;
+      lista.sort((x, y) => y.pts - x.pts
+        || (y.it.selo === "favorito") - (x.it.selo === "favorito")
+        || y.it.etiquetas.includes("cafe") - x.it.etiquetas.includes("cafe")
+        || preco(x.it) - preco(y.it)
+        || x.ordem - y.ordem);
+      if (!lista.length) return null;
+      const topo = lista[0], outros = lista.slice(1);
+      let segundo = outros[0], terceiro = outros[1];
+      if (segundo && terceiro && segundo.it.categoria === topo.it.categoria && terceiro.it.categoria === topo.it.categoria) {
+        const outra = outros.slice(2).find((x) => x.it.categoria !== topo.it.categoria);
+        if (outra) terceiro = outra;
+      }
+      const define = {};
+      escolhidas.forEach((r) => Object.assign(define, r.define || {}));
+      const pega = (x) => {                            // tamanho e leite escolhidos no quiz
+        const it = x.it;
+        let tam = T.tamRec(it);
+        if (define.temperatura === "gelado") { const g = it.tamanhos.findIndex((t) => t.rotulo === "Gelado"); if (g >= 0) tam = g; }
+        const sel = T.padroes(it);
+        if (define.leite && OPCOES.leite && it.opcoes.includes("leite") && OPCOES.leite.itens.some((o) => o.id === define.leite)) sel.leite = [define.leite];
+        return { item: it, tam, sel, pts: x.pts };
+      };
+      // explicação: as 2 respostas que mais somaram pontos para o 1º lugar (com motivo)
+      const motivos = escolhidas.map((r, i) => ({ m: r.motivo, p: topo.porResposta[i], i })).filter((x) => x.m);
+      const ordenados = motivos.filter((x) => x.p > 0).sort((a, b) => b.p - a.p || a.i - b.i).slice(0, 2);
+      if (ordenados.length < 2) motivos.filter((x) => x.p <= 0 && x.p === 0).forEach((x) => { if (ordenados.length < 2) ordenados.push(x); });
+      const explicacao = ordenados.length ? "Porque você " + ordenados.map((x) => x.m).join(" e ") + "." : "";
+      let acomp = null;
+      if (define.acompanhamento === "salgado" || define.acompanhamento === "doce") {
+        const regra = HARMONIZACAO.find((h) => topo.it.etiquetas.includes(h.etiqueta)) || HARMONIZACAO_PADRAO;
+        const food = T.item(regra[define.acompanhamento]);
+        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), texto: regra.texto };
+      }
+      return { principal: pega(topo), explicacao, alternativas: [segundo, terceiro].filter(Boolean).map(pega), acomp };
+    },
+    // Console: testeQuiz() roda 1.000 combinações aleatórias
+    teste(n) {
+      n = n || 1000;
+      let sem = 0; const primeiros = {};
+      for (let k = 0; k < n; k++) {
+        const resp = QUIZ_PERGUNTAS.map((p) => Math.floor(Math.random() * p.respostas.length));   // aleatório só no teste
+        const r = T.quiz.calcula(resp);
+        if (!r) { sem++; continue; }
+        primeiros[r.principal.item.id] = (primeiros[r.principal.item.id] || 0) + 1;
+      }
+      const ids = Object.keys(primeiros).sort((a, b) => primeiros[b] - primeiros[a]);
+      console.info(`[TOSTES] testeQuiz: ${n} combinações · sem resultado: ${sem} · itens diferentes em 1º lugar: ${ids.length}`);
+      console.table(ids.slice(0, 10).map((id) => ({ item: id, vezes: primeiros[id] })));
+      return { combinacoes: n, semResultado: sem, itensEmPrimeiro: ids.length };
+    }
+  };
+  window.testeQuiz = (n) => T.quiz.teste(n);
+
   build.quiz = () => {
-    const el = camada("quiz", "layer-tela layer-creme", QUIZ.titulo);
-    const Q = { passo: -1, resp: [], res: [] };
+    const el = camada("quiz", "layer-tela layer-creme", "Descubra seu café");
+    const Q = { passo: -1, resp: [], res: null, trava: false };
     el._Q = Q;
+    const card = (r, grande) => {
+      const it = r.item, t = it.tamanhos[r.tam], un = T.precoUnit(it, r.tam, r.sel);
+      const ops = T.textoOpcoes(it, r.sel);
+      return `<div class="card card-quiz${grande ? " card-gd" : ""}">
+        <button type="button" class="card-hit" data-act="open-item" data-id="${E(it.id)}" aria-label="Ver detalhes de ${E(T.nome(it))}">
+          <span class="foto">${T.foto(it.foto, T.nome(it), it.grupo, 92, 92)}</span>
+          <span class="txt"><span class="nome">${E(T.nome(it))}</span>
+            <span class="desc">${E([it.tamanhos.length > 1 ? t.rotulo : "", ...ops].filter(Boolean).join(" · ") || it.descricaoCurta)}</span>
+            <span class="preco-linha"><span class="preco">${T.money(un)}</span></span></span></button></div>`;
+    };
     const render = () => {
-      let h = `<div class="tela-topo"><h2 class="titulo">${E(QUIZ.titulo)}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar">×</button></div><div class="tela-scroll quiz-corpo">`;
-      const n = QUIZ.perguntas.length;
+      const n = QUIZ_PERGUNTAS.length;
+      let h = `<div class="tela-topo"><h2 class="titulo">Descubra seu café</h2><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar">×</button></div><div class="tela-scroll quiz-corpo">`;
       if (Q.passo < 0) {
-        h += `${T.ilus("xicara", "quiz-gd")}<p class="quiz-intro">${E(QUIZ.chamada)}</p><button type="button" class="btn btn-vinho btn-bloco" data-act="q-iniciar">Começar</button>`;
+        h += `${T.ilus("xicara", "quiz-gd")}<p class="quiz-intro">${E(QUIZ_TEXTOS.abertura)}</p><button type="button" class="btn btn-vinho btn-bloco" data-act="q-iniciar">Começar</button>`;
       } else if (Q.passo < n) {
-        const p = QUIZ.perguntas[Q.passo];
-        h += `<p class="quiz-passo">Pergunta ${Q.passo + 1} de ${n}</p><div class="quiz-barra"><i style="width:${(Q.passo / n) * 100}%"></i></div>
-          <h3 class="titulo quiz-pergunta">${E(p.titulo)}</h3>
-          <div class="quiz-resp">${p.respostas.map((r, k) => `<button type="button" class="btn-resp" data-act="q-resp" data-k="${k}">${E(r.rotulo)}</button>`).join("")}</div>
+        const p = QUIZ_PERGUNTAS[Q.passo];
+        h += `<div class="quiz-barra" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${Q.passo}"><i style="width:${(Q.passo / n) * 100}%"></i></div>
+          <p class="quiz-passo">${Q.passo + 1} de ${n}</p>
+          <h3 class="titulo quiz-pergunta">${E(p.pergunta)}</h3>
+          <p class="quiz-apoio">${E(p.apoio)}</p>
+          <div class="quiz-resp">${p.respostas.map((r, k) => `<button type="button" class="btn-resp${Q.resp[Q.passo] === k ? " on" : ""}" data-act="q-resp" data-k="${k}">${E(r.texto)}</button>`).join("")}</div>
           ${Q.passo > 0 ? `<button type="button" class="link-rm" data-act="q-voltar">Voltar</button>` : ""}`;
       } else {
-        h += `<h3 class="titulo quiz-pergunta">Tem tudo a ver com você</h3><ul class="quiz-res">${Q.res.map((r, k) => {
-          const it = r.item, t = it.tamanhos[r.tam];
-          return `<li class="card card-quiz"><button type="button" class="card-hit" data-act="open-item" data-id="${E(it.id)}" aria-label="Ver detalhes de ${E(T.nome(it))}">
-            <span class="foto">${T.foto(it.foto, T.nome(it), it.grupo, 92, 92)}</span>
-            <span class="txt"><span class="nome">${E(it.nome)}</span><span class="desc">${E(it.descricaoCurta)}</span>
-            <span class="preco-linha"><span class="preco">${T.money(t.preco)}</span>${it.tamanhos.length > 1 ? ` <small>${E(t.rotulo)}</small>` : ""}</span></span></button>
-            <button type="button" class="add" data-act="q-add" data-k="${k}" aria-label="Adicionar ${E(T.nome(it))}">+</button></li>`;
-        }).join("")}</ul><button type="button" class="btn btn-contorno btn-bloco" data-act="q-refazer">Refazer</button>`;
+        const r = Q.res;
+        if (!r) h += `<p class="quiz-intro">Não encontramos uma bebida com essas respostas. Tente de novo.</p>`;
+        else {
+          h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.titulo)}</h3>${card(r.principal, true)}
+            ${r.explicacao ? `<p class="quiz-explica">${E(r.explicacao)}</p>` : ""}
+            <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="p">Adicionar ao pedido</button>`;
+          if (r.alternativas.length) h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.alternativas)}</h3><div class="quiz-alt">${r.alternativas.map((a, k) => `<div>${card(a)}<button type="button" class="btn btn-contorno btn-bloco" data-act="q-add" data-w="a${k}">Adicionar ao pedido</button></div>`).join("")}</div>`;
+          if (r.acomp) h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.acompanhamento)}</h3>${card(r.acomp)}<p class="quiz-explica">${E(r.acomp.texto)}</p>
+            <button type="button" class="btn btn-contorno btn-bloco" data-act="q-add" data-w="c">Adicionar ao pedido</button>
+            <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="os-dois">Adicionar os dois</button>`;
+        }
+        h += `<button type="button" class="link-rm limpar" data-act="q-refazer">${E(QUIZ_TEXTOS.refazer)}</button>`;
       }
       el.innerHTML = h + `</div>`;
     };
@@ -292,37 +387,37 @@ T.L = (function () {
   T.acts["q-iniciar"] = (b) => { const e = quizEl(b); e._Q.passo = 0; e._Q.resp = []; e._draw(); };
   T.acts["q-resp"] = (b) => {
     const e = quizEl(b), Q = e._Q;
-    Q.resp[Q.passo] = QUIZ.perguntas[Q.passo].respostas[+b.dataset.k].etiqueta;
-    Q.passo++;
-    if (Q.passo >= QUIZ.perguntas.length) Q.res = T.recomenda(Q.resp);
-    e._draw();
+    if (Q.trava) return;
+    Q.trava = true;
+    Q.resp[Q.passo] = +b.dataset.k;
+    b.classList.add("on");                              // a resposta acende e o quiz avança sozinho
+    setTimeout(() => {
+      Q.trava = false;
+      Q.passo++;
+      if (Q.passo >= QUIZ_PERGUNTAS.length) Q.res = T.quiz.calcula(Q.resp);
+      e._draw();
+      const sc = $(".tela-scroll", e); if (sc) sc.scrollTop = 0;
+    }, 250);
   };
   T.acts["q-voltar"] = (b) => { const e = quizEl(b); e._Q.passo = Math.max(0, e._Q.passo - 1); e._draw(); };
-  T.acts["q-refazer"] = (b) => { const e = quizEl(b); e._Q.passo = 0; e._Q.resp = []; e._Q.res = []; e._draw(); };
+  T.acts["q-refazer"] = (b) => { const e = quizEl(b); Object.assign(e._Q, { passo: 0, resp: [], res: null }); e._draw(); };
   T.acts["q-add"] = (b) => {
-    const r = quizEl(b)._Q.res[+b.dataset.k], it = r.item;
-    if (T.faltando(it, T.padroes(it)).length) { api.abrir("item/" + it.id); return; }
-    T.cart.addItem(it.id, r.tam, T.padroes(it), 1);
-    T.toast("Adicionado · " + T.nome(it), { act: "open-pedido", rotulo: "Ver pedido" });
+    const r = quizEl(b)._Q.res, w = b.dataset.w;
+    const poe = (x) => {                                // devolve true se adicionou; false se precisou abrir o detalhe
+      if (T.faltando(x.item, x.sel).length) { T.preset[x.item.id] = { tam: x.tam, sel: x.sel }; api.abrir("item/" + x.item.id); return false; }
+      T.cart.addItem(x.item.id, x.tam, x.sel, 1);
+      return true;
+    };
+    if (w === "os-dois") {
+      T.cart.addItem(r.acomp.item.id, r.acomp.tam, r.acomp.sel, 1);
+      if (poe(r.principal)) T.toast("Adicionados: bebida e acompanhamento", { act: "open-pedido", rotulo: "Ver pedido" });
+      else T.toast("Acompanhamento adicionado. Falta escolher a bebida.");
+      return;
+    }
+    const x = w === "p" ? r.principal : w === "c" ? r.acomp : r.alternativas[+w.slice(1)];
+    if (poe(x)) T.toast("Adicionado · " + T.nome(x.item), { act: "open-pedido", rotulo: "Ver pedido" });
   };
-
-  // regras do quiz (data/quiz.js): pontua por etiqueta e desempata por "cafe"
-  T.recomenda = (escolhas) => {
-    const R = QUIZ.regras;
-    const lista = MENU.filter((i) => i.grupo === R.grupo && i.pedido !== false && i.tamanhos.length)
-      .map((i, ordem) => ({ i, ordem, pts: escolhas.filter((e) => i.etiquetas.includes(e)).length * R.pontosPorEtiqueta, cafe: i.etiquetas.includes(R.desempate) ? 1 : 0 }));
-    lista.sort((a, b) => b.pts - a.pts || b.cafe - a.cafe || a.ordem - b.ordem);
-    const n = Math.max(R.minimo, Math.min(R.maximo, lista.length));
-    return lista.slice(0, n).map((x) => {
-      let tam = T.tamRec(x.i);                        // tamanho recomendado (M)
-      escolhas.forEach((e) => {
-        const alvo = R.tamanhoPorEtiqueta[e];
-        const k = alvo ? x.i.tamanhos.findIndex((t) => t.rotulo === alvo) : -1;
-        if (k >= 0) tam = k;
-      });
-      return { item: x.i, tam, pts: x.pts };
-    });
-  };
+  T.preset = {};                                        // tamanho e leite vindos do quiz para a tela de detalhe
 
   /* ===== aulas (stories) =====
      Toque no terço esquerdo volta; no resto da tela avança. Segurar pausa (não navega).

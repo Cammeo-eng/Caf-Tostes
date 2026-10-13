@@ -73,3 +73,7 @@ Formato: data · assunto · decisão · quem decidiu.
 - 2026-10-13 · Card do quiz · Fundo verde musgo, título "Não sabe o que pedir?", botão "Descobrir meu café". O texto curto do card ("Responda às perguntas e a gente sugere a bebida certa para você.") é provisório, pois o prompt só pediu um "texto curto" · Claude
 - 2026-10-13 · Bug de CSS achado nos testes · Uma regra apagada pela metade quebrava o `scroll-margin-top`, e o título de Aulas ficava sob o topo fixo ao navegar pelo menu. Corrigido e testado nos 4 destinos de rolagem · Claude
 - 2026-10-13 · Pendente · `data/quiz.js` (12 perguntas, `QUIZ_TEXTOS`) continua sem chegar nos anexos; o quiz novo e `testeQuiz()` aguardam o arquivo · Claude (aguarda dono)
+- 2026-10-13 · Rodada 5 (ALTERACOES-5.md) · Quiz refeito do zero com o novo `data/quiz.js` (12 perguntas, filtros, pesos, harmonização). `testeQuiz()` no console · dono
+- 2026-10-13 · Pedido · "Retirar no balcão" vira "Levar pra viagem"; nome obrigatório (botão fica desabilitado até preencher; tocar nele leva ao campo); mensagem do WhatsApp com `*Para viagem*`/`*Mesa N*` e `Nome:` sempre presente · dono
+- 2026-10-13 · Mensagem do WhatsApp · Seguindo o exemplo do prompt, as linhas Subtotal e Desconto só aparecem quando há combo com desconto; sem desconto, só o Total · Claude
+- 2026-10-13 · Quiz: "Adicionar os dois" · Quando a bebida exige escolha (Monte seu Cappuccino, Soda Italiana), o acompanhamento é adicionado e o detalhe da bebida abre com tamanho e leite já escolhidos · Claude

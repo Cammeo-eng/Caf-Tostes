@@ -21,6 +21,11 @@ Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, 
 - Fonte Parisienne só nos títulos "O pedido favorito" e "Promoção do dia".
 - `CONFIG.mapa` (botão "Como chegar") e `CONFIG.instagramConvite` (bloco antes do rodapé).
 
+## Pedido
+- Opções: **Levar pra viagem** (padrão) e **Comer na mesa**. O nome é obrigatório; observações são opcionais.
+- A mensagem do WhatsApp começa com `*Para viagem*` ou `*Mesa N*` e sempre traz a linha `Nome:`.
+- O quiz (`data/quiz.js`) tem 12 perguntas; no console, `testeQuiz()` roda 1.000 combinações aleatórias.
+
 ## Mesas
 O QR code de cada mesa abre `.../index.html?mesa=3` (de 1 a 6). O pedido já vem com "Comer na mesa → Mesa 3".
 
