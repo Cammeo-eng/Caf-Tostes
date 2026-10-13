@@ -1,7 +1,7 @@
 /* ==========================================================
    TOSTES café — Cardápio
    Arquivo de dados. Para alterar preços, nomes ou itens, edite SÓ este arquivo.
-   Atualizado em: 2026-10-12
+   Atualizado em: 2026-10-12 (rodada 3)
 
    ITEM
    - id ............ identificador único. A foto do item é assets/fotos/<id>.jpg
@@ -15,13 +15,14 @@
    - tamanhos ...... lista { rotulo, ml, preco }. 1 tamanho = preço único.
                      Mais de 1 = cliente escolhe. O tamanho recomendado (M) vem
                      definido em CONFIG.tamanhoRecomendado
-   - opcoes ........ ids de OPCOES (leite, extras, complementos-cappuccino, pao, sabores-soda)
+   - opcoes ........ ids de OPCOES (leite, extras, complementos-cappuccino, estilo-pingado, pao, sabores-soda)
    - preparo ....... (opcional) como é preparado; vazio = seção não aparece
    - fichaTecnica .. (opcional) { dose: "18 g", extracao: "28 s", temperatura: "65 °C" }
                      null = não aparece
    - etiquetas ..... usadas no quiz "Descubra seu café" (lista completa em data/quiz.js)
    - promocaoElegivel  false = fica fora do sorteio da Promoção do dia
    - selo .......... (opcional) "favorito" = etiqueta "Favorito da casa"
+   - servidoEm ..... (opcional) "xícara" ou "copo". Aparece na tela de detalhe
    - serve ......... (opcional) número de pessoas
    - pedido ........ (opcional) false = item só informativo, sem botão de adicionar
    - precoAConfirmar (anotação interna, NÃO aparece no site) preço ainda provisório
@@ -29,9 +30,15 @@
 
 const CATEGORIAS = [
   {
-    "id": "espresso-bar",
+    "id": "espressos",
     "grupo": "bebidas",
-    "nome": "Espresso Bar",
+    "nome": "Espressos",
+    "nota": "Sem leite. Servidos na xícara."
+  },
+  {
+    "id": "espressos-com-leite",
+    "grupo": "bebidas",
+    "nome": "Espressos com Leite",
     "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
   },
   {
@@ -208,6 +215,23 @@ const OPCOES = {
       }
     ]
   },
+  "estilo-pingado": {
+    "titulo": "Como você prefere?",
+    "tipo": "unica",
+    "obrigatoria": true,
+    "itens": [
+      {
+        "id": "simples",
+        "nome": "Simples",
+        "valor": 0
+      },
+      {
+        "id": "cremoso",
+        "nome": "Cremoso",
+        "valor": 0
+      }
+    ]
+  },
   "pao": {
     "titulo": "Pão",
     "tipo": "unica",
@@ -271,7 +295,7 @@ const MENU = [
   {
     "id": "espresso",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos",
     "nome": "Espresso",
     "descricaoCurta": "Café puro e intenso, extraído na hora.",
     "descricao": "",
@@ -302,12 +326,13 @@ const MENU = [
       "classico",
       "notas-do-grao"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "ristretto",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos",
     "nome": "Ristretto",
     "descricaoCurta": "Extração curta: mais doce e concentrado.",
     "descricao": "",
@@ -339,12 +364,13 @@ const MENU = [
       "notas-do-grao"
     ],
     "promocaoElegivel": false,
+    "servidoEm": "xícara",
     "precoAConfirmar": true
   },
   {
     "id": "espresso-duplo-doppio",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos",
     "nome": "Espresso Duplo (Doppio)",
     "descricaoCurta": "Duas doses de espresso.",
     "descricao": "",
@@ -375,12 +401,13 @@ const MENU = [
       "classico"
     ],
     "promocaoElegivel": false,
+    "servidoEm": "xícara",
     "precoAConfirmar": true
   },
   {
     "id": "americano",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos",
     "nome": "Americano",
     "descricaoCurta": "Espresso alongado com água quente.",
     "descricao": "",
@@ -412,12 +439,13 @@ const MENU = [
       "classico",
       "notas-do-grao"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "macchiato",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Macchiato",
     "descricaoCurta": "Espresso com um toque de espuma de leite.",
     "descricao": "",
@@ -449,12 +477,13 @@ const MENU = [
       "cafeina-alta",
       "classico"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "cortado",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Cortado",
     "descricaoCurta": "Espresso com a mesma quantidade de leite vaporizado.",
     "descricao": "",
@@ -487,12 +516,13 @@ const MENU = [
       "classico"
     ],
     "promocaoElegivel": false,
+    "servidoEm": "xícara",
     "precoAConfirmar": true
   },
   {
     "id": "flat-white",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Flat White",
     "descricaoCurta": "Leite aveludado e pouca espuma.",
     "descricao": "",
@@ -525,12 +555,13 @@ const MENU = [
       "cafeina-alta",
       "classico"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "copo"
   },
   {
     "id": "cappuccino",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Cappuccino Italiano",
     "descricaoCurta": "Espresso, leite vaporizado e espuma.",
     "descricao": "",
@@ -573,12 +604,13 @@ const MENU = [
       "cafeina-media",
       "classico"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "monte-seu-cappuccino",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Monte seu Cappuccino",
     "descricaoCurta": "Cappuccino com os complementos que você escolher.",
     "descricao": "",
@@ -627,12 +659,13 @@ const MENU = [
       "canela",
       "baunilha"
     ],
-    "promocaoElegivel": false
+    "promocaoElegivel": false,
+    "servidoEm": "xícara"
   },
   {
     "id": "cafe-latte",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Café Latte",
     "descricaoCurta": "Espresso com bastante leite vaporizado.",
     "descricao": "",
@@ -674,12 +707,13 @@ const MENU = [
       "cafeina-media",
       "classico"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "marroquino",
     "grupo": "bebidas",
-    "categoria": "espresso-bar",
+    "categoria": "espressos-com-leite",
     "nome": "Marroquino",
     "descricaoCurta": "Chocolate, espresso e espuma de leite em camadas, com cacau.",
     "descricao": "",
@@ -725,7 +759,8 @@ const MENU = [
       "chocolate",
       "cacau"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "copo"
   },
   {
     "id": "coado-do-dia",
@@ -767,11 +802,11 @@ const MENU = [
     "grupo": "bebidas",
     "categoria": "coados",
     "nome": "Pingado",
-    "descricaoCurta": "Coado com um pingo de leite.",
+    "descricaoCurta": "Café passado com leite. Você escolhe: simples ou cremoso.",
     "descricao": "",
     "ingredientes": [
       "Café coado",
-      "Leite"
+      "Leite (simples ou cremoso)"
     ],
     "tamanhos": [
       {
@@ -781,6 +816,7 @@ const MENU = [
       }
     ],
     "opcoes": [
+      "estilo-pingado",
       "leite"
     ],
     "preparo": "",
@@ -796,7 +832,8 @@ const MENU = [
       "cafeina-alta",
       "classico"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": false,
+    "servidoEm": "xícara"
   },
   {
     "id": "metodo-v60",
@@ -873,12 +910,13 @@ const MENU = [
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Caramel Macchiato",
-    "descricaoCurta": "Leite, espresso e calda de caramelo por cima.",
+    "descricaoCurta": "Leite vaporizado com xarope de caramelo e baunilha, espresso e calda de caramelo por cima.",
     "descricao": "",
     "ingredientes": [
-      "Leite vaporizado",
       "Espresso",
-      "Calda de caramelo"
+      "Leite vaporizado",
+      "Xarope de caramelo com baunilha",
+      "Calda de caramelo por cima"
     ],
     "tamanhos": [
       {
@@ -916,19 +954,20 @@ const MENU = [
       "caramelo",
       "sobremesa"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "avela-latte",
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Avelã Latte",
-    "descricaoCurta": "Latte com creme de avelã.",
+    "descricaoCurta": "Espresso e leite vaporizado com creme de avelã diluído na bebida.",
     "descricao": "",
     "ingredientes": [
       "Espresso",
       "Leite vaporizado",
-      "Creme de avelã"
+      "Creme de avelã diluído"
     ],
     "tamanhos": [
       {
@@ -965,7 +1004,8 @@ const MENU = [
       "classico",
       "avela"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "cafe-moka",
@@ -1014,7 +1054,8 @@ const MENU = [
       "classico",
       "chocolate"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "vietnamita-latte",
@@ -1065,7 +1106,8 @@ const MENU = [
       "sobremesa",
       "lactose-fixa"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "latte-vanilla",
@@ -1114,19 +1156,20 @@ const MENU = [
       "classico",
       "baunilha"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "caramel-latte",
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Caramel Latte",
-    "descricaoCurta": "Latte com calda de caramelo.",
+    "descricaoCurta": "Latte com xarope de caramelo. Mais suave que o Caramel Macchiato, sem calda por cima.",
     "descricao": "",
     "ingredientes": [
       "Espresso",
       "Leite vaporizado",
-      "Calda de caramelo"
+      "Xarope de caramelo"
     ],
     "tamanhos": [
       {
@@ -1163,36 +1206,38 @@ const MENU = [
       "classico",
       "caramelo"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "cappuccino-avela",
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Cappuccino Avelã",
-    "descricaoCurta": "Cappuccino com creme de avelã.",
+    "descricaoCurta": "Cappuccino com creme de avelã por toda a borda da xícara e amendoim moído. Contém amendoim.",
     "descricao": "",
     "ingredientes": [
       "Espresso",
       "Leite vaporizado",
       "Espuma de leite",
-      "Creme de avelã"
+      "Creme de avelã na borda da xícara",
+      "Amendoim moído"
     ],
     "tamanhos": [
       {
         "rotulo": "P",
         "ml": 170,
-        "preco": 14
+        "preco": 16
       },
       {
         "rotulo": "M",
         "ml": 200,
-        "preco": 15
+        "preco": 17
       },
       {
         "rotulo": "G",
         "ml": 250,
-        "preco": 16
+        "preco": 18
       }
     ],
     "opcoes": [
@@ -1213,19 +1258,20 @@ const MENU = [
       "classico",
       "avela"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "latte-doce-de-leite",
     "grupo": "bebidas",
     "categoria": "docinhos",
     "nome": "Latte Doce de Leite",
-    "descricaoCurta": "Latte com doce de leite.",
+    "descricaoCurta": "Espresso e leite vaporizado com doce de leite diluído na bebida.",
     "descricao": "",
     "ingredientes": [
       "Espresso",
       "Leite vaporizado",
-      "Doce de leite"
+      "Doce de leite diluído"
     ],
     "tamanhos": [
       {
@@ -1265,7 +1311,8 @@ const MENU = [
       "sobremesa",
       "lactose-fixa"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
   },
   {
     "id": "bala-de-canela",
