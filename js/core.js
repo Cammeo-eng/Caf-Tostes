@@ -136,6 +136,7 @@ T.faltaTexto = (item, sel) => {
     const grupo = OPCOES[g];
     if ((sel[g] || []).length >= T.minimo(grupo)) return;
     if (g === "complementos-cappuccino") f.push("Escolha pelo menos 1 complemento");
+    else if (g === "estilo-pingado") f.push("Escolha simples ou cremoso");
     else f.push("Falta escolher: " + grupo.titulo.replace(/\s*\(.*\)/, ""));
   });
   return f;

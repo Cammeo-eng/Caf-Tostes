@@ -453,3 +453,10 @@ h2.titulo { font-size: 32px; }
 /* ----- imagem do slide: bloco 4:5, no máximo 45% da tela, foto centralizada pelo foco ----- */
 .story-img-bloco { box-sizing: border-box; width: 100%; aspect-ratio: 4 / 5; max-height: 45vh; max-height: 45dvh; border-radius: 16px; overflow: hidden; flex: none; background: var(--musgo-claro); margin-bottom: 4px; }
 .story-img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+
+/* ----- detalhe: "Servido na xícara/copo" e aviso de alérgeno ----- */
+.sheet-preco { flex-wrap: wrap; row-gap: 4px; }
+.servido { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; opacity: .85; }
+.servido svg { flex: none; }
+.alergeno-linha { margin: 10px 0 0; }
+.alergeno { display: inline-block; font-size: 12.5px; font-weight: 700; color: var(--vinho); border: 1px solid var(--vinho); border-radius: 99px; padding: 3px 12px; }

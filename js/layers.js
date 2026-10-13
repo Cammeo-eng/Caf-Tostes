@@ -22,6 +22,12 @@ T.L = (function () {
   }
 
   /* ===== detalhe do item ===== */
+  // ícones de traço fino: xícara e copo
+  const ICONE_SERVIDO = {
+    "xícara": '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H15.5"/><path d="M3 21h15"/><path d="M8 3.5c-1 1 1 2 0 3M12 3.5c-1 1 1 2 0 3"/></svg>',
+    "copo": '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12l-1.6 15.2a1.5 1.5 0 0 1-1.5 1.3H9.1a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M6.6 9.5h10.8"/></svg>'
+  };
+
   build.item = (id) => {
     const it = T.item(id);
     if (!it) return null;
@@ -54,9 +60,13 @@ T.L = (function () {
       h += `<h2 class="titulo sheet-nome">${E(T.nome(it))}</h2>`;
       if (pedivel) {
         const t1 = it.tamanhos[0];
-        h += `<p class="sheet-preco"><span class="preco preco-gd">${T.money(total)}</span>${it.tamanhos.length === 1 && t1.ml ? `<span class="ml">${t1.ml} ml</span>` : ""}</p>`;
+        const servido = it.servidoEm ? `<span class="servido">${ICONE_SERVIDO[it.servidoEm] || ""}Servido ${it.servidoEm === "copo" ? "no copo" : "na xícara"}</span>` : "";
+        h += `<p class="sheet-preco"><span class="preco preco-gd">${T.money(total)}</span>${it.tamanhos.length === 1 && t1.ml ? `<span class="ml">${t1.ml} ml</span>` : ""}${servido}</p>`;
       }
-      h += `<p class="sheet-desc">${E(it.descricao || it.descricaoCurta)}</p>`;
+      // aviso de alérgeno no fim do texto ("Contém amendoim.") vira etiqueta própria
+      const texto = it.descricao || it.descricaoCurta;
+      const alerg = texto.match(/\s*(Contém [^.]+\.)\s*$/);
+      h += `<p class="sheet-desc">${E(alerg ? texto.slice(0, alerg.index) : texto)}</p>${alerg ? `<p class="alergeno-linha"><span class="alergeno">${E(alerg[1])}</span></p>` : ""}`;
       if (!pedivel) {
         h += `<p class="aviso-balcao">Consulte o sabor no balcão</p>`;
       } else {
