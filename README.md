@@ -11,6 +11,9 @@ Coloque em `assets/fotos/<id>.jpg`, onde `<id>` é o `id` do item em `data/menu.
 ## WhatsApp, endereço e horários
 Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, `horarios`, `mesas`, texto da fidelidade, promoção do dia e o pedido favorito.
 
+## Fotos das aulas
+Foto vertical 4:5 (ex.: 720×900) em `assets/aulas/<id-da-aula>.jpg` e o campo `imagem` na aula em `data/aulas.js`. Aparece na bolinha e no topo do primeiro slide; aulas sem `imagem` ficam com o ícone. Um slide também pode ter `imagem` (4:5), que aparece no topo dele e tem prioridade sobre a capa. As imagens do story ocupam no máximo 45% da altura da tela.
+
 ## Outros arquivos de dados
 - `data/aulas.js`: trilhas (`AULAS_TRILHAS` com `descricao`) e aulas em formato stories (`leitura`, `slides` com `destaque` opcional, `item`, `link`).
 - `data/quiz.js`: perguntas e regras do quiz "Descubra seu café".
@@ -20,6 +23,11 @@ Em `data/config.js`: `WHATSAPP` (55 + DDD + número, só dígitos), `endereco`, 
 - `CONFIG.tamanhoRecomendado` define o tamanho recomendado (M).
 - Fonte Parisienne só nos títulos "O pedido favorito" e "Promoção do dia".
 - `CONFIG.mapa` (botão "Como chegar") e `CONFIG.instagramConvite` (bloco antes do rodapé).
+
+## Pedido
+- Opções: **Levar pra viagem** (padrão) e **Comer na mesa**. O nome é obrigatório; observações são opcionais.
+- A mensagem do WhatsApp começa com `*Para viagem*` ou `*Mesa N*` e sempre traz a linha `Nome:`.
+- O quiz (`data/quiz.js`) tem 12 perguntas; no console, `testeQuiz()` roda 1.000 combinações aleatórias.
 
 ## Mesas
 O QR code de cada mesa abre `.../index.html?mesa=3` (de 1 a 6). O pedido já vem com "Comer na mesa → Mesa 3".
