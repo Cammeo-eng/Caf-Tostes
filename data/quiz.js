@@ -1,5 +1,5 @@
 /* ==========================================================
-   TOSTES to go — Quiz "Descubra seu café"
+   TOSTES café — Quiz "Descubra seu café"
    Recomendação sem IA, só com regras. As etiquetas de cada item estão em menu.js.
 
    PERGUNTAS ..... uma por tela. Cada resposta aponta para uma etiqueta de menu.js.

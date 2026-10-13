@@ -1,4 +1,4 @@
-/* TOSTES to go — seções da página inicial. */
+/* TOSTES café — seções da página inicial. */
 "use strict";
 
 const $ = (s, r) => (r || document).querySelector(s);
@@ -27,7 +27,7 @@ T.v.favorito = () => {
     <article class="fav-card">
       <div class="fav-foto">${T.foto(f.foto, f.nome, "bebidas", 480, 360)}</div>
       <div class="fav-corpo">
-        <h2 id="fav-titulo" class="titulo">${E(f.titulo)}</h2>
+        <h2 id="fav-titulo" class="titulo-script">${E(f.titulo)}</h2>
         <p class="fav-nome">${E(f.nome)}</p>
         <p class="fav-texto">${E(f.texto)}</p>
         <div class="fav-rodape">
@@ -50,9 +50,8 @@ T.v.promo = () => {
   const [, mm, dd] = chave.split("-");
   const combos = T.combosDoDia(chave);
   sec.innerHTML = `
-    <span class="selo selo-creme">Promoção do dia</span>
-    <h2 id="promo-titulo" class="titulo">Válido hoje, ${dd}/${mm}</h2>
-    <p class="sub">${Math.round(CONFIG.promocao.desconto * 100)}% de desconto em cada combo de 1 bebida e 1 comida.</p>
+    <h2 id="promo-titulo" class="titulo-script">Promoção do dia</h2>
+    <p class="sub"><strong>Válido hoje, ${dd}/${mm}</strong> · ${Math.round(CONFIG.promocao.desconto * 100)}% de desconto em cada combo de 1 bebida e 1 comida.</p>
     <div class="combos">
       ${combos.map((c, k) => `
         <article class="combo">
@@ -96,7 +95,9 @@ T.v.card = (i) => {
   if (i.serve) tags.push(`<span class="tag">Serve ${i.serve}</span>`);
   const preco = !pedivel
     ? '<span class="consulte">Consulte o sabor no balcão</span>'
-    : (i.tamanhos.length > 1 ? '<small>a partir de</small> ' : "") + `<span class="preco">${T.money(T.menorPreco(i))}</span>`;
+    : i.tamanhos.length > 1
+      ? `<small>${E(i.tamanhos[T.tamRec(i)].rotulo)} ·</small> <span class="preco">${T.money(i.tamanhos[T.tamRec(i)].preco)}</span>`
+      : `<span class="preco">${T.money(i.tamanhos[0].preco)}</span>`;
   return `
     <article class="card">
       <button type="button" class="card-hit" data-act="open-item" data-id="${E(i.id)}" aria-label="Ver detalhes de ${E(T.nome(i))}">
@@ -114,13 +115,7 @@ T.v.card = (i) => {
 
 T.v.painel = (grupo) => {
   const cat = T.cats[ativa[grupo]];
-  let sub = null;
-  const html = MENU.filter((i) => i.categoria === cat.id).map((i) => {
-    let cab = "";
-    if (i.subgrupo && i.subgrupo !== sub) cab = `<h4 class="subgrupo">${E(i.subgrupo)}</h4>`;
-    sub = i.subgrupo || null;
-    return cab + T.v.card(i);
-  }).join("");
+  const html = MENU.filter((i) => i.categoria === cat.id).map(T.v.card).join("");
   return `<div class="cat-topo"><h3 class="titulo titulo-cat">${E(cat.nome)}</h3>${cat.nota ? `<p class="nota">${E(cat.nota)}</p>` : ""}</div><div class="lista">${html}</div>`;
 };
 
@@ -166,24 +161,45 @@ T.v.swipe = (grupo) => {
   }, { passive: true });
 };
 
-/* ---------- aulas ---------- */
+/* ---------- aulas (trilhas com bolinhas, como os destaques do Instagram) ---------- */
+T.vistas = {
+  KEY: "tostes.aulasVistas",
+  lista() { try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch (e) { return []; } },
+  tem(id) { return this.lista().includes(id); },
+  marca(id) { try { const l = this.lista(); if (!l.includes(id)) { l.push(id); localStorage.setItem(this.KEY, JSON.stringify(l)); } } catch (e) { /* sem storage */ } }
+};
 T.v.aulas = () => {
   $("#aulas").innerHTML = `
     <h2 id="aulas-titulo" class="titulo">Enquanto seu café fica pronto</h2>
-    <p class="sub">Toque e leia um pouco sobre café.</p>
-    <div class="aulas-grade">
-      ${AULAS.map((a) => `
-        <button type="button" class="aula-card" data-act="open" data-name="aula/${E(a.id)}">
-          ${T.ilus(a.ilustracao, "aula-ilus")}
-          <strong>${E(a.titulo)}</strong>
-          <span>${E(a.resumo)}</span>
-        </button>`).join("")}
+    <p class="sub">Toque numa bolinha e leia um pouco sobre café.</p>
+    ${AULAS_TRILHAS.map((t) => `
+      <div class="trilha">
+        <h3 class="trilha-nome">${E(t.nome)}</h3>
+        <ul class="bolinhas">
+          ${AULAS.filter((a) => a.trilha === t.id).map((a) => `
+            <li><button type="button" class="bolinha${T.vistas.tem(a.id) ? " vista" : ""}" data-act="open" data-name="aula/${E(a.id)}" data-aula="${E(a.id)}">
+              <span class="anel">${T.icone(a.icone, "bolinha-ilus")}</span>
+              <span class="bolinha-titulo">${E(a.titulo)}</span>
+            </button></li>`).join("")}
+        </ul>
+      </div>`).join("")}`;
+};
+T.v.atualizaVistas = () => { $$(".bolinha").forEach((b) => b.classList.toggle("vista", T.vistas.tem(b.dataset.aula))); };
+
+/* ---------- convite do Instagram ---------- */
+T.v.insta = () => {
+  const c = CONFIG.instagramConvite;
+  $("#insta").innerHTML = `
+    <div class="insta-card">
+      ${T.ilus("camera", "insta-ilus")}
+      <h2 class="titulo">${E(c.titulo)}</h2>
+      <p>${E(c.texto)}</p>
+      <a class="btn btn-musgo" href="${E(CONFIG.instagram.url)}" target="_blank" rel="noopener">${E(c.botao)}</a>
     </div>`;
 };
 
 /* ---------- rodapé ---------- */
 T.v.rodape = () => {
-  const mapa = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.endereco);
   $("#rodape").innerHTML = `
     <section id="fidelidade" class="secao fidelidade" aria-labelledby="fid-titulo">
       <h2 id="fid-titulo" class="titulo">Cartão fidelidade</h2>
@@ -198,12 +214,12 @@ T.v.rodape = () => {
       <h2 id="hor-titulo" class="titulo">Horários e localização</h2>
       <ul class="horarios">${T.horariosTexto().map((h) => `<li><span>${E(h.dias)}</span><span>${E(h.horas)}</span></li>`).join("")}</ul>
       <p class="endereco">${E(CONFIG.endereco)}</p>
-      <p class="links"><a href="${mapa}" target="_blank" rel="noopener">Como chegar</a><a href="${E(CONFIG.instagram.url)}" target="_blank" rel="noopener">Instagram ${E(CONFIG.instagram.usuario)}</a></p>
+      <p class="links"><a href="${E(CONFIG.mapa)}" target="_blank" rel="noopener">Como chegar</a><a href="${E(CONFIG.instagram.url)}" target="_blank" rel="noopener">Instagram ${E(CONFIG.instagram.usuario)}</a></p>
     </section>
     <button type="button" class="chapeu-link" data-act="open" data-name="chapeu">
       ${T.ilus("chapeu", "chapeu-mini")}<span>Conheça a história por trás do chapéu →</span>
     </button>
-    <p class="marca-gigante" aria-hidden="true">TOSTES to go</p>`;
+    <p class="marca-gigante" aria-hidden="true">TOSTES café</p>`;
 };
 
 /* ---------- barra flutuante do carrinho ---------- */
