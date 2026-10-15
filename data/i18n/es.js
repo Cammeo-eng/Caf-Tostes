@@ -87,6 +87,8 @@ window.I18N.es = {
     "preenchaNome": "Escribe tu nombre para enviar el pedido.",
     "enviarWhatsapp": "Enviar pedido por WhatsApp",
     "avisoPedido": "Tu pedido llega al mostrador por WhatsApp. Se paga en el mostrador. También puedes pedir directamente en el mostrador.",
+    "avisoPreparoTitulo": "Hecho al momento, uno por uno",
+    "avisoPreparoTexto": "Aquí todo se prepara en el momento del pedido. En los días más movidos, puede tardar unos minutitos más. Prometemos que vale cada segundo.",
     "limparPedido": "Vaciar pedido",
     "remover": "Quitar",
     "voltar": "Volver",

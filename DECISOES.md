@@ -90,3 +90,13 @@ Formato: data · assunto · decisão · quem decidiu.
 - 2026-10-15 · Chaves novas em `ui` (32, nos três arquivos, texto meu no mesmo tom) · comboDia, promoDescricao, quizCardTexto, quizSemResultado, cafesBebidas, comidas, categoriasAria, verDetalhes, adicionarNome, adicionadoNome, comboAdicionado, adicionadosDois, acompAdicionado, abrirMenu, fecharMenu, serveCurto, faltaEscolher, escolhaComplemento, fichaDose, fichaExtracao, fichaTemperatura, quantidade, diminuir, aumentar, comoReceber, escolhaNumeroMesa, confirmaLimpar, pedidoAberto, slideAnterior, proximoSlide, fecharAula, pedidoVazioPendencia · Claude
 - 2026-10-15 · Escolhas técnicas dos idiomas · Horário do indicador: 9h (pt), 9 am (en), 9:00 (es). Os horários do rodapé vêm das frases `ui.horarioSemana/Sabado/Domingo` (antes eram geradas de `CONFIG.horarios`: se o horário mudar, atualizar essas três frases nos três idiomas). "Combo do dia" na linha do carrinho tem tradução própria (`comboDia`); a foto da página do chapéu usa `legendaChapeu` como texto alternativo. O nome e o texto do pedido favorito e a página do chapéu seguem em português, como pedido · Claude
 - 2026-10-15 · Pendente · As traduções em inglês trazem "To go" (opção "Levar pra viagem") e "To go with it" (quiz, "Para acompanhar"). São frases comuns, não o nome da marca, mas a regra do projeto é que "to go" não apareça no site (será o nome de outra unidade). Mantidas como vieram; aguarda o dono decidir se troca (ex.: "Takeaway") · Claude (aguarda dono)
+
+
+## Rodada "feedback dos clientes" (2026-10-16)
+- Nova ordem: combos do dia e cardápio vêm primeiro; favorito, quiz e aulas depois. Combos em carrossel de cupons (~62% da largura) para o cardápio aparecer na primeira tela (390 px: cardápio a ~220 px do topo da tela de combos).
+- Selo da promoção mostra só o desconto vindo de `CONFIG.promocao.desconto` (−10%) e a palavra "hoje" (`ui.hoje`); nenhum texto novo. O subtítulo longo (`promoDescricao`) fica como `aria-label` do selo.
+- "Promoção do dia" ficou um pouco menor (`clamp(30px, 8vw, 38px)`), como pedido.
+- Aviso de preparo: chaves `avisoPreparoTitulo` e `avisoPreparoTexto` em pt, en e es.
+- Gravuras com `vector-effect: non-scaling-stroke` para o traço não afinar nos tamanhos pequenos. Chave de agrupamento: grãos (bebidas) e folha (comidas) nos títulos; prensa francesa fica disponível, ainda sem uso.
+- Vapor do topo só anima com a loja aberta; com `prefers-reduced-motion` fica parado.
+- Textura de papel: o grão antigo do `#app` foi trocado pelo `body::before` fixo (evita grão duplo).

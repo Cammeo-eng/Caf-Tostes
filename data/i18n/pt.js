@@ -71,6 +71,8 @@ window.I18N.pt = {
     "preenchaNome": "Preencha seu nome para enviar o pedido.",
     "enviarWhatsapp": "Enviar pedido pelo WhatsApp",
     "avisoPedido": "O pedido chega ao balcão pelo WhatsApp. Pagamento no balcão. Você também pode pedir direto no balcão.",
+    "avisoPreparoTitulo": "Feito na hora, um de cada vez",
+    "avisoPreparoTexto": "Aqui tudo é preparado no momento do pedido. Em dias mais movimentados, pode levar alguns minutinhos a mais. Prometemos que vale cada segundo.",
     "limparPedido": "Limpar pedido",
     "remover": "Remover",
     "voltar": "Voltar",
