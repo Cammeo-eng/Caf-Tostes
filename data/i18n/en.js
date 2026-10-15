@@ -87,6 +87,8 @@ window.I18N.en = {
     "preenchaNome": "Enter your name to send the order.",
     "enviarWhatsapp": "Send order via WhatsApp",
     "avisoPedido": "Your order goes to the counter via WhatsApp. You pay at the counter. You can also order at the counter.",
+    "avisoPreparoTitulo": "Made to order, one at a time",
+    "avisoPreparoTexto": "Everything here is made when you order. On busier days, it may take a few extra minutes. We promise it's worth every second.",
     "limparPedido": "Clear order",
     "remover": "Remove",
     "voltar": "Back",

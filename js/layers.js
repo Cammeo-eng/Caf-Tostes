@@ -172,9 +172,9 @@ T.L = (function () {
     const render = () => {
       const c = T.cart, st = c.st, t = c.totais();
       const sc = $(".tela-scroll", el), y = sc ? sc.scrollTop : 0;
-      let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("seuPedido"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll">`;
+      let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("seuPedido"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll"><span class="mancha-xic" aria-hidden="true"></span>`;
       if (!st.linhas.length) {
-        h += `<div class="vazio">${T.ilus("xicara", "vazio-ilus")}<p>${E(T.t("pedidoVazio"))}</p><button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
+        h += `<div class="vazio">${T.ilus("chapeu", "vazio-ilus")}<p>${E(T.t("pedidoVazio"))}</p><button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
       } else {
         h += `<ul class="linhas">${st.linhas.map((l, i) => {
           const v = c.valores(l);
@@ -214,6 +214,7 @@ T.L = (function () {
         <label class="campo">${E(T.t("seuNome"))}<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" required value="${E(st.nome)}"></label>
         <label class="campo">${E(T.t("observacoes"))} (${E(T.t("opcional"))})<textarea id="c-obs" maxlength="140" rows="2">${E(st.obs)}</textarea><small id="c-cont">${st.obs.length}/140</small></label>
         <p class="mini">${E(T.t("avisoPedido"))}</p>
+        <div class="aviso-preparo">${T.ilus("xicara-vapor", "aviso-ilus")}<div><p class="aviso-titulo">${E(T.t("avisoPreparoTitulo"))}</p><p class="aviso-texto">${E(T.t("avisoPreparoTexto"))}</p></div></div>
         <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" id="c-enviar" aria-disabled="${c.podeEnviar() ? "false" : "true"}">${E(T.t("enviarWhatsapp"))}</button>
         <p class="falta" id="c-falta" role="status" ${c.pendencia() ? "" : "hidden"}>${E(c.pendencia() || "")}</p>
         <button type="button" class="link-rm limpar" data-act="c-limpar">${E(T.t("limparPedido"))}</button>`;

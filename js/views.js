@@ -13,7 +13,7 @@ T.v.topo = () => {
   const s = T.statusLoja();
   const el = $("#status");
   el.className = "status " + (s.aberto ? "on" : "off");
-  el.textContent = s.texto;
+  el.innerHTML = `<i class="xic" aria-hidden="true"></i>${E(s.texto)}`;
   $("#marquee .marquee-trilho").innerHTML = `<span>${E(T.cfg("marquee", CONFIG.marquee))}</span>`.repeat(4);
   const m = $("#mesa-linha");
   if (T.cart.daUrl && T.cart.st.modo === "mesa") { m.hidden = false; m.textContent = T.t("mesa", { n: T.cart.st.mesa }); } else m.hidden = true;
@@ -38,6 +38,7 @@ T.v.favorito = () => {
     <article class="fav-card">
       <div class="fav-foto">${T.foto(f.foto, f.nome, "bebidas", 480, 360)}</div>
       <div class="fav-corpo">
+        ${T.ilus("xicara-vapor", "grav grav-fav")}
         <h2 id="fav-titulo" class="titulo-script">${E(T.cfg("favorito.titulo", f.titulo))}</h2>
         <p class="fav-nome">${E(f.nome)}</p>
         <p class="fav-texto">${E(f.texto)}</p>
@@ -60,18 +61,25 @@ T.v.promo = () => {
   const chave = T.chaveData(0);
   const [, mm, dd] = chave.split("-");
   const combos = T.combosDoDia(chave);
+  const pct = Math.round(CONFIG.promocao.desconto * 100);
   sec.innerHTML = `
-    <h2 id="promo-titulo" class="titulo-script">${E(T.t("promocaoDia"))}</h2>
-    <p class="sub"><strong>${E(T.t("validoHoje", { data: dd + "/" + mm }))}</strong> · ${E(T.t("promoDescricao", { n: Math.round(CONFIG.promocao.desconto * 100) }))}</p>
-    <div class="combos">
+    <span class="grav-mask grav-ramo" aria-hidden="true"></span>
+    <div class="promo-topo">
+      <div>
+        <h2 id="promo-titulo" class="titulo-script">${E(T.t("promocaoDia"))}</h2>
+        <p class="sub"><strong>${E(T.t("validoHoje", { data: dd + "/" + mm }))}</strong></p>
+      </div>
+      <span class="selo-promo" aria-label="${E(T.t("promoDescricao", { n: pct }))}"><b>−${pct}%</b><small>${E(T.t("hoje"))}</small></span>
+    </div>
+    <div class="combos" role="list">
       ${combos.map((c, k) => `
-        <article class="combo">
-          <div class="combo-fotos">${c.partes.map((p) => { const it = T.item(p.id); return T.foto(it.foto, T.nome(it), it.grupo, 64, 64, "foto-mini"); }).join("")}</div>
-          <p class="combo-itens"><strong>${E(T.nomeParte(c.partes[0]))}</strong><span>+ ${E(T.nomeParte(c.partes[1]))}</span></p>
-          <div class="combo-rodape">
-            <p class="preco-bloco"><s>${T.money(c.original)}</s><span class="preco preco-gd">${T.money(c.preco)}</span></p>
-            <button type="button" class="btn btn-creme" data-act="combo-add" data-i="${k}">${E(T.t("adicionarCombo"))}</button>
+        <article class="combo" role="listitem">
+          <div class="combo-topo">
+            <div class="combo-fotos">${c.partes.map((p) => { const it = T.item(p.id); return T.foto(it.foto, "", it.grupo, 56, 56, "foto-mini"); }).join("")}</div>
+            <button type="button" class="add combo-add" data-act="combo-add" data-i="${k}" aria-label="${E(T.t("adicionarCombo"))}">+</button>
           </div>
+          <p class="combo-itens"><strong>${E(T.nomeParte(c.partes[0]))}</strong><span>+ ${E(T.nomeParte(c.partes[1]))}</span></p>
+          <p class="preco-bloco combo-preco"><s>${T.money(c.original)}</s><span class="preco">${T.money(c.preco)}</span></p>
         </article>`).join("")}
     </div>`;
 };
@@ -136,7 +144,7 @@ T.v.cardapio = (grupo) => {
   if (!ativa[grupo] || !cats.some((c) => c.id === ativa[grupo])) ativa[grupo] = cats[0].id;    // ao trocar de idioma, mantém a categoria aberta
   const abas = $(`#${grupo} .tabs`), rolagem = abas ? abas.scrollLeft : 0;
   $("#" + grupo).innerHTML = `
-    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2></div>
+    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2>${T.ilus(grupo === "bebidas" ? "graos" : "folha", "grav grav-grupo")}</div>
     <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="${E(T.t("categoriasAria"))}">
       ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${E(T.catTxt(c).nome)}</button>`).join("")}
     </div></div>
@@ -184,6 +192,7 @@ T.vistas = {
 };
 T.v.aulas = () => {
   $("#aulas").innerHTML = `
+    <span class="grav-mask grav-moedor" aria-hidden="true"></span>
     <h2 id="aulas-titulo" class="titulo">${E(T.t("aulasTitulo"))}</h2>
     <p class="sub">${E(T.t("aulasSubtitulo"))}</p>
     ${AULAS_TRILHAS.map((t) => { const tt = T.aulaTrilhaTxt(t); return `
@@ -238,7 +247,7 @@ T.v.rodape = () => {
     <button type="button" class="chapeu-link" data-act="open" data-name="chapeu">
       ${T.ilus("chapeu", "chapeu-mini")}<span>${E(T.t("historiaChapeu"))}</span>
     </button>
-    <p class="marca-gigante" aria-hidden="true">TOSTES café</p>`;
+    <div class="marca-wrap" aria-hidden="true">${T.ilus("ramo-cafe", "grav-marca")}<p class="marca-gigante">TOSTES café</p></div>`;
 };
 
 /* ---------- barra flutuante do carrinho ---------- */
