@@ -460,3 +460,28 @@ h2.titulo { font-size: 32px; }
 .servido svg { flex: none; }
 .alergeno-linha { margin: 10px 0 0; }
 .alergeno { display: inline-block; font-size: 12.5px; font-weight: 700; color: var(--vinho); border: 1px solid var(--vinho); border-radius: 99px; padding: 3px 12px; }
+
+/* ----- idiomas (PT · ES · EN) ----- */
+#topo { gap: 6px; }
+.topo-esq { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; justify-content: center; }
+.topo-esq .logo img { height: 24px; }
+.topo-esq .status { align-self: flex-start; max-width: 100%; font-size: 11px; padding: 2px 8px; }
+.idiomas { display: flex; flex: none; align-items: center; }
+.idioma-btn { min-width: 32px; height: 44px; padding: 0 2px; background: none; border: 0; display: grid; place-items: center; font-weight: 600; }
+.idioma-btn span { display: block; font-size: 12px; line-height: 1; padding: 6px 7px; border-radius: 99px; letter-spacing: .3px; }
+.idioma-btn[aria-pressed="true"] span { background: var(--vinho); color: var(--creme); font-weight: 700; }
+.idioma-btn[aria-pressed="false"] span { color: var(--terra); opacity: .8; }
+.menu-idiomas { padding: 12px 20px 4px; display: grid; gap: 6px; }
+.menu-idiomas > span { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; opacity: .8; }
+.menu-idiomas > div { display: flex; gap: 8px; flex-wrap: wrap; }
+.menu-idiomas .idioma-btn { height: 48px; min-width: 0; padding: 0; }
+.menu-idiomas .idioma-btn span { padding: 11px 18px; font-size: 15px; border: 1.5px solid color-mix(in srgb, var(--creme) 55%, transparent); color: var(--creme); opacity: 1; }
+.menu-idiomas .idioma-btn[aria-pressed="true"] span { background: var(--creme); color: var(--vinho); border-color: var(--creme); }
+@media (max-width: 400px) {
+  #topo { padding-left: 12px; padding-right: 4px; gap: 2px; }
+  .idioma-btn { min-width: 28px; }
+  .idioma-btn span { padding: 6px 5px; }
+  .btn-menu { width: 44px; }
+  .topo-esq .status { font-size: 10.5px; padding: 2px 7px; }
+  .topo-esq .status::before { margin-right: 4px; }
+}

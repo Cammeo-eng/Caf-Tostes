@@ -25,7 +25,7 @@ MENU.forEach((i) => { T.itens[i.id] = i; });
 T.cats = {};
 CATEGORIAS.forEach((c) => { T.cats[c.id] = c; });
 T.item = (id) => T.itens[id];
-T.nome = (i) => i.nomeCompleto || i.nome;
+T.nome = (i, lang) => T.itemTxt(i, lang).nomeCompleto;       // nome no idioma atual (ou no idioma pedido; "pt" = original)
 T.pedivel = (i) => i.pedido !== false && i.tamanhos.length > 0;
 
 /* ---------- data e hora em America/Sao_Paulo ---------- */
@@ -52,19 +52,24 @@ T.chaveData = (n) => {                       // "2026-10-12", com deslocamento d
 T.diaSemanaDe = (n) => (T.agoraSP().wd + (n || 0)) % 7;
 
 const paraMin = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
-T.hora = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return m ? `${h}h${String(m).padStart(2, "0")}` : `${h}h`; };
+T.hora = (hhmm) => {                          // 9h30 (pt) · 9:30 am (en) · 9:30 (es)
+  const [h, m] = hhmm.split(":").map(Number), mm = String(m).padStart(2, "0");
+  if (T.lang === "en") { const h12 = h % 12 || 12; return `${h12}${m ? ":" + mm : ""} ${h < 12 ? "am" : "pm"}`; }
+  if (T.lang === "es") return `${h}:${mm}`;
+  return m ? `${h}h${mm}` : `${h}h`;
+};
 
 T.statusLoja = () => {
   const a = T.agoraSP();
   const hoje = CONFIG.horarios[DIAS[a.wd]];
-  if (hoje && a.min >= paraMin(hoje[0]) && a.min < paraMin(hoje[1])) return { aberto: true, texto: "Aberto agora" };
+  if (hoje && a.min >= paraMin(hoje[0]) && a.min < paraMin(hoje[1])) return { aberto: true, texto: T.t("abertoAgora") };
   for (let n = 0; n < 8; n++) {
     const dia = (a.wd + n) % 7;
     const h = CONFIG.horarios[DIAS[dia]];
     if (!h) continue;
     if (n === 0 && a.min >= paraMin(h[0])) continue;       // hoje já passou do horário de abrir
-    const quando = n === 0 ? "hoje" : n === 1 ? "amanhã" : DIAS_NOME[dia];
-    return { aberto: false, texto: `Fechado · abre ${quando} às ${T.hora(h[0])}` };
+    const quando = n === 0 ? T.t("hoje") : n === 1 ? T.t("amanha") : T.t("dias")[dia];
+    return { aberto: false, texto: T.t("fechadoAbre", { dia: quando, hora: T.hora(h[0]) }) };
   }
   return { aberto: false, texto: "Fechado" };
 };
@@ -135,29 +140,29 @@ T.faltaTexto = (item, sel) => {
   item.opcoes.forEach((g) => {
     const grupo = OPCOES[g];
     if ((sel[g] || []).length >= T.minimo(grupo)) return;
-    if (g === "complementos-cappuccino") f.push("Escolha pelo menos 1 complemento");
-    else if (g === "estilo-pingado") f.push("Escolha simples ou cremoso");
-    else f.push("Falta escolher: " + grupo.titulo.replace(/\s*\(.*\)/, ""));
+    if (g === "complementos-cappuccino") f.push(T.t("escolhaComplemento"));
+    else if (g === "estilo-pingado") f.push(T.t("escolhaPingado"));
+    else f.push(T.t("faltaEscolher", { nome: T.opTitulo(g).replace(/\s*\(.*\)/, "") }));
   });
   return f;
 };
 
 // Opções escolhidas, na ordem dos grupos e, dentro de cada grupo, na ordem em que a pessoa tocou.
 // semPadrao = true omite as opções padrão (usado nos combos, que sempre levam o padrão).
-T.textoOpcoes = (item, sel, semPadrao) => {
+T.textoOpcoes = (item, sel, semPadrao, lang) => {
   const out = [];
   item.opcoes.forEach((g) => {
     const grupo = OPCOES[g];
     (sel[g] || []).forEach((id) => {
       const o = grupo.itens.find((x) => x.id === id);
-      if (o && !(semPadrao && grupo.tipo === "unica" && o.padrao)) out.push(o.nome);
+      if (o && !(semPadrao && grupo.tipo === "unica" && o.padrao)) out.push(T.opNome(g, id, lang));
     });
   });
   return out;
 };
 
-T.rotuloTam = (item, tam) => (item.tamanhos.length > 1 ? item.tamanhos[tam].rotulo : "");
-T.nomeComTam = (item, tam) => { const r = T.rotuloTam(item, tam); return r ? `${T.nome(item)} (${r})` : T.nome(item); };
+T.rotuloTam = (item, tam, lang) => (item.tamanhos.length > 1 ? T.rot(item.tamanhos[tam].rotulo, lang) : "");
+T.nomeComTam = (item, tam, lang) => { const r = T.rotuloTam(item, tam, lang); return r ? `${T.nome(item, lang)} (${r})` : T.nome(item, lang); };
 
 /* ---------- imagens com placeholder ---------- */
 T.ilus = (nome, classe) => `<img class="${classe || "ilus"}" src="assets/ilustracoes/${nome}.svg" alt="" width="120" height="120">`;
@@ -180,7 +185,7 @@ document.addEventListener("error", (e) => {
   const ph = document.createElement("span");
   ph.className = "ph";
   ph.setAttribute("role", "img");
-  ph.setAttribute("aria-label", el.alt || "Sem foto");
+  ph.setAttribute("aria-label", el.alt || T.t("fotoIndisponivel"));
   ph.innerHTML = `<img src="assets/ilustracoes/${el.dataset.ph}.svg" alt="" width="120" height="120">`;
   el.replaceWith(ph);
 }, true);

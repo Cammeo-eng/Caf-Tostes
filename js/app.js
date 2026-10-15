@@ -4,7 +4,24 @@
 (function () {
   T.checarDados();
 
+  // desenha toda a tela no idioma atual; também é chamado ao trocar de idioma (sem recarregar)
+  T.aplicaIdioma = () => {
+    T.v.topo();
+    T.v.idiomas();
+    T.v.favorito();
+    T.v.promo();
+    T.v.quizCard();
+    T.v.cardapio("bebidas");                       // mantém a categoria aberta
+    T.v.cardapio("comidas");
+    T.v.aulas();
+    T.v.insta();
+    T.v.rodape();
+    T.v.bag();
+    T.L.atualizaIdioma();                          // menu, pedido etc. se estiverem abertos
+  };
+
   T.v.topo();
+  T.v.idiomas();
   T.v.favorito();
   T.v.promo();
   T.v.quizCard();
