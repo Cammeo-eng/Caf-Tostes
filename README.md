@@ -29,6 +29,12 @@ Foto vertical 4:5 (ex.: 720×900) em `assets/aulas/<id-da-aula>.jpg` e o campo `
 - A mensagem do WhatsApp começa com `*Para viagem*` ou `*Mesa N*` e sempre traz a linha `Nome:`.
 - O quiz (`data/quiz.js`) tem 12 perguntas; no console, `testeQuiz()` roda 1.000 combinações aleatórias.
 
+## Idiomas (português, español, English)
+- Os textos traduzidos ficam em `data/i18n/pt.js`, `en.js` e `es.js`, organizados pelos mesmos ids do cardápio. O português original continua em `menu.js`, `quiz.js`, `aulas.js` e `config.js`.
+- Escolha do idioma: botões PT · ES · EN no topo e no menu; `?lang=es` na URL (combina com `?mesa=2`); a escolha fica salva no celular.
+- O pedido pelo WhatsApp sai sempre em português, com a linha "Idioma do cliente".
+- No console, `i18nFaltando()` lista o que falta traduzir.
+
 ## Mesas
 O QR code de cada mesa abre `.../index.html?mesa=3` (de 1 a 6). O pedido já vem com "Comer na mesa → Mesa 3".
 

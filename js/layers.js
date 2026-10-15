@@ -40,7 +40,7 @@ T.L = (function () {
         <div class="sheet-scroll">
           <div class="sheet-foto">${T.foto(it.foto, T.nome(it), it.grupo, 480, 360)}
             <span class="puxador" aria-hidden="true"></span>
-            <button type="button" class="fechar" data-act="back" aria-label="Fechar">×</button>
+            <button type="button" class="fechar" data-act="back" aria-label="${E(T.t("fechar"))}">×</button>
           </div>
           <div class="sheet-corpo"></div>
         </div>
@@ -52,57 +52,58 @@ T.L = (function () {
       const pedivel = T.pedivel(it);
       const un = pedivel ? T.precoUnit(it, S.tam, S.sel) : 0;
       const total = T.r2(un * S.qtd);
-      const tag = [];
-      if (it.selo === "favorito") tag.push('<span class="tag tag-fav">Favorito da casa</span>');
-      if (it.serve) tag.push(`<span class="tag">Serve ${it.serve}</span>`);
+      const tag = [], tx = T.itemTxt(it);
+      if (it.selo === "favorito") tag.push(`<span class="tag tag-fav">${E(T.t("favoritoCasa"))}</span>`);
+      if (it.serve) tag.push(`<span class="tag">${E(T.t("serveCurto", { n: it.serve }))}</span>`);
       let h = "";
       h += tag.length ? `<p class="tags">${tag.join("")}</p>` : "";
       h += `<h2 class="titulo sheet-nome">${E(T.nome(it))}</h2>`;
       if (pedivel) {
         const t1 = it.tamanhos[0];
-        const servido = it.servidoEm ? `<span class="servido">${ICONE_SERVIDO[it.servidoEm] || ""}Servido ${it.servidoEm === "copo" ? "no copo" : "na xícara"}</span>` : "";
+        const servido = it.servidoEm ? `<span class="servido">${ICONE_SERVIDO[it.servidoEm] || ""}${E(T.t(it.servidoEm === "copo" ? "servidoCopo" : "servidoXicara"))}</span>` : "";
         h += `<p class="sheet-preco"><span class="preco preco-gd">${T.money(total)}</span>${it.tamanhos.length === 1 && t1.ml ? `<span class="ml">${t1.ml} ml</span>` : ""}${servido}</p>`;
       }
       // aviso de alérgeno no fim do texto ("Contém amendoim.") vira etiqueta própria
-      const texto = it.descricao || it.descricaoCurta;
+      const texto = it.descricao || tx.descricaoCurta;
       const alerg = texto.match(/\s*(Contém [^.]+\.)\s*$/);
       h += `<p class="sheet-desc">${E(alerg ? texto.slice(0, alerg.index) : texto)}</p>${alerg ? `<p class="alergeno-linha"><span class="alergeno">${E(alerg[1])}</span></p>` : ""}`;
       if (!pedivel) {
-        h += `<p class="aviso-balcao">Consulte o sabor no balcão</p>`;
+        h += `<p class="aviso-balcao">${E(T.t("consulteBalcao"))}</p>`;
       } else {
         if (it.tamanhos.length > 1) {
           const rec = T.temRec(it) ? T.tamRec(it) : -1;
-          h += `<div class="grupo"><h3>Tamanho</h3><div class="tamanhos" role="radiogroup" aria-label="Tamanho">${it.tamanhos.map((t, k) =>
-            `<div class="tam-col"><em class="rec">${k === rec ? "Recomendado" : "&nbsp;"}</em><button type="button" role="radio" aria-checked="${k === S.tam}" class="tam" data-act="sheet-tam" data-i="${k}"><b>${E(t.rotulo)}</b><small>${t.ml ? t.ml + " ml" : "&nbsp;"}</small><span>${T.money(t.preco)}</span></button></div>`).join("")}</div></div>`;
+          h += `<div class="grupo"><h3>${E(T.t("tamanho"))}</h3><div class="tamanhos" role="radiogroup" aria-label="${E(T.t("tamanho"))}">${it.tamanhos.map((t, k) =>
+            `<div class="tam-col"><em class="rec">${k === rec ? E(T.t("recomendado")) : "&nbsp;"}</em><button type="button" role="radio" aria-checked="${k === S.tam}" class="tam" data-act="sheet-tam" data-i="${k}"><b>${E(T.rot(t.rotulo))}</b><small>${t.ml ? t.ml + " ml" : "&nbsp;"}</small><span>${T.money(t.preco)}</span></button></div>`).join("")}</div></div>`;
         }
         it.opcoes.forEach((g) => {
           const gr = OPCOES[g], escolhidos = S.sel[g] || [], max = T.maximo(gr);
-          h += `<div class="grupo"><h3>${E(gr.titulo)}${gr.tipo === "multipla" && max !== Infinity ? ` <em>${escolhidos.length} de ${max}</em>` : ""}</h3>`;
-          if (g === "leite") h += `<p class="nota-grupo">Zero lactose e vegetal sem custo extra.</p>`;
+          const titulo = T.opTitulo(g);
+          h += `<div class="grupo"><h3>${E(titulo)}${gr.tipo === "multipla" && max !== Infinity ? ` <em>${E(T.t("contadorEscolha", { n: escolhidos.length, max }))}</em>` : ""}</h3>`;
+          if (g === "leite") h += `<p class="nota-grupo">${E(T.t("semCustoLeite"))}</p>`;
           if (g === "complementos-cappuccino") {
-            h += `<div class="chips chips-gd" role="group" aria-label="${E(gr.titulo)}">${gr.itens.map((o) => {
+            h += `<div class="chips chips-gd" role="group" aria-label="${E(titulo)}">${gr.itens.map((o) => {
               const on = escolhidos.includes(o.id), trava = !on && escolhidos.length >= max;
-              return `<button type="button" class="chip chip-gd" aria-pressed="${on}" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${trava ? "disabled" : ""}>${E(o.nome)}</button>`;
+              return `<button type="button" class="chip chip-gd" aria-pressed="${on}" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${trava ? "disabled" : ""}>${E(T.opNome(g, o.id))}</button>`;
             }).join("")}</div>`;
           } else if (gr.tipo === "unica") {
-            h += `<div class="chips" role="radiogroup" aria-label="${E(gr.titulo)}">${gr.itens.map((o) =>
-              `<button type="button" role="radio" aria-checked="${escolhidos.includes(o.id)}" class="chip" data-act="sheet-opt" data-g="${g}" data-o="${o.id}">${E(o.nome)}${o.valor > 0 ? ` <small>+ ${T.money(o.valor)}</small>` : ""}</button>`).join("")}</div>`;
+            h += `<div class="chips" role="radiogroup" aria-label="${E(titulo)}">${gr.itens.map((o) =>
+              `<button type="button" role="radio" aria-checked="${escolhidos.includes(o.id)}" class="chip" data-act="sheet-opt" data-g="${g}" data-o="${o.id}">${E(T.opNome(g, o.id))}${o.valor > 0 ? ` <small>+ ${T.money(o.valor)}</small>` : ""}</button>`).join("")}</div>`;
           } else {
             h += `<div class="checks">${gr.itens.map((o) => {
               const on = escolhidos.includes(o.id);
               const trava = !on && escolhidos.length >= max;
-              return `<label class="check${trava ? " trava" : ""}"><input type="checkbox" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${on ? "checked" : ""} ${trava ? "disabled" : ""}><span class="caixa"></span><span class="rot">${E(o.nome)}</span>${o.valor > 0 ? `<small>+ ${T.money(o.valor)}</small>` : ""}</label>`;
+              return `<label class="check${trava ? " trava" : ""}"><input type="checkbox" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${on ? "checked" : ""} ${trava ? "disabled" : ""}><span class="caixa"></span><span class="rot">${E(T.opNome(g, o.id))}</span>${o.valor > 0 ? `<small>+ ${T.money(o.valor)}</small>` : ""}</label>`;
             }).join("")}</div>`;
           }
           h += `</div>`;
         });
       }
-      if (it.ingredientes.length) h += `<div class="grupo"><h3>${it.grupo === "bebidas" ? "O que vai na bebida" : "O que vai no prato"}</h3><ul class="ingr">${it.ingredientes.map((x) => `<li>${E(x)}</li>`).join("")}</ul></div>`;
-      if (it.serve) h += `<p class="serve">Serve ${it.serve} pessoas</p>`;
-      if (it.preparo) h += `<div class="grupo"><h3>Como é preparado</h3><p>${E(it.preparo)}</p></div>`;
+      if (it.ingredientes.length) h += `<div class="grupo"><h3>${E(T.t("ingredientes"))}</h3><ul class="ingr">${tx.ingredientes.map((x) => `<li>${E(x)}</li>`).join("")}</ul></div>`;
+      if (it.serve) h += `<p class="serve">${E(T.t("serve", { n: it.serve }))}</p>`;
+      if (it.preparo) h += `<div class="grupo"><h3>${E(T.t("preparo"))}</h3><p>${E(it.preparo)}</p></div>`;
       if (it.fichaTecnica) {
-        const rot = { dose: "Dose", extracao: "Extração", temperatura: "Temperatura" };
-        h += `<dl class="ficha" aria-label="Ficha técnica">${Object.keys(it.fichaTecnica).map((k) => `<div><dt>${E(rot[k] || k)}</dt><dd>${E(it.fichaTecnica[k])}</dd></div>`).join("")}</dl>`;
+        const rot = { dose: T.t("fichaDose"), extracao: T.t("fichaExtracao"), temperatura: T.t("fichaTemperatura") };
+        h += `<dl class="ficha" aria-label="${E(T.t("fichaTecnica"))}">${Object.keys(it.fichaTecnica).map((k) => `<div><dt>${E(rot[k] || k)}</dt><dd>${E(it.fichaTecnica[k])}</dd></div>`).join("")}</dl>`;
       }
       corpo.innerHTML = h;
       if (!pedivel) { barra.innerHTML = ""; barra.hidden = true; }
@@ -112,12 +113,12 @@ T.L = (function () {
         barra.innerHTML = `
           ${falta.length ? `<p class="falta">${E(falta.join(". "))}.</p>` : ""}
           <div class="barra-linha">
-            <div class="stepper" role="group" aria-label="Quantidade">
-              <button type="button" data-act="sheet-qtd" data-d="-1" aria-label="Diminuir" ${S.qtd <= 1 ? "disabled" : ""}>−</button>
+            <div class="stepper" role="group" aria-label="${E(T.t("quantidade"))}">
+              <button type="button" data-act="sheet-qtd" data-d="-1" aria-label="${E(T.t("diminuir"))}" ${S.qtd <= 1 ? "disabled" : ""}>−</button>
               <output>${S.qtd}</output>
-              <button type="button" data-act="sheet-qtd" data-d="1" aria-label="Aumentar">+</button>
+              <button type="button" data-act="sheet-qtd" data-d="1" aria-label="${E(T.t("aumentar"))}">+</button>
             </div>
-            <button type="button" class="btn btn-vinho btn-add" data-act="sheet-add" ${falta.length ? "disabled" : ""}>Adicionar · ${T.money(total)}</button>
+            <button type="button" class="btn btn-vinho btn-add" data-act="sheet-add" ${falta.length ? "disabled" : ""}>${E(T.t("adicionarTotal", { valor: T.money(total) }))}</button>
           </div>`;
       }
       sc.scrollTop = y;
@@ -162,24 +163,24 @@ T.L = (function () {
     if (T.faltando(S.it, S.sel).length) return;
     T.cart.addItem(S.it.id, S.tam, S.sel, S.qtd);
     api.voltar();
-    T.toast("Adicionado · " + T.nome(S.it), { act: "open-pedido", rotulo: "Ver pedido" });
+    T.toast(T.t("adicionadoNome", { nome: T.nome(S.it) }), { act: "open-pedido", rotulo: T.t("verPedido") });
   };
 
   /* ===== pedido (carrinho) ===== */
   build.pedido = () => {
-    const el = camada("pedido", "layer-tela", "Seu pedido");
+    const el = camada("pedido", "layer-tela", T.t("seuPedido"));
     const render = () => {
       const c = T.cart, st = c.st, t = c.totais();
       const sc = $(".tela-scroll", el), y = sc ? sc.scrollTop : 0;
-      let h = `<div class="tela-topo"><h2 class="titulo">Seu pedido</h2><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar">×</button></div><div class="tela-scroll">`;
+      let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("seuPedido"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll">`;
       if (!st.linhas.length) {
-        h += `<div class="vazio">${T.ilus("xicara", "vazio-ilus")}<p>Seu pedido está vazio.</p><button type="button" class="btn btn-vinho" data-act="ver-cardapio">Ver cardápio</button></div>`;
+        h += `<div class="vazio">${T.ilus("xicara", "vazio-ilus")}<p>${E(T.t("pedidoVazio"))}</p><button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
       } else {
         h += `<ul class="linhas">${st.linhas.map((l, i) => {
           const v = c.valores(l);
           let nome, det;
           if (l.tipo === "combo") {
-            nome = l.prefixo;
+            nome = l.prefixo === "Combo do dia" ? T.t("comboDia") : T.t("pedidoFavorito");     // a linha guarda o nome em português (vai assim no WhatsApp)
             det = l.partes.map((p) => { const it = T.item(p.id), o = T.textoOpcoes(it, p.sel, true); return T.nomeParte(p) + (o.length ? " · " + o.join(" · ") : ""); }).join("<br>+ ");
             det = det.split("<br>").map((s, k) => (k ? "<br>" : "") + E(s).replace(/^\+ /, "+ ")).join("");
           } else {
@@ -192,36 +193,36 @@ T.L = (function () {
               <p class="linha-preco">${v.original > v.preco ? `<s>${T.money(T.r2(v.original * l.qtd))}</s>` : ""}<strong>${T.money(T.r2(v.preco * l.qtd))}</strong></p></div>
             ${det ? `<p class="linha-det">${det}</p>` : ""}
             <div class="linha-acoes">
-              <div class="stepper stepper-p" role="group" aria-label="Quantidade">
-                <button type="button" data-act="c-qtd" data-i="${i}" data-d="-1" aria-label="Diminuir">−</button><output>${l.qtd}</output><button type="button" data-act="c-qtd" data-i="${i}" data-d="1" aria-label="Aumentar">+</button>
+              <div class="stepper stepper-p" role="group" aria-label="${E(T.t("quantidade"))}">
+                <button type="button" data-act="c-qtd" data-i="${i}" data-d="-1" aria-label="${E(T.t("diminuir"))}">−</button><output>${l.qtd}</output><button type="button" data-act="c-qtd" data-i="${i}" data-d="1" aria-label="${E(T.t("aumentar"))}">+</button>
               </div>
-              <button type="button" class="link-rm" data-act="c-rm" data-i="${i}">Remover</button>
+              <button type="button" class="link-rm" data-act="c-rm" data-i="${i}">${E(T.t("remover"))}</button>
             </div></li>`;
         }).join("")}</ul>
         <dl class="resumo">
-          <div><dt>Subtotal</dt><dd>${T.money(t.subtotal)}</dd></div>
-          ${t.desconto > 0 ? `<div><dt>Desconto</dt><dd>−${T.money(t.desconto)}</dd></div>` : ""}
-          <div class="total"><dt>Total</dt><dd>${T.money(t.total)}</dd></div>
+          <div><dt>${E(T.t("subtotal"))}</dt><dd>${T.money(t.subtotal)}</dd></div>
+          ${t.desconto > 0 ? `<div><dt>${E(T.t("desconto"))}</dt><dd>−${T.money(t.desconto)}</dd></div>` : ""}
+          <div class="total"><dt>${E(T.t("total"))}</dt><dd>${T.money(t.total)}</dd></div>
         </dl>
-        <fieldset class="modo"><legend>Como você quer receber?</legend>
+        <fieldset class="modo"><legend>${E(T.t("comoReceber"))}</legend>
           <div class="chips">
-            <button type="button" role="radio" aria-checked="${st.modo === "viagem"}" class="chip" data-act="c-modo" data-m="viagem">Levar pra viagem</button>
-            <button type="button" role="radio" aria-checked="${st.modo === "mesa"}" class="chip" data-act="c-modo" data-m="mesa">Comer na mesa</button>
+            <button type="button" role="radio" aria-checked="${st.modo === "viagem"}" class="chip" data-act="c-modo" data-m="viagem">${E(T.t("levarViagem"))}</button>
+            <button type="button" role="radio" aria-checked="${st.modo === "mesa"}" class="chip" data-act="c-modo" data-m="mesa">${E(T.t("comerMesa"))}</button>
           </div>
-          ${st.modo === "mesa" ? `<p class="mesa-rot">Qual é a sua mesa?</p><div class="mesas">${Array.from({ length: CONFIG.mesas }, (_, k) => `<button type="button" role="radio" aria-checked="${st.mesa === k + 1}" class="mesa-n" data-act="c-mesa" data-n="${k + 1}" aria-label="Mesa ${k + 1}">${k + 1}</button>`).join("")}</div>` : ""}
+          ${st.modo === "mesa" ? `<p class="mesa-rot">${E(T.t("escolhaMesa"))}</p><div class="mesas">${Array.from({ length: CONFIG.mesas }, (_, k) => `<button type="button" role="radio" aria-checked="${st.mesa === k + 1}" class="mesa-n" data-act="c-mesa" data-n="${k + 1}" aria-label="${E(T.t("mesa", { n: k + 1 }))}">${k + 1}</button>`).join("")}</div>` : ""}
         </fieldset>
-        <label class="campo">Seu nome<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" required value="${E(st.nome)}"></label>
-        <label class="campo">Observações (opcional)<textarea id="c-obs" maxlength="140" rows="2">${E(st.obs)}</textarea><small id="c-cont">${st.obs.length}/140</small></label>
-        <p class="mini">Fazer o pedido por aqui é opcional: você também pode pedir no balcão. O pagamento é feito no balcão.</p>
-        <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" id="c-enviar" aria-disabled="${c.podeEnviar() ? "false" : "true"}">Enviar pedido pelo WhatsApp</button>
+        <label class="campo">${E(T.t("seuNome"))}<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" required value="${E(st.nome)}"></label>
+        <label class="campo">${E(T.t("observacoes"))} (${E(T.t("opcional"))})<textarea id="c-obs" maxlength="140" rows="2">${E(st.obs)}</textarea><small id="c-cont">${st.obs.length}/140</small></label>
+        <p class="mini">${E(T.t("avisoPedido"))}</p>
+        <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" id="c-enviar" aria-disabled="${c.podeEnviar() ? "false" : "true"}">${E(T.t("enviarWhatsapp"))}</button>
         <p class="falta" id="c-falta" role="status" ${c.pendencia() ? "" : "hidden"}>${E(c.pendencia() || "")}</p>
-        <button type="button" class="link-rm limpar" data-act="c-limpar">Limpar pedido</button>`;
+        <button type="button" class="link-rm limpar" data-act="c-limpar">${E(T.t("limparPedido"))}</button>`;
       }
       h += `</div>`;
       el.innerHTML = h;
       const ns = $(".tela-scroll", el);
       if (ns) ns.scrollTop = y;
-      if (el._enviado && st.linhas.length) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status"><strong>Pedido aberto no WhatsApp.</strong> É só enviar a mensagem.<small>${E(CONFIG.instagramConvite.aposPedido)}</small></div>`);
+      if (el._enviado && st.linhas.length) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status">${E(T.t("pedidoAberto"))}<small>${E(T.cfg("instagramConvite.aposPedido", CONFIG.instagramConvite.aposPedido))}</small></div>`);
       const n = $("#c-nome", el), o = $("#c-obs", el);
       if (n) n.addEventListener("input", () => {
         c.set("nome", n.value, true);                          // digitando não redesenha a tela; só atualiza o botão
@@ -240,7 +241,7 @@ T.L = (function () {
   T.acts["c-rm"] = (b) => { semEnviado(); T.cart.remover(+b.dataset.i); };
   T.acts["c-modo"] = (b) => { T.cart.st.modo = b.dataset.m; if (b.dataset.m === "viagem") T.cart.st.mesa = null; T.cart.set("modo", b.dataset.m); };
   T.acts["c-mesa"] = (b) => T.cart.set("mesa", +b.dataset.n);
-  T.acts["c-limpar"] = () => { if (confirm("Limpar todo o pedido?")) T.cart.limpar(); };
+  T.acts["c-limpar"] = () => { if (confirm(T.t("confirmaLimpar"))) T.cart.limpar(); };
   T.acts["c-enviar"] = () => {
     const falta = T.cart.pendencia();
     if (falta) {                                        // botão desabilitado: leva até o campo que falta
@@ -258,18 +259,19 @@ T.L = (function () {
 
   /* ===== menu de três tracinhos ===== */
   build.menu = () => {
-    const el = camada("menu", "layer-menu", "Menu");
+    const el = camada("menu", "layer-menu", T.t("menuCardapio"));
     const link = (rot, acao, arg) => `<li><button type="button" data-act="${acao}" ${arg ? `data-arg="${arg}"` : ""}>${rot}</button></li>`;
     el.innerHTML = `
-      <div class="tela-topo"><span class="titulo">Menu</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar menu">×</button></div>
+      <div class="tela-topo"><span class="titulo">${E(T.t("menuCardapio"))}</span><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fecharMenu"))}">×</button></div>
+      <div class="menu-idiomas" role="group" aria-label="${E(T.t("idioma"))}"><span>${E(T.t("idioma"))}</span><div>${T.v.seletorIdioma(true)}</div></div>
       <ul class="menu-lista">
-        ${link("Cardápio", "m-ir", "bebidas")}
-        ${link("Descubra seu café", "m-abrir", "quiz")}
-        ${link("Aulas", "m-ir", "aulas")}
-        ${link("Por trás do chapéu", "m-abrir", "chapeu")}
-        ${link("Fidelidade", "m-ir", "fidelidade")}
-        <li><a href="${E(CONFIG.avaliacaoGoogle)}" target="_blank" rel="noopener">Avalie no Google</a></li>
-        ${link("Horários e localização", "m-ir", "horarios")}
+        ${link(E(T.t("menuCardapio")), "m-ir", "bebidas")}
+        ${link(E(T.t("menuQuiz")), "m-abrir", "quiz")}
+        ${link(E(T.t("menuAulas")), "m-ir", "aulas")}
+        ${link(E(T.t("menuChapeu")), "m-abrir", "chapeu")}
+        ${link(E(T.t("menuFidelidade")), "m-ir", "fidelidade")}
+        <li><a href="${E(CONFIG.avaliacaoGoogle)}" target="_blank" rel="noopener">${E(T.t("menuAvalie"))}</a></li>
+        ${link(E(T.t("menuHorarios")), "m-ir", "horarios")}
       </ul>
       <p class="menu-rodape">${E(CONFIG.nome)} · ${E(CONFIG.cidade)}</p>`;
     return el;
@@ -318,12 +320,13 @@ T.L = (function () {
       const motivos = escolhidas.map((r, i) => ({ m: r.motivo, p: topo.porResposta[i], i })).filter((x) => x.m);
       const ordenados = motivos.filter((x) => x.p > 0).sort((a, b) => b.p - a.p || a.i - b.i).slice(0, 2);
       if (ordenados.length < 2) motivos.filter((x) => x.p <= 0 && x.p === 0).forEach((x) => { if (ordenados.length < 2) ordenados.push(x); });
-      const explicacao = ordenados.length ? "Porque você " + ordenados.map((x) => x.m).join(" e ") + "." : "";
+      const explicacao = ordenados.map((x) => x.i);       // perguntas cujos "motivos" explicam o resultado (o texto é montado na hora, no idioma atual)
       let acomp = null;
       if (define.acompanhamento === "salgado" || define.acompanhamento === "doce") {
-        const regra = HARMONIZACAO.find((h) => topo.it.etiquetas.includes(h.etiqueta)) || HARMONIZACAO_PADRAO;
+        const idx = HARMONIZACAO.findIndex((h) => topo.it.etiquetas.includes(h.etiqueta));
+        const regra = idx >= 0 ? HARMONIZACAO[idx] : HARMONIZACAO_PADRAO;
         const food = T.item(regra[define.acompanhamento]);
-        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), texto: regra.texto };
+        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: idx };
       }
       return { principal: pega(topo), explicacao, alternativas: [segundo, terceiro].filter(Boolean).map(pega), acomp };
     },
@@ -346,45 +349,48 @@ T.L = (function () {
   window.testeQuiz = (n) => T.quiz.teste(n);
 
   build.quiz = () => {
-    const el = camada("quiz", "layer-tela layer-creme", "Descubra seu café");
+    const el = camada("quiz", "layer-tela layer-creme", T.t("menuQuiz"));
     const Q = { passo: -1, resp: [], res: null, trava: false };
     el._Q = Q;
     const card = (r, grande) => {
       const it = r.item, t = it.tamanhos[r.tam], un = T.precoUnit(it, r.tam, r.sel);
       const ops = T.textoOpcoes(it, r.sel);
       return `<div class="card card-quiz${grande ? " card-gd" : ""}">
-        <button type="button" class="card-hit" data-act="open-item" data-id="${E(it.id)}" aria-label="Ver detalhes de ${E(T.nome(it))}">
+        <button type="button" class="card-hit" data-act="open-item" data-id="${E(it.id)}" aria-label="${E(T.t("verDetalhes", { nome: T.nome(it) }))}">
           <span class="foto">${T.foto(it.foto, T.nome(it), it.grupo, 92, 92)}</span>
           <span class="txt"><span class="nome">${E(T.nome(it))}</span>
-            <span class="desc">${E([it.tamanhos.length > 1 ? t.rotulo : "", ...ops].filter(Boolean).join(" · ") || it.descricaoCurta)}</span>
+            <span class="desc">${E([it.tamanhos.length > 1 ? T.rot(t.rotulo) : "", ...ops].filter(Boolean).join(" · ") || T.itemTxt(it).descricaoCurta)}</span>
             <span class="preco-linha"><span class="preco">${T.money(un)}</span></span></span></button></div>`;
     };
     const render = () => {
       const n = QUIZ_PERGUNTAS.length;
-      let h = `<div class="tela-topo"><h2 class="titulo">Descubra seu café</h2><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar">×</button></div><div class="tela-scroll quiz-corpo">`;
+      let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("menuQuiz"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll quiz-corpo">`;
       if (Q.passo < 0) {
-        h += `${T.ilus("xicara", "quiz-gd")}<p class="quiz-intro">${E(QUIZ_TEXTOS.abertura)}</p><button type="button" class="btn btn-vinho btn-bloco" data-act="q-iniciar">Começar</button>`;
+        h += `${T.ilus("xicara", "quiz-gd")}<p class="quiz-intro">${E(T.qTxt.textos("abertura"))}</p><button type="button" class="btn btn-vinho btn-bloco" data-act="q-iniciar">${E(T.t("comecar"))}</button>`;
       } else if (Q.passo < n) {
         const p = QUIZ_PERGUNTAS[Q.passo];
         h += `<div class="quiz-barra" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${Q.passo}"><i style="width:${(Q.passo / n) * 100}%"></i></div>
-          <p class="quiz-passo">${Q.passo + 1} de ${n}</p>
-          <h3 class="titulo quiz-pergunta">${E(p.pergunta)}</h3>
-          <p class="quiz-apoio">${E(p.apoio)}</p>
-          <div class="quiz-resp">${p.respostas.map((r, k) => `<button type="button" class="btn-resp${Q.resp[Q.passo] === k ? " on" : ""}" data-act="q-resp" data-k="${k}">${E(r.texto)}</button>`).join("")}</div>
-          ${Q.passo > 0 ? `<button type="button" class="link-rm" data-act="q-voltar">Voltar</button>` : ""}`;
+          <p class="quiz-passo">${E(T.t("perguntaDe", { n: Q.passo + 1, total: n }))}</p>
+          <h3 class="titulo quiz-pergunta">${E(T.qTxt.pergunta(p))}</h3>
+          <p class="quiz-apoio">${E(T.qTxt.apoio(p))}</p>
+          <div class="quiz-resp">${p.respostas.map((r, k) => `<button type="button" class="btn-resp${Q.resp[Q.passo] === k ? " on" : ""}" data-act="q-resp" data-k="${k}">${E(T.qTxt.resposta(p, k))}</button>`).join("")}</div>
+          ${Q.passo > 0 ? `<button type="button" class="link-rm" data-act="q-voltar">${E(T.t("voltar"))}</button>` : ""}`;
       } else {
         const r = Q.res;
-        if (!r) h += `<p class="quiz-intro">Não encontramos uma bebida com essas respostas. Tente de novo.</p>`;
+        if (!r) h += `<p class="quiz-intro">${E(T.t("quizSemResultado"))}</p>`;
         else {
-          h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.titulo)}</h3>${card(r.principal, true)}
-            ${r.explicacao ? `<p class="quiz-explica">${E(r.explicacao)}</p>` : ""}
-            <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="p">Adicionar ao pedido</button>`;
-          if (r.alternativas.length) h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.alternativas)}</h3><div class="quiz-alt">${r.alternativas.map((a, k) => `<div>${card(a)}<button type="button" class="btn btn-contorno btn-bloco" data-act="q-add" data-w="a${k}">Adicionar ao pedido</button></div>`).join("")}</div>`;
-          if (r.acomp) h += `<h3 class="quiz-sec">${E(QUIZ_TEXTOS.acompanhamento)}</h3>${card(r.acomp)}<p class="quiz-explica">${E(r.acomp.texto)}</p>
-            <button type="button" class="btn btn-contorno btn-bloco" data-act="q-add" data-w="c">Adicionar ao pedido</button>
-            <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="os-dois">Adicionar os dois</button>`;
+          const ms = r.explicacao.map((qi) => T.qTxt.motivo(QUIZ_PERGUNTAS[qi], Q.resp[qi]));
+          const explica = ms.length ? T.qTxt.textos("porque") + " " + ms.join(" " + T.qTxt.textos("e") + " ") + "." : "";
+          const addBtn = (w, cls) => `<button type="button" class="btn ${cls} btn-bloco" data-act="q-add" data-w="${w}">${E(T.t("adicionarAoPedido"))}</button>`;
+          h += `<h3 class="quiz-sec">${E(T.qTxt.textos("titulo"))}</h3>${card(r.principal, true)}
+            ${explica ? `<p class="quiz-explica">${E(explica)}</p>` : ""}
+            ${addBtn("p", "btn-vinho")}`;
+          if (r.alternativas.length) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("alternativas"))}</h3><div class="quiz-alt">${r.alternativas.map((a, k) => `<div>${card(a)}${addBtn("a" + k, "btn-contorno")}</div>`).join("")}</div>`;
+          if (r.acomp) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("acompanhamento"))}</h3>${card(r.acomp)}<p class="quiz-explica">${E(T.qTxt.harmonizacao(r.acomp.harm))}</p>
+            ${addBtn("c", "btn-contorno")}
+            <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="os-dois">${E(T.t("adicionarOsDois"))}</button>`;
         }
-        h += `<button type="button" class="link-rm limpar" data-act="q-refazer">${E(QUIZ_TEXTOS.refazer)}</button>`;
+        h += `<button type="button" class="link-rm limpar" data-act="q-refazer">${E(T.qTxt.textos("refazer"))}</button>`;
       }
       el.innerHTML = h + `</div>`;
     };
@@ -420,12 +426,12 @@ T.L = (function () {
     };
     if (w === "os-dois") {
       T.cart.addItem(r.acomp.item.id, r.acomp.tam, r.acomp.sel, 1);
-      if (poe(r.principal)) T.toast("Adicionados: bebida e acompanhamento", { act: "open-pedido", rotulo: "Ver pedido" });
-      else T.toast("Acompanhamento adicionado. Falta escolher a bebida.");
+      if (poe(r.principal)) T.toast(T.t("adicionadosDois"), { act: "open-pedido", rotulo: T.t("verPedido") });
+      else T.toast(T.t("acompAdicionado"));
       return;
     }
     const x = w === "p" ? r.principal : w === "c" ? r.acomp : r.alternativas[+w.slice(1)];
-    if (poe(x)) T.toast("Adicionado · " + T.nome(x.item), { act: "open-pedido", rotulo: "Ver pedido" });
+    if (poe(x)) T.toast(T.t("adicionadoNome", { nome: T.nome(x.item) }), { act: "open-pedido", rotulo: T.t("verPedido") });
   };
   T.preset = {};                                        // tamanho e leite vindos do quiz para a tela de detalhe
 
@@ -436,7 +442,7 @@ T.L = (function () {
   build.aula = (id) => {
     let aula = AULAS.find((a) => a.id === id);
     if (!aula) return null;
-    const el = camada("aula/" + id, "layer-aula", aula.titulo);
+    const el = camada("aula/" + id, "layer-aula", T.aulaTxt(aula).titulo);
     let k = 0, fim = false;
     const trilhaDe = (a) => AULAS_TRILHAS.find((t) => t.id === a.trilha);
     const proximaTrilha = () => {
@@ -444,35 +450,35 @@ T.L = (function () {
       for (let j = i + 1; j < AULAS_TRILHAS.length; j++) { const a = AULAS.find((x) => x.trilha === AULAS_TRILHAS[j].id); if (a) return a; }
       return null;
     };
-    const abre = () => { T.vistas.marca(aula.id); T.v.atualizaVistas(); el.setAttribute("aria-label", aula.titulo); };
+    const abre = () => { T.vistas.marca(aula.id); T.v.atualizaVistas(); el.setAttribute("aria-label", T.aulaTxt(aula).titulo); };
     // imagem do slide tem prioridade; no primeiro slide, sem imagem própria, vale a capa da aula
     const imagemDoSlide = (s) => s.imagem || (k === 0 ? aula.imagem : null);
     const focoDoSlide = (s) => (s.imagem ? s.foco : aula.foco) || "50% 50%";      // foco da aula na capa; do slide na imagem do slide
     const render = () => {
-      const n = aula.slides.length;
+      const n = aula.slides.length, at = T.aulaTxt(aula);
       if (fim) {
         const prox = proximaTrilha();
         el.innerHTML = `
-          <div class="story-topo"><span>${E(aula.titulo)}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
-          <div class="story-corpo story-fim">${T.icone(aula.icone, "story-ilus")}<h2 class="titulo">Você terminou a trilha ${E(trilhaDe(aula).nome)}</h2>
-            <div class="story-botoes">${prox ? `<button type="button" class="btn btn-vinho" data-act="s-trilha">Próxima trilha</button>` : ""}<button type="button" class="btn btn-contorno" data-act="back">Fechar</button></div></div>`;
+          <div class="story-topo"><span>${E(at.titulo)}</span><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fecharAula"))}">×</button></div>
+          <div class="story-corpo story-fim">${T.icone(aula.icone, "story-ilus")}<h2 class="titulo">${E(T.t("trilhaTerminada", { nome: T.aulaTrilhaTxt(trilhaDe(aula)).nome }))}</h2>
+            <div class="story-botoes">${prox ? `<button type="button" class="btn btn-vinho" data-act="s-trilha">${E(T.t("proximaTrilha"))}</button>` : ""}<button type="button" class="btn btn-contorno" data-act="back">${E(T.t("fechar"))}</button></div></div>`;
         return;
       }
-      const s = aula.slides[k], ultimo = k === n - 1;
+      const s = at.slide(k), ultimo = k === n - 1;
       const botoes = [];
-      if (ultimo && aula.item && T.item(aula.item)) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-item" data-id="${E(aula.item)}">Ver no cardápio</button>`);
-      if (ultimo && aula.link) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-link" data-h="${E(aula.link.replace(/^#/, ""))}">Conhecer a história</button>`);
+      if (ultimo && aula.item && T.item(aula.item)) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-item" data-id="${E(aula.item)}">${E(T.t("verNoCardapio"))}</button>`);
+      if (ultimo && aula.link) botoes.push(`<button type="button" class="btn btn-vinho" data-act="s-link" data-h="${E(aula.link.replace(/^#/, ""))}">${E(T.t("conhecerHistoria"))}</button>`);
       el.innerHTML = `
         <div class="story-barras" aria-hidden="true">${aula.slides.map((_, j) => `<i class="${j <= k ? "feita" : ""}"></i>`).join("")}</div>
-        <div class="story-topo"><span>${E(aula.titulo)}${aula.leitura ? ` <em>· ${E(aula.leitura)}</em>` : ""}</span><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar aula">×</button></div>
+        <div class="story-topo"><span>${E(at.titulo)}${at.leitura ? ` <em>· ${E(T.t("leitura", { n: at.leitura }))}</em>` : ""}</span><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fecharAula"))}">×</button></div>
         <div class="story-corpo" tabindex="0"><div class="story-miolo">
           ${imagemDoSlide(s) ? `<div class="story-img-bloco"><img class="story-img" src="${E(imagemDoSlide(s))}" alt="${E(s.titulo)}" width="720" height="900" decoding="async" style="object-position:${E(focoDoSlide(s))}" data-remove-se-falhar="1"></div>` : ""}
-          <p class="story-n">${k + 1} de ${n}</p>
+          <p class="story-n">${E(T.t("perguntaDe", { n: k + 1, total: n }))}</p>
           ${s.destaque ? `<p class="story-destaque"><strong>${E(s.destaque.valor)}</strong><span>${E(s.destaque.legenda)}</span></p>` : ""}
           <h2 class="titulo">${E(s.titulo)}</h2><p class="story-texto">${E(s.texto)}</p>
           ${botoes.length ? `<div class="story-botoes">${botoes.join("")}</div>` : ""}
           </div>
-          <div class="sr-nav"><button type="button" data-act="s-ant">Slide anterior</button><button type="button" data-act="s-prox">Próximo slide</button></div>
+          <div class="sr-nav"><button type="button" data-act="s-ant">${E(T.t("slideAnterior"))}</button><button type="button" data-act="s-prox">${E(T.t("proximoSlide"))}</button></div>
         </div>`;
     };
     const proximaAula = () => {
@@ -510,16 +516,16 @@ T.L = (function () {
 
   /* ===== por trás do chapéu ===== */
   build.chapeu = () => {
-    const el = camada("chapeu", "layer-tela layer-creme", "Por trás do chapéu");
+    const el = camada("chapeu", "layer-tela layer-creme", T.t("menuChapeu"));
     // TEXTO PROVISÓRIO — o dono vai substituir.
     el.innerHTML = `
-      <div class="tela-topo"><h2 class="titulo">Por trás do chapéu</h2><button type="button" class="fechar-tela" data-act="back" aria-label="Fechar">×</button></div>
+      <div class="tela-topo"><h2 class="titulo">${E(T.t("menuChapeu"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div>
       <div class="tela-scroll chapeu-corpo">
-        <div class="chapeu-foto">${T.foto("assets/fotos/chapeu-historia.jpg", "Foto da história por trás do chapéu", "bebidas", 480, 360)}</div>
+        <div class="chapeu-foto">${T.foto("assets/fotos/chapeu-historia.jpg", T.t("legendaChapeu"), "bebidas", 480, 360)}</div>
         ${T.ilus("chapeu", "chapeu-gd")}
         <p>O chapéu da nossa marca é uma homenagem ao avô do fundador, Lucas Tostes, e a todos os trabalhadores e trabalhadoras que passam o dia no sol para o café chegar até a xícara.</p>
         <p>Cada café que sai daqui carrega um pouco desse trabalho. Obrigado por fazer parte dessa história.</p>
-        <button type="button" class="btn btn-vinho btn-bloco" data-act="ver-cardapio">Ver cardápio</button>
+        <button type="button" class="btn btn-vinho btn-bloco" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button>
       </div>`;
     return el;
   };
@@ -564,6 +570,16 @@ T.L = (function () {
   const api = {
     abertas: () => pilha.length > 0,
     atualiza() { Array.from(cont.children).forEach((el) => el._render && !el._saindo && el._render()); },
+    // troca de idioma com telas abertas (o seletor fica no menu): redesenha cada uma sem perder o estado
+    atualizaIdioma() {
+      Array.from(cont.children).forEach((el) => {
+        if (el._saindo) return;
+        if (el.dataset.name === "menu") { const n = build.menu(); el.innerHTML = n.innerHTML; el.setAttribute("aria-label", n.getAttribute("aria-label")); }
+        else if (el._render) el._render();
+        else if (el._S) el._S.render();
+        else if (el._draw) el._draw();
+      });
+    },
     abrir(nome) {
       if (pilha.includes(nome)) return;
       pilha.push(nome);
@@ -612,7 +628,7 @@ T.L = (function () {
     const it = T.item(b.dataset.id);
     if (T.adicionaDireto(it)) {
       T.cart.addItem(it.id, 0, T.padroes(it), 1);
-      T.toast("Adicionado · " + T.nome(it), { act: "open-pedido", rotulo: "Ver pedido" });
+      T.toast(T.t("adicionadoNome", { nome: T.nome(it) }), { act: "open-pedido", rotulo: T.t("verPedido") });
     } else api.abrir("item/" + it.id);
   };
   T.acts.go = (b) => api.irPara(b.dataset.id);

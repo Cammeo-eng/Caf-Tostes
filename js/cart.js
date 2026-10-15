@@ -82,9 +82,9 @@ T.cart = (function () {
     },
     // O que falta para enviar (texto curto) ou null. O nome é obrigatório.
     pendencia() {
-      if (!st.linhas.length) return "Seu pedido está vazio.";
-      if (!st.nome.trim()) return "Preencha seu nome para enviar o pedido.";
-      if (st.modo === "mesa" && !st.mesa) return "Escolha o número da mesa.";
+      if (!st.linhas.length) return T.t("pedidoVazioPendencia");
+      if (!st.nome.trim()) return T.t("preenchaNome");
+      if (st.modo === "mesa" && !st.mesa) return T.t("escolhaNumeroMesa");
       return null;
     },
     podeEnviar() { return api.pendencia() === null; },
@@ -95,16 +95,18 @@ T.cart = (function () {
       L.push("*Pedido — " + CONFIG.nome + "*");
       L.push(st.modo === "mesa" ? "*Mesa " + st.mesa + "*" : "*Para viagem*");
       L.push("Nome: " + st.nome.trim());
+      // A mensagem é para o barista: vai sempre em português. Se o cliente usa outro idioma, avisa qual.
+      if (T.lang !== "pt") L.push("Idioma do cliente: " + T.IDIOMAS.find((x) => x.id === T.lang).cliente);
       L.push("");
       st.linhas.forEach((l) => {
         const v = api.valores(l);
         const valor = T.moneyWA(T.r2(v.preco * l.qtd));
         if (l.tipo === "combo") {
-          L.push(`${l.qtd}x ${l.prefixo}: ${l.partes.map(T.nomeParte).join(" + ")} — ${valor}`);
+          L.push(`${l.qtd}x ${l.prefixo}: ${l.partes.map((p) => T.nomeParte(p, "pt")).join(" + ")} — ${valor}`);
         } else {
           const it = T.item(l.id);
-          const ops = T.textoOpcoes(it, l.sel);
-          L.push(`${l.qtd}x ${T.nomeComTam(it, l.tam)}${ops.length ? " — " + ops.join(", ") : ""} — ${valor}`);
+          const ops = T.textoOpcoes(it, l.sel, false, "pt");
+          L.push(`${l.qtd}x ${T.nomeComTam(it, l.tam, "pt")}${ops.length ? " — " + ops.join(", ") : ""} — ${valor}`);
         }
       });
       L.push("");

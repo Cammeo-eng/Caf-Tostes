@@ -33,7 +33,7 @@ T.parte = (id, tamRotulo) => {
   const sel = T.padroes(item);
   return { id, tam, sel, preco: T.precoUnit(item, tam, sel) };
 };
-T.nomeParte = (p) => T.nomeComTam(T.item(p.id), p.tam);
+T.nomeParte = (p, lang) => T.nomeComTam(T.item(p.id), p.tam, lang);
 
 T.combosDoDia = (chave) => {
   const cfg = CONFIG.promocao;
