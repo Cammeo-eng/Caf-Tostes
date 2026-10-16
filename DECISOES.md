@@ -128,3 +128,7 @@ Formato: data · assunto · decisão · quem decidiu.
 ## Ajustes (2026-10-18)
 - EN: "To go" virou "Takeaway" (`levarViagem`). "To go with it" (acompanhamento do quiz) fica, porque significa "combina com".
 - Moka Pistache: M passou a R$ 16,00 (pedido do Fabrício); P R$ 15,00 e G R$ 17,00, mantendo a diferença de R$ 1,00.
+
+## Fotos r5 e receita do Marroquino (2026-10-18)
+- Fotos novas: `macchiato.jpg`, `marroquino.jpg`; `flat-white.jpg` substituída. Versão dos links subiu para limpar o cache.
+- Marroquino sem chocolate: cacau 50%, açúcar e canela (descrição, ingredientes, etiquetas e traduções EN e ES). Nenhuma aula nem "O que é?" citava chocolate no Marroquino.

@@ -446,12 +446,13 @@ window.I18N.es = {
     },
     "marroquino": {
       "nome": "Marroquino",
-      "descricaoCurta": "Capas de chocolate, espresso y espuma de leche, con cacao.",
+      "descricaoCurta": "Espresso con cacao al 50%, azúcar y canela, cubierto de espuma de leche.",
       "ingredientes": [
-        "Chocolate",
         "Espresso",
-        "Espuma de leche",
-        "Cacao en polvo"
+        "Cacao al 50%",
+        "Azúcar",
+        "Canela",
+        "Espuma de leche"
       ]
     },
     "coado-do-dia": {
