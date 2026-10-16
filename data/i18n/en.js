@@ -446,12 +446,13 @@ window.I18N.en = {
     },
     "marroquino": {
       "nome": "Marocchino",
-      "descricaoCurta": "Layers of chocolate, espresso and milk foam, dusted with cocoa.",
+      "descricaoCurta": "Espresso with 50% cocoa, sugar and cinnamon, topped with milk foam.",
       "ingredientes": [
-        "Chocolate",
         "Espresso",
-        "Milk foam",
-        "Cocoa powder"
+        "50% cocoa",
+        "Sugar",
+        "Cinnamon",
+        "Milk foam"
       ]
     },
     "coado-do-dia": {

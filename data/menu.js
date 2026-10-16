@@ -859,13 +859,14 @@ const MENU = [
     "grupo": "bebidas",
     "categoria": "espressos-com-leite",
     "nome": "Marroquino",
-    "descricaoCurta": "Chocolate, espresso e espuma de leite em camadas, com cacau.",
+    "descricaoCurta": "Espresso com cacau 50%, açúcar e canela, coberto de espuma de leite.",
     "descricao": "",
     "ingredientes": [
-      "Chocolate",
       "Espresso",
-      "Espuma de leite",
-      "Cacau em pó"
+      "Cacau 50%",
+      "Açúcar",
+      "Canela",
+      "Espuma de leite"
     ],
     "tamanhos": [
       {
@@ -901,7 +902,8 @@ const MENU = [
       "cafeina-media",
       "classico",
       "chocolate",
-      "cacau"
+      "cacau",
+      "canela"
     ],
     "promocaoElegivel": true,
     "servidoEm": "copo"
