@@ -133,7 +133,13 @@ window.I18N.pt = {
     "slideAnterior": "Slide anterior",
     "proximoSlide": "Próximo slide",
     "fecharAula": "Fechar aula",
-    "pedidoVazioPendencia": "Seu pedido está vazio."
+    "pedidoVazioPendencia": "Seu pedido está vazio.",
+    "temporadaTitulo": "Smoothies de Primavera/Verão",
+    "temporadaTexto": "7 sabores com fruta de verdade, batidos na hora.",
+    "temporadaBotao": "Ver smoothies",
+    "temporadaSelo": "Primavera/Verão",
+    "oQueE": "O que é?",
+    "escolhaCobertura": "Escolha pelo menos 1 cobertura"
   },
   "quiz": {
     "textos": {

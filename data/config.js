@@ -46,6 +46,9 @@ const CONFIG = {
   // Promoção do dia: 2 combos (1 bebida + 1 comida), sorteados com a data como semente
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
 
+  // Temporada: quando ativa=false, a categoria sazonal some do site inteiro
+  temporada: { ativa: true, id: "primavera-verao", categoria: "smoothies" },
+
   // O pedido favorito (destaque no topo)
   favorito: {
     titulo: "O pedido favorito",

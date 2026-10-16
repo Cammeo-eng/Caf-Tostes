@@ -149,7 +149,13 @@ window.I18N.en = {
     "slideAnterior": "Previous slide",
     "proximoSlide": "Next slide",
     "fecharAula": "Close story",
-    "pedidoVazioPendencia": "Your order is empty."
+    "pedidoVazioPendencia": "Your order is empty.",
+    "temporadaTitulo": "Spring/Summer Smoothies",
+    "temporadaTexto": "7 flavors made with real fruit, blended to order.",
+    "temporadaBotao": "See smoothies",
+    "temporadaSelo": "Spring/Summer",
+    "oQueE": "What's this?",
+    "escolhaCobertura": "Choose at least 1 topping"
   },
   "config": {
     "marquee": "coffee to the millimeter ✦ 84+ beans ✦ made to order ✦ Fazenda Rio Grande ✦",
@@ -173,75 +179,103 @@ window.I18N.en = {
   "categorias": {
     "espressos": {
       "nome": "Espressos",
-      "nota": "No milk. Served in a cup."
+      "nota": "No milk. Served in a cup.",
+      "sobre": "The base of everything: freshly ground coffee, pulled under pressure in about 30 seconds. Short, intense and aromatic. These are our coffees without milk."
     },
     "espressos-com-leite": {
       "nome": "Espresso & Milk",
-      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml"
+      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml",
+      "sobre": "Espresso with milk steamed to the right texture. What changes from one to the next is the amount of milk and foam: from the macchiato, almost pure, to the latte, very smooth."
     },
     "coados": {
       "nome": "Filter Coffee",
-      "nota": "V60 and French Press serve 2."
+      "nota": "V60 and French Press serve 2.",
+      "sobre": "Filter coffee, brewed without pressure: lighter and more aromatic than espresso, great for tasting the bean's notes. The V60 and French press are brewed to order and serve two."
     },
     "docinhos": {
       "nome": "Flavored Coffees",
-      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml"
+      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml",
+      "sobre": "Espressos with milk and a sweet touch: caramel, hazelnut, vanilla, chocolate or dulce de leche. For those who like a coffee that tastes like dessert."
     },
     "autorais": {
       "nome": "House Signatures",
-      "nota": "Recipes created here."
+      "nota": "Recipes created here.",
+      "sobre": "Recipes created here at TOSTES, that you won't find anywhere else."
     },
     "chocolate-quente": {
       "nome": "Hot Chocolate",
-      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml"
+      "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml",
+      "sobre": "Real chocolate melted into steamed milk. Creamy, with no coffee."
     },
     "gelados": {
       "nome": "Iced Coffees",
-      "nota": ""
+      "nota": "",
+      "sobre": "Our coffees served iced, in a 500 ml cup."
     },
     "matcha": {
       "nome": "Matcha",
-      "nota": ""
+      "nota": "",
+      "sobre": "Japanese green tea powder, whisked to order. Hot or iced, pure or with milk."
     },
     "chai": {
       "nome": "Chai",
-      "nota": ""
+      "nota": "",
+      "sobre": "Black tea with spices like cinnamon, cardamom and ginger. Aromatic and slightly spicy."
     },
     "drinks": {
       "nome": "Drinks",
-      "nota": ""
+      "nota": "",
+      "sobre": "Juice, tea and Italian soda, for when you don't want coffee."
     },
     "croissants-salgados": {
       "nome": "Savory Croissants",
-      "nota": "Baked fresh every day."
+      "nota": "Baked fresh every day.",
+      "sobre": "Baked every day and filled when you order. That keeps the pastry crisp outside and soft inside: filled in advance, a croissant soaks up moisture and goes limp."
     },
     "croissants-doces": {
       "nome": "Sweet Croissants",
-      "nota": "Baked fresh every day."
+      "nota": "Baked fresh every day.",
+      "sobre": "Baked every day and filled when you order, so the pastry stays crisp and the filling fresh."
     },
     "sanduiches": {
       "nome": "Sandwiches",
-      "nota": "On sliced bread or baguette."
+      "nota": "On sliced bread or baguette.",
+      "sobre": "Classic grilled sandwiches, on sliced bread or baguette. Quick and warm."
     },
     "gratinados": {
       "nome": "Gratin Sandwiches",
-      "nota": "Topped with melted, grilled cheese."
+      "nota": "Topped with melted, grilled cheese.",
+      "sobre": "Sandwiches topped with cheese and baked until it melts and turns golden. That cheese crust on top is what makes a gratin."
     },
     "brunches": {
       "nome": "Brunch",
-      "nota": ""
+      "nota": "",
+      "sobre": "A complete breakfast plate: eggs, toast and sides served side by side, to put together your way."
     },
     "waffle-mineiro": {
       "nome": "Cheese Bread Waffles",
-      "nota": "Brazilian cheese bread (pão de queijo) dough baked as a waffle."
+      "nota": "Brazilian cheese bread (pão de queijo) dough baked as a waffle.",
+      "sobre": "Brazilian cheese bread (pão de queijo) dough baked in a waffle iron: crispy outside, soft and chewy inside. A very Minas Gerais idea."
     },
     "waffle-americano": {
       "nome": "American Waffles",
-      "nota": ""
+      "nota": "",
+      "sobre": "The classic waffle, light and slightly sweet, with toppings."
     },
     "tortas": {
       "nome": "Pie of the Day",
-      "nota": "A different flavor every day."
+      "nota": "A different flavor every day.",
+      "sobre": "Pies made here, with a different flavor every day. Ask at the counter for today's."
+    },
+    "smoothies": {
+      "nome": "Smoothies",
+      "nota": "Spring/Summer. Frozen fruit instead of ice: more flavor, never watery. 500 ml.",
+      "sobre": "Frozen fruit blended to order, with no ice: more flavor and never watery. Spring and summer only."
+    },
+    "toasts": {
+      "nome": "Toasts",
+      "nota": "On Brazilian corn bread, a thick slice toasted on the grill.",
+      "sobre": "A thick slice of broa de milho, a Brazilian corn bread with a gentle corn flavor and a hint of sweetness, toasted on the grill with butter, with the topping built on top. A step up from a sandwich, eaten with a knife and fork. With Build Your Toast, you choose everything."
     }
   },
   "opcoes": {
@@ -299,6 +333,32 @@ window.I18N.en = {
         "frutas-vermelhas": "Berries",
         "limao-gengibre": "Lime and ginger",
         "tangerina": "Tangerine"
+      }
+    },
+    "base-toast": {
+      "titulo": "Spread",
+      "itens": {
+        "requeijao": "Requeijão (cream cheese)",
+        "manteiga": "Just butter",
+        "doce-de-leite": "Dulce de leche",
+        "creme-de-avela": "Hazelnut spread"
+      }
+    },
+    "coberturas-toast": {
+      "titulo": "Toppings (choose 1 to 5)",
+      "itens": {
+        "ovos-mexidos": "Scrambled eggs",
+        "ovo-estrelado": "Sunny-side-up egg",
+        "queijo": "Melted cheese",
+        "bacon": "Bacon",
+        "presunto": "Ham",
+        "frango-cremoso": "Creamy chicken",
+        "calabresa": "Calabresa sausage",
+        "tomate": "Seasoned tomato",
+        "banana": "Banana",
+        "morangos": "Strawberries",
+        "mel": "Honey",
+        "canela": "Cinnamon"
       }
     }
   },
@@ -1207,6 +1267,179 @@ window.I18N.en = {
       "nome": "Pie of the day",
       "descricaoCurta": "The flavor changes every day. Ask at the counter for today's flavor and price.",
       "ingredientes": []
+    },
+    "smoothie-melancia-banana": {
+      "nome": "Watermelon & Banana",
+      "descricaoCurta": "Frozen watermelon and banana, with lime and a touch of honey.",
+      "ingredientes": [
+        "Frozen watermelon",
+        "Frozen banana",
+        "Lime juice",
+        "Honey"
+      ],
+      "nomeCompleto": "Smoothie — Watermelon & Banana"
+    },
+    "smoothie-melao-hortela-limao": {
+      "nome": "Melon, Mint & Lime",
+      "descricaoCurta": "Frozen melon blended with fresh mint, lime and honey. The most refreshing one.",
+      "ingredientes": [
+        "Frozen melon",
+        "Fresh mint",
+        "Lime juice",
+        "Honey"
+      ],
+      "nomeCompleto": "Smoothie — Melon, Mint & Lime"
+    },
+    "smoothie-abacaxi-hortela-mel": {
+      "nome": "Pineapple, Mint & Honey",
+      "descricaoCurta": "Frozen pineapple with fresh mint, honey and lime.",
+      "ingredientes": [
+        "Frozen pineapple",
+        "Fresh mint",
+        "Honey",
+        "Lime juice"
+      ],
+      "nomeCompleto": "Smoothie — Pineapple, Mint & Honey"
+    },
+    "smoothie-manga-laranja": {
+      "nome": "Mango & Orange",
+      "descricaoCurta": "Frozen mango and banana with fresh-squeezed orange juice.",
+      "ingredientes": [
+        "Frozen mango",
+        "Frozen banana",
+        "Fresh-squeezed orange juice"
+      ],
+      "nomeCompleto": "Smoothie — Mango & Orange"
+    },
+    "smoothie-morango-baunilha": {
+      "nome": "Strawberry & Vanilla",
+      "descricaoCurta": "Strawberry and banana with vanilla ice cream, milk and vanilla. Creamy.",
+      "ingredientes": [
+        "Frozen strawberries",
+        "Frozen banana",
+        "Vanilla ice cream",
+        "Milk",
+        "Vanilla syrup"
+      ],
+      "nomeCompleto": "Smoothie — Strawberry & Vanilla"
+    },
+    "smoothie-bala-de-canela": {
+      "nome": "Iced Bala de Canela",
+      "descricaoCurta": "The summer version of our signature drink: banana, cherry syrup, condensed milk and cinnamon.",
+      "ingredientes": [
+        "Frozen banana",
+        "House-made cherry syrup",
+        "Condensed milk",
+        "Milk",
+        "Ground cinnamon"
+      ],
+      "nomeCompleto": "Smoothie — Iced Bala de Canela"
+    },
+    "smoothie-matcha-manga": {
+      "nome": "Matcha & Mango",
+      "descricaoCurta": "Matcha with frozen mango, milk and honey.",
+      "ingredientes": [
+        "Matcha",
+        "Frozen mango",
+        "Milk",
+        "Honey"
+      ],
+      "nomeCompleto": "Smoothie — Matcha & Mango"
+    },
+    "toast-ovos-queijo-requeijao": {
+      "nome": "Eggs, Cheese & Cream Cheese",
+      "descricaoCurta": "Requeijão (Brazilian cream cheese) spread, creamy scrambled eggs and melted cheese.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Requeijão (Brazilian cream cheese)",
+        "Creamy scrambled eggs",
+        "Melted cheese"
+      ],
+      "nomeCompleto": "Toast — Eggs, Cheese & Cream Cheese"
+    },
+    "toast-ovos-bacon-queijo": {
+      "nome": "Eggs, Bacon & Cheese",
+      "descricaoCurta": "Scrambled eggs, crispy bacon and melted cheese.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Creamy scrambled eggs",
+        "Crispy bacon",
+        "Melted cheese"
+      ],
+      "nomeCompleto": "Toast — Eggs, Bacon & Cheese"
+    },
+    "toast-frango-cremoso": {
+      "nome": "Creamy Chicken Gratin",
+      "descricaoCurta": "Our creamy chicken with cheese grilled on top.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Creamy chicken",
+        "Melted, grilled cheese"
+      ],
+      "nomeCompleto": "Toast — Creamy Chicken Gratin"
+    },
+    "toast-tomate-queijo": {
+      "nome": "Tomato & Cheese",
+      "descricaoCurta": "Melted cheese and diced tomato with olive oil and oregano.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Melted cheese",
+        "Diced tomato with olive oil and oregano"
+      ],
+      "nomeCompleto": "Toast — Tomato & Cheese"
+    },
+    "toast-presunto-queijo-ovo": {
+      "nome": "Ham, Cheese & Egg",
+      "descricaoCurta": "Ham and melted cheese topped with a sunny-side-up egg, croque madame style.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Ham",
+        "Melted cheese",
+        "Sunny-side-up egg"
+      ],
+      "nomeCompleto": "Toast — Ham, Cheese & Egg"
+    },
+    "toast-banana-canela-mel": {
+      "nome": "Banana, Cinnamon & Honey",
+      "descricaoCurta": "Banana caramelized on the grill, cinnamon and a drizzle of honey.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Caramelized banana",
+        "Cinnamon",
+        "Honey"
+      ],
+      "nomeCompleto": "Toast — Banana, Cinnamon & Honey"
+    },
+    "toast-morango-avela": {
+      "nome": "Strawberry & Hazelnut",
+      "descricaoCurta": "Hazelnut spread and fresh sliced strawberries.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Hazelnut spread",
+        "Fresh strawberries"
+      ],
+      "nomeCompleto": "Toast — Strawberry & Hazelnut"
+    },
+    "toast-doce-de-leite-banana": {
+      "nome": "Dulce de Leche & Banana",
+      "descricaoCurta": "Dulce de leche, sliced banana and cinnamon.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Dulce de leche",
+        "Banana",
+        "Cinnamon"
+      ],
+      "nomeCompleto": "Toast — Dulce de Leche & Banana"
+    },
+    "toast-monte-o-seu": {
+      "nome": "Build Your Toast",
+      "descricaoCurta": "Choose the spread and 1 to 5 toppings. The price depends on what you pick.",
+      "ingredientes": [
+        "Thick slice of Brazilian corn bread (broa de milho), toasted in butter",
+        "Your choice of spread",
+        "Your choice of toppings"
+      ],
+      "nomeCompleto": "Toast — Build Your Toast"
     }
   },
   "quiz": {

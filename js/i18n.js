@@ -29,10 +29,10 @@ T.cfg = (chave, original) => {
   return v != null ? v : original;
 };
 
-/* Categoria: { nome, nota } */
+/* Categoria: { nome, nota, sobre } */
 T.catTxt = (c) => {
   const tr = T.lang === "pt" ? null : (_I(T.lang).categorias || {})[c.id];
-  return { nome: (tr && tr.nome) || c.nome, nota: tr && tr.nota != null ? tr.nota : c.nota };
+  return { nome: (tr && tr.nome) || c.nome, nota: tr && tr.nota != null ? tr.nota : c.nota, sobre: tr && tr.sobre ? tr.sobre : c.sobre || "" };
 };
 
 /* Item: nome, nomeCompleto, descricaoCurta, ingredientes (no idioma pedido; padrão: idioma atual) */
@@ -140,6 +140,7 @@ window.i18nFaltando = function () {
       const tr = (I.categorias || {})[c.id];
       if (!tr || !tr.nome) f.push("categorias." + c.id + ".nome");
       if (c.nota && (!tr || !tr.nota)) f.push("categorias." + c.id + ".nota");
+      if (c.sobre && (!tr || !tr.sobre)) f.push("categorias." + c.id + ".sobre");
     });
     Object.keys(OPCOES).forEach((g) => {
       const tr = (I.opcoes || {})[g];

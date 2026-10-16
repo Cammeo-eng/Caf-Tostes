@@ -1,7 +1,7 @@
 /* ==========================================================
    TOSTES café — Cardápio
    Arquivo de dados. Para alterar preços, nomes ou itens, edite SÓ este arquivo.
-   Atualizado em: 2026-10-12 (rodada 3)
+   Atualizado em: 2026-10-16 (smoothies sazonais e toasts)
 
    ITEM
    - id ............ identificador único. A foto do item é assets/fotos/<id>.jpg
@@ -25,6 +25,8 @@
    - servidoEm ..... (opcional) "xícara" ou "copo". Aparece na tela de detalhe
    - serve ......... (opcional) número de pessoas
    - pedido ........ (opcional) false = item só informativo, sem botão de adicionar
+   - sazonal ....... (só em CATEGORIAS) id da temporada, ex. "primavera-verao". Com CONFIG.temporada.ativa=false a categoria e seus itens somem do site
+   - sobre ......... (só em CATEGORIAS) texto do "O que é?" da categoria
    - precoAConfirmar (anotação interna, NÃO aparece no site) preço ainda provisório
    ========================================================== */
 
@@ -33,109 +35,142 @@ const CATEGORIAS = [
     "id": "espressos",
     "grupo": "bebidas",
     "nome": "Espressos",
-    "nota": "Sem leite. Servidos na xícara."
+    "nota": "Sem leite. Servidos na xícara.",
+    "sobre": "A base de tudo: café moído na hora e extraído sob pressão em cerca de 30 segundos. Curto, intenso e aromático. Aqui ficam os cafés sem leite."
   },
   {
     "id": "espressos-com-leite",
     "grupo": "bebidas",
     "nome": "Espressos com Leite",
-    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml",
+    "sobre": "Espresso com leite vaporizado na textura certa. O que muda de um para outro é a quantidade de leite e de espuma: do macchiato, quase puro, ao latte, bem suave."
   },
   {
     "id": "coados",
     "grupo": "bebidas",
     "nome": "Coados",
-    "nota": "V60 e Prensa Francesa servem 2 pessoas."
+    "nota": "V60 e Prensa Francesa servem 2 pessoas.",
+    "sobre": "Café filtrado, sem pressão: mais leve e aromático que o espresso, ótimo para sentir as notas do grão. O V60 e a prensa francesa são preparados na hora, para dividir."
   },
   {
     "id": "docinhos",
     "grupo": "bebidas",
     "nome": "Cafés com Sabor",
-    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml",
+    "sobre": "Espressos com leite e um toque doce: caramelo, avelã, baunilha, chocolate ou doce de leite. Para quem gosta de café com cara de sobremesa."
   },
   {
     "id": "autorais",
     "grupo": "bebidas",
     "nome": "Autorais da Casa",
-    "nota": "Receitas criadas aqui."
+    "nota": "Receitas criadas aqui.",
+    "sobre": "Receitas criadas aqui na TOSTES, que você não encontra em outro lugar."
   },
   {
     "id": "chocolate-quente",
     "grupo": "bebidas",
     "nome": "Chocolate Quente",
-    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml"
+    "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml",
+    "sobre": "Chocolate de verdade derretido no leite vaporizado. Cremoso e sem café."
   },
   {
     "id": "gelados",
     "grupo": "bebidas",
     "nome": "Gelados de Café",
-    "nota": ""
+    "nota": "",
+    "sobre": "Nossos cafés na versão gelada, com gelo, em copo de 500 ml."
+  },
+  {
+    "id": "smoothies",
+    "grupo": "bebidas",
+    "nome": "Smoothies",
+    "nota": "Primavera/Verão. Fruta congelada no lugar do gelo: mais sabor, nada aguado. 500 ml.",
+    "sobre": "Frutas congeladas batidas na hora, sem gelo: mais sabor e nada aguado. Só na primavera e no verão.",
+    "sazonal": "primavera-verao"
   },
   {
     "id": "matcha",
     "grupo": "bebidas",
     "nome": "Matcha",
-    "nota": ""
+    "nota": "",
+    "sobre": "Chá verde japonês em pó, batido na hora. Quente ou gelado, puro ou com leite."
   },
   {
     "id": "chai",
     "grupo": "bebidas",
     "nome": "Chai",
-    "nota": ""
+    "nota": "",
+    "sobre": "Chá preto com especiarias como canela, cardamomo e gengibre. Aromático e levemente picante."
   },
   {
     "id": "drinks",
     "grupo": "bebidas",
     "nome": "Drinks",
-    "nota": ""
+    "nota": "",
+    "sobre": "Sucos, chás e soda italiana, para quem não quer café."
   },
   {
     "id": "croissants-salgados",
     "grupo": "comidas",
     "nome": "Croissants Salgados",
-    "nota": "Feitos todos os dias."
+    "nota": "Feitos todos os dias.",
+    "sobre": "Assados todos os dias e recheados na hora do pedido. Assim a massa continua crocante por fora e macia por dentro: recheado com antecedência, o croissant absorve a umidade e murcha."
   },
   {
     "id": "croissants-doces",
     "grupo": "comidas",
     "nome": "Croissants Doces",
-    "nota": "Feitos todos os dias."
+    "nota": "Feitos todos os dias.",
+    "sobre": "Assados todos os dias e recheados na hora do pedido, para a massa continuar crocante e o recheio, fresco."
   },
   {
     "id": "sanduiches",
     "grupo": "comidas",
     "nome": "Sanduíches",
-    "nota": "No pão de forma ou na baguete."
+    "nota": "No pão de forma ou na baguete.",
+    "sobre": "Sanduíches clássicos na chapa, no pão de forma ou na baguete. Rápidos e quentinhos."
   },
   {
     "id": "gratinados",
     "grupo": "comidas",
     "nome": "Gratinados",
-    "nota": ""
+    "nota": "",
+    "sobre": "Sanduíches cobertos de queijo e levados ao forno até o queijo derreter e dourar. A casquinha de queijo por cima é o que faz o gratinado."
+  },
+  {
+    "id": "toasts",
+    "grupo": "comidas",
+    "nome": "Toasts",
+    "nota": "Na broa de milho sovada, em fatia grossa dourada na chapa.",
+    "sobre": "Uma fatia grossa de broa de milho sovada, com leve sabor de milho e um toque adocicado, dourada na chapa com manteiga e com a cobertura montada por cima. Mais caprichado que um sanduíche, para comer com garfo e faca. No Monte seu Toast, você escolhe tudo."
   },
   {
     "id": "brunches",
     "grupo": "comidas",
     "nome": "Brunches",
-    "nota": ""
+    "nota": "",
+    "sobre": "Prato completo de café da manhã: ovos, torradas e acompanhamentos servidos lado a lado, para montar do seu jeito."
   },
   {
     "id": "waffle-mineiro",
     "grupo": "comidas",
     "nome": "Waffle Mineiro",
-    "nota": "Massa de pão de queijo assada em forma de waffle."
+    "nota": "Massa de pão de queijo assada em forma de waffle.",
+    "sobre": "Massa de pão de queijo assada na máquina de waffle: casquinha crocante e miolo macio e elástico. Uma ideia bem mineira."
   },
   {
     "id": "waffle-americano",
     "grupo": "comidas",
     "nome": "Waffle Americano",
-    "nota": ""
+    "nota": "",
+    "sobre": "O waffle clássico, de massa leve e levemente doce, com coberturas."
   },
   {
     "id": "tortas",
     "grupo": "comidas",
     "nome": "Tortas do Dia",
-    "nota": "Sabor diferente todos os dias."
+    "nota": "Sabor diferente todos os dias.",
+    "sobre": "Tortas feitas aqui, com um sabor diferente a cada dia. Pergunte no balcão qual é o de hoje."
   }
 ];
 
@@ -297,6 +332,103 @@ const OPCOES = {
       {
         "id": "tangerina",
         "nome": "Tangerina",
+        "valor": 0
+      }
+    ]
+  },
+  "base-toast": {
+    "titulo": "Base",
+    "tipo": "unica",
+    "obrigatoria": true,
+    "itens": [
+      {
+        "id": "requeijao",
+        "nome": "Requeijão",
+        "valor": 0,
+        "padrao": true
+      },
+      {
+        "id": "manteiga",
+        "nome": "Só manteiga",
+        "valor": 0
+      },
+      {
+        "id": "doce-de-leite",
+        "nome": "Doce de leite",
+        "valor": 2
+      },
+      {
+        "id": "creme-de-avela",
+        "nome": "Creme de avelã",
+        "valor": 3
+      }
+    ]
+  },
+  "coberturas-toast": {
+    "titulo": "Coberturas (escolha de 1 a 5)",
+    "tipo": "multipla",
+    "obrigatoria": true,
+    "min": 1,
+    "max": 5,
+    "itens": [
+      {
+        "id": "ovos-mexidos",
+        "nome": "Ovos mexidos",
+        "valor": 3
+      },
+      {
+        "id": "ovo-estrelado",
+        "nome": "Ovo estrelado",
+        "valor": 3
+      },
+      {
+        "id": "queijo",
+        "nome": "Queijo derretido",
+        "valor": 2
+      },
+      {
+        "id": "bacon",
+        "nome": "Bacon",
+        "valor": 3
+      },
+      {
+        "id": "presunto",
+        "nome": "Presunto",
+        "valor": 2
+      },
+      {
+        "id": "frango-cremoso",
+        "nome": "Frango cremoso",
+        "valor": 5
+      },
+      {
+        "id": "calabresa",
+        "nome": "Calabresa",
+        "valor": 3
+      },
+      {
+        "id": "tomate",
+        "nome": "Tomate temperado",
+        "valor": 2
+      },
+      {
+        "id": "banana",
+        "nome": "Banana",
+        "valor": 2
+      },
+      {
+        "id": "morangos",
+        "nome": "Morangos",
+        "valor": 4
+      },
+      {
+        "id": "mel",
+        "nome": "Mel",
+        "valor": 1
+      },
+      {
+        "id": "canela",
+        "nome": "Canela",
         "valor": 0
       }
     ]
@@ -1956,6 +2088,300 @@ const MENU = [
     "precoAConfirmar": true
   },
   {
+    "id": "smoothie-melancia-banana",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Melancia e Banana",
+    "nomeCompleto": "Smoothie — Melancia e Banana",
+    "descricaoCurta": "Melancia e banana congeladas, com limão e um toque de mel.",
+    "descricao": "",
+    "ingredientes": [
+      "Melancia congelada",
+      "Banana congelada",
+      "Suco de limão",
+      "Mel"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 15
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-melancia-banana.jpg",
+    "etiquetas": [
+      "doce",
+      "sem-leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "diferente",
+      "frutado",
+      "mel"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-melao-hortela-limao",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Melão, Hortelã e Limão",
+    "nomeCompleto": "Smoothie — Melão, Hortelã e Limão",
+    "descricaoCurta": "Melão congelado batido com hortelã fresca, limão e mel. O mais refrescante.",
+    "descricao": "",
+    "ingredientes": [
+      "Melão congelado",
+      "Hortelã fresca",
+      "Suco de limão",
+      "Mel"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 15
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-melao-hortela-limao.jpg",
+    "etiquetas": [
+      "doce",
+      "sem-leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "diferente",
+      "frutado",
+      "herbal",
+      "citrico",
+      "mel"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-abacaxi-hortela-mel",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Abacaxi, Hortelã e Mel",
+    "nomeCompleto": "Smoothie — Abacaxi, Hortelã e Mel",
+    "descricaoCurta": "Abacaxi congelado com hortelã fresca, mel e limão.",
+    "descricao": "",
+    "ingredientes": [
+      "Abacaxi congelado",
+      "Hortelã fresca",
+      "Mel",
+      "Suco de limão"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 16
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-abacaxi-hortela-mel.jpg",
+    "etiquetas": [
+      "doce",
+      "sem-leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "diferente",
+      "frutado",
+      "herbal",
+      "citrico",
+      "mel"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-manga-laranja",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Manga e Laranja",
+    "nomeCompleto": "Smoothie — Manga e Laranja",
+    "descricaoCurta": "Manga e banana congeladas com suco de laranja espremido na hora.",
+    "descricao": "",
+    "ingredientes": [
+      "Manga congelada",
+      "Banana congelada",
+      "Suco de laranja natural"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 16
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-manga-laranja.jpg",
+    "etiquetas": [
+      "doce",
+      "sem-leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "refrescante",
+      "sem-cafeina",
+      "classico",
+      "frutado",
+      "citrico"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-morango-baunilha",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Morango e Baunilha",
+    "nomeCompleto": "Smoothie — Morango e Baunilha",
+    "descricaoCurta": "Morango e banana com sorvete de creme, leite e baunilha. Cremoso.",
+    "descricao": "",
+    "ingredientes": [
+      "Morango congelado",
+      "Banana congelada",
+      "Sorvete de creme",
+      "Leite",
+      "Xarope de baunilha"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 18
+      }
+    ],
+    "opcoes": [
+      "leite"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-morango-baunilha.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "cremoso",
+      "refrescante",
+      "sem-cafeina",
+      "classico",
+      "frutado",
+      "morango",
+      "baunilha",
+      "sobremesa",
+      "lactose-fixa"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-bala-de-canela",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Bala de Canela Gelada",
+    "nomeCompleto": "Smoothie — Bala de Canela Gelada",
+    "descricaoCurta": "A versão de verão da nossa autoral: banana, calda de cereja, leite condensado e canela.",
+    "descricao": "",
+    "ingredientes": [
+      "Banana congelada",
+      "Calda artesanal de cereja",
+      "Leite condensado",
+      "Leite",
+      "Canela em pó"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 18
+      }
+    ],
+    "opcoes": [
+      "leite"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-bala-de-canela.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "autoral",
+      "diferente",
+      "frutado",
+      "cereja",
+      "canela",
+      "condensado",
+      "sobremesa",
+      "lactose-fixa"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "smoothie-matcha-manga",
+    "grupo": "bebidas",
+    "categoria": "smoothies",
+    "nome": "Matcha e Manga",
+    "nomeCompleto": "Smoothie — Matcha e Manga",
+    "descricaoCurta": "Matcha com manga congelada, leite e mel.",
+    "descricao": "",
+    "ingredientes": [
+      "Matcha",
+      "Manga congelada",
+      "Leite",
+      "Mel"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": 500,
+        "preco": 19
+      }
+    ],
+    "opcoes": [
+      "leite"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/smoothie-matcha-manga.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "gelado",
+      "leve",
+      "sem-cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "herbal",
+      "frutado",
+      "mel"
+    ],
+    "promocaoElegivel": true
+  },
+  {
     "id": "pure-matcha",
     "grupo": "bebidas",
     "categoria": "matcha",
@@ -3585,6 +4011,275 @@ const MENU = [
       "salgado"
     ],
     "promocaoElegivel": true
+  },
+  {
+    "id": "toast-ovos-queijo-requeijao",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Ovos, Queijo e Requeijão",
+    "nomeCompleto": "Toast — Ovos, Queijo e Requeijão",
+    "descricaoCurta": "Requeijão na base, ovos mexidos cremosos e queijo derretido.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Requeijão",
+      "Ovos mexidos cremosos",
+      "Queijo derretido"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 15
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-ovos-queijo-requeijao.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-ovos-bacon-queijo",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Ovos, Bacon e Queijo",
+    "nomeCompleto": "Toast — Ovos, Bacon e Queijo",
+    "descricaoCurta": "Ovos mexidos, bacon crocante e queijo derretido.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Ovos mexidos cremosos",
+      "Bacon crocante",
+      "Queijo derretido"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 17
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-ovos-bacon-queijo.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-frango-cremoso",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Frango Cremoso Gratinado",
+    "nomeCompleto": "Toast — Frango Cremoso Gratinado",
+    "descricaoCurta": "O frango cremoso da casa com queijo gratinado por cima.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Frango cremoso",
+      "Queijo gratinado"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 17
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-frango-cremoso.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-tomate-queijo",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Tomate e Queijo",
+    "nomeCompleto": "Toast — Tomate e Queijo",
+    "descricaoCurta": "Queijo derretido e tomate em cubinhos temperado com azeite e orégano.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Queijo derretido",
+      "Tomate temperado com azeite e orégano"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 14
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-tomate-queijo.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-presunto-queijo-ovo",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Presunto, Queijo e Ovo",
+    "nomeCompleto": "Toast — Presunto, Queijo e Ovo",
+    "descricaoCurta": "Presunto e queijo derretido com um ovo estrelado por cima, no estilo croque madame.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Presunto",
+      "Queijo derretido",
+      "Ovo estrelado"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 17
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-presunto-queijo-ovo.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-banana-canela-mel",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Banana, Canela e Mel",
+    "nomeCompleto": "Toast — Banana, Canela e Mel",
+    "descricaoCurta": "Banana caramelizada na chapa, canela e um fio de mel.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Banana caramelizada",
+      "Canela",
+      "Mel"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 14
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-banana-canela-mel.jpg",
+    "etiquetas": [
+      "doce"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-morango-avela",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Morango e Avelã",
+    "nomeCompleto": "Toast — Morango e Avelã",
+    "descricaoCurta": "Creme de avelã e morangos frescos fatiados.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Creme de avelã",
+      "Morangos frescos"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 17
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-morango-avela.jpg",
+    "etiquetas": [
+      "doce"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-doce-de-leite-banana",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Doce de Leite e Banana",
+    "nomeCompleto": "Toast — Doce de Leite e Banana",
+    "descricaoCurta": "Doce de leite, banana em rodelas e canela.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Doce de leite",
+      "Banana",
+      "Canela"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 15
+      }
+    ],
+    "opcoes": [],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-doce-de-leite-banana.jpg",
+    "etiquetas": [
+      "doce"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "toast-monte-o-seu",
+    "grupo": "comidas",
+    "categoria": "toasts",
+    "nome": "Monte seu Toast",
+    "nomeCompleto": "Toast — Monte seu Toast",
+    "descricaoCurta": "Escolha a base e de 1 a 5 coberturas. O preço muda conforme o que você escolher.",
+    "descricao": "",
+    "ingredientes": [
+      "Fatia grossa de broa de milho sovada, dourada na manteiga",
+      "Base à escolha",
+      "Coberturas à escolha"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "Único",
+        "ml": null,
+        "preco": 10
+      }
+    ],
+    "opcoes": [
+      "base-toast",
+      "coberturas-toast"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/toast-monte-o-seu.jpg",
+    "etiquetas": [
+      "salgado"
+    ],
+    "promocaoElegivel": false
   },
   {
     "id": "brunches-tradicional",
