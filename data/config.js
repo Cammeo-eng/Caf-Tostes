@@ -46,6 +46,16 @@ const CONFIG = {
   // Promoção do dia: 2 combos (1 bebida + 1 comida), sorteados com a data como semente
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
 
+  // Sticker usado no lugar da foto quando o item ainda não tem foto
+  stickerCategoria: {
+    "espressos": "tamper", "espressos-com-leite": "xicara-latte", "coados": "filtro-papel",
+    "docinhos": "xicaras", "autorais": "leiteira", "chocolate-quente": "xicaras",
+    "gelados": "copo-latte", "matcha": "copo-latte", "chai": "xicara-latte", "drinks": "copo-viagem-2",
+    "croissants-salgados": "croissant", "croissants-doces": "croissant-2",
+    "sanduiches": "pao", "gratinados": "pao", "toasts": "pao", "brunches": "xicaras",
+    "waffle-mineiro": "rolinho-canela", "waffle-americano": "rolinho-canela", "tortas": "rocambole"
+  },
+
   // Temporada: quando ativa=false, a categoria sazonal some do site inteiro
   temporada: { ativa: true, id: "primavera-verao", categoria: "smoothies" },
 

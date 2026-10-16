@@ -188,8 +188,18 @@ T.nomeComTam = (item, tam, lang) => { const r = T.rotuloTam(item, tam, lang); re
 /* ---------- imagens com placeholder ---------- */
 T.ilus = (nome, classe) => `<img class="${classe || "ilus"}" src="assets/ilustracoes/${nome}.svg" alt="" width="120" height="120">`;
 T.icone = (caminho, classe) => `<img class="${classe || "ilus"}" src="${T.esc(caminho)}" alt="" width="120" height="120">`;
-T.foto = (src, alt, grupo, w, h, classe) =>
-  `<img class="${classe || "foto-img"}" src="${T.esc(src)}" alt="${T.esc(alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" data-ph="${grupo === "comidas" ? "croissant" : "xicara"}">`;
+// Sticker da categoria (CONFIG.stickerCategoria); a categoria da temporada (smoothies) usa o ícone de Primavera/Verão
+T.stickerUrl = (cat) => {
+  const id = cat && cat.id ? cat.id : cat;
+  if (CONFIG.temporada && id === CONFIG.temporada.categoria) return "assets/ilustracoes/primavera-verao-selo.svg";
+  const nome = (CONFIG.stickerCategoria || {})[id];
+  return nome ? `assets/ilustracoes/stickers/${nome}.svg` : "";
+};
+// item (opcional): se a foto não carregar, o lugar dela mostra o sticker da categoria do item
+T.foto = (src, alt, grupo, w, h, classe, item) => {
+  const st = item ? T.stickerUrl(item.categoria) : "";
+  return `<img class="${classe || "foto-img"}" src="${T.esc(src)}" alt="${T.esc(alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" data-ph="${grupo === "comidas" ? "croissant" : "xicara"}"${st ? ` data-sticker="${T.esc(st)}"` : ""}>`;
+};
 
 // Foto que não carrega vira o placeholder do site (nunca ícone quebrado). O evento error não borbulha, por isso captura.
 document.addEventListener("error", (e) => {
@@ -207,7 +217,8 @@ document.addEventListener("error", (e) => {
   ph.className = "ph";
   ph.setAttribute("role", "img");
   ph.setAttribute("aria-label", el.alt || T.t("fotoIndisponivel"));
-  ph.innerHTML = `<img src="assets/ilustracoes/${el.dataset.ph}.svg" alt="" width="120" height="120">`;
+  if (el.dataset.sticker) { ph.classList.add("ph-sticker"); ph.innerHTML = `<span class="sticker-ph" style="--src:url(${new URL(el.dataset.sticker, document.baseURI).href})"></span>`; }
+  else ph.innerHTML = `<img src="assets/ilustracoes/${el.dataset.ph}.svg" alt="" width="120" height="120">`;
   el.replaceWith(ph);
 }, true);
 

@@ -181,7 +181,7 @@ h2.titulo { font-size: 32px; }
 .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 10px 0 0; }
 .links a { font-weight: 700; color: var(--vinho); display: inline-flex; min-height: 44px; align-items: center; }
 .chapeu-link { display: flex; align-items: center; gap: 12px; width: calc(100% - 40px); margin: 0 20px; padding: 14px; border: 1.5px solid var(--vinho); background: none; border-radius: var(--raio); text-align: left; font-weight: 700; color: var(--vinho); min-height: 64px; }
-.chapeu-mini { width: 44px; height: 44px; flex: none; }
+.chapeu-mini { width: 76px; height: auto; flex: none; }
 .marca-gigante { font-family: var(--f-titulo); color: var(--vinho); font-size: clamp(36px, 11.5vw, 56px); white-space: nowrap; line-height: 1; text-align: center; margin: 48px 0 24px; }
 
 /* ----- barra do carrinho ----- */
@@ -269,7 +269,7 @@ h2.titulo { font-size: 32px; }
 .tela-topo .titulo { font-size: 28px; }
 .tela-scroll { flex: 1; overflow-y: auto; padding: 20px 20px 40px; overscroll-behavior: contain; }
 .vazio { display: grid; justify-items: center; gap: 14px; padding: 40px 0; text-align: center; }
-.vazio-ilus { width: 112px; height: 112px; }
+.vazio-ilus { width: 160px; height: auto; }
 .linhas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
 .linha { border: 1px solid var(--linha); border-radius: var(--raio); padding: 14px; box-shadow: var(--sombra); }
 .linha-topo { display: flex; justify-content: space-between; gap: 12px; }
@@ -318,12 +318,12 @@ h2.titulo { font-size: 32px; }
 .chapeu-corpo { display: grid; gap: 18px; text-align: center; }
 .chapeu-corpo p { margin: 0; font-size: 18px; }
 .chapeu-foto { aspect-ratio: 4 / 3; border-radius: 28px; overflow: hidden; background: var(--musgo-claro); }
-.chapeu-gd { width: 88px; height: 88px; margin: 0 auto; }
+.chapeu-gd { width: 170px; height: auto; margin: 0 auto; }
 
 /* ----- tela de carregamento ----- */
 #splash { position: fixed; inset: 0; z-index: 500; background: var(--creme) var(--papel); display: grid; place-content: center; justify-items: center; gap: 10px; transition: opacity .3s; }
 #splash.fim { opacity: 0; pointer-events: none; }
-#splash img { width: 110px; height: 110px; animation: balanca .8s ease-in-out; }
+#splash img { width: 150px; height: auto; animation: balanca .8s ease-in-out; }
 #splash p { margin: 0; font-family: var(--f-titulo); font-size: 34px; color: var(--vinho); animation: aparece .6s ease-out; }
 @keyframes balanca { 0% { transform: translateY(-30px) rotate(-14deg); opacity: 0; } 60% { transform: translateY(0) rotate(6deg); opacity: 1; } 100% { transform: rotate(0); } }
 @keyframes aparece { from { opacity: 0; transform: translateY(8px); } }
@@ -386,9 +386,9 @@ h2.titulo { font-size: 32px; }
 .fid-gancho { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--vinho); }
 .fidelidade .titulo { font-size: 26px; line-height: 1.15; }
 .fid-texto { margin: 12px 0 0 !important; }
-.carimbo.carimbado { border-style: solid; border-color: var(--vinho); background: color-mix(in srgb, var(--vinho) 12%, var(--creme)); transform: rotate(-6deg); }
+.carimbo.carimbado { border-style: solid; border-color: var(--vinho); background: var(--vinho); transform: rotate(-6deg); }
 .carimbo.carimbado img { opacity: 1; }
-.carimbo.carimbado b { background: var(--vinho); }
+.carimbo.carimbado b { background: var(--creme); color: var(--vinho); }
 .fidelidade .mini { margin: 0; }
 
 /* ----- aulas: descrição da trilha ----- */
@@ -484,7 +484,8 @@ h2.titulo { font-size: 32px; }
    ===================================================================== */
 :root {
   --gravura-ramo: url("../assets/ilustracoes/ramo-cafe.svg");
-  --gravura-moedor: url("../assets/ilustracoes/moedor.svg");
+  --gravura-moedor: url("../assets/ilustracoes/stickers/moedor.svg");
+  --padrao: url("../assets/ilustracoes/padrao-stickers.svg");
   --papel-claro: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .96 0 0 0 0 .92 0 0 0 0 .87 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --tinta: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.6 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");
   --risco: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M3 6C20 2 38 9 60 5S100 3 117 6' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M10 8.5C40 7 80 8 108 7.5' fill='none' stroke='%23000' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -631,3 +632,37 @@ body::before {
 .chip-gd:has(small) { flex-direction: column; justify-content: center; padding: 6px 18px; }
 @media (max-width: 400px) { .temp-icone { width: 72px; height: 72px; } .temp-meio p { font-size: 12px; } .temp-titulo { font-size: 16px; } }
 @media (max-width: 360px) { .temp-card { padding: 8px 10px; column-gap: 8px; } .temp-titulo { font-size: 15px; } .temp-meio p { font-size: 11.5px; line-height: 1.25; margin: 2px 0 3px; } .temp-fotos { display: none; } .temp-card.com-fotos { grid-template-columns: auto minmax(0, 1fr); } }
+
+/* =====================================================================
+   Stickers: chapéu novo, textura de fundo e sticker no lugar da foto
+   ===================================================================== */
+.sticker { display: inline-block; background-color: var(--cor, #4A3222); -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
+.carimbo-chapeu { --src: url("../assets/ilustracoes/chapeu-icone.svg"); --cor: var(--creme); width: 66%; aspect-ratio: 515 / 276; }
+.sticker-grupo { width: 32px; height: 32px; flex: none; }
+.oque-grav { width: 34px; height: 34px; opacity: .35; }
+.combo-colher { position: absolute; top: -4px; right: -14px; width: 76px; height: auto; opacity: .3; transform: rotate(-20deg); pointer-events: none; }
+.quiz-sec-moka { display: flex; align-items: center; gap: 10px; }
+.quiz-sec-moka img { width: 36px; height: 36px; flex: none; }
+.fid-graos { position: absolute; top: 10px; right: 14px; width: 34px; height: 34px; opacity: .14; pointer-events: none; }
+
+/* sticker no lugar da foto que falta */
+.ph-sticker { background: color-mix(in srgb, var(--musgo-claro) 70%, var(--creme)); }
+.sticker-ph { width: 60%; height: 60%; background: var(--terra); opacity: .55; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
+.card .ph-sticker { background: color-mix(in srgb, var(--creme) 82%, var(--terra)); }
+
+/* textura de fundo (padrao-stickers.svg): só em topo, rodapé, blocos escuros, carrinho vazio, pedido enviado e laterais */
+#topo, #rodape, .vazio, .enviado, .fidelidade, .quiz-card, .bloco-vinho, .bloco-musgo { isolation: isolate; }
+#rodape { position: relative; }
+#topo::before, #rodape::before, .vazio::before, .enviado::before, .fidelidade::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .06; background: var(--padrao) 0 0 / 300px 300px repeat;
+}
+#rodape::before, .fidelidade::before { opacity: .045; }
+.vazio, .enviado { position: relative; }
+.tex, .quiz-card::before, .bag-bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit; background: var(--creme); opacity: .075;
+  -webkit-mask: var(--padrao) 0 0 / 300px 300px repeat; mask: var(--padrao) 0 0 / 300px 300px repeat;
+}
+span.tex { content: none; }
+@media (min-width: 721px) {
+  body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .07; background: var(--padrao) 0 0 / 320px 320px repeat; }
+}

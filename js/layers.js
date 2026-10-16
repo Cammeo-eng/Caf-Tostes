@@ -38,7 +38,7 @@ T.L = (function () {
     el.innerHTML = `
       <div class="sheet">
         <div class="sheet-scroll">
-          <div class="sheet-foto">${T.foto(it.foto, T.nome(it), it.grupo, 480, 360)}
+          <div class="sheet-foto">${T.foto(it.foto, T.nome(it), it.grupo, 480, 360, "", it)}
             <span class="puxador" aria-hidden="true"></span>
             <button type="button" class="fechar" data-act="back" aria-label="${E(T.t("fechar"))}">×</button>
           </div>
@@ -214,7 +214,7 @@ T.L = (function () {
         <label class="campo">${E(T.t("seuNome"))}<input type="text" id="c-nome" maxlength="40" autocomplete="given-name" required value="${E(st.nome)}"></label>
         <label class="campo">${E(T.t("observacoes"))} (${E(T.t("opcional"))})<textarea id="c-obs" maxlength="140" rows="2">${E(st.obs)}</textarea><small id="c-cont">${st.obs.length}/140</small></label>
         <p class="mini">${E(T.t("avisoPedido"))}</p>
-        <div class="aviso-preparo">${T.ilus("xicara-vapor", "aviso-ilus")}<div><p class="aviso-titulo">${E(T.t("avisoPreparoTitulo"))}</p><p class="aviso-texto">${E(T.t("avisoPreparoTexto"))}</p></div></div>
+        <div class="aviso-preparo">${T.ilus("stickers/xicaras", "aviso-ilus")}<div><p class="aviso-titulo">${E(T.t("avisoPreparoTitulo"))}</p><p class="aviso-texto">${E(T.t("avisoPreparoTexto"))}</p></div></div>
         <button type="button" class="btn btn-vinho btn-bloco" data-act="c-enviar" id="c-enviar" aria-disabled="${c.podeEnviar() ? "false" : "true"}">${E(T.t("enviarWhatsapp"))}</button>
         <p class="falta" id="c-falta" role="status" ${c.pendencia() ? "" : "hidden"}>${E(c.pendencia() || "")}</p>
         <button type="button" class="link-rm limpar" data-act="c-limpar">${E(T.t("limparPedido"))}</button>`;
@@ -358,7 +358,7 @@ T.L = (function () {
       const ops = T.textoOpcoes(it, r.sel);
       return `<div class="card card-quiz${grande ? " card-gd" : ""}">
         <button type="button" class="card-hit" data-act="open-item" data-id="${E(it.id)}" aria-label="${E(T.t("verDetalhes", { nome: T.nome(it) }))}">
-          <span class="foto">${T.foto(it.foto, T.nome(it), it.grupo, 92, 92)}</span>
+          <span class="foto">${T.foto(it.foto, T.nome(it), it.grupo, 92, 92, "", it)}</span>
           <span class="txt"><span class="nome">${E(T.nome(it))}</span>
             <span class="desc">${E([it.tamanhos.length > 1 ? T.rot(t.rotulo) : "", ...ops].filter(Boolean).join(" · ") || T.itemTxt(it).descricaoCurta)}</span>
             <span class="preco-linha"><span class="preco">${T.money(un)}</span></span></span></button></div>`;
@@ -383,7 +383,7 @@ T.L = (function () {
           const ms = r.explicacao.map((qi) => T.qTxt.motivo(QUIZ_PERGUNTAS[qi], Q.resp[qi]));
           const explica = ms.length ? T.qTxt.textos("porque") + " " + ms.join(" " + T.qTxt.textos("e") + " ") + "." : "";
           const addBtn = (w, cls) => `<button type="button" class="btn ${cls} btn-bloco" data-act="q-add" data-w="${w}">${E(T.t("adicionarAoPedido"))}</button>`;
-          h += `<h3 class="quiz-sec">${E(T.qTxt.textos("titulo"))}</h3>${card(r.principal, true)}
+          h += `<h3 class="quiz-sec quiz-sec-moka">${E(T.qTxt.textos("titulo"))}<img src="assets/ilustracoes/stickers/moka.svg" alt="" width="36" height="36"></h3>${card(r.principal, true)}
             ${explica ? `<p class="quiz-explica">${E(explica)}</p>` : ""}
             ${addBtn("p", "btn-vinho")}`;
           if (r.alternativas.length) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("alternativas"))}</h3><div class="quiz-alt">${r.alternativas.map((a, k) => `<div>${card(a)}${addBtn("a" + k, "btn-contorno")}</div>`).join("")}</div>`;
