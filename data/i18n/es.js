@@ -512,6 +512,16 @@ window.I18N.es = {
         "Leche vaporizada"
       ]
     },
+    "moka-pistache": {
+      "nome": "Moka de Pistacho",
+      "descricaoCurta": "Espresso, chocolate blanco, pistacho y leche vaporizada.",
+      "ingredientes": [
+        "Espresso",
+        "Chocolate blanco",
+        "Pistacho",
+        "Leche vaporizada"
+      ]
+    },
     "vietnamita-latte": {
       "nome": "Latte Vietnamita",
       "descricaoCurta": "Espresso con leche condensada.",

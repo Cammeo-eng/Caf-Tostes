@@ -121,3 +121,6 @@ Formato: data · assunto · decisão · quem decidiu.
 - Textura nos blocos escuros usa máscara creme (`.tex`); na fidelidade (verde claro) e no rodapé ficou mais leve (4,5%) para não atrapalhar a leitura. O favorito (fundo creme) não recebeu textura.
 - Carimbo preenchido da fidelidade agora tem fundo vinho para o chapéu creme aparecer.
 - A colher do 1º cupom fica no canto superior direito, atrás do botão "+", para nunca ficar atrás de texto ou preço.
+
+## Moka Pistache (2026-10-18)
+- Item `moka-pistache` em Cafés com Sabor, logo depois do Café Moka, com os dados do prompt e as traduções EN e ES. Sem foto: sticker da categoria (`xicaras`) até entrar `assets/fotos/moka-pistache.jpg`.

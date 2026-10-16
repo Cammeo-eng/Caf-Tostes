@@ -1202,6 +1202,57 @@ const MENU = [
     "servidoEm": "xícara"
   },
   {
+    "id": "moka-pistache",
+    "grupo": "bebidas",
+    "categoria": "docinhos",
+    "nome": "Moka Pistache",
+    "descricaoCurta": "Espresso, chocolate branco, pistache e leite vaporizado.",
+    "descricao": "",
+    "ingredientes": [
+      "Espresso",
+      "Chocolate branco",
+      "Pistache",
+      "Leite vaporizado"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "P",
+        "ml": 170,
+        "preco": 16
+      },
+      {
+        "rotulo": "M",
+        "ml": 200,
+        "preco": 17
+      },
+      {
+        "rotulo": "G",
+        "ml": 250,
+        "preco": 18
+      }
+    ],
+    "opcoes": [
+      "leite",
+      "extras"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/moka-pistache.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "quente",
+      "cafe",
+      "cremoso",
+      "cafeina-media",
+      "diferente",
+      "chocolate",
+      "sobremesa"
+    ],
+    "promocaoElegivel": true,
+    "servidoEm": "xícara"
+  },
+  {
     "id": "vietnamita-latte",
     "grupo": "bebidas",
     "categoria": "docinhos",
