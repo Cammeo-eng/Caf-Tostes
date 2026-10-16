@@ -149,7 +149,13 @@ window.I18N.es = {
     "slideAnterior": "Diapositiva anterior",
     "proximoSlide": "Siguiente diapositiva",
     "fecharAula": "Cerrar lección",
-    "pedidoVazioPendencia": "Tu pedido está vacío."
+    "pedidoVazioPendencia": "Tu pedido está vacío.",
+    "temporadaTitulo": "Smoothies de Primavera/Verano",
+    "temporadaTexto": "7 sabores con fruta de verdad, preparados al momento.",
+    "temporadaBotao": "Ver smoothies",
+    "temporadaSelo": "Primavera/Verano",
+    "oQueE": "¿Qué es?",
+    "escolhaCobertura": "Elige al menos 1 cobertura"
   },
   "config": {
     "marquee": "café al milímetro ✦ granos 84+ ✦ hecho al momento ✦ Fazenda Rio Grande ✦",
@@ -173,75 +179,103 @@ window.I18N.es = {
   "categorias": {
     "espressos": {
       "nome": "Espressos",
-      "nota": "Sin leche. Se sirven en taza."
+      "nota": "Sin leche. Se sirven en taza.",
+      "sobre": "La base de todo: café molido al momento y extraído con presión en unos 30 segundos. Corto, intenso y aromático. Aquí están los cafés sin leche."
     },
     "espressos-com-leite": {
       "nome": "Espressos con Leche",
-      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml"
+      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml",
+      "sobre": "Espresso con leche vaporizada en su punto. Lo que cambia de uno a otro es la cantidad de leche y de espuma: del macchiato, casi puro, al latte, muy suave."
     },
     "coados": {
       "nome": "Filtrados",
-      "nota": "El V60 y la Prensa Francesa son para 2 personas."
+      "nota": "El V60 y la Prensa Francesa son para 2 personas.",
+      "sobre": "Café filtrado, sin presión: más ligero y aromático que el espresso, ideal para sentir las notas del grano. El V60 y la prensa francesa se preparan al momento, para compartir."
     },
     "docinhos": {
       "nome": "Cafés con Sabor",
-      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml"
+      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml",
+      "sobre": "Espressos con leche y un toque dulce: caramelo, avellana, vainilla, chocolate o dulce de leche. Para quien le gusta un café con aire de postre."
     },
     "autorais": {
       "nome": "De la Casa",
-      "nota": "Recetas creadas aquí."
+      "nota": "Recetas creadas aquí.",
+      "sobre": "Recetas creadas aquí en TOSTES, que no vas a encontrar en otro lugar."
     },
     "chocolate-quente": {
       "nome": "Chocolate Caliente",
-      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml"
+      "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml",
+      "sobre": "Chocolate de verdad derretido en leche vaporizada. Cremoso y sin café."
     },
     "gelados": {
       "nome": "Cafés Helados",
-      "nota": ""
+      "nota": "",
+      "sobre": "Nuestros cafés en versión helada, con hielo, en vaso de 500 ml."
     },
     "matcha": {
       "nome": "Matcha",
-      "nota": ""
+      "nota": "",
+      "sobre": "Té verde japonés en polvo, batido al momento. Caliente o helado, puro o con leche."
     },
     "chai": {
       "nome": "Chai",
-      "nota": ""
+      "nota": "",
+      "sobre": "Té negro con especias como canela, cardamomo y jengibre. Aromático y ligeramente picante."
     },
     "drinks": {
       "nome": "Bebidas",
-      "nota": ""
+      "nota": "",
+      "sobre": "Jugos, tés y soda italiana, para cuando no quieres café."
     },
     "croissants-salgados": {
       "nome": "Croissants Salados",
-      "nota": "Hechos todos los días."
+      "nota": "Hechos todos los días.",
+      "sobre": "Horneados todos los días y rellenados al momento del pedido. Así la masa sigue crocante por fuera y suave por dentro: rellenado con anticipación, el croissant absorbe la humedad y se aplasta."
     },
     "croissants-doces": {
       "nome": "Croissants Dulces",
-      "nota": "Hechos todos los días."
+      "nota": "Hechos todos los días.",
+      "sobre": "Horneados todos los días y rellenados al momento, para que la masa siga crocante y el relleno, fresco."
     },
     "sanduiches": {
       "nome": "Sándwiches",
-      "nota": "En pan de molde o baguette."
+      "nota": "En pan de molde o baguette.",
+      "sobre": "Sándwiches clásicos a la plancha, en pan de molde o baguette. Rápidos y calientitos."
     },
     "gratinados": {
       "nome": "Gratinados",
-      "nota": "Con queso gratinado por encima."
+      "nota": "Con queso gratinado por encima.",
+      "sobre": "Sándwiches cubiertos de queso y llevados al horno hasta que se derrita y se dore. La costrita de queso por encima es lo que hace el gratinado."
     },
     "brunches": {
       "nome": "Brunch",
-      "nota": ""
+      "nota": "",
+      "sobre": "Plato completo de desayuno: huevos, tostadas y acompañantes servidos lado a lado, para armar a tu manera."
     },
     "waffle-mineiro": {
       "nome": "Waffle Mineiro",
-      "nota": "Masa de pan de queso brasileño (pão de queijo) hecha en wafflera."
+      "nota": "Masa de pan de queso brasileño (pão de queijo) hecha en wafflera.",
+      "sobre": "Masa de pan de queso brasileño (pão de queijo) hecha en wafflera: crocante por fuera, suave y elástica por dentro. Una idea muy de Minas Gerais."
     },
     "waffle-americano": {
       "nome": "Waffles Americanos",
-      "nota": ""
+      "nota": "",
+      "sobre": "El waffle clásico, de masa ligera y un poco dulce, con coberturas."
     },
     "tortas": {
       "nome": "Torta del Día",
-      "nota": "Un sabor diferente cada día."
+      "nota": "Un sabor diferente cada día.",
+      "sobre": "Tortas hechas aquí, con un sabor diferente cada día. Pregunta en el mostrador cuál es el de hoy."
+    },
+    "smoothies": {
+      "nome": "Smoothies",
+      "nota": "Primavera/Verano. Fruta congelada en lugar de hielo: más sabor, nada aguado. 500 ml.",
+      "sobre": "Fruta congelada licuada al momento, sin hielo: más sabor y nada aguado. Solo en primavera y verano."
+    },
+    "toasts": {
+      "nome": "Toasts",
+      "nota": "En pan de maíz brasileño, rebanada gruesa dorada a la plancha.",
+      "sobre": "Una rebanada gruesa de broa de milho, un pan de maíz brasileño con suave sabor a maíz y un toque dulce, dorada a la plancha con mantequilla y con la cobertura armada encima. Más elaborado que un sándwich, para comer con cuchillo y tenedor. En Arma tu Toast, eliges todo."
     }
   },
   "opcoes": {
@@ -299,6 +333,32 @@ window.I18N.es = {
         "frutas-vermelhas": "Frutos rojos",
         "limao-gengibre": "Limón y jengibre",
         "tangerina": "Mandarina"
+      }
+    },
+    "base-toast": {
+      "titulo": "Base",
+      "itens": {
+        "requeijao": "Requeijão (queso crema)",
+        "manteiga": "Solo mantequilla",
+        "doce-de-leite": "Dulce de leche",
+        "creme-de-avela": "Crema de avellanas"
+      }
+    },
+    "coberturas-toast": {
+      "titulo": "Coberturas (elige de 1 a 5)",
+      "itens": {
+        "ovos-mexidos": "Huevos revueltos",
+        "ovo-estrelado": "Huevo frito",
+        "queijo": "Queso derretido",
+        "bacon": "Tocineta",
+        "presunto": "Jamón",
+        "frango-cremoso": "Pollo cremoso",
+        "calabresa": "Calabresa",
+        "tomate": "Tomate sazonado",
+        "banana": "Cambur",
+        "morangos": "Fresas",
+        "mel": "Miel",
+        "canela": "Canela"
       }
     }
   },
@@ -1207,6 +1267,179 @@ window.I18N.es = {
       "nome": "Torta del día",
       "descricaoCurta": "El sabor cambia todos los días. Pregunta en el mostrador por el sabor y el precio.",
       "ingredientes": []
+    },
+    "smoothie-melancia-banana": {
+      "nome": "Patilla y Cambur",
+      "descricaoCurta": "Patilla (sandía) y cambur congelados, con limón y un toque de miel.",
+      "ingredientes": [
+        "Patilla (sandía) congelada",
+        "Cambur (plátano) congelado",
+        "Jugo de limón",
+        "Miel"
+      ],
+      "nomeCompleto": "Smoothie — Patilla y Cambur"
+    },
+    "smoothie-melao-hortela-limao": {
+      "nome": "Melón, Hierbabuena y Limón",
+      "descricaoCurta": "Melón congelado con hierbabuena fresca, limón y miel. El más refrescante.",
+      "ingredientes": [
+        "Melón congelado",
+        "Hierbabuena fresca",
+        "Jugo de limón",
+        "Miel"
+      ],
+      "nomeCompleto": "Smoothie — Melón, Hierbabuena y Limón"
+    },
+    "smoothie-abacaxi-hortela-mel": {
+      "nome": "Piña, Hierbabuena y Miel",
+      "descricaoCurta": "Piña congelada con hierbabuena fresca, miel y limón.",
+      "ingredientes": [
+        "Piña congelada",
+        "Hierbabuena fresca",
+        "Miel",
+        "Jugo de limón"
+      ],
+      "nomeCompleto": "Smoothie — Piña, Hierbabuena y Miel"
+    },
+    "smoothie-manga-laranja": {
+      "nome": "Mango y Naranja",
+      "descricaoCurta": "Mango y cambur congelados con jugo de naranja exprimido al momento.",
+      "ingredientes": [
+        "Mango congelado",
+        "Cambur (plátano) congelado",
+        "Jugo de naranja natural"
+      ],
+      "nomeCompleto": "Smoothie — Mango y Naranja"
+    },
+    "smoothie-morango-baunilha": {
+      "nome": "Fresa y Vainilla",
+      "descricaoCurta": "Fresa y cambur con helado de crema, leche y vainilla. Cremoso.",
+      "ingredientes": [
+        "Fresas congeladas",
+        "Cambur (plátano) congelado",
+        "Helado de crema",
+        "Leche",
+        "Jarabe de vainilla"
+      ],
+      "nomeCompleto": "Smoothie — Fresa y Vainilla"
+    },
+    "smoothie-bala-de-canela": {
+      "nome": "Bala de Canela Helada",
+      "descricaoCurta": "La versión de verano de nuestra receta de la casa: cambur, salsa de cereza, leche condensada y canela.",
+      "ingredientes": [
+        "Cambur (plátano) congelado",
+        "Salsa artesanal de cereza",
+        "Leche condensada",
+        "Leche",
+        "Canela en polvo"
+      ],
+      "nomeCompleto": "Smoothie — Bala de Canela Helada"
+    },
+    "smoothie-matcha-manga": {
+      "nome": "Matcha y Mango",
+      "descricaoCurta": "Matcha con mango congelado, leche y miel.",
+      "ingredientes": [
+        "Matcha",
+        "Mango congelado",
+        "Leche",
+        "Miel"
+      ],
+      "nomeCompleto": "Smoothie — Matcha y Mango"
+    },
+    "toast-ovos-queijo-requeijao": {
+      "nome": "Huevos, Queso y Queso Crema",
+      "descricaoCurta": "Requeijão (queso crema) como base, huevos revueltos cremosos y queso derretido.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Requeijão (queso crema brasileño)",
+        "Huevos revueltos cremosos",
+        "Queso derretido"
+      ],
+      "nomeCompleto": "Toast — Huevos, Queso y Queso Crema"
+    },
+    "toast-ovos-bacon-queijo": {
+      "nome": "Huevos, Tocineta y Queso",
+      "descricaoCurta": "Huevos revueltos, tocineta crocante y queso derretido.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Huevos revueltos cremosos",
+        "Tocineta crocante",
+        "Queso derretido"
+      ],
+      "nomeCompleto": "Toast — Huevos, Tocineta y Queso"
+    },
+    "toast-frango-cremoso": {
+      "nome": "Pollo Cremoso Gratinado",
+      "descricaoCurta": "Nuestro pollo cremoso con queso gratinado por encima.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Pollo cremoso",
+        "Queso gratinado"
+      ],
+      "nomeCompleto": "Toast — Pollo Cremoso Gratinado"
+    },
+    "toast-tomate-queijo": {
+      "nome": "Tomate y Queso",
+      "descricaoCurta": "Queso derretido y tomate en cubitos con aceite de oliva y orégano.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Queso derretido",
+        "Tomate en cubitos con aceite de oliva y orégano"
+      ],
+      "nomeCompleto": "Toast — Tomate y Queso"
+    },
+    "toast-presunto-queijo-ovo": {
+      "nome": "Jamón, Queso y Huevo",
+      "descricaoCurta": "Jamón y queso derretido con un huevo frito encima, estilo croque madame.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Jamón",
+        "Queso derretido",
+        "Huevo frito"
+      ],
+      "nomeCompleto": "Toast — Jamón, Queso y Huevo"
+    },
+    "toast-banana-canela-mel": {
+      "nome": "Cambur, Canela y Miel",
+      "descricaoCurta": "Cambur caramelizado a la plancha, canela y un hilo de miel.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Cambur caramelizado",
+        "Canela",
+        "Miel"
+      ],
+      "nomeCompleto": "Toast — Cambur, Canela y Miel"
+    },
+    "toast-morango-avela": {
+      "nome": "Fresa y Avellana",
+      "descricaoCurta": "Crema de avellanas y fresas frescas en láminas.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Crema de avellanas",
+        "Fresas frescas"
+      ],
+      "nomeCompleto": "Toast — Fresa y Avellana"
+    },
+    "toast-doce-de-leite-banana": {
+      "nome": "Dulce de Leche y Cambur",
+      "descricaoCurta": "Dulce de leche, cambur en rodajas y canela.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Dulce de leche",
+        "Cambur / plátano",
+        "Canela"
+      ],
+      "nomeCompleto": "Toast — Dulce de Leche y Cambur"
+    },
+    "toast-monte-o-seu": {
+      "nome": "Arma tu Toast",
+      "descricaoCurta": "Elige la base y de 1 a 5 coberturas. El precio cambia según lo que elijas.",
+      "ingredientes": [
+        "Rebanada gruesa de pan de maíz brasileño (broa de milho), dorada en mantequilla",
+        "Base a elección",
+        "Coberturas a elección"
+      ],
+      "nomeCompleto": "Toast — Arma tu Toast"
     }
   },
   "quiz": {

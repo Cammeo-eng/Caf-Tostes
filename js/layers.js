@@ -80,10 +80,10 @@ T.L = (function () {
           const titulo = T.opTitulo(g);
           h += `<div class="grupo"><h3>${E(titulo)}${gr.tipo === "multipla" && max !== Infinity ? ` <em>${E(T.t("contadorEscolha", { n: escolhidos.length, max }))}</em>` : ""}</h3>`;
           if (g === "leite") h += `<p class="nota-grupo">${E(T.t("semCustoLeite"))}</p>`;
-          if (g === "complementos-cappuccino") {
+          if (g === "complementos-cappuccino" || g === "coberturas-toast") {
             h += `<div class="chips chips-gd" role="group" aria-label="${E(titulo)}">${gr.itens.map((o) => {
               const on = escolhidos.includes(o.id), trava = !on && escolhidos.length >= max;
-              return `<button type="button" class="chip chip-gd" aria-pressed="${on}" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${trava ? "disabled" : ""}>${E(T.opNome(g, o.id))}</button>`;
+              return `<button type="button" class="chip chip-gd" aria-pressed="${on}" data-act="sheet-opt" data-g="${g}" data-o="${o.id}" ${trava ? "disabled" : ""}>${E(T.opNome(g, o.id))}${o.valor > 0 ? `<small>+ ${T.money(o.valor)}</small>` : ""}</button>`;
             }).join("")}</div>`;
           } else if (gr.tipo === "unica") {
             h += `<div class="chips" role="radiogroup" aria-label="${E(titulo)}">${gr.itens.map((o) =>

@@ -90,6 +90,46 @@ T.acts["combo-add"] = (el) => {
   T.toast(T.t("comboAdicionado"), { act: "open-pedido", rotulo: T.t("verPedido") });
 };
 
+/* ---------- destaque da temporada (Primavera/Verão) ---------- */
+T.v.temporada = () => {
+  const sec = $("#temporada"), t = CONFIG.temporada;
+  const cat = t && T.temporadaAtiva && T.cats[t.categoria];
+  if (!cat) { sec.hidden = true; sec.innerHTML = ""; return; }
+  sec.hidden = false;
+  sec.setAttribute("aria-label", T.t("temporadaTitulo"));
+  const itens = MENU.filter((i) => i.categoria === cat.id);
+  sec.innerHTML = `
+    <div class="temp-card" data-act="ver-temporada">
+      <span class="selo-temp" aria-hidden="true">${E(T.t("temporadaSelo")).replace("/", "/<br>")}</span>
+      <div class="temp-meio">
+        <h2 class="temp-titulo">${E(T.t("temporadaTitulo"))}</h2>
+        <p>${E(T.t("temporadaTexto"))}</p>
+      </div>
+      <div class="temp-dir">
+        <div class="temp-fotos" aria-hidden="true">${T.ilus("frutas", "temp-frutas")}</div>
+        <button type="button" class="btn btn-vinho temp-btn" data-act="ver-temporada">${E(T.t("temporadaBotao"))}</button>
+      </div>
+    </div>`;
+  // 3 fotos redondas dos smoothies que tiverem foto; sem foto, fica a gravura das frutas
+  const ok = [];
+  let pend = itens.length;
+  const fim = () => {
+    if (--pend > 0 || !ok.length) return;
+    const box = $(".temp-fotos", sec);
+    if (!box) return;
+    box.innerHTML = ok.slice(0, 3).map((i) => `<img class="temp-foto" src="${E(i.foto)}" alt="" width="40" height="40" decoding="async">`).join("");
+  };
+  itens.forEach((i) => { const im = new Image(); im.onload = () => { ok.push(i); fim(); }; im.onerror = fim; im.src = i.foto; });
+};
+T.acts["ver-temporada"] = () => {
+  const t = CONFIG.temporada;
+  T.L.fechaTudo(() => {
+    T.v.setCat("bebidas", t.categoria);
+    const el = $("#bebidas");
+    el.scrollIntoView({ behavior: T.reduzMovimento() ? "auto" : "smooth", block: "start" });
+  });
+};
+
 /* ---------- card do quiz ---------- */
 T.v.quizCard = () => {
   $("#quiz-card").innerHTML = `
@@ -115,6 +155,8 @@ T.v.card = (i) => {
   if (i.serve) tags.push(`<span class="tag">${E(T.t("serveCurto", { n: i.serve }))}</span>`);
   const preco = !pedivel
     ? `<span class="consulte">${E(T.t("consulteBalcao"))}</span>`
+    : i.opcoes.includes("coberturas-toast")
+      ? `<span class="preco">${E(T.t("aPartirDe", { valor: T.money(T.precoMinimo(i)) }))}</span>`
     : i.tamanhos.length > 1
       ? `<small>${E(T.rot(i.tamanhos[T.tamRec(i)].rotulo))} ·</small> <span class="preco">${T.money(i.tamanhos[T.tamRec(i)].preco)}</span>`
       : `<span class="preco">${T.money(i.tamanhos[0].preco)}</span>`;
@@ -133,10 +175,35 @@ T.v.card = (i) => {
     </article>`;
 };
 
+/* "O que é?": texto "sobre" da categoria. Fechado por padrão; em Toasts e Waffle Mineiro abre sozinho na 1ª vez (sessionStorage). */
+const SOBRE_ABRE = ["toasts", "waffle-mineiro"];
+const GRAV_CAT = { espressos: "graos", coados: "prensa", smoothies: "frutas", matcha: "folha", chai: "folha", autorais: "moedor" };
+const sobreEstado = {};                             // categoria -> aberto (vale na sessão da página)
+const sobreVisto = (id, marca) => {
+  let l = [];
+  let ja = false;
+  try { l = JSON.parse(sessionStorage.getItem("tostes.sobreVisto")) || []; ja = l.includes(id); if (marca && !ja) { l.push(id); sessionStorage.setItem("tostes.sobreVisto", JSON.stringify(l)); } } catch (e) { /* sem storage */ }
+  return ja;                                        // já tinha sido visto antes desta chamada?
+};
+T.v.sobre = (cat, ct) => {
+  if (!ct.sobre) return "";
+  if (sobreEstado[cat.id] == null) sobreEstado[cat.id] = SOBRE_ABRE.includes(cat.id) && !sobreVisto(cat.id, true);
+  const aberto = sobreEstado[cat.id], id = "sobre-" + cat.id;
+  return `<button type="button" class="oque-link" data-act="oque" data-cat="${E(cat.id)}" aria-expanded="${aberto}" aria-controls="${id}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 7.2v4M8 4.9v.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>${E(T.t("oQueE"))}</span></button>
+    <div class="oque${aberto ? " aberto" : ""}" id="${id}"><div class="oque-miolo"><div class="oque-caixa">${GRAV_CAT[cat.id] ? T.ilus(GRAV_CAT[cat.id], "oque-grav") : ""}<p>${E(ct.sobre)}</p></div></div></div>`;
+};
+T.acts.oque = (b) => {
+  const id = b.dataset.cat, aberto = !(sobreEstado[id]);
+  sobreEstado[id] = aberto;
+  b.setAttribute("aria-expanded", String(aberto));
+  const box = document.getElementById("sobre-" + id);
+  if (box) box.classList.toggle("aberto", aberto);
+};
+
 T.v.painel = (grupo) => {
   const cat = T.cats[ativa[grupo]], ct = T.catTxt(cat);
   const html = MENU.filter((i) => i.categoria === cat.id).map(T.v.card).join("");
-  return `<div class="cat-topo"><h3 class="titulo titulo-cat">${E(ct.nome)}</h3>${ct.nota ? `<p class="nota">${E(ct.nota)}</p>` : ""}</div><div class="lista">${html}</div>`;
+  return `<div class="cat-topo"><h3 class="titulo titulo-cat">${E(ct.nome)}</h3>${ct.nota ? `<p class="nota">${E(ct.nota)}</p>` : ""}${T.v.sobre(cat, ct)}</div><div class="lista">${html}</div>`;
 };
 
 T.v.cardapio = (grupo) => {
@@ -146,7 +213,7 @@ T.v.cardapio = (grupo) => {
   $("#" + grupo).innerHTML = `
     <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2>${T.ilus(grupo === "bebidas" ? "graos" : "folha", "grav grav-grupo")}</div>
     <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="${E(T.t("categoriasAria"))}">
-      ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${E(T.catTxt(c).nome)}</button>`).join("")}
+      ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${c.sazonal ? `<span class="tab-sazonal" aria-hidden="true">✦</span> ` : ""}${E(T.catTxt(c).nome)}</button>`).join("")}
     </div></div>
     <div class="painel" role="tabpanel">${T.v.painel(grupo)}</div>`;
   T.v.swipe(grupo);

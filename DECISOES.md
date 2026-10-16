@@ -100,3 +100,12 @@ Formato: data · assunto · decisão · quem decidiu.
 - Gravuras com `vector-effect: non-scaling-stroke` para o traço não afinar nos tamanhos pequenos. Chave de agrupamento: grãos (bebidas) e folha (comidas) nos títulos; prensa francesa fica disponível, ainda sem uso.
 - Vapor do topo só anima com a loja aberta; com `prefers-reduced-motion` fica parado.
 - Textura de papel: o grão antigo do `#app` foi trocado pelo `body::before` fixo (evita grão duplo).
+
+
+## Rodada Smoothies de Primavera/Verão e Toasts (2026-10-17)
+- Dados copiados do SMOOTHIES-E-TOASTS.md sem alteração (preços, nomes, textos e traduções). Smoothies: 7 itens de 500 ml; Toasts: 8 prontos + Monte seu Toast.
+- Temporada: `CONFIG.temporada.ativa=false` remove a categoria sazonal e os itens dela dos dados no carregamento (`js/core.js`). Testado: abas, destaque, `previaCombos(7)`, `testeQuiz()` e `i18nFaltando()` sem smoothies.
+- Selo da temporada com o texto quebrado na barra ("Primavera/" e "Verão") para caber num círculo de 60 px.
+- Fotos dos 16 itens ainda não existem: placeholder do site. As fotos do destaque só aparecem quando o arquivo existe; sem nenhuma, fica `frutas.svg`.
+- "a partir de R$ 10,00" usa a chave `aPartirDe`, que já existia nos 3 idiomas.
+- Gravuras por categoria no "O que é?": espressos (grãos), coados (prensa), smoothies (frutas), matcha e chai (folha), autorais (moedor). As demais ficam sem gravura.

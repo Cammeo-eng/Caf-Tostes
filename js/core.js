@@ -19,6 +19,16 @@ T.store = {
 
 T.reduzMovimento = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* ---------- temporada ---------- */
+// CONFIG.temporada.ativa=false: toda categoria com "sazonal" e os itens dela somem do site (abas, destaque, combos, quiz).
+T.temporadaAtiva = !!(CONFIG.temporada && CONFIG.temporada.ativa);
+(function () {
+  const fora = new Set(CATEGORIAS.filter((c) => c.sazonal && !(T.temporadaAtiva && c.sazonal === CONFIG.temporada.id)).map((c) => c.id));
+  if (!fora.size) return;
+  for (let k = MENU.length - 1; k >= 0; k--) if (fora.has(MENU[k].categoria)) MENU.splice(k, 1);
+  for (let k = CATEGORIAS.length - 1; k >= 0; k--) if (fora.has(CATEGORIAS[k].id)) CATEGORIAS.splice(k, 1);
+})();
+
 /* ---------- dados ---------- */
 T.itens = {};
 MENU.forEach((i) => { T.itens[i.id] = i; });
@@ -128,6 +138,16 @@ T.precoUnit = (item, tam, sel) => {
   return T.r2(v);
 };
 
+// Menor preço possível (tamanho mais barato + o mínimo obrigatório de cada grupo de opções): "a partir de"
+T.precoMinimo = (item) => {
+  let v = T.menorPreco(item);
+  item.opcoes.forEach((g) => {
+    const gr = OPCOES[g], n = T.minimo(gr);
+    if (!n) return;
+    v += gr.itens.map((o) => o.valor).sort((a, b) => a - b).slice(0, n).reduce((s, x) => s + x, 0);
+  });
+  return T.r2(v);
+};
 T.menorPreco = (item) => Math.min(...item.tamanhos.map((t) => t.preco));
 
 // Tamanho recomendado (CONFIG.tamanhoRecomendado, "M"); sem ele, o primeiro da lista
@@ -142,6 +162,7 @@ T.faltaTexto = (item, sel) => {
     if ((sel[g] || []).length >= T.minimo(grupo)) return;
     if (g === "complementos-cappuccino") f.push(T.t("escolhaComplemento"));
     else if (g === "estilo-pingado") f.push(T.t("escolhaPingado"));
+    else if (g === "coberturas-toast") f.push(T.t("escolhaCobertura"));
     else f.push(T.t("faltaEscolher", { nome: T.opTitulo(g).replace(/\s*\(.*\)/, "") }));
   });
   return f;
