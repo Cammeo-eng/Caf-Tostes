@@ -270,7 +270,7 @@ window.I18N.es = {
     "smoothies": {
       "nome": "Smoothies",
       "nota": "Primavera/Verano. Fruta congelada en lugar de hielo: más sabor, nada aguado. 500 ml.",
-      "sobre": "Fruta congelada licuada al momento, sin hielo: más sabor y nada aguado. Solo en primavera y verano."
+      "sobre": "Fruta congelada licuada al momento, sin hielo: más sabor y nada aguado. En los de fruta, eliges el dulzor: sin endulzar, solo con el dulce de la fruta, ligeramente endulzado con miel o más dulce. Solo en primavera y verano."
     },
     "toasts": {
       "nome": "Toasts",
@@ -359,6 +359,14 @@ window.I18N.es = {
         "morangos": "Fresas",
         "mel": "Miel",
         "canela": "Canela"
+      }
+    },
+    "docura-smoothie": {
+      "titulo": "Dulzor",
+      "itens": {
+        "sem-adocar": "Sin endulzar (solo la fruta)",
+        "levemente": "Ligeramente endulzado",
+        "mais-docinho": "Más dulce"
       }
     }
   },

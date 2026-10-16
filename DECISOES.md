@@ -132,3 +132,6 @@ Formato: data · assunto · decisão · quem decidiu.
 ## Fotos r5 e receita do Marroquino (2026-10-18)
 - Fotos novas: `macchiato.jpg`, `marroquino.jpg`; `flat-white.jpg` substituída. Versão dos links subiu para limpar o cache.
 - Marroquino sem chocolate: cacau 50%, açúcar e canela (descrição, ingredientes, etiquetas e traduções EN e ES). Nenhuma aula nem "O que é?" citava chocolate no Marroquino.
+
+## Doçura dos smoothies (2026-10-19)
+- Grupo `docura-smoothie` com os dados do prompt; "+" do card adiciona direto com "Levemente adoçado". A doçura aparece sempre no carrinho e no WhatsApp dos itens avulsos. Nos combos do dia a linha do WhatsApp só leva os nomes (como sempre), então a doçura padrão fica subentendida.
