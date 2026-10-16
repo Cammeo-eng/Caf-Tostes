@@ -512,6 +512,16 @@ window.I18N.en = {
         "Steamed milk"
       ]
     },
+    "moka-pistache": {
+      "nome": "Pistachio White Mocha",
+      "descricaoCurta": "Espresso, white chocolate, pistachio and steamed milk.",
+      "ingredientes": [
+        "Espresso",
+        "White chocolate",
+        "Pistachio",
+        "Steamed milk"
+      ]
+    },
     "vietnamita-latte": {
       "nome": "Vietnamese Latte",
       "descricaoCurta": "Espresso with condensed milk.",
