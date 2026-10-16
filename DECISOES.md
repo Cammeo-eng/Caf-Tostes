@@ -124,3 +124,7 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Moka Pistache (2026-10-18)
 - Item `moka-pistache` em Cafés com Sabor, logo depois do Café Moka, com os dados do prompt e as traduções EN e ES. Sem foto: sticker da categoria (`xicaras`) até entrar `assets/fotos/moka-pistache.jpg`.
+
+## Ajustes (2026-10-18)
+- EN: "To go" virou "Takeaway" (`levarViagem`). "To go with it" (acompanhamento do quiz) fica, porque significa "combina com".
+- Moka Pistache: M passou a R$ 16,00 (pedido do Fabrício); P R$ 15,00 e G R$ 17,00, mantendo a diferença de R$ 1,00.
