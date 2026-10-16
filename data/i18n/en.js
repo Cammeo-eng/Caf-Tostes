@@ -78,7 +78,7 @@ window.I18N.en = {
     "subtotal": "Subtotal",
     "desconto": "Discount",
     "total": "Total",
-    "levarViagem": "To go",
+    "levarViagem": "Takeaway",
     "comerMesa": "Eat here",
     "escolhaMesa": "Which table?",
     "seuNome": "Your name",

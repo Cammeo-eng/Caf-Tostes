@@ -1218,17 +1218,17 @@ const MENU = [
       {
         "rotulo": "P",
         "ml": 170,
-        "preco": 16
+        "preco": 15
       },
       {
         "rotulo": "M",
         "ml": 200,
-        "preco": 17
+        "preco": 16
       },
       {
         "rotulo": "G",
         "ml": 250,
-        "preco": 18
+        "preco": 17
       }
     ],
     "opcoes": [
