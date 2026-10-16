@@ -109,3 +109,8 @@ Formato: data · assunto · decisão · quem decidiu.
 - Fotos dos 16 itens ainda não existem: placeholder do site. As fotos do destaque só aparecem quando o arquivo existe; sem nenhuma, fica `frutas.svg`.
 - "a partir de R$ 10,00" usa a chave `aPartirDe`, que já existia nos 3 idiomas.
 - Gravuras por categoria no "O que é?": espressos (grãos), coados (prensa), smoothies (frutas), matcha e chai (folha), autorais (moedor). As demais ficam sem gravura.
+
+## Ícone de Primavera/Verão (2026-10-17)
+- O selo redondo com texto foi trocado pelo ícone `primavera-verao-selo.svg`; `primavera-verao.svg` e `.png` ficaram na pasta como reserva (não são carregados pela página).
+- O destaque virou grade de 3 colunas com o botão embaixo do texto. Sem fotos dos smoothies, a coluna das fotos não existe (a gravura `frutas.svg` deixou de ser usada no destaque).
+- Em espanhol a 360 px o destaque tem ~130 px (o texto quebra em mais linhas); nas outras combinações fica entre 109 e 125 px.

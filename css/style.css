@@ -593,26 +593,21 @@ body::before {
    Smoothies de Primavera/Verão, Toasts e "O que é?"
    ===================================================================== */
 /* destaque da temporada: compacto (≤ ~110 px) */
-.temporada { padding: 8px 16px 0; }
+.temporada { padding: 36px 16px 0; }
 .temp-card {
-  position: relative; display: flex; align-items: center; gap: 10px; min-height: 96px; max-height: 120px; padding: 10px 12px; border-radius: 16px; cursor: pointer;
-  background: var(--musgo-claro) var(--papel); color: var(--musgo); overflow: hidden; border: 1px solid color-mix(in srgb, var(--musgo) 22%, transparent);
+  box-sizing: border-box; width: 100%; max-width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 10px;
+  padding: 10px 12px; border-radius: 16px; cursor: pointer; background: var(--musgo-claro) var(--papel); color: var(--musgo); overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--musgo) 22%, transparent);
 }
-.selo-temp {
-  flex: none; width: 60px; height: 60px; border-radius: 50%; display: grid; place-content: center; text-align: center; padding: 4px;
-  font-size: 8px; font-weight: 700; letter-spacing: 0; line-height: 1.15; text-transform: uppercase; color: var(--vinho);
-  border: 1.5px solid var(--vinho); box-shadow: inset 0 0 0 3px var(--musgo-claro), inset 0 0 0 4px var(--vinho); transform: rotate(-7deg); opacity: .92;
-  -webkit-mask: var(--tinta); mask: var(--tinta);
-}
-.temp-meio { flex: 1 1 auto; min-width: 0; }
-.temp-titulo { margin: 0; font: 400 17px/1.15 var(--f-titulo); color: var(--musgo); }
-.temp-meio p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.3; color: var(--terra); }
-.temp-dir { flex: none; display: grid; justify-items: end; gap: 4px; }
-.temp-fotos { display: flex; height: 40px; align-items: center; }
+.temp-card.com-fotos { grid-template-columns: auto minmax(0, 1fr) auto; }
+.temp-icone { width: 84px; height: 84px; transform: rotate(-6deg); }
+.temp-meio { min-width: 0; }
+.temp-titulo { margin: 0; font: 400 17px/1.15 var(--f-titulo); color: var(--musgo); overflow-wrap: anywhere; }
+.temp-meio p { margin: 3px 0 4px; font-size: 12.5px; line-height: 1.3; color: var(--terra); }
+.temp-fotos { display: flex; align-items: center; }
 .temp-foto { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--musgo-claro); box-shadow: 0 0 0 1px var(--linha); }
 .temp-foto + .temp-foto { margin-left: -14px; }
-.temp-frutas { width: 44px; height: 40px; }
-.temp-btn { min-height: 44px; padding: 0 14px; font-size: 13px; white-space: nowrap; }
+.temp-btn { min-height: 44px; padding: 0 14px; font-size: 13px; white-space: nowrap; max-width: 100%; }
 .tab-sazonal { font-size: .8em; margin-right: 2px; }
 .tab[aria-selected="true"] .tab-sazonal { color: var(--creme); }
 
@@ -634,4 +629,5 @@ body::before {
 /* chips grandes com valor embaixo (Monte seu Toast) */
 .chip-gd small { display: block; font-size: 11.5px; font-weight: 600; opacity: .85; line-height: 1.1; margin-top: 2px; }
 .chip-gd:has(small) { flex-direction: column; justify-content: center; padding: 6px 18px; }
-@media (max-width: 400px) { .temp-meio p { font-size: 12px; } .temp-titulo { font-size: 16px; } }
+@media (max-width: 400px) { .temp-icone { width: 72px; height: 72px; } .temp-meio p { font-size: 12px; } .temp-titulo { font-size: 16px; } }
+@media (max-width: 360px) { .temp-card { padding: 8px 10px; column-gap: 8px; } .temp-titulo { font-size: 15px; } .temp-meio p { font-size: 11.5px; line-height: 1.25; margin: 2px 0 3px; } .temp-fotos { display: none; } .temp-card.com-fotos { grid-template-columns: auto minmax(0, 1fr); } }
