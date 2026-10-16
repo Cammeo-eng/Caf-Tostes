@@ -100,23 +100,22 @@ T.v.temporada = () => {
   const itens = MENU.filter((i) => i.categoria === cat.id);
   sec.innerHTML = `
     <div class="temp-card" data-act="ver-temporada">
-      <span class="selo-temp" aria-hidden="true">${E(T.t("temporadaSelo")).replace("/", "/<br>")}</span>
+      <img class="temp-icone" src="assets/ilustracoes/primavera-verao-selo.svg" width="84" height="84" alt="${E(T.t("temporadaSelo"))}">
       <div class="temp-meio">
         <h2 class="temp-titulo">${E(T.t("temporadaTitulo"))}</h2>
         <p>${E(T.t("temporadaTexto"))}</p>
-      </div>
-      <div class="temp-dir">
-        <div class="temp-fotos" aria-hidden="true">${T.ilus("frutas", "temp-frutas")}</div>
         <button type="button" class="btn btn-vinho temp-btn" data-act="ver-temporada">${E(T.t("temporadaBotao"))}</button>
       </div>
+      <div class="temp-fotos" aria-hidden="true"></div>
     </div>`;
-  // 3 fotos redondas dos smoothies que tiverem foto; sem foto, fica a gravura das frutas
+  // 3 fotos redondas dos smoothies que tiverem foto
   const ok = [];
   let pend = itens.length;
   const fim = () => {
     if (--pend > 0 || !ok.length) return;
     const box = $(".temp-fotos", sec);
     if (!box) return;
+    $(".temp-card", sec).classList.add("com-fotos");
     box.innerHTML = ok.slice(0, 3).map((i) => `<img class="temp-foto" src="${E(i.foto)}" alt="" width="40" height="40" decoding="async">`).join("");
   };
   itens.forEach((i) => { const im = new Image(); im.onload = () => { ok.push(i); fim(); }; im.onerror = fim; im.src = i.foto; });
