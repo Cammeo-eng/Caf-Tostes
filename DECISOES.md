@@ -114,3 +114,10 @@ Formato: data · assunto · decisão · quem decidiu.
 - O selo redondo com texto foi trocado pelo ícone `primavera-verao-selo.svg`; `primavera-verao.svg` e `.png` ficaram na pasta como reserva (não são carregados pela página).
 - O destaque virou grade de 3 colunas com o botão embaixo do texto. Sem fotos dos smoothies, a coluna das fotos não existe (a gravura `frutas.svg` deixou de ser usada no destaque).
 - Em espanhol a 360 px o destaque tem ~130 px (o texto quebra em mais linhas); nas outras combinações fica entre 109 e 125 px.
+
+## Stickers e chapéu novo (2026-10-18)
+- Chapéu trocado em: favicon (`chapeu-icone`), tela de abertura, carrinho vazio, página "Por trás do chapéu", link do rodapé (`chapeu`), carimbo preenchido da fidelidade (`chapeu-icone`) e ícone das aulas "chapéu" (`aulas.js`, mesmo arquivo `chapeu.svg`). O logo ficou como estava. Não havia chapéu em SVG escrito à mão no código.
+- Apagados: `graos.svg`, `moedor.svg`, `xicara-vapor.svg` (trocados pelos stickers) e `frutas.svg` (sem uso). `folha.svg` e `prensa.svg` ficam como o prompt pediu, mas hoje nenhuma tela os usa.
+- Textura nos blocos escuros usa máscara creme (`.tex`); na fidelidade (verde claro) e no rodapé ficou mais leve (4,5%) para não atrapalhar a leitura. O favorito (fundo creme) não recebeu textura.
+- Carimbo preenchido da fidelidade agora tem fundo vinho para o chapéu creme aparecer.
+- A colher do 1º cupom fica no canto superior direito, atrás do botão "+", para nunca ficar atrás de texto ou preço.

@@ -38,7 +38,7 @@ T.v.favorito = () => {
     <article class="fav-card">
       <div class="fav-foto">${T.foto(f.foto, f.nome, "bebidas", 480, 360)}</div>
       <div class="fav-corpo">
-        ${T.ilus("xicara-vapor", "grav grav-fav")}
+        ${T.ilus("stickers/xicaras", "grav grav-fav")}
         <h2 id="fav-titulo" class="titulo-script">${E(T.cfg("favorito.titulo", f.titulo))}</h2>
         <p class="fav-nome">${E(f.nome)}</p>
         <p class="fav-texto">${E(f.texto)}</p>
@@ -63,6 +63,7 @@ T.v.promo = () => {
   const combos = T.combosDoDia(chave);
   const pct = Math.round(CONFIG.promocao.desconto * 100);
   sec.innerHTML = `
+    <span class="tex" aria-hidden="true"></span>
     <span class="grav-mask grav-ramo" aria-hidden="true"></span>
     <div class="promo-topo">
       <div>
@@ -74,8 +75,9 @@ T.v.promo = () => {
     <div class="combos" role="list">
       ${combos.map((c, k) => `
         <article class="combo" role="listitem">
+          ${k === 0 ? `<img class="combo-colher" src="assets/ilustracoes/stickers/colher.svg" alt="" width="14" height="48" loading="lazy">` : ""}
           <div class="combo-topo">
-            <div class="combo-fotos">${c.partes.map((p) => { const it = T.item(p.id); return T.foto(it.foto, "", it.grupo, 56, 56, "foto-mini"); }).join("")}</div>
+            <div class="combo-fotos">${c.partes.map((p) => { const it = T.item(p.id); return T.foto(it.foto, "", it.grupo, 56, 56, "foto-mini", it); }).join("")}</div>
             <button type="button" class="add combo-add" data-act="combo-add" data-i="${k}" aria-label="${E(T.t("adicionarCombo"))}">+</button>
           </div>
           <p class="combo-itens"><strong>${E(T.nomeParte(c.partes[0]))}</strong><span>+ ${E(T.nomeParte(c.partes[1]))}</span></p>
@@ -162,7 +164,7 @@ T.v.card = (i) => {
   return `
     <article class="card">
       <button type="button" class="card-hit" data-act="open-item" data-id="${E(i.id)}" aria-label="${E(T.t("verDetalhes", { nome: T.nome(i) }))}">
-        <span class="foto">${T.foto(i.foto, T.nome(i), i.grupo, 92, 92)}</span>
+        <span class="foto">${T.foto(i.foto, T.nome(i), i.grupo, 92, 92, "", i)}</span>
         <span class="txt">
           ${tags.length ? `<span class="tags">${tags.join("")}</span>` : ""}
           <span class="nome">${E(tx.nome)}</span>
@@ -176,7 +178,6 @@ T.v.card = (i) => {
 
 /* "O que é?": texto "sobre" da categoria. Fechado por padrão; em Toasts e Waffle Mineiro abre sozinho na 1ª vez (sessionStorage). */
 const SOBRE_ABRE = ["toasts", "waffle-mineiro"];
-const GRAV_CAT = { espressos: "graos", coados: "prensa", smoothies: "frutas", matcha: "folha", chai: "folha", autorais: "moedor" };
 const sobreEstado = {};                             // categoria -> aberto (vale na sessão da página)
 const sobreVisto = (id, marca) => {
   let l = [];
@@ -189,7 +190,7 @@ T.v.sobre = (cat, ct) => {
   if (sobreEstado[cat.id] == null) sobreEstado[cat.id] = SOBRE_ABRE.includes(cat.id) && !sobreVisto(cat.id, true);
   const aberto = sobreEstado[cat.id], id = "sobre-" + cat.id;
   return `<button type="button" class="oque-link" data-act="oque" data-cat="${E(cat.id)}" aria-expanded="${aberto}" aria-controls="${id}"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 7.2v4M8 4.9v.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>${E(T.t("oQueE"))}</span></button>
-    <div class="oque${aberto ? " aberto" : ""}" id="${id}"><div class="oque-miolo"><div class="oque-caixa">${GRAV_CAT[cat.id] ? T.ilus(GRAV_CAT[cat.id], "oque-grav") : ""}<p>${E(ct.sobre)}</p></div></div></div>`;
+    <div class="oque${aberto ? " aberto" : ""}" id="${id}"><div class="oque-miolo"><div class="oque-caixa">${T.stickerUrl(cat) ? `<img class="oque-grav" src="${E(T.stickerUrl(cat))}" alt="" width="32" height="32" loading="lazy">` : ""}<p>${E(ct.sobre)}</p></div></div></div>`;
 };
 T.acts.oque = (b) => {
   const id = b.dataset.cat, aberto = !(sobreEstado[id]);
@@ -210,7 +211,7 @@ T.v.cardapio = (grupo) => {
   if (!ativa[grupo] || !cats.some((c) => c.id === ativa[grupo])) ativa[grupo] = cats[0].id;    // ao trocar de idioma, mantém a categoria aberta
   const abas = $(`#${grupo} .tabs`), rolagem = abas ? abas.scrollLeft : 0;
   $("#" + grupo).innerHTML = `
-    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2>${T.ilus(grupo === "bebidas" ? "graos" : "folha", "grav grav-grupo")}</div>
+    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2><img class="sticker-grupo" src="assets/ilustracoes/stickers/${grupo === "bebidas" ? "xicara-latte" : "croissant"}.svg" alt="" width="32" height="32"></div>
     <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="${E(T.t("categoriasAria"))}">
       ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${c.sazonal ? `<span class="tab-sazonal" aria-hidden="true">✦</span> ` : ""}${E(T.catTxt(c).nome)}</button>`).join("")}
     </div></div>
@@ -258,6 +259,7 @@ T.vistas = {
 };
 T.v.aulas = () => {
   $("#aulas").innerHTML = `
+    <span class="tex" aria-hidden="true"></span>
     <span class="grav-mask grav-moedor" aria-hidden="true"></span>
     <h2 id="aulas-titulo" class="titulo">${E(T.t("aulasTitulo"))}</h2>
     <p class="sub">${E(T.t("aulasSubtitulo"))}</p>
@@ -295,10 +297,11 @@ T.v.rodape = () => {
   const fid = (n) => T.cfg("fidelidade." + n, CONFIG.fidelidade[n]);
   $("#rodape").innerHTML = `
     <section id="fidelidade" class="secao fidelidade" aria-labelledby="fid-titulo">
+      ${T.ilus("stickers/graos", "fid-graos")}
       <p class="fid-gancho">✦ ${E(fid("gancho"))}</p>
       <h2 id="fid-titulo" class="titulo">${E(fid("titulo"))}</h2>
       <p class="fid-texto">${E(fid("texto"))}</p>
-      <div class="carimbos" aria-hidden="true">${Array.from({ length: 10 }, (_, k) => `<span class="carimbo${k === 0 ? " carimbado" : ""}">${T.ilus("xicara")}<b>${k + 1}</b></span>`).join("")}</div>
+      <div class="carimbos" aria-hidden="true">${Array.from({ length: 10 }, (_, k) => `<span class="carimbo${k === 0 ? " carimbado" : ""}">${k === 0 ? `<span class="sticker carimbo-chapeu"></span>` : T.ilus("xicara")}<b>${k + 1}</b></span>`).join("")}</div>
       <p class="mini">${E(fid("rodape"))}</p>
     </section>
     <section class="secao">
