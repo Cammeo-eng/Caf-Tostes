@@ -270,7 +270,7 @@ window.I18N.en = {
     "smoothies": {
       "nome": "Smoothies",
       "nota": "Spring/Summer. Frozen fruit instead of ice: more flavor, never watery. 500 ml.",
-      "sobre": "Frozen fruit blended to order, with no ice: more flavor and never watery. Spring and summer only."
+      "sobre": "Frozen fruit blended to order, with no ice: more flavor and never watery. For the fruit ones, you pick the sweetness: unsweetened, with just the fruit's own sugar, lightly sweetened with honey, or sweeter. Spring and summer only."
     },
     "toasts": {
       "nome": "Toasts",
@@ -359,6 +359,14 @@ window.I18N.en = {
         "morangos": "Strawberries",
         "mel": "Honey",
         "canela": "Cinnamon"
+      }
+    },
+    "docura-smoothie": {
+      "titulo": "Sweetness",
+      "itens": {
+        "sem-adocar": "Unsweetened (just the fruit)",
+        "levemente": "Lightly sweetened",
+        "mais-docinho": "Sweeter"
       }
     }
   },

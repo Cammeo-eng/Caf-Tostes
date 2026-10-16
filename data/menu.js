@@ -85,7 +85,7 @@ const CATEGORIAS = [
     "grupo": "bebidas",
     "nome": "Smoothies",
     "nota": "Primavera/Verão. Fruta congelada no lugar do gelo: mais sabor, nada aguado. 500 ml.",
-    "sobre": "Frutas congeladas batidas na hora, sem gelo: mais sabor e nada aguado. Só na primavera e no verão.",
+    "sobre": "Frutas congeladas batidas na hora, sem gelo: mais sabor e nada aguado. Nos de fruta, você escolhe a doçura: sem adoçar, só com o doce da própria fruta, levemente adoçado com mel ou mais docinho. Só na primavera e no verão.",
     "sazonal": "primavera-verao"
   },
   {
@@ -431,6 +431,16 @@ const OPCOES = {
         "nome": "Canela",
         "valor": 0
       }
+    ]
+  },
+  "docura-smoothie": {
+    "titulo": "Doçura",
+    "tipo": "unica",
+    "obrigatoria": true,
+    "itens": [
+      { "id": "sem-adocar", "nome": "Sem adoçar (só a fruta)", "valor": 0 },
+      { "id": "levemente", "nome": "Levemente adoçado", "valor": 0, "padrao": true },
+      { "id": "mais-docinho", "nome": "Mais docinho", "valor": 0 }
     ]
   }
 };
@@ -2161,7 +2171,9 @@ const MENU = [
         "preco": 15
       }
     ],
-    "opcoes": [],
+    "opcoes": [
+      "docura-smoothie"
+    ],
     "preparo": "",
     "fichaTecnica": null,
     "foto": "assets/fotos/smoothie-melancia-banana.jpg",
@@ -2200,7 +2212,9 @@ const MENU = [
         "preco": 15
       }
     ],
-    "opcoes": [],
+    "opcoes": [
+      "docura-smoothie"
+    ],
     "preparo": "",
     "fichaTecnica": null,
     "foto": "assets/fotos/smoothie-melao-hortela-limao.jpg",
@@ -2241,7 +2255,9 @@ const MENU = [
         "preco": 16
       }
     ],
-    "opcoes": [],
+    "opcoes": [
+      "docura-smoothie"
+    ],
     "preparo": "",
     "fichaTecnica": null,
     "foto": "assets/fotos/smoothie-abacaxi-hortela-mel.jpg",
@@ -2281,7 +2297,9 @@ const MENU = [
         "preco": 16
       }
     ],
-    "opcoes": [],
+    "opcoes": [
+      "docura-smoothie"
+    ],
     "preparo": "",
     "fichaTecnica": null,
     "foto": "assets/fotos/smoothie-manga-laranja.jpg",
@@ -2414,6 +2432,7 @@ const MENU = [
       }
     ],
     "opcoes": [
+      "docura-smoothie",
       "leite"
     ],
     "preparo": "",
