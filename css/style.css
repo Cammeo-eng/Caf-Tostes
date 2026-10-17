@@ -671,3 +671,4 @@ span.tex { content: none; }
 .docuras { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .tam.docura { min-height: 64px; padding: 6px 8px; display: grid; place-items: center; }
 .tam.docura b { font-size: 14px; line-height: 1.2; font-weight: 600; text-align: center; overflow-wrap: anywhere; }
+.docuras.dois { grid-template-columns: repeat(2, minmax(0, 1fr)); }
