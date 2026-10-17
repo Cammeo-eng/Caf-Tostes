@@ -135,3 +135,8 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Doçura dos smoothies (2026-10-19)
 - Grupo `docura-smoothie` com os dados do prompt; "+" do card adiciona direto com "Levemente adoçado". A doçura aparece sempre no carrinho e no WhatsApp dos itens avulsos. Nos combos do dia a linha do WhatsApp só leva os nomes (como sempre), então a doçura padrão fica subentendida.
+
+## Fotos r6 e Chocolate Quente (2026-10-19)
+- 16 fotos provisórias (7 smoothies, 3 chocolates quentes, 6 cafés). Fotos antigas do Tradicional e do Meio Amargo apagadas.
+- Chocolate Quente: Tradicional e Meio Amargo viraram a escolha `tipo-chocolate` dentro de Clássico, Com Marshmallow e Com Chantilly. Nenhuma referência aos ids antigos existia em quiz, combos, favorito ou aulas.
+- Escolha de 2 botões reaproveita o estilo dos 3 botões da doçura dos smoothies.

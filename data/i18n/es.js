@@ -205,7 +205,7 @@ window.I18N.es = {
     "chocolate-quente": {
       "nome": "Chocolate Caliente",
       "nota": "Tamaños: P 170 ml · M 200 ml · G 250 ml",
-      "sobre": "Chocolate de verdad derretido en leche vaporizada. Cremoso y sin café."
+      "sobre": "Chocolate de verdad derretido en leche vaporizada. Cremoso y sin café. En el clásico, el de malvaviscos y el de chantilly, eliges: tradicional, más dulce y cremoso, o semiamargo, más intenso."
     },
     "gelados": {
       "nome": "Cafés Helados",
@@ -367,6 +367,13 @@ window.I18N.es = {
         "sem-adocar": "Sin endulzar (solo la fruta)",
         "levemente": "Ligeramente endulzado",
         "mais-docinho": "Más dulce"
+      }
+    },
+    "tipo-chocolate": {
+      "titulo": "Chocolate",
+      "itens": {
+        "tradicional": "Tradicional",
+        "meio-amargo": "Semiamargo"
       }
     }
   },
@@ -610,23 +617,35 @@ window.I18N.es = {
         "Hielo"
       ]
     },
-    "chocolate-quente-tradicional": {
-      "nome": "Tradicional",
-      "descricaoCurta": "Cremoso y bien achocolatado.",
+    "chocolate-quente-classico": {
+      "nome": "Clásico",
+      "descricaoCurta": "Chocolate derretido en leche vaporizada. Elige tradicional o semiamargo.",
       "ingredientes": [
         "Chocolate",
         "Leche"
       ],
-      "nomeCompleto": "Chocolate Caliente — Tradicional"
+      "nomeCompleto": "Chocolate Caliente — Clásico"
     },
-    "chocolate-quente-meio-amargo": {
-      "nome": "Semiamargo",
-      "descricaoCurta": "Más intenso y menos dulce.",
+    "chocolate-quente-marshmallow": {
+      "nome": "Con Malvaviscos",
+      "descricaoCurta": "Chocolate caliente cubierto de malvaviscos.",
       "ingredientes": [
-        "Chocolate semiamargo",
-        "Leche"
+        "Chocolate",
+        "Leche",
+        "Malvaviscos"
       ],
-      "nomeCompleto": "Chocolate Caliente — Semiamargo"
+      "nomeCompleto": "Chocolate Caliente — Con Malvaviscos"
+    },
+    "chocolate-quente-chantilly": {
+      "nome": "Con Crema Chantilly",
+      "descricaoCurta": "Chocolate caliente con crema chantilly y virutas de chocolate.",
+      "ingredientes": [
+        "Chocolate",
+        "Leche",
+        "Crema chantilly",
+        "Virutas de chocolate"
+      ],
+      "nomeCompleto": "Chocolate Caliente — Con Crema Chantilly"
     },
     "chocolate-quente-avela": {
       "nome": "Avellana",

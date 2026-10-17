@@ -205,7 +205,7 @@ window.I18N.en = {
     "chocolate-quente": {
       "nome": "Hot Chocolate",
       "nota": "Sizes: S 170 ml · M 200 ml · L 250 ml",
-      "sobre": "Real chocolate melted into steamed milk. Creamy, with no coffee."
+      "sobre": "Real chocolate melted into steamed milk. Creamy, with no coffee. For the classic, marshmallow and whipped cream ones, you choose: classic, sweeter and creamier, or dark, more intense."
     },
     "gelados": {
       "nome": "Iced Coffees",
@@ -367,6 +367,13 @@ window.I18N.en = {
         "sem-adocar": "Unsweetened (just the fruit)",
         "levemente": "Lightly sweetened",
         "mais-docinho": "Sweeter"
+      }
+    },
+    "tipo-chocolate": {
+      "titulo": "Chocolate",
+      "itens": {
+        "tradicional": "Classic",
+        "meio-amargo": "Dark"
       }
     }
   },
@@ -610,23 +617,35 @@ window.I18N.en = {
         "Ice"
       ]
     },
-    "chocolate-quente-tradicional": {
+    "chocolate-quente-classico": {
       "nome": "Classic",
-      "descricaoCurta": "Creamy and rich in chocolate.",
+      "descricaoCurta": "Chocolate melted into steamed milk. Choose classic or dark.",
       "ingredientes": [
         "Chocolate",
         "Milk"
       ],
       "nomeCompleto": "Hot Chocolate — Classic"
     },
-    "chocolate-quente-meio-amargo": {
-      "nome": "Dark",
-      "descricaoCurta": "More intense and less sweet.",
+    "chocolate-quente-marshmallow": {
+      "nome": "With Marshmallows",
+      "descricaoCurta": "Hot chocolate topped with marshmallows.",
       "ingredientes": [
-        "Dark chocolate",
-        "Milk"
+        "Chocolate",
+        "Milk",
+        "Marshmallows"
       ],
-      "nomeCompleto": "Hot Chocolate — Dark"
+      "nomeCompleto": "Hot Chocolate — With Marshmallows"
+    },
+    "chocolate-quente-chantilly": {
+      "nome": "With Whipped Cream",
+      "descricaoCurta": "Hot chocolate topped with whipped cream and chocolate shavings.",
+      "ingredientes": [
+        "Chocolate",
+        "Milk",
+        "Whipped cream",
+        "Chocolate shavings"
+      ],
+      "nomeCompleto": "Hot Chocolate — With Whipped Cream"
     },
     "chocolate-quente-avela": {
       "nome": "Hazelnut",

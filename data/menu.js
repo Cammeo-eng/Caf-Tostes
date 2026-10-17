@@ -71,7 +71,7 @@ const CATEGORIAS = [
     "grupo": "bebidas",
     "nome": "Chocolate Quente",
     "nota": "Tamanhos: P 170 ml · M 200 ml · G 250 ml",
-    "sobre": "Chocolate de verdade derretido no leite vaporizado. Cremoso e sem café."
+    "sobre": "Chocolate de verdade derretido no leite vaporizado. Cremoso e sem café. No clássico, no de marshmallow e no de chantilly, você escolhe: tradicional, mais doce e cremoso, ou meio amargo, mais intenso."
   },
   {
     "id": "gelados",
@@ -441,6 +441,15 @@ const OPCOES = {
       { "id": "sem-adocar", "nome": "Sem adoçar (só a fruta)", "valor": 0 },
       { "id": "levemente", "nome": "Levemente adoçado", "valor": 0, "padrao": true },
       { "id": "mais-docinho", "nome": "Mais docinho", "valor": 0 }
+    ]
+  },
+  "tipo-chocolate": {
+    "titulo": "Chocolate",
+    "tipo": "unica",
+    "obrigatoria": true,
+    "itens": [
+      { "id": "tradicional", "nome": "Tradicional", "valor": 0, "padrao": true },
+      { "id": "meio-amargo", "nome": "Meio amargo", "valor": 0 }
     ]
   }
 };
@@ -1677,12 +1686,12 @@ const MENU = [
     "promocaoElegivel": true
   },
   {
-    "id": "chocolate-quente-tradicional",
+    "id": "chocolate-quente-classico",
     "grupo": "bebidas",
     "categoria": "chocolate-quente",
-    "nome": "Tradicional",
-    "nomeCompleto": "Chocolate Quente — Tradicional",
-    "descricaoCurta": "Cremoso e bem chocolatudo.",
+    "nome": "Clássico",
+    "nomeCompleto": "Chocolate Quente — Clássico",
+    "descricaoCurta": "Chocolate derretido no leite vaporizado. Escolha tradicional ou meio amargo.",
     "descricao": "",
     "ingredientes": [
       "Chocolate",
@@ -1706,12 +1715,118 @@ const MENU = [
       }
     ],
     "opcoes": [
+      "tipo-chocolate",
       "leite",
       "extras"
     ],
     "preparo": "",
     "fichaTecnica": null,
-    "foto": "assets/fotos/chocolate-quente-tradicional.jpg",
+    "foto": "assets/fotos/chocolate-quente-classico.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "quente",
+      "leve",
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "classico",
+      "chocolate",
+      "cacau"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "chocolate-quente-marshmallow",
+    "grupo": "bebidas",
+    "categoria": "chocolate-quente",
+    "nome": "Com Marshmallow",
+    "nomeCompleto": "Chocolate Quente — Com Marshmallow",
+    "descricaoCurta": "Chocolate quente coberto de marshmallows.",
+    "descricao": "",
+    "ingredientes": [
+      "Chocolate",
+      "Leite",
+      "Marshmallows"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "P",
+        "ml": 170,
+        "preco": 16
+      },
+      {
+        "rotulo": "M",
+        "ml": 200,
+        "preco": 17
+      },
+      {
+        "rotulo": "G",
+        "ml": 250,
+        "preco": 18
+      }
+    ],
+    "opcoes": [
+      "tipo-chocolate",
+      "leite",
+      "extras"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/chocolate-quente-marshmallow.jpg",
+    "etiquetas": [
+      "doce",
+      "leite",
+      "quente",
+      "leve",
+      "sem-cafe",
+      "cremoso",
+      "sem-cafeina",
+      "diferente",
+      "chocolate",
+      "sobremesa"
+    ],
+    "promocaoElegivel": true
+  },
+  {
+    "id": "chocolate-quente-chantilly",
+    "grupo": "bebidas",
+    "categoria": "chocolate-quente",
+    "nome": "Com Chantilly",
+    "nomeCompleto": "Chocolate Quente — Com Chantilly",
+    "descricaoCurta": "Chocolate quente com chantilly e raspas de chocolate por cima.",
+    "descricao": "",
+    "ingredientes": [
+      "Chocolate",
+      "Leite",
+      "Chantilly",
+      "Raspas de chocolate"
+    ],
+    "tamanhos": [
+      {
+        "rotulo": "P",
+        "ml": 170,
+        "preco": 16
+      },
+      {
+        "rotulo": "M",
+        "ml": 200,
+        "preco": 17
+      },
+      {
+        "rotulo": "G",
+        "ml": 250,
+        "preco": 18
+      }
+    ],
+    "opcoes": [
+      "tipo-chocolate",
+      "leite",
+      "extras"
+    ],
+    "preparo": "",
+    "fichaTecnica": null,
+    "foto": "assets/fotos/chocolate-quente-chantilly.jpg",
     "etiquetas": [
       "doce",
       "leite",
@@ -1723,56 +1838,6 @@ const MENU = [
       "classico",
       "chocolate",
       "sobremesa"
-    ],
-    "promocaoElegivel": true
-  },
-  {
-    "id": "chocolate-quente-meio-amargo",
-    "grupo": "bebidas",
-    "categoria": "chocolate-quente",
-    "nome": "Meio Amargo",
-    "nomeCompleto": "Chocolate Quente — Meio Amargo",
-    "descricaoCurta": "Mais intenso e menos doce.",
-    "descricao": "",
-    "ingredientes": [
-      "Chocolate meio amargo",
-      "Leite"
-    ],
-    "tamanhos": [
-      {
-        "rotulo": "P",
-        "ml": 170,
-        "preco": 14
-      },
-      {
-        "rotulo": "M",
-        "ml": 200,
-        "preco": 15
-      },
-      {
-        "rotulo": "G",
-        "ml": 250,
-        "preco": 16
-      }
-    ],
-    "opcoes": [
-      "leite",
-      "extras"
-    ],
-    "preparo": "",
-    "fichaTecnica": null,
-    "foto": "assets/fotos/chocolate-quente-meio-amargo.jpg",
-    "etiquetas": [
-      "doce",
-      "leite",
-      "quente",
-      "intenso",
-      "sem-cafe",
-      "cremoso",
-      "sem-cafeina",
-      "classico",
-      "chocolate",
-      "cacau"
     ],
     "promocaoElegivel": true
   },
