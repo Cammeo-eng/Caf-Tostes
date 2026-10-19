@@ -146,3 +146,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Últimas 2 fotos dos croissants (2026-10-19)
 - `croissants-2-queijos-gratinado` e `croissants-ovos-com-queijo` ganharam foto (recortadas em quadrado 720×720). Agora todos os croissants têm foto.
+
+## Fotos dos sanduíches (2026-10-19)
+- 5 fotos: pão na chapa com requeijão, queijo quente, misto quente, queijo e bacon e bauru (recortadas em quadrado 720×720). A foto de queijo e tomate ficou de reserva: não existe esse item no cardápio.
