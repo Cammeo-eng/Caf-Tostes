@@ -149,3 +149,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Fotos dos sanduíches (2026-10-19)
 - 5 fotos: pão na chapa com requeijão, queijo quente, misto quente, queijo e bacon e bauru (recortadas em quadrado 720×720). A foto de queijo e tomate ficou de reserva: não existe esse item no cardápio.
+
+## Fotos dos gratinados (2026-10-19)
+- 4 fotos nos gratinados: frango cremoso, bauru, croque monsieur e ovos e queijo (quadrado 720×720). Associei pelo que aparece em cada foto, porque a ordem da lista não batia com as imagens. A foto do sanduíche de ovos e queijo sem gratinar ficou de reserva: não há item para ela.
