@@ -143,3 +143,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Fotos dos croissants (2026-10-19)
 - 10 fotos novas dos croissants (6 salgados, 4 doces). `croissants-2-queijos-gratinado` e `croissants-ovos-com-queijo` continuam sem foto (sticker da categoria).
+
+## Últimas 2 fotos dos croissants (2026-10-19)
+- `croissants-2-queijos-gratinado` e `croissants-ovos-com-queijo` ganharam foto (recortadas em quadrado 720×720). Agora todos os croissants têm foto.
