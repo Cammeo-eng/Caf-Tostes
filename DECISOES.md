@@ -152,3 +152,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Fotos dos gratinados (2026-10-19)
 - 4 fotos nos gratinados: frango cremoso, bauru, croque monsieur e ovos e queijo (quadrado 720×720). Associei pelo que aparece em cada foto, porque a ordem da lista não batia com as imagens. A foto do sanduíche de ovos e queijo sem gratinar ficou de reserva: não há item para ela.
+
+## Fotos dos waffles (2026-10-19)
+- 4 fotos nos waffles americanos (chantilly e caramelo, doce de leite e banana, avelã e morangos, waffle brunch), recortadas em quadrado 720×720. Os waffles mineiros seguem sem foto.
