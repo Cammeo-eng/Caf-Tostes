@@ -140,3 +140,6 @@ Formato: data · assunto · decisão · quem decidiu.
 - 16 fotos provisórias (7 smoothies, 3 chocolates quentes, 6 cafés). Fotos antigas do Tradicional e do Meio Amargo apagadas.
 - Chocolate Quente: Tradicional e Meio Amargo viraram a escolha `tipo-chocolate` dentro de Clássico, Com Marshmallow e Com Chantilly. Nenhuma referência aos ids antigos existia em quiz, combos, favorito ou aulas.
 - Escolha de 2 botões reaproveita o estilo dos 3 botões da doçura dos smoothies.
+
+## Fotos dos croissants (2026-10-19)
+- 10 fotos novas dos croissants (6 salgados, 4 doces). `croissants-2-queijos-gratinado` e `croissants-ovos-com-queijo` continuam sem foto (sticker da categoria).
