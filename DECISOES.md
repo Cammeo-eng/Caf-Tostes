@@ -155,3 +155,11 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Fotos dos waffles (2026-10-19)
 - 4 fotos nos waffles americanos (chantilly e caramelo, doce de leite e banana, avelã e morangos, waffle brunch), recortadas em quadrado 720×720. Os waffles mineiros seguem sem foto.
+
+## Contraste, logo e foto da torta (2026-10-21)
+- Foto da Torta do dia (`tortas-torta-do-dia.jpg`).
+- Novo token `--papel-escuro` (#EADFCB) para os cards. O chapéu do logo agora é o novo e o logo virou HTML (chapéu + texto), não mais `logo.svg`.
+- Pontinho "Aberto agora" substitui a xícara com vapor do topo, como o prompt pediu.
+- Fidelidade passou a vinho (carimbo preenchido em verde-musgo com chapéu creme) e o favorito ganhou faixa verde clara; o divisor ondulado antes do favorito saiu (cores diferentes se separam sozinhas).
+- Tirei a textura de stickers do bloco das aulas, porque ali há texto de leitura; o rodapé marrom e os blocos vinho continuam com ela a 6%.
+- Rodapé repete endereço, horários (3 frases juntas) e Instagram em creme, além da faixa de horários verde clara.

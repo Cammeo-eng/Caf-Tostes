@@ -102,7 +102,7 @@ T.v.temporada = () => {
   const itens = MENU.filter((i) => i.categoria === cat.id);
   sec.innerHTML = `
     <div class="temp-card" data-act="ver-temporada">
-      <img class="temp-icone" src="assets/ilustracoes/primavera-verao-selo.svg" width="84" height="84" alt="${E(T.t("temporadaSelo"))}">
+      <span class="temp-icone" role="img" aria-label="${E(T.t("temporadaSelo"))}"></span>
       <div class="temp-meio">
         <h2 class="temp-titulo">${E(T.t("temporadaTitulo"))}</h2>
         <p>${E(T.t("temporadaTexto"))}</p>
@@ -259,7 +259,6 @@ T.vistas = {
 };
 T.v.aulas = () => {
   $("#aulas").innerHTML = `
-    <span class="tex" aria-hidden="true"></span>
     <span class="grav-mask grav-moedor" aria-hidden="true"></span>
     <h2 id="aulas-titulo" class="titulo">${E(T.t("aulasTitulo"))}</h2>
     <p class="sub">${E(T.t("aulasSubtitulo"))}</p>
@@ -295,9 +294,11 @@ T.v.insta = () => {
 /* ---------- rodapé ---------- */
 T.v.rodape = () => {
   const fid = (n) => T.cfg("fidelidade." + n, CONFIG.fidelidade[n]);
+  const horas = ["horarioSemana", "horarioSabado", "horarioDomingo"].map((k) => T.t(k));
   $("#rodape").innerHTML = `
     <section id="fidelidade" class="secao fidelidade" aria-labelledby="fid-titulo">
-      ${T.ilus("stickers/graos", "fid-graos")}
+      <span class="tex" aria-hidden="true"></span>
+      <span class="fid-graos" aria-hidden="true"></span>
       <p class="fid-gancho">✦ ${E(fid("gancho"))}</p>
       <h2 id="fid-titulo" class="titulo">${E(fid("titulo"))}</h2>
       <p class="fid-texto">${E(fid("texto"))}</p>
@@ -307,16 +308,24 @@ T.v.rodape = () => {
     <section class="secao">
       <a class="btn btn-vinho btn-bloco" href="${E(CONFIG.avaliacaoGoogle)}" target="_blank" rel="noopener">${E(T.t("avalieGoogle"))}</a>
     </section>
-    <section id="horarios" class="secao info" aria-labelledby="hor-titulo">
+    <section id="horarios" class="faixa-verde info" aria-labelledby="hor-titulo">
       <h2 id="hor-titulo" class="titulo">${E(T.t("menuHorarios"))}</h2>
-      <ul class="horarios">${["horarioSemana", "horarioSabado", "horarioDomingo"].map((k) => `<li><span>${E(T.t(k))}</span></li>`).join("")}</ul>
+      <ul class="horarios">${horas.map((h) => `<li><span>${E(h)}</span></li>`).join("")}</ul>
       <p class="endereco">${E(CONFIG.endereco)}</p>
       <p class="links"><a href="${E(CONFIG.mapa)}" target="_blank" rel="noopener">${E(T.t("comoChegar"))}</a><a href="${E(CONFIG.instagram.url)}" target="_blank" rel="noopener">Instagram ${E(CONFIG.instagram.usuario)}</a></p>
     </section>
-    <button type="button" class="chapeu-link" data-act="open" data-name="chapeu">
-      ${T.ilus("chapeu", "chapeu-mini")}<span>${E(T.t("historiaChapeu"))}</span>
-    </button>
-    <div class="marca-wrap" aria-hidden="true">${T.ilus("ramo-cafe", "grav-marca")}<p class="marca-gigante">TOSTES café</p></div>`;
+    <div class="chapeu-bloco">
+      <button type="button" class="chapeu-link" data-act="open" data-name="chapeu">
+        <span class="chapeu-mini" aria-hidden="true"></span><span>${E(T.t("historiaChapeu"))}</span>
+      </button>
+    </div>
+    <div class="rodape-faixa">
+      <span class="tex" aria-hidden="true"></span>
+      <div class="marca-wrap" aria-hidden="true"><span class="grav-marca"></span><p class="marca-gigante">TOSTES café</p></div>
+      <p class="rodape-info">${E(CONFIG.endereco)}</p>
+      <p class="rodape-info">${E(horas.join(" · "))}</p>
+      <p class="rodape-info"><a href="${E(CONFIG.instagram.url)}" target="_blank" rel="noopener">Instagram ${E(CONFIG.instagram.usuario)}</a></p>
+    </div>`;
 };
 
 /* ---------- barra flutuante do carrinho ---------- */
