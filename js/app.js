@@ -33,6 +33,9 @@
   T.v.insta();
   T.v.rodape();
   T.v.observaBebidas();
+  const sombraTopo = () => $("#topo").classList.toggle("rolou", window.scrollY > 4);
+  window.addEventListener("scroll", sombraTopo, { passive: true });
+  sombraTopo();
   T.v.bag();
   setInterval(T.v.topo, 60000);                    // atualiza "Aberto agora"
 

@@ -672,3 +672,77 @@ span.tex { content: none; }
 .tam.docura { min-height: 64px; padding: 6px 8px; display: grid; place-items: center; }
 .tam.docura b { font-size: 14px; line-height: 1.2; font-weight: 600; text-align: center; overflow-wrap: anywhere; }
 .docuras.dois { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* =====================================================================
+   Ritmo das seções e contraste (cada seção com fundo diferente da vizinha)
+   ===================================================================== */
+:root { --papel-escuro: #EADFCB; }
+
+/* topo: creme liso, sem textura; linha vinho a 25% e sombra ao rolar */
+#topo { background: var(--creme); border-bottom: 1px solid rgba(110, 30, 35, .25); transition: box-shadow .2s; }
+#topo.rolou { box-shadow: 0 2px 12px rgba(74, 50, 34, .12); }
+#topo::before { content: none; }
+.logo { display: flex; align-items: flex-end; gap: 4px; text-decoration: none; line-height: 1; }
+.topo-esq .logo .logo-chapeu { width: 34px; height: auto; flex: none; }
+.logo-txt { display: flex; align-items: baseline; gap: 4px; white-space: nowrap; }
+.logo-txt b { font: 400 22px/1 var(--f-titulo); color: var(--vinho); letter-spacing: .3px; }
+.logo-txt i { font: 600 12px/1 var(--f-texto); font-style: normal; color: var(--terra); }
+.status.on { background: var(--musgo); color: var(--creme); }
+.status.off { background: var(--terra); color: var(--creme); }
+.xic { width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--musgo-claro); vertical-align: 1px; }
+.xic::before, .xic::after { content: none; }
+.status.off .xic { background: color-mix(in srgb, var(--creme) 55%, var(--terra)); }
+.status.on .xic { animation: pulsa 2.4s ease-in-out infinite; }
+@keyframes pulsa { 0%, 100% { box-shadow: 0 0 0 0 rgba(220, 221, 200, .6); } 50% { box-shadow: 0 0 0 4px rgba(220, 221, 200, 0); } }
+
+/* destaque da temporada: verde-musgo, entre o vinho de cima e o creme de baixo */
+.temp-card { background: var(--musgo); color: var(--creme); border: 0; box-shadow: inset 0 0 0 1px rgba(244, 235, 221, .15); }
+.temp-titulo, .temp-meio p { color: var(--creme); }
+.temp-icone { display: block; flex: none; background: var(--creme); -webkit-mask: url("../assets/ilustracoes/primavera-verao-selo.svg") center / contain no-repeat; mask: url("../assets/ilustracoes/primavera-verao-selo.svg") center / contain no-repeat; }
+.temp-btn { background: var(--creme); color: var(--vinho); border-color: transparent; }
+.temp-foto { border: 2px solid var(--creme); box-shadow: none; }
+
+/* cardápio: fundo creme, cards em papel escuro */
+.card { background: var(--papel-escuro); border: 1px solid rgba(74, 50, 34, .12); }
+.card .ph-sticker { background: color-mix(in srgb, var(--papel-escuro) 78%, var(--terra)); }
+
+/* favorito em verde claro, quiz em card vinho sobre creme */
+.divisor:first-of-type { display: none; }
+.secao-favorito { background: var(--musgo-claro); padding: 36px 20px 36px; margin-top: 32px; }
+.quiz-card { background: var(--vinho); }
+
+/* fidelidade: card vinho */
+.fidelidade { background: var(--vinho); color: var(--creme); }
+.fidelidade::before { content: none; }
+.fidelidade h2, .fidelidade .titulo { color: var(--creme); }
+.fidelidade h2::after { background: var(--creme); }
+.fid-gancho { color: var(--creme); opacity: .85; }
+.fidelidade .mini { opacity: .85; }
+.fidelidade::after { background: radial-gradient(circle, transparent 52%, var(--creme) 55%, var(--creme) 61%, transparent 66%); }
+.carimbo { border-color: rgba(244, 235, 221, .85); }
+.carimbo.carimbado { background: var(--musgo); border-color: var(--creme); }
+.fid-graos { position: absolute; top: 10px; right: 14px; width: 34px; height: 34px; background: var(--creme); opacity: .14; pointer-events: none; -webkit-mask: url("../assets/ilustracoes/stickers/graos.svg") center / contain no-repeat; mask: url("../assets/ilustracoes/stickers/graos.svg") center / contain no-repeat; }
+
+/* horários: faixa inteira em verde claro */
+#rodape { padding-bottom: 0; }
+#rodape::before { content: none; }
+.faixa-verde { background: var(--musgo-claro); padding: 36px 20px 40px; margin-top: 8px; }
+.faixa-verde .horarios li { border-bottom: 1px dotted rgba(63, 74, 43, .3); }
+.faixa-verde .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.faixa-verde .links a { flex: 1 1 auto; justify-content: center; text-align: center; min-height: 44px; padding: 0 10px; font-size: 15px; border: 1.5px solid var(--vinho); border-radius: 99px; color: var(--vinho); text-decoration: none; }
+
+/* convite do chapéu: card vinho cheio */
+.chapeu-bloco { padding: 36px 20px 0; }
+.chapeu-link { width: 100%; margin: 0; padding: 18px; border: 0; background: var(--vinho); color: var(--creme); border-radius: var(--raio); min-height: 84px; }
+.chapeu-mini { display: block; width: 84px; height: 43px; flex: none; background: var(--creme); -webkit-mask: url("../assets/ilustracoes/chapeu.svg") center / contain no-repeat; mask: url("../assets/ilustracoes/chapeu.svg") center / contain no-repeat; }
+
+/* rodapé: faixa marrom */
+.rodape-faixa { position: relative; isolation: isolate; overflow: hidden; margin-top: 36px; padding: 40px 20px 28px; background: var(--terra); color: var(--creme); text-align: center; }
+.rodape-faixa .marca-wrap { margin: 0 0 20px; }
+.rodape-faixa .marca-gigante { color: var(--creme); margin: 36px 0; }
+.rodape-faixa .grav-marca { background: var(--creme); opacity: .15; -webkit-mask: url("../assets/ilustracoes/ramo-cafe.svg") center / contain no-repeat; mask: url("../assets/ilustracoes/ramo-cafe.svg") center / contain no-repeat; }
+.rodape-info { margin: 6px 0; font-size: 14px; line-height: 1.45; color: rgba(244, 235, 221, .8); }
+.rodape-info a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; }
+
+/* textura de stickers: só nos blocos escuros (6%) */
+.tex, .quiz-card::before, .bag-bar::before { opacity: .06; }
