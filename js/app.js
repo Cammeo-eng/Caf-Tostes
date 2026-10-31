@@ -9,6 +9,7 @@
     T.v.topo();
     T.v.idiomas();
     T.v.favorito();
+    T.v.favoritoFoto();
     T.v.promo();
     T.v.temporada();
     T.v.quizCard();
@@ -24,6 +25,7 @@
   T.v.topo();
   T.v.idiomas();
   T.v.favorito();
+  T.v.favoritoFoto();
   T.v.promo();
   T.v.temporada();
   T.v.quizCard();

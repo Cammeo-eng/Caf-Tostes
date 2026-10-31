@@ -101,8 +101,7 @@ h2.titulo { font-size: 32px; }
 .fav-card { background: #fff0; border-radius: 28px; overflow: hidden; box-shadow: var(--sombra); background: var(--creme); border: 1px solid var(--linha); }
 .fav-foto { aspect-ratio: 4 / 3; background: var(--musgo-claro); }
 .fav-corpo { padding: 20px; }
-.fav-nome { font-weight: 700; margin: 10px 0 6px; font-size: 18px; line-height: 1.3; }
-.fav-texto { margin: 0 0 16px; opacity: .9; }
+.fav-nome { font-weight: 700; margin: 10px 0 16px; font-size: 18px; line-height: 1.3; }
 .fav-rodape, .combo-rodape { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .preco-bloco { margin: 0; display: flex; flex-direction: column; line-height: 1.15; }
 .preco-bloco s { font-size: 14px; opacity: .65; }
@@ -746,3 +745,11 @@ span.tex { content: none; }
 
 /* textura de stickers: só nos blocos escuros (6%) */
 .tex, .quiz-card::before, .bag-bar::before { opacity: .06; }
+
+/* foto do favorito: bebida e comida divididas por um corte diagonal (linha creme de 3 px) */
+.fav-foto { position: relative; overflow: hidden; background: var(--creme); }
+.fav-img { position: absolute; top: 0; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.fav-img-a { left: 0; width: 58%; clip-path: polygon(0 0, 96.7% 0, 76% 100%, 0 100%); }
+.fav-img-b { left: 42%; width: 58%; clip-path: polygon(calc(25.2% + 3px) 0, 100% 0, 100% 100%, calc(4.5% + 3px) 100%); }
+.fav-foto.so-bebida .fav-img-a { width: 100%; clip-path: none; }
+.fav-foto .ph { position: absolute; inset: 0; }

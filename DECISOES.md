@@ -168,3 +168,7 @@ Formato: data · assunto · decisão · quem decidiu.
 - `limon-cappuccino` apagado (item, traduções EN/ES e foto): o limão talha o leite. Limon Gelado fica.
 - Waffles pausados por `CONFIG.categoriasPausadas`; nada foi apagado. Reserva do quiz por regra em `HARMONIZACAO`. Textos novos em EN/ES que eu traduzi (o prompt só deu o PT): "Melted, grilled cheese balances the herbal notes of matcha." / "El queso gratinado equilibra lo herbal del matcha." e o aviso "Waffles are off the menu for now." / "Los waffles están fuera del menú por ahora."
 - O aviso do carrinho diz "Waffles…" mesmo que depois outra categoria seja pausada; se isso acontecer, trocar o texto.
+
+## Pedido favorito (2026-10-31)
+- Texto provisório removido; foto virou composição cappuccino + sanduíche com corte diagonal (CSS). Ambas as fotos já existiam. `CONFIG.favorito.foto` (favorito.jpg) ficou no config, mas não é mais usada.
+- O recurso "Mais pedido" não existia no projeto (nada foi removido).

@@ -140,7 +140,8 @@ window.I18N.pt = {
     "temporadaSelo": "Primavera/Verão",
     "oQueE": "O que é?",
     "escolhaCobertura": "Escolha pelo menos 1 cobertura",
-    "categoriaPausadaAviso": "Waffles fora do cardápio por enquanto."
+    "categoriaPausadaAviso": "Waffles fora do cardápio por enquanto.",
+    "favoritoFotoAlt": "Cappuccino com chocolate meio amargo e sanduíche gratinado de frango"
   },
   "quiz": {
     "textos": {
