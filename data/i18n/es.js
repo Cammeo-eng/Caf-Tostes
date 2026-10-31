@@ -155,7 +155,8 @@ window.I18N.es = {
     "temporadaBotao": "Ver smoothies",
     "temporadaSelo": "Primavera/Verano",
     "oQueE": "¿Qué es?",
-    "escolhaCobertura": "Elige al menos 1 cobertura"
+    "escolhaCobertura": "Elige al menos 1 cobertura",
+    "categoriaPausadaAviso": "Los waffles están fuera del menú por ahora."
   },
   "config": {
     "marquee": "café al milímetro ✦ granos 84+ ✦ hecho al momento ✦ Fazenda Rio Grande ✦",
@@ -594,16 +595,6 @@ window.I18N.es = {
         "Salsa artesanal de cereza",
         "Leche condensada",
         "Canela en polvo"
-      ]
-    },
-    "limon-cappuccino": {
-      "nome": "Cappuccino de Limón",
-      "descricaoCurta": "Cappuccino cítrico con jarabe de limón.",
-      "ingredientes": [
-        "Espresso",
-        "Leche vaporizada",
-        "Espuma de leche",
-        "Jarabe de limón"
       ]
     },
     "limon-gelado": {
@@ -1770,6 +1761,9 @@ window.I18N.es = {
       "Lo salado del croissant contrasta con lo dulce de la bebida.",
       "Un café sin azúcar va bien con algo cremoso."
     ],
-    "harmonizacaoPadrao": "Nuestros croissants se hacen todos los días."
+    "harmonizacaoPadrao": "Nuestros croissants se hacen todos los días.",
+    "harmonizacaoReserva": {
+      "0": "El queso gratinado equilibra lo herbal del matcha."
+    }
   }
 };

@@ -12,6 +12,10 @@ T.cart = (function () {
     obs: salvo.obs || ""
   };
   const ouvintes = [];
+  // linhas de itens pausados (ex.: waffles) salvas antes da pausa saem do pedido, com aviso
+  const pausado = (id) => T.todosItens[id] && T.pausadas.has(T.todosItens[id].categoria);
+  const eraPausada = (l) => (l && l.tipo === "combo" ? (l.partes || []).some((p) => pausado(p.id)) : l && pausado(l.id));
+  const avisoPausa = (Array.isArray(salvo.linhas) ? salvo.linhas : []).some(eraPausada);
 
   function linhaValida(l) {                    // descarta linhas de itens que não existem mais
     if (!l) return false;
@@ -37,6 +41,7 @@ T.cart = (function () {
 
   const api = {
     st,
+    avisoPausa,
     daUrl,
     onChange(f) { ouvintes.push(f); },
 
@@ -122,5 +127,6 @@ T.cart = (function () {
     },
     urlWhatsApp() { return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(api.mensagem()); }
   };
+  if (avisoPausa) salvar();                    // grava o pedido já sem os itens pausados
   return api;
 })();

@@ -55,4 +55,5 @@
   else setTimeout(() => { splash.classList.add("fim"); setTimeout(() => splash.remove(), 350); }, T.reduzMovimento() ? 150 : 900);
 
   T.L.iniciar();
+  if (T.cart.avisoPausa) setTimeout(() => T.toast(T.t("categoriaPausadaAviso")), T.reduzMovimento() ? 200 : 1300);
 })();

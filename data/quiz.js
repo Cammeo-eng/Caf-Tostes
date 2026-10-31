@@ -169,11 +169,15 @@ const QUIZ_PERGUNTAS = [
 ];
 
 // Harmonização: a primeira regra cuja etiqueta o 1º lugar tem é usada.
+// "reserva": usada só quando o item original está pausado (CONFIG.categoriasPausadas); {salgado?, doce?, texto?}.
 const HARMONIZACAO = [
-  { etiqueta: "herbal",      salgado: "waffle-mineiro-tradicional",         doce: "croissants-creme-de-avela-e-morangos",  texto: "O pão de queijo equilibra o herbal do matcha." },
+  { etiqueta: "herbal",      salgado: "waffle-mineiro-tradicional",         doce: "croissants-creme-de-avela-e-morangos",  texto: "O pão de queijo equilibra o herbal do matcha.",
+    reserva: { salgado: "croissants-2-queijos-gratinado", texto: "O queijo gratinado equilibra o herbal do matcha." } },
   { etiqueta: "especiarias", salgado: "gratinados-croque-monsieur",         doce: "croissants-doce-de-leite-com-banana",   texto: "Banana e canela são parceiras antigas." },
-  { etiqueta: "refrescante", salgado: "croissants-presunto-queijo-e-tomate", doce: "waffle-mineiro-morangos-e-avela",      texto: "Uma bebida leve pede um acompanhamento fresco." },
-  { etiqueta: "doce",        salgado: "croissants-presunto-com-queijo",     doce: "waffle-mineiro-doce-de-leite",          texto: "O salgado do croissant contrasta com o doce da bebida." },
+  { etiqueta: "refrescante", salgado: "croissants-presunto-queijo-e-tomate", doce: "waffle-mineiro-morangos-e-avela",      texto: "Uma bebida leve pede um acompanhamento fresco.",
+    reserva: { doce: "croissants-creme-de-avela-e-morangos" } },
+  { etiqueta: "doce",        salgado: "croissants-presunto-com-queijo",     doce: "waffle-mineiro-doce-de-leite",          texto: "O salgado do croissant contrasta com o doce da bebida.",
+    reserva: { doce: "croissants-doce-de-leite" } },
   { etiqueta: "amargo",      salgado: "gratinados-frango-cremoso",          doce: "croissants-creme-de-avela",             texto: "Um café sem açúcar valoriza um acompanhamento cremoso." }
 ];
 const HARMONIZACAO_PADRAO = { salgado: "croissants-na-chapa-com-manteiga", doce: "croissants-creme-de-avela", texto: "O croissant é feito aqui todos os dias." };

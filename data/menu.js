@@ -1595,58 +1595,6 @@ const MENU = [
     "promocaoElegivel": true
   },
   {
-    "id": "limon-cappuccino",
-    "grupo": "bebidas",
-    "categoria": "autorais",
-    "nome": "Limon Cappuccino",
-    "descricaoCurta": "Cappuccino cítrico com xarope de limão siciliano.",
-    "descricao": "",
-    "ingredientes": [
-      "Espresso",
-      "Leite vaporizado",
-      "Espuma de leite",
-      "Xarope de limão siciliano"
-    ],
-    "tamanhos": [
-      {
-        "rotulo": "P",
-        "ml": 170,
-        "preco": 13
-      },
-      {
-        "rotulo": "M",
-        "ml": 200,
-        "preco": 14
-      },
-      {
-        "rotulo": "G",
-        "ml": 250,
-        "preco": 15
-      }
-    ],
-    "opcoes": [
-      "leite",
-      "extras"
-    ],
-    "preparo": "",
-    "fichaTecnica": null,
-    "foto": "assets/fotos/limon-cappuccino.jpg",
-    "etiquetas": [
-      "doce",
-      "leite",
-      "quente",
-      "intenso",
-      "cafe",
-      "espumoso",
-      "cafeina-media",
-      "autoral",
-      "diferente",
-      "citrico"
-    ],
-    "promocaoElegivel": false,
-    "precoAConfirmar": true
-  },
-  {
     "id": "limon-gelado",
     "grupo": "bebidas",
     "categoria": "autorais",

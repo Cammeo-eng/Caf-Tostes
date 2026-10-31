@@ -19,11 +19,17 @@ T.store = {
 
 T.reduzMovimento = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------- temporada ---------- */
+/* ---------- categorias pausadas e temporada ---------- */
+// CONFIG.categoriasPausadas: categorias fora do cardápio por enquanto (nada é apagado; para voltar, tire o id da lista).
+T.pausadas = new Set(CONFIG.categoriasPausadas || []);
+T.todosItens = {};                                   // todos os itens, inclusive os pausados (só para reconhecer ids antigos)
+MENU.forEach((i) => { T.todosItens[i.id] = i; });
+T.itemDisponivel = (i) => !!i && !T.pausadas.has(i.categoria);
 // CONFIG.temporada.ativa=false: toda categoria com "sazonal" e os itens dela somem do site (abas, destaque, combos, quiz).
 T.temporadaAtiva = !!(CONFIG.temporada && CONFIG.temporada.ativa);
 (function () {
   const fora = new Set(CATEGORIAS.filter((c) => c.sazonal && !(T.temporadaAtiva && c.sazonal === CONFIG.temporada.id)).map((c) => c.id));
+  T.pausadas.forEach((id) => fora.add(id));
   if (!fora.size) return;
   for (let k = MENU.length - 1; k >= 0; k--) if (fora.has(MENU[k].categoria)) MENU.splice(k, 1);
   for (let k = CATEGORIAS.length - 1; k >= 0; k--) if (fora.has(CATEGORIAS[k].id)) CATEGORIAS.splice(k, 1);
