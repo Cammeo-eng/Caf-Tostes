@@ -328,8 +328,9 @@ T.L = (function () {
       if (define.acompanhamento === "salgado" || define.acompanhamento === "doce") {
         const idx = HARMONIZACAO.findIndex((h) => topo.it.etiquetas.includes(h.etiqueta));
         const regra = idx >= 0 ? HARMONIZACAO[idx] : HARMONIZACAO_PADRAO;
-        const food = T.item(regra[define.acompanhamento]);
-        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: idx };
+        let food = T.item(regra[define.acompanhamento]), reserva = false;
+        if (!food && regra.reserva && regra.reserva[define.acompanhamento]) { food = T.item(regra.reserva[define.acompanhamento]); reserva = !!food; }     // original pausado: usa a reserva
+        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: idx, reserva };
       }
       return { principal: pega(topo), explicacao, alternativas: [segundo, terceiro].filter(Boolean).map(pega), acomp };
     },
@@ -389,7 +390,7 @@ T.L = (function () {
             ${explica ? `<p class="quiz-explica">${E(explica)}</p>` : ""}
             ${addBtn("p", "btn-vinho")}`;
           if (r.alternativas.length) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("alternativas"))}</h3><div class="quiz-alt">${r.alternativas.map((a, k) => `<div>${card(a)}${addBtn("a" + k, "btn-contorno")}</div>`).join("")}</div>`;
-          if (r.acomp) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("acompanhamento"))}</h3>${card(r.acomp)}<p class="quiz-explica">${E(T.qTxt.harmonizacao(r.acomp.harm))}</p>
+          if (r.acomp) h += `<h3 class="quiz-sec">${E(T.qTxt.textos("acompanhamento"))}</h3>${card(r.acomp)}<p class="quiz-explica">${E(T.qTxt.harmonizacao(r.acomp.harm, r.acomp.reserva))}</p>
             ${addBtn("c", "btn-contorno")}
             <button type="button" class="btn btn-vinho btn-bloco" data-act="q-add" data-w="os-dois">${E(T.t("adicionarOsDois"))}</button>`;
         }

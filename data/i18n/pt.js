@@ -139,7 +139,8 @@ window.I18N.pt = {
     "temporadaBotao": "Ver smoothies",
     "temporadaSelo": "Primavera/Verão",
     "oQueE": "O que é?",
-    "escolhaCobertura": "Escolha pelo menos 1 cobertura"
+    "escolhaCobertura": "Escolha pelo menos 1 cobertura",
+    "categoriaPausadaAviso": "Waffles fora do cardápio por enquanto."
   },
   "quiz": {
     "textos": {

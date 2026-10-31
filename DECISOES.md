@@ -163,3 +163,8 @@ Formato: data · assunto · decisão · quem decidiu.
 - Fidelidade passou a vinho (carimbo preenchido em verde-musgo com chapéu creme) e o favorito ganhou faixa verde clara; o divisor ondulado antes do favorito saiu (cores diferentes se separam sozinhas).
 - Tirei a textura de stickers do bloco das aulas, porque ali há texto de leitura; o rodapé marrom e os blocos vinho continuam com ela a 6%.
 - Rodapé repete endereço, horários (3 frases juntas) e Instagram em creme, além da faixa de horários verde clara.
+
+## Limon Cappuccino removido e waffles pausados (2026-10-31)
+- `limon-cappuccino` apagado (item, traduções EN/ES e foto): o limão talha o leite. Limon Gelado fica.
+- Waffles pausados por `CONFIG.categoriasPausadas`; nada foi apagado. Reserva do quiz por regra em `HARMONIZACAO`. Textos novos em EN/ES que eu traduzi (o prompt só deu o PT): "Melted, grilled cheese balances the herbal notes of matcha." / "El queso gratinado equilibra lo herbal del matcha." e o aviso "Waffles are off the menu for now." / "Los waffles están fuera del menú por ahora."
+- O aviso do carrinho diz "Waffles…" mesmo que depois outra categoria seja pausada; se isso acontecer, trocar o texto.

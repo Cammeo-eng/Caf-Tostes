@@ -155,7 +155,8 @@ window.I18N.en = {
     "temporadaBotao": "See smoothies",
     "temporadaSelo": "Spring/Summer",
     "oQueE": "What's this?",
-    "escolhaCobertura": "Choose at least 1 topping"
+    "escolhaCobertura": "Choose at least 1 topping",
+    "categoriaPausadaAviso": "Waffles are off the menu for now."
   },
   "config": {
     "marquee": "coffee to the millimeter ✦ 84+ beans ✦ made to order ✦ Fazenda Rio Grande ✦",
@@ -594,16 +595,6 @@ window.I18N.en = {
         "House-made cherry syrup",
         "Condensed milk",
         "Ground cinnamon"
-      ]
-    },
-    "limon-cappuccino": {
-      "nome": "Lemon Cappuccino",
-      "descricaoCurta": "A citrusy cappuccino with lemon syrup.",
-      "ingredientes": [
-        "Espresso",
-        "Steamed milk",
-        "Milk foam",
-        "Lemon syrup"
       ]
     },
     "limon-gelado": {
@@ -1770,6 +1761,9 @@ window.I18N.en = {
       "The savory croissant contrasts with the sweet drink.",
       "Coffee without sugar goes well with something creamy."
     ],
-    "harmonizacaoPadrao": "Our croissants are baked fresh every day."
+    "harmonizacaoPadrao": "Our croissants are baked fresh every day.",
+    "harmonizacaoReserva": {
+      "0": "Melted, grilled cheese balances the herbal notes of matcha."
+    }
   }
 };

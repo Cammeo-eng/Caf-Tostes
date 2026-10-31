@@ -97,9 +97,11 @@ T.qTxt = {
     if (T.lang !== "pt") { const v = ((_I(T.lang).quiz || {}).textos || {})[k]; if (v) return v; }
     return k === "porque" ? "Porque você" : k === "e" ? "e" : QUIZ_TEXTOS[k];
   },
-  harmonizacao(idx) {                          // idx = posição em HARMONIZACAO; -1 = padrão
+  harmonizacao(idx, reserva) {                 // idx = posição em HARMONIZACAO; -1 = padrão; reserva = usou o item de reserva (original pausado)
     const q = T.lang === "pt" ? {} : (_I(T.lang).quiz || {});
     if (idx < 0) return q.harmonizacaoPadrao || HARMONIZACAO_PADRAO.texto;
+    const rt = reserva && HARMONIZACAO[idx].reserva && HARMONIZACAO[idx].reserva.texto;
+    if (rt) return (q.harmonizacaoReserva || {})[idx] || rt;
     return (q.harmonizacao || [])[idx] || HARMONIZACAO[idx].texto;
   }
 };
@@ -168,6 +170,7 @@ window.i18nFaltando = function () {
     });
     Object.keys(QUIZ_TEXTOS).concat(["porque", "e"]).forEach((k) => { if (!(q.textos || {})[k]) f.push("quiz.textos." + k); });
     HARMONIZACAO.forEach((h, k) => { if (!(q.harmonizacao || [])[k]) f.push("quiz.harmonizacao[" + k + "]"); });
+    HARMONIZACAO.forEach((h, k) => { if (h.reserva && h.reserva.texto && !(q.harmonizacaoReserva || {})[k]) f.push("quiz.harmonizacaoReserva[" + k + "]"); });
     if (!q.harmonizacaoPadrao) f.push("quiz.harmonizacaoPadrao");
     out[l] = f;
     const aulas = (I.aulas && I.aulas.aulas) || {};

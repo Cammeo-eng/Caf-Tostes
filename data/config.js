@@ -46,6 +46,9 @@ const CONFIG = {
   // Promoção do dia: 2 combos (1 bebida + 1 comida), sorteados com a data como semente
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
 
+  // Categorias fora do cardápio por enquanto. Para voltar, tire o id da lista.
+  categoriasPausadas: ["waffle-mineiro", "waffle-americano"],
+
   // Sticker usado no lugar da foto quando o item ainda não tem foto
   stickerCategoria: {
     "espressos": "tamper", "espressos-com-leite": "xicara-latte", "coados": "filtro-papel",
