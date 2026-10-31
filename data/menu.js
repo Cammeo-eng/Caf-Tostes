@@ -20,6 +20,7 @@
    - fichaTecnica .. (opcional) { dose: "18 g", extracao: "28 s", temperatura: "65 °C" }
                      null = não aparece
    - etiquetas ..... usadas no quiz "Descubra seu café" (lista completa em data/quiz.js)
+   - recomendadoPor  (opcional) nome de quem recomenda; aparece como assinatura abaixo da descrição (o nome não é traduzido)
    - promocaoElegivel  false = fica fora do sorteio da Promoção do dia
    - selo .......... (opcional) "favorito" = etiqueta "Favorito da casa"
    - servidoEm ..... (opcional) "xícara" ou "copo". Aparece na tela de detalhe
@@ -3458,7 +3459,7 @@ const MENU = [
       {
         "rotulo": "Único",
         "ml": null,
-        "preco": 12.0
+        "preco": 10.0
       }
     ],
     "opcoes": [],
@@ -3468,7 +3469,8 @@ const MENU = [
     "etiquetas": [
       "salgado"
     ],
-    "promocaoElegivel": true
+    "promocaoElegivel": true,
+    "recomendadoPor": "Julia"
   },
   {
     "id": "croissants-frango-com-requeijao-e-queijo",

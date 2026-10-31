@@ -753,3 +753,10 @@ span.tex { content: none; }
 .fav-img-b { left: 42%; width: 58%; clip-path: polygon(calc(25.2% + 3px) 0, 100% 0, 100% 100%, calc(4.5% + 3px) 100%); }
 .fav-foto.so-bebida .fav-img-a { width: 100%; clip-path: none; }
 .fav-foto .ph { position: absolute; inset: 0; }
+
+/* assinatura "Recomendação da nossa cliente — Julia" */
+.recom { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; margin-top: 4px; color: var(--terra); }
+.recom-frase { font: 400 13px/1.3 var(--f-texto); color: #4A3222; }
+.recom-nome { font-family: "Parisienne", "Brush Script MT", cursive; font-size: 24px; line-height: 1.1; color: var(--vinho); display: inline-flex; align-items: center; gap: 5px; }
+.recom-nome svg { flex: none; color: var(--vinho); align-self: center; margin-top: 4px; }
+.recom-det { margin: 4px 0 14px; }

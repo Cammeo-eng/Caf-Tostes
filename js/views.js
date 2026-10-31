@@ -158,6 +158,8 @@ T.v.quizCard = () => {
 const GRUPOS = { bebidas: "cafesBebidas", comidas: "comidas" };      // chaves de tradução dos títulos
 const ativa = {};                                  // categoria ativa por grupo
 
+/* Assinatura de quem recomenda o item (campo opcional recomendadoPor; o nome não é traduzido) */
+T.v.recom = (i, classe) => i.recomendadoPor ? `<span class="recom${classe ? " " + classe : ""}"><span class="recom-frase">${E(T.t("recomendadoPor"))}</span><span class="recom-nome"><svg viewBox="0 0 16 14" width="14" height="12" aria-hidden="true"><path d="M8 13C3 9.5 1 7 1 4.6 1 2.7 2.4 1.5 4.1 1.5 5.7 1.5 7.1 2.5 8 4c.9-1.5 2.3-2.5 3.9-2.5C13.6 1.5 15 2.7 15 4.6 15 7 13 9.5 8 13z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>${E(i.recomendadoPor)}</span></span>` : "";
 T.v.card = (i) => {
   const pedivel = T.pedivel(i);
   const tags = [];
@@ -179,6 +181,7 @@ T.v.card = (i) => {
           ${tags.length ? `<span class="tags">${tags.join("")}</span>` : ""}
           <span class="nome">${E(tx.nome)}</span>
           <span class="desc">${E(tx.descricaoCurta)}</span>
+          ${T.v.recom(i)}
           <span class="preco-linha">${preco}</span>
         </span>
       </button>

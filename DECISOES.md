@@ -172,3 +172,6 @@ Formato: data · assunto · decisão · quem decidiu.
 ## Pedido favorito (2026-10-31)
 - Texto provisório removido; foto virou composição cappuccino + sanduíche com corte diagonal (CSS). Ambas as fotos já existiam. `CONFIG.favorito.foto` (favorito.jpg) ficou no config, mas não é mais usada.
 - O recurso "Mais pedido" não existia no projeto (nada foi removido).
+
+## Croissant na chapa: Julia e R$ 10 (2026-10-31)
+- Preço do `croissants-na-chapa-com-manteiga` passou de R$ 12 para R$ 10. Campo novo `recomendadoPor` (assinatura em Parisienne). Frases: PT "Recomendação da nossa cliente", ES "Recomendación de nuestra clienta", EN "Recommended by our guest".
