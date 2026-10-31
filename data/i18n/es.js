@@ -156,7 +156,8 @@ window.I18N.es = {
     "temporadaSelo": "Primavera/Verano",
     "oQueE": "¿Qué es?",
     "escolhaCobertura": "Elige al menos 1 cobertura",
-    "categoriaPausadaAviso": "Los waffles están fuera del menú por ahora."
+    "categoriaPausadaAviso": "Los waffles están fuera del menú por ahora.",
+    "favoritoFotoAlt": "Capuchino con chocolate semiamargo y sándwich gratinado de pollo cremoso"
   },
   "config": {
     "marquee": "café al milímetro ✦ granos 84+ ✦ hecho al momento ✦ Fazenda Rio Grande ✦",

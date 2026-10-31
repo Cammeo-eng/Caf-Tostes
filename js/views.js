@@ -36,18 +36,28 @@ T.v.favorito = () => {
   const c = T.favorito();
   $("#favorito").innerHTML = `
     <article class="fav-card">
-      <div class="fav-foto">${T.foto(f.foto, f.nome, "bebidas", 480, 360)}</div>
+      <div class="fav-foto">
+        ${T.foto(T.item(f.itens[0].id).foto, T.t("favoritoFotoAlt"), "bebidas", 480, 360, "fav-img fav-img-a", T.item(f.itens[0].id))}
+        <img class="fav-img fav-img-b" src="${E(T.item(f.itens[1].id).foto)}" alt="" width="480" height="360" loading="lazy" decoding="async">
+      </div>
       <div class="fav-corpo">
         ${T.ilus("stickers/xicaras", "grav grav-fav")}
         <h2 id="fav-titulo" class="titulo-script">${E(T.cfg("favorito.titulo", f.titulo))}</h2>
         <p class="fav-nome">${E(f.nome)}</p>
-        <p class="fav-texto">${E(f.texto)}</p>
         <div class="fav-rodape">
           <p class="preco-bloco">${c.original > c.preco ? `<s>${T.money(c.original)}</s>` : ""}<span class="preco preco-gd">${T.money(c.preco)}</span></p>
           <button type="button" class="btn btn-vinho" data-act="fav-add">${E(T.t("adicionarAoPedido"))}</button>
         </div>
       </div>
     </article>`;
+};
+/* Foto do favorito: bebida à esquerda, comida à direita (corte diagonal). Sem a foto da comida, só a bebida ocupa o quadro. */
+T.v.favoritoFoto = () => {
+  const box = $("#favorito .fav-foto"), b = box && $(".fav-img-b", box);
+  if (!b) return;
+  const sem = () => { b.remove(); box.classList.add("so-bebida"); };
+  b.addEventListener("error", sem, { once: true });
+  if (b.complete && b.naturalWidth === 0 && b.src) sem();
 };
 T.acts["fav-add"] = () => {
   T.cart.addCombo(T.favorito());

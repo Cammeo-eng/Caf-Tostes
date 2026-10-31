@@ -156,7 +156,8 @@ window.I18N.en = {
     "temporadaSelo": "Spring/Summer",
     "oQueE": "What's this?",
     "escolhaCobertura": "Choose at least 1 topping",
-    "categoriaPausadaAviso": "Waffles are off the menu for now."
+    "categoriaPausadaAviso": "Waffles are off the menu for now.",
+    "favoritoFotoAlt": "Cappuccino with dark chocolate and gratin creamy chicken sandwich"
   },
   "config": {
     "marquee": "coffee to the millimeter ✦ 84+ beans ✦ made to order ✦ Fazenda Rio Grande ✦",

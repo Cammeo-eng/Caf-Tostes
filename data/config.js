@@ -73,7 +73,6 @@ const CONFIG = {
     ],
     // Preço do favorito. null = soma dos itens acima (hoje R$ 26,00). CONFIRMAR.
     preco: null,
-    texto: "TEXTO PROVISÓRIO — explicar o que é o combo e por que é o mais pedido.",
     foto: "assets/fotos/favorito.jpg"
   }
 };
