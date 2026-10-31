@@ -66,7 +66,7 @@ T.L = (function () {
       // aviso de alérgeno no fim do texto ("Contém amendoim.") vira etiqueta própria
       const texto = it.descricao || tx.descricaoCurta;
       const alerg = texto.match(/\s*(Contém [^.]+\.)\s*$/);
-      h += `<p class="sheet-desc">${E(alerg ? texto.slice(0, alerg.index) : texto)}</p>${alerg ? `<p class="alergeno-linha"><span class="alergeno">${E(alerg[1])}</span></p>` : ""}`;
+      h += `<p class="sheet-desc">${E(alerg ? texto.slice(0, alerg.index) : texto)}</p>${alerg ? `<p class="alergeno-linha"><span class="alergeno">${E(alerg[1])}</span></p>` : ""}${T.v.recom(it, "recom-det")}`;
       if (!pedivel) {
         h += `<p class="aviso-balcao">${E(T.t("consulteBalcao"))}</p>`;
       } else {
