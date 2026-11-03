@@ -142,7 +142,8 @@ window.I18N.pt = {
     "escolhaCobertura": "Escolha pelo menos 1 cobertura",
     "categoriaPausadaAviso": "Waffles fora do cardápio por enquanto.",
     "favoritoFotoAlt": "Cappuccino com chocolate meio amargo e sanduíche gratinado de frango",
-    "recomendadoPor": "Recomendação da nossa cliente"
+    "recomendadoPor": "Recomendação da nossa cliente",
+    "itemPausadoAviso": "Um item do seu pedido está indisponível por enquanto e foi retirado."
   },
   "quiz": {
     "textos": {

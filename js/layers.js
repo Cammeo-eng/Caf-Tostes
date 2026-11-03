@@ -330,7 +330,8 @@ T.L = (function () {
         const regra = idx >= 0 ? HARMONIZACAO[idx] : HARMONIZACAO_PADRAO;
         let food = T.item(regra[define.acompanhamento]), reserva = false;
         if (!food && regra.reserva && regra.reserva[define.acompanhamento]) { food = T.item(regra.reserva[define.acompanhamento]); reserva = !!food; }     // original pausado: usa a reserva
-        if (food) acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: idx, reserva };
+        if (!food) { food = T.item(HARMONIZACAO_PADRAO[define.acompanhamento]); if (food) { acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: -1, reserva: false }; } }       // original e reserva indisponíveis: sugestão padrão
+        else acomp = { item: food, tam: T.tamRec(food), sel: T.padroes(food), harm: idx, reserva };
       }
       return { principal: pega(topo), explicacao, alternativas: [segundo, terceiro].filter(Boolean).map(pega), acomp };
     },

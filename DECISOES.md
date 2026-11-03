@@ -175,3 +175,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Croissant na chapa: Julia e R$ 10 (2026-10-31)
 - Preço do `croissants-na-chapa-com-manteiga` passou de R$ 12 para R$ 10. Campo novo `recomendadoPor` (assinatura em Parisienne). Frases: PT "Recomendação da nossa cliente", ES "Recomendación de nuestra clienta", EN "Recommended by our guest".
+
+## Croissant de creme de avelã e morangos indisponível (2026-11-03)
+- `croissants-creme-de-avela-e-morangos` em `CONFIG.itensPausados` (nada apagado). Como ele era a reserva do quiz para a regra "refrescante" (com os waffles pausados) e o doce da regra "herbal", o quiz usa a sugestão padrão (`croissants-creme-de-avela`) quando não há opção disponível. Texto novo: aviso do carrinho `itemPausadoAviso` (PT/EN/ES; EN e ES traduzidos por mim).

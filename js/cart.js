@@ -13,9 +13,12 @@ T.cart = (function () {
   };
   const ouvintes = [];
   // linhas de itens pausados (ex.: waffles) salvas antes da pausa saem do pedido, com aviso
-  const pausado = (id) => T.todosItens[id] && T.pausadas.has(T.todosItens[id].categoria);
+  const pausado = (id) => T.todosItens[id] && !T.itemDisponivel(T.todosItens[id]);
+  const itemAvulso = (id) => T.todosItens[id] && T.itensPausados.has(id);
   const eraPausada = (l) => (l && l.tipo === "combo" ? (l.partes || []).some((p) => pausado(p.id)) : l && pausado(l.id));
-  const avisoPausa = (Array.isArray(salvo.linhas) ? salvo.linhas : []).some(eraPausada);
+  const linhasSalvas = Array.isArray(salvo.linhas) ? salvo.linhas : [];
+  const avisoPausa = linhasSalvas.some(eraPausada);
+  const avisoItem = linhasSalvas.some((l) => l && (l.tipo === "combo" ? (l.partes || []).some((p) => itemAvulso(p.id)) : itemAvulso(l.id)));      // saiu um item avulso (não uma categoria)
 
   function linhaValida(l) {                    // descarta linhas de itens que não existem mais
     if (!l) return false;
@@ -42,6 +45,7 @@ T.cart = (function () {
   const api = {
     st,
     avisoPausa,
+    avisoItem,
     daUrl,
     onChange(f) { ouvintes.push(f); },
 

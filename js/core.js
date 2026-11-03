@@ -24,12 +24,14 @@ T.reduzMovimento = () => window.matchMedia && matchMedia("(prefers-reduced-motio
 T.pausadas = new Set(CONFIG.categoriasPausadas || []);
 T.todosItens = {};                                   // todos os itens, inclusive os pausados (só para reconhecer ids antigos)
 MENU.forEach((i) => { T.todosItens[i.id] = i; });
-T.itemDisponivel = (i) => !!i && !T.pausadas.has(i.categoria);
+T.itensPausados = new Set(CONFIG.itensPausados || []);   // CONFIG.itensPausados: itens avulsos indisponíveis por enquanto
+T.itemDisponivel = (i) => !!i && !T.pausadas.has(i.categoria) && !T.itensPausados.has(i.id);
 // CONFIG.temporada.ativa=false: toda categoria com "sazonal" e os itens dela somem do site (abas, destaque, combos, quiz).
 T.temporadaAtiva = !!(CONFIG.temporada && CONFIG.temporada.ativa);
 (function () {
   const fora = new Set(CATEGORIAS.filter((c) => c.sazonal && !(T.temporadaAtiva && c.sazonal === CONFIG.temporada.id)).map((c) => c.id));
   T.pausadas.forEach((id) => fora.add(id));
+  for (let k = MENU.length - 1; k >= 0; k--) if (T.itensPausados.has(MENU[k].id)) MENU.splice(k, 1);
   if (!fora.size) return;
   for (let k = MENU.length - 1; k >= 0; k--) if (fora.has(MENU[k].categoria)) MENU.splice(k, 1);
   for (let k = CATEGORIAS.length - 1; k >= 0; k--) if (fora.has(CATEGORIAS[k].id)) CATEGORIAS.splice(k, 1);
