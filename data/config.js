@@ -49,6 +49,9 @@ const CONFIG = {
   // Categorias fora do cardápio por enquanto. Para voltar, tire o id da lista.
   categoriasPausadas: ["waffle-mineiro", "waffle-americano"],
 
+  // Itens indisponíveis por enquanto (ids). Nada é apagado; para voltar, tire o id da lista.
+  itensPausados: ["croissants-creme-de-avela-e-morangos"],
+
   // Sticker usado no lugar da foto quando o item ainda não tem foto
   stickerCategoria: {
     "espressos": "tamper", "espressos-com-leite": "xicara-latte", "coados": "filtro-papel",
