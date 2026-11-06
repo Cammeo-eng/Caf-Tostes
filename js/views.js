@@ -102,6 +102,27 @@ T.acts["combo-add"] = (el) => {
   T.toast(T.t("comboAdicionado"), { act: "open-pedido", rotulo: T.t("verPedido") });
 };
 
+/* ---------- destaque dos cafés gelados (site separado) ---------- */
+T.v.gelados = () => {
+  const sec = $("#gelados");
+  if (!CONFIG.gelados) { sec.hidden = true; sec.innerHTML = ""; return; }
+  sec.hidden = false;
+  const fotos = (CONFIG.geladosFotos || []).slice(0, 3);
+  // neve: posições fixas (sem Math.random), cada floco com tamanho, atraso e duração próprios
+  const neve = [[6,3,0,7],[14,2,2.4,8],[23,4,1.2,6.5],[31,2,4,9],[40,3,.6,7.5],[48,2,3.2,8.5],[57,3,1.8,6.8],[66,2,5,9.5],[74,4,.3,7.2],[83,2,2.8,8.2],[91,3,4.4,6.9],[97,2,1,9]];
+  sec.innerHTML = `
+    <a class="gel-card" href="${E(CONFIG.gelados)}" aria-label="${E(T.t("geladosAria"))}">
+      <span class="gel-neve" aria-hidden="true">${neve.map(([x, r, d, t]) => `<i style="left:${x}%;width:${r * 2}px;height:${r * 2}px;animation-delay:-${d}s;animation-duration:${t}s"></i>`).join("")}</span>
+      <span class="gel-txt">
+        <span class="gel-selo"><span class="ponte-floco" aria-hidden="true"></span>${E(T.t("geladosSelo"))}</span>
+        <span class="gel-titulo">${E(T.t("geladosTitulo"))}</span>
+        <span class="gel-texto">${E(T.t("geladosTexto"))}</span>
+        <span class="gel-btn">${E(T.t("geladosBotao"))}<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 10h10M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="gel-copos" aria-hidden="true">${fotos.map((f, i) => `<img class="gel-copo c${i}" src="${E(f)}" alt="" decoding="async" onerror="this.remove()">`).join("")}</span>
+    </a>`;
+};
+
 /* ---------- destaque da temporada (Primavera/Verão) ---------- */
 T.v.temporada = () => {
   const sec = $("#temporada"), t = CONFIG.temporada;
@@ -224,7 +245,7 @@ T.v.cardapio = (grupo) => {
   if (!ativa[grupo] || !cats.some((c) => c.id === ativa[grupo])) ativa[grupo] = cats[0].id;    // ao trocar de idioma, mantém a categoria aberta
   const abas = $(`#${grupo} .tabs`), rolagem = abas ? abas.scrollLeft : 0;
   $("#" + grupo).innerHTML = `
-    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2><img class="sticker-grupo" src="assets/ilustracoes/stickers/${grupo === "bebidas" ? "xicara-latte" : "croissant"}.svg" alt="" width="32" height="32">${grupo === "bebidas" && CONFIG.gelados ? `<a class="ponte-gelados" href="${E(CONFIG.gelados)}" aria-label="${E(T.t("geladosAria"))}"><span class="ponte-floco" aria-hidden="true"></span><span>${E(T.t("geladosBotao"))}</span></a>` : ""}</div>
+    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2><img class="sticker-grupo" src="assets/ilustracoes/stickers/${grupo === "bebidas" ? "xicara-latte" : "croissant"}.svg" alt="" width="32" height="32"></div>
     <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="${E(T.t("categoriasAria"))}">
       ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${c.sazonal ? `<span class="tab-sazonal" aria-hidden="true">✦</span> ` : ""}${E(T.catTxt(c).nome)}</button>`).join("")}
     </div></div>

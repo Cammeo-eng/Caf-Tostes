@@ -12,6 +12,7 @@
     T.v.favoritoFoto();
     T.v.promo();
     T.v.temporada();
+    T.v.gelados();
     T.v.quizCard();
     T.v.cardapio("bebidas");                       // mantém a categoria aberta
     T.v.cardapio("comidas");
@@ -28,6 +29,7 @@
   T.v.favoritoFoto();
   T.v.promo();
   T.v.temporada();
+  T.v.gelados();
   T.v.quizCard();
   T.v.cardapio("bebidas");
   T.v.cardapio("comidas");
