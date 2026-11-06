@@ -269,6 +269,7 @@ T.L = (function () {
       <div class="menu-idiomas" role="group" aria-label="${E(T.t("idioma"))}"><span>${E(T.t("idioma"))}</span><div>${T.v.seletorIdioma(true)}</div></div>
       <ul class="menu-lista">
         ${link(E(T.t("menuCardapio")), "m-ir", "bebidas")}
+        ${CONFIG.gelados ? `<li><a class="menu-gelados" href="${E(CONFIG.gelados)}"><span class="ponte-floco" aria-hidden="true"></span>${E(T.t("menuGelados"))}</a></li>` : ""}
         ${link(E(T.t("menuQuiz")), "m-abrir", "quiz")}
         ${link(E(T.t("menuAulas")), "m-ir", "aulas")}
         ${link(E(T.t("menuChapeu")), "m-abrir", "chapeu")}

@@ -224,7 +224,7 @@ T.v.cardapio = (grupo) => {
   if (!ativa[grupo] || !cats.some((c) => c.id === ativa[grupo])) ativa[grupo] = cats[0].id;    // ao trocar de idioma, mantém a categoria aberta
   const abas = $(`#${grupo} .tabs`), rolagem = abas ? abas.scrollLeft : 0;
   $("#" + grupo).innerHTML = `
-    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2><img class="sticker-grupo" src="assets/ilustracoes/stickers/${grupo === "bebidas" ? "xicara-latte" : "croissant"}.svg" alt="" width="32" height="32"></div>
+    <div class="cardapio-topo"><h2 id="${grupo}-titulo" class="titulo">${E(T.t(GRUPOS[grupo]))}</h2><img class="sticker-grupo" src="assets/ilustracoes/stickers/${grupo === "bebidas" ? "xicara-latte" : "croissant"}.svg" alt="" width="32" height="32">${grupo === "bebidas" && CONFIG.gelados ? `<a class="ponte-gelados" href="${E(CONFIG.gelados)}" aria-label="${E(T.t("geladosAria"))}"><span class="ponte-floco" aria-hidden="true"></span><span>${E(T.t("geladosBotao"))}</span></a>` : ""}</div>
     <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="${E(T.t("categoriasAria"))}">
       ${cats.map((c) => `<button type="button" role="tab" class="tab" id="tab-${c.id}" aria-selected="${c.id === ativa[grupo]}" data-act="cat" data-grupo="${grupo}" data-cat="${c.id}">${c.sazonal ? `<span class="tab-sazonal" aria-hidden="true">✦</span> ` : ""}${E(T.catTxt(c).nome)}</button>`).join("")}
     </div></div>

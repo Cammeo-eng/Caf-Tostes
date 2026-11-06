@@ -178,3 +178,8 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Croissant de creme de avelã e morangos indisponível (2026-11-03)
 - `croissants-creme-de-avela-e-morangos` em `CONFIG.itensPausados` (nada apagado). Como ele era a reserva do quiz para a regra "refrescante" (com os waffles pausados) e o doce da regra "herbal", o quiz usa a sugestão padrão (`croissants-creme-de-avela`) quando não há opção disponível. Texto novo: aviso do carrinho `itemPausadoAviso` (PT/EN/ES; EN e ES traduzidos por mim).
+
+## Ponte para o cardápio dos gelados (2026-11-06)
+- Os cafés gelados ficam num site separado (`CONFIG.gelados`: https://cammeo-eng.github.io/tostesgelados-/). No título "Bebidas" entrou uma pílula verde-musgo com floco de neve ("Gelados") que abre esse site na mesma aba, e o menu de três tracinhos ganhou o link "Cafés gelados" logo abaixo de "Cardápio". O floco é uma gravura nova (`assets/ilustracoes/floco.svg`, traço de 1,4 px) usada como máscara creme.
+- Textos novos (`geladosBotao`, `geladosAria`, `menuGelados`) em PT, EN e ES; EN e ES traduzidos por mim. O site dos gelados é só em português.
+- O site dos gelados ganhou um botão de volta para este cardápio.
