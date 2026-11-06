@@ -24,6 +24,9 @@ const CONFIG = {
   instagram: { usuario: "@tostes_co", url: "https://www.instagram.com/tostes_co" },
   avaliacaoGoogle: "https://g.page/r/CXD8XVyDVQdyEBM/review",
 
+  // Cardápio dos cafés gelados (site separado). Botão com floco de neve em "Bebidas" e link no menu.
+  gelados: "https://cammeo-eng.github.io/tostesgelados-/",
+
   // Horário de funcionamento (fuso America/Sao_Paulo). null = fechado.
   horarios: {
     seg: ["09:00", "19:30"], ter: ["09:00", "19:30"], qua: ["09:00", "19:30"],

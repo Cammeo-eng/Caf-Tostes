@@ -760,3 +760,23 @@ span.tex { content: none; }
 .recom-nome { font-family: "Parisienne", "Brush Script MT", cursive; font-size: 24px; line-height: 1.1; color: var(--vinho); display: inline-flex; align-items: center; gap: 5px; }
 .recom-nome svg { flex: none; color: var(--vinho); align-self: center; margin-top: 4px; }
 .recom-det { margin: 4px 0 14px; }
+
+/* ponte para o cardápio dos gelados: pílula verde-musgo com floco de neve (só cores da paleta) */
+.cardapio-topo:has(.ponte-gelados) .sticker-grupo { margin-right: auto; }
+.ponte-gelados {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 12px; flex: none;
+  border-radius: 99px; background: var(--musgo); color: var(--creme); text-decoration: none;
+  font-family: var(--f-texto, "DM Sans", sans-serif); font-weight: 600; font-size: 15px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--musgo) 25%, transparent);
+  transition: transform .15s ease;
+}
+.ponte-gelados:active { transform: scale(.96); }
+.ponte-floco {
+  display: inline-block; width: 22px; height: 22px; flex: none; background: currentColor;
+  -webkit-mask: url("../assets/ilustracoes/floco.svg") center / contain no-repeat; mask: url("../assets/ilustracoes/floco.svg") center / contain no-repeat;
+  animation: floco-gira 9s linear infinite;
+}
+@keyframes floco-gira { to { transform: rotate(360deg); } }
+.menu-lista .menu-gelados { gap: 12px; }
+.menu-gelados .ponte-floco { width: 26px; height: 26px; }
+@media (prefers-reduced-motion: reduce) { .ponte-floco { animation: none; } }
