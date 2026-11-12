@@ -188,3 +188,6 @@ Formato: data · assunto · decisão · quem decidiu.
 ## Waffle Mineiro volta; croissant avelã/morangos e smoothies pausados (2026-11-12)
 - `categoriasPausadas: ["waffle-americano"]`; `temporada.ativa: false`; `itensPausados` já tinha o croissant (feito em 3/11). Reserva herbal/doce = `croissants-creme-de-avela`. Aviso do carrinho agora cobre também itens de temporada. EN/ES do aviso: "This item is off the menu for now." / "Este artículo está fuera del menú por ahora." (traduzidos por mim).
 - O croissant também é reserva da regra refrescante (para o waffle mineiro, hoje disponível): se o mineiro for pausado de novo, cai na sugestão padrão.
+
+## Croissant de creme de avelã e morangos volta (2026-11-12)
+- `itensPausados: []`: o item voltou para Croissants Doces (pedido do Fabrício). O mecanismo de itens pausados continua pronto.
