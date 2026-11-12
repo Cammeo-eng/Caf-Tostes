@@ -14,7 +14,7 @@ T.cart = (function () {
   const ouvintes = [];
   // linhas de itens pausados (ex.: waffles) salvas antes da pausa saem do pedido, com aviso
   const pausado = (id) => T.todosItens[id] && !T.itemDisponivel(T.todosItens[id]);
-  const itemAvulso = (id) => T.todosItens[id] && T.itensPausados.has(id);
+  const itemAvulso = (id) => T.todosItens[id] && !T.pausadas.has(T.todosItens[id].categoria) && !T.itemDisponivel(T.todosItens[id]);     // item avulso ou de temporada (não de categoria pausada)
   const eraPausada = (l) => (l && l.tipo === "combo" ? (l.partes || []).some((p) => pausado(p.id)) : l && pausado(l.id));
   const linhasSalvas = Array.isArray(salvo.linhas) ? salvo.linhas : [];
   const avisoPausa = linhasSalvas.some(eraPausada);

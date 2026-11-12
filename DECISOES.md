@@ -184,3 +184,7 @@ Formato: data · assunto · decisão · quem decidiu.
 - A primeira versão (pílula "Gelados" ao lado do título Bebidas) passava despercebida e foi trocada pelo destaque `#gelados`: card marrom terra entre a temporada (musgo) e o cardápio (creme), com neve creme caindo, selo "Novo cardápio", título, texto, botão creme/vinho "Ver os gelados" e três copos recortados flutuando (`CONFIG.geladosFotos`, em `assets/fotos/gelados/`, webp com fundo transparente). O card inteiro é o link. Neve com posições fixas; tudo parado com `prefers-reduced-motion`.
 - Textos novos (`geladosSelo`, `geladosTitulo`, `geladosTexto`, `geladosBotao`, `geladosAria`, `menuGelados`) em PT, EN e ES; EN e ES traduzidos por mim (em espanhol "Bebidas heladas", porque "helados" sozinho é sorvete). O site dos gelados é só em português.
 - O site dos gelados ganhou um botão de volta para este cardápio.
+
+## Waffle Mineiro volta; croissant avelã/morangos e smoothies pausados (2026-11-12)
+- `categoriasPausadas: ["waffle-americano"]`; `temporada.ativa: false`; `itensPausados` já tinha o croissant (feito em 3/11). Reserva herbal/doce = `croissants-creme-de-avela`. Aviso do carrinho agora cobre também itens de temporada. EN/ES do aviso: "This item is off the menu for now." / "Este artículo está fuera del menú por ahora." (traduzidos por mim).
+- O croissant também é reserva da regra refrescante (para o waffle mineiro, hoje disponível): se o mineiro for pausado de novo, cai na sugestão padrão.

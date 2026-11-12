@@ -172,7 +172,7 @@ const QUIZ_PERGUNTAS = [
 // "reserva": usada só quando o item original está pausado (CONFIG.categoriasPausadas); {salgado?, doce?, texto?}.
 const HARMONIZACAO = [
   { etiqueta: "herbal",      salgado: "waffle-mineiro-tradicional",         doce: "croissants-creme-de-avela-e-morangos",  texto: "O pão de queijo equilibra o herbal do matcha.",
-    reserva: { salgado: "croissants-2-queijos-gratinado", texto: "O queijo gratinado equilibra o herbal do matcha." } },
+    reserva: { salgado: "croissants-2-queijos-gratinado", doce: "croissants-creme-de-avela", texto: "O queijo gratinado equilibra o herbal do matcha." } },
   { etiqueta: "especiarias", salgado: "gratinados-croque-monsieur",         doce: "croissants-doce-de-leite-com-banana",   texto: "Banana e canela são parceiras antigas." },
   { etiqueta: "refrescante", salgado: "croissants-presunto-queijo-e-tomate", doce: "waffle-mineiro-morangos-e-avela",      texto: "Uma bebida leve pede um acompanhamento fresco.",
     reserva: { doce: "croissants-creme-de-avela-e-morangos" } },

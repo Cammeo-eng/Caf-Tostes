@@ -165,7 +165,7 @@ window.I18N.es = {
     "categoriaPausadaAviso": "Los waffles están fuera del menú por ahora.",
     "favoritoFotoAlt": "Capuchino con chocolate semiamargo y sándwich gratinado de pollo cremoso",
     "recomendadoPor": "Recomendación de nuestra clienta",
-    "itemPausadoAviso": "Un artículo de tu pedido no está disponible por ahora y se retiró."
+    "itemPausadoAviso": "Este artículo está fuera del menú por ahora."
   },
   "config": {
     "marquee": "café al milímetro ✦ granos 84+ ✦ hecho al momento ✦ Fazenda Rio Grande ✦",
