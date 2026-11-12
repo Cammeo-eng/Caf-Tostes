@@ -25,7 +25,8 @@ T.pausadas = new Set(CONFIG.categoriasPausadas || []);
 T.todosItens = {};                                   // todos os itens, inclusive os pausados (só para reconhecer ids antigos)
 MENU.forEach((i) => { T.todosItens[i.id] = i; });
 T.itensPausados = new Set(CONFIG.itensPausados || []);   // CONFIG.itensPausados: itens avulsos indisponíveis por enquanto
-T.itemDisponivel = (i) => !!i && !T.pausadas.has(i.categoria) && !T.itensPausados.has(i.id);
+T.sazonaisFora = new Set(CATEGORIAS.filter((c) => c.sazonal && !(CONFIG.temporada && CONFIG.temporada.ativa && c.sazonal === CONFIG.temporada.id)).map((c) => c.id));   // categorias de temporada desligada
+T.itemDisponivel = (i) => !!i && !T.pausadas.has(i.categoria) && !T.sazonaisFora.has(i.categoria) && !T.itensPausados.has(i.id);
 // CONFIG.temporada.ativa=false: toda categoria com "sazonal" e os itens dela somem do site (abas, destaque, combos, quiz).
 T.temporadaAtiva = !!(CONFIG.temporada && CONFIG.temporada.ativa);
 (function () {

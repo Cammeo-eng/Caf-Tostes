@@ -52,7 +52,7 @@ const CONFIG = {
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
 
   // Categorias fora do cardápio por enquanto. Para voltar, tire o id da lista.
-  categoriasPausadas: ["waffle-mineiro", "waffle-americano"],
+  categoriasPausadas: ["waffle-americano"],
 
   // Itens indisponíveis por enquanto (ids). Nada é apagado; para voltar, tire o id da lista.
   itensPausados: ["croissants-creme-de-avela-e-morangos"],
@@ -68,7 +68,7 @@ const CONFIG = {
   },
 
   // Temporada: quando ativa=false, a categoria sazonal some do site inteiro
-  temporada: { ativa: true, id: "primavera-verao", categoria: "smoothies" },
+  temporada: { ativa: false, id: "primavera-verao", categoria: "smoothies" },
 
   // O pedido favorito (destaque no topo)
   favorito: {
