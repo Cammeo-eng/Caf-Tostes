@@ -55,7 +55,7 @@ const CONFIG = {
   categoriasPausadas: ["waffle-americano"],
 
   // Itens indisponíveis por enquanto (ids). Nada é apagado; para voltar, tire o id da lista.
-  itensPausados: ["croissants-creme-de-avela-e-morangos"],
+  itensPausados: [],
 
   // Sticker usado no lugar da foto quando o item ainda não tem foto
   stickerCategoria: {
