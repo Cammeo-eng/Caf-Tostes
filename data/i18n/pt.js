@@ -104,7 +104,7 @@ window.I18N.pt = {
     "horarioSabado": "Sábado, 9h às 15h",
     "horarioDomingo": "Domingo, fechado",
     "historiaChapeu": "Conheça a história por trás do chapéu →",
-    "legendaChapeu": "Colheita de café no começo do século 20.",
+    "legendaChapeu": "Os avós que inspiraram a TOSTES café.",
     "fotoIndisponivel": "Foto em breve",
     "erroCarregar": "Não foi possível carregar o cardápio.",
     "tentarNovamente": "Tentar de novo",
@@ -149,7 +149,10 @@ window.I18N.pt = {
     "categoriaPausadaAviso": "Waffles fora do cardápio por enquanto.",
     "favoritoFotoAlt": "Cappuccino com chocolate meio amargo e sanduíche gratinado de frango",
     "recomendadoPor": "Recomendação da nossa cliente",
-    "itemPausadoAviso": "Este item está fora do cardápio por enquanto."
+    "itemPausadoAviso": "Este item está fora do cardápio por enquanto.",
+    "chapeuTexto1": "Este café foi inspirado nos nossos avós e em todos os trabalhadores e trabalhadoras que ajudam o café a chegar a cada xícara.",
+    "chapeuTexto2": "O chapéu de palha é o símbolo dessa história: ele lembra de onde vem tudo, da terra, do sol e do trabalho de muitas mãos.",
+    "chapeuTexto3": "Cada xícara que sai daqui carrega um pouco disso. Obrigado por fazer parte dessa história."
   },
   "quiz": {
     "textos": {

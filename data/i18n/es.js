@@ -120,7 +120,7 @@ window.I18N.es = {
     "horarioSabado": "Sábado, de 9:00 a 15:00",
     "horarioDomingo": "Domingo, cerrado",
     "historiaChapeu": "Conoce la historia detrás del sombrero →",
-    "legendaChapeu": "Cosecha de café a principios del siglo XX.",
+    "legendaChapeu": "Los abuelos que inspiraron TOSTES café.",
     "fotoIndisponivel": "Foto próximamente",
     "erroCarregar": "No pudimos cargar el menú.",
     "tentarNovamente": "Intentar de nuevo",
@@ -165,7 +165,10 @@ window.I18N.es = {
     "categoriaPausadaAviso": "Los waffles están fuera del menú por ahora.",
     "favoritoFotoAlt": "Capuchino con chocolate semiamargo y sándwich gratinado de pollo cremoso",
     "recomendadoPor": "Recomendación de nuestra clienta",
-    "itemPausadoAviso": "Este artículo está fuera del menú por ahora."
+    "itemPausadoAviso": "Este artículo está fuera del menú por ahora.",
+    "chapeuTexto1": "Este café se inspiró en nuestros abuelos y en todos los trabajadores y trabajadoras que ayudan a que el café llegue a cada taza.",
+    "chapeuTexto2": "El sombrero de paja es el símbolo de esta historia: nos recuerda de dónde viene todo, la tierra, el sol y el trabajo de muchas manos.",
+    "chapeuTexto3": "Cada taza que sale de aquí lleva un poco de eso. Gracias por ser parte de esta historia."
   },
   "config": {
     "marquee": "café al milímetro ✦ granos 84+ ✦ hecho al momento ✦ Fazenda Rio Grande ✦",

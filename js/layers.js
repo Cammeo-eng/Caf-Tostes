@@ -525,14 +525,14 @@ T.L = (function () {
   /* ===== por trás do chapéu ===== */
   build.chapeu = () => {
     const el = camada("chapeu", "layer-tela layer-creme", T.t("menuChapeu"));
-    // TEXTO PROVISÓRIO — o dono vai substituir.
     el.innerHTML = `
       <div class="tela-topo"><h2 class="titulo">${E(T.t("menuChapeu"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div>
       <div class="tela-scroll chapeu-corpo">
-        <div class="chapeu-foto">${T.foto("assets/fotos/chapeu-historia.jpg", T.t("legendaChapeu"), "bebidas", 480, 360)}</div>
+        <div class="chapeu-foto">${T.foto("assets/fotos/chapeu-historia.jpg", T.t("legendaChapeu"), "bebidas", 480, 600)}</div>
         ${T.ilus("chapeu", "chapeu-gd")}
-        <p>O chapéu da nossa marca é uma homenagem ao avô do fundador, Lucas Tostes, e a todos os trabalhadores e trabalhadoras que passam o dia no sol para o café chegar até a xícara.</p>
-        <p>Cada café que sai daqui carrega um pouco desse trabalho. Obrigado por fazer parte dessa história.</p>
+        <p>${E(T.t("chapeuTexto1"))}</p>
+        <p>${E(T.t("chapeuTexto2"))}</p>
+        <p class="chapeu-fecho">${E(T.t("chapeuTexto3"))}</p>
         <button type="button" class="btn btn-vinho btn-bloco" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button>
       </div>`;
     return el;

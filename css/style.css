@@ -316,7 +316,7 @@ h2.titulo { font-size: 32px; }
 
 .chapeu-corpo { display: grid; gap: 18px; text-align: center; }
 .chapeu-corpo p { margin: 0; font-size: 18px; }
-.chapeu-foto { aspect-ratio: 4 / 3; border-radius: 28px; overflow: hidden; background: var(--musgo-claro); }
+.chapeu-foto { aspect-ratio: 4 / 5; border-radius: 28px; overflow: hidden; background: var(--musgo-claro); }
 .chapeu-gd { width: 170px; height: auto; margin: 0 auto; }
 
 /* ----- tela de carregamento ----- */
@@ -818,3 +818,10 @@ span.tex { content: none; }
   .ponte-floco, .gel-neve i, .gel-copo { animation: none !important; }
   .gel-neve i { top: auto; bottom: 30%; }
 }
+
+/* página "Por trás do chapéu": foto retrato dos avós */
+.chapeu-foto .foto-img { object-position: 50% 15%; }
+.chapeu-corpo .chapeu-fecho { font-weight: 600; color: var(--vinho); }
+.chapeu-foto { position: relative; width: 100%; }
+.chapeu-foto .foto-img, .chapeu-foto .ph { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chapeu-foto { aspect-ratio: auto; height: 0; padding-bottom: 125%; }
