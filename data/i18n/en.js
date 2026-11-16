@@ -120,7 +120,7 @@ window.I18N.en = {
     "horarioSabado": "Saturday, 9 am to 3 pm",
     "horarioDomingo": "Sunday, closed",
     "historiaChapeu": "The story behind the hat →",
-    "legendaChapeu": "Coffee harvest in the early 20th century.",
+    "legendaChapeu": "The grandparents who inspired TOSTES café.",
     "fotoIndisponivel": "Photo coming soon",
     "erroCarregar": "We couldn't load the menu.",
     "tentarNovamente": "Try again",
@@ -165,7 +165,10 @@ window.I18N.en = {
     "categoriaPausadaAviso": "Waffles are off the menu for now.",
     "favoritoFotoAlt": "Cappuccino with dark chocolate and gratin creamy chicken sandwich",
     "recomendadoPor": "Recommended by our guest",
-    "itemPausadoAviso": "This item is off the menu for now."
+    "itemPausadoAviso": "This item is off the menu for now.",
+    "chapeuTexto1": "This coffee was inspired by our grandparents and by all the workers who help coffee reach every cup.",
+    "chapeuTexto2": "The straw hat is the symbol of this story: it reminds us where everything comes from, the land, the sun and the work of many hands.",
+    "chapeuTexto3": "Every cup that leaves here carries a little of that. Thank you for being part of this story."
   },
   "config": {
     "marquee": "coffee to the millimeter ✦ 84+ beans ✦ made to order ✦ Fazenda Rio Grande ✦",

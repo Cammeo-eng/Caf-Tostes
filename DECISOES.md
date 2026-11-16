@@ -197,3 +197,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Gelados de Café fora do cardápio (2026-11-16)
 - Categoria `gelados` em `categoriasPausadas` (nada apagado; para voltar, tirar o id). Os gelados agora ficam no cardápio dedicado (destaque e link já existentes). O Limon Gelado (categoria Autorais) continua aqui. Sem gelados nos combos, na promoção e no quiz (testeQuiz sem resultado: 0).
+
+## Nossa história: foto dos avós (2026-11-16)
+- Foto dos avós na página "Por trás do chapéu" e texto novo escrito por mim a partir do que o Fabrício pediu (inspirado nos avós e nos trabalhadores; chapéu = de onde vem tudo). Textos em EN/ES também escritos por mim. O texto antigo (que citava o fundador) saiu. A foto virou retrato 4:5; o quadro usa padding-bottom por causa de um problema de altura de grid na tela.
