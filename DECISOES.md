@@ -191,3 +191,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Croissant de creme de avelã e morangos volta (2026-11-12)
 - `itensPausados: []`: o item voltou para Croissants Doces (pedido do Fabrício). O mecanismo de itens pausados continua pronto.
+
+## Pedido nunca salvo (2026-11-16)
+- Carrinho só em memória; sem `sessionStorage`. Depois de abrir o WhatsApp o carrinho esvazia (e as observações), com o aviso "Pedido aberto no WhatsApp" na tela. Se o WhatsApp não abrir de verdade, o cliente precisa montar o pedido de novo (aceito para evitar reenvio por engano). O nome digitado fica só até recarregar.
