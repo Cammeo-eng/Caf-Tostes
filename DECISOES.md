@@ -194,3 +194,6 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Pedido nunca salvo (2026-11-16)
 - Carrinho só em memória; sem `sessionStorage`. Depois de abrir o WhatsApp o carrinho esvazia (e as observações), com o aviso "Pedido aberto no WhatsApp" na tela. Se o WhatsApp não abrir de verdade, o cliente precisa montar o pedido de novo (aceito para evitar reenvio por engano). O nome digitado fica só até recarregar.
+
+## Gelados de Café fora do cardápio (2026-11-16)
+- Categoria `gelados` em `categoriasPausadas` (nada apagado; para voltar, tirar o id). Os gelados agora ficam no cardápio dedicado (destaque e link já existentes). O Limon Gelado (categoria Autorais) continua aqui. Sem gelados nos combos, na promoção e no quiz (testeQuiz sem resultado: 0).

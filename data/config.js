@@ -52,7 +52,7 @@ const CONFIG = {
   promocao: { ativa: true, desconto: 0.10, combos: 2 },
 
   // Categorias fora do cardápio por enquanto. Para voltar, tire o id da lista.
-  categoriasPausadas: ["waffle-americano"],
+  categoriasPausadas: ["waffle-americano", "gelados"],
 
   // Itens indisponíveis por enquanto (ids). Nada é apagado; para voltar, tire o id da lista.
   itensPausados: [],
