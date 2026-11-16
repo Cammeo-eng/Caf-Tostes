@@ -2,30 +2,24 @@
 "use strict";
 
 T.cart = (function () {
-  const KEY = "tostes.pedido";
-  const salvo = T.store.get(KEY) || {};
+  // O pedido NUNCA fica salvo: só existe na memória desta página. Ao recarregar ou voltar outro dia, o carrinho começa vazio,
+  // para ninguém reenviar um pedido antigo por engano. (Limpa também o que versões antigas do site tinham guardado.)
+  try { sessionStorage.removeItem("tostes.pedido"); } catch (e) { /* sem storage */ }
   const st = {
-    linhas: Array.isArray(salvo.linhas) ? salvo.linhas.filter((l) => linhaValida(l)) : [],
-    modo: salvo.modo === "mesa" ? "mesa" : "viagem",         // "viagem" = Levar pra viagem
-    mesa: salvo.mesa || null,
-    nome: salvo.nome || "",
-    obs: salvo.obs || ""
+    linhas: [],
+    modo: "viagem",                                          // "viagem" = Levar pra viagem
+    mesa: null,
+    nome: "",
+    obs: ""
   };
   const ouvintes = [];
-  // linhas de itens pausados (ex.: waffles) salvas antes da pausa saem do pedido, com aviso
-  const pausado = (id) => T.todosItens[id] && !T.itemDisponivel(T.todosItens[id]);
-  const itemAvulso = (id) => T.todosItens[id] && !T.pausadas.has(T.todosItens[id].categoria) && !T.itemDisponivel(T.todosItens[id]);     // item avulso ou de temporada (não de categoria pausada)
-  const eraPausada = (l) => (l && l.tipo === "combo" ? (l.partes || []).some((p) => pausado(p.id)) : l && pausado(l.id));
-  const linhasSalvas = Array.isArray(salvo.linhas) ? salvo.linhas : [];
-  const avisoPausa = linhasSalvas.some(eraPausada);
-  const avisoItem = linhasSalvas.some((l) => l && (l.tipo === "combo" ? (l.partes || []).some((p) => itemAvulso(p.id)) : itemAvulso(l.id)));      // saiu um item avulso (não uma categoria)
 
   function linhaValida(l) {                    // descarta linhas de itens que não existem mais
     if (!l) return false;
     if (l.tipo === "combo") return l.partes && l.partes.every((p) => T.item(p.id) && T.item(p.id).tamanhos[p.tam]);
     return T.item(l.id) && T.item(l.id).tamanhos[l.tam];
   }
-  function salvar() { T.store.set(KEY, st); ouvintes.forEach((f) => f()); }
+  function salvar() { ouvintes.forEach((f) => f()); }
 
   // Mesa vinda do QR code: ?mesa=3 (valores fora de 1..CONFIG.mesas são ignorados)
   function mesaDaUrl() {
@@ -44,8 +38,6 @@ T.cart = (function () {
 
   const api = {
     st,
-    avisoPausa,
-    avisoItem,
     daUrl,
     onChange(f) { ouvintes.push(f); },
 
@@ -73,7 +65,8 @@ T.cart = (function () {
     },
     remover(i) { st.linhas.splice(i, 1); salvar(); },
     limpar() { st.linhas = []; salvar(); },
-    set(campo, v, mudo) { st[campo] = v; if (mudo) T.store.set(KEY, st); else salvar(); },   // mudo = não avisa a tela (digitação)
+    enviado() { st.linhas = []; st.obs = ""; salvar(); },      // depois de abrir o WhatsApp o pedido sai do carrinho (não dá para reenviar sem querer)
+    set(campo, v, mudo) { st[campo] = v; if (!mudo) salvar(); },   // mudo = não avisa a tela (digitação)
 
     valores(l) {                               // unitário original e unitário cobrado
       if (l.tipo === "combo") return { original: l.original, preco: l.preco };
@@ -131,6 +124,5 @@ T.cart = (function () {
     },
     urlWhatsApp() { return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(api.mensagem()); }
   };
-  if (avisoPausa) salvar();                    // grava o pedido já sem os itens pausados
   return api;
 })();

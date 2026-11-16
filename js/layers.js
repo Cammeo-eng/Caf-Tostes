@@ -176,7 +176,7 @@ T.L = (function () {
       const sc = $(".tela-scroll", el), y = sc ? sc.scrollTop : 0;
       let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("seuPedido"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll"><span class="mancha-xic" aria-hidden="true"></span>`;
       if (!st.linhas.length) {
-        h += `<div class="vazio">${T.ilus("chapeu", "vazio-ilus")}<p>${E(T.t("pedidoVazio"))}</p><button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
+        h += `<div class="vazio">${T.ilus("chapeu", "vazio-ilus")}${el._enviado ? "" : `<p>${E(T.t("pedidoVazio"))}</p>`}<button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
       } else {
         h += `<ul class="linhas">${st.linhas.map((l, i) => {
           const v = c.valores(l);
@@ -225,7 +225,7 @@ T.L = (function () {
       el.innerHTML = h;
       const ns = $(".tela-scroll", el);
       if (ns) ns.scrollTop = y;
-      if (el._enviado && st.linhas.length) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status">${E(T.t("pedidoAberto"))}<small>${E(T.cfg("instagramConvite.aposPedido", CONFIG.instagramConvite.aposPedido))}</small></div>`);
+      if (el._enviado) ns.insertAdjacentHTML("afterbegin", `<div class="enviado" role="status">${E(T.t("pedidoAberto"))}<small>${E(T.cfg("instagramConvite.aposPedido", CONFIG.instagramConvite.aposPedido))}</small></div>`);
       const n = $("#c-nome", el), o = $("#c-obs", el);
       if (n) n.addEventListener("input", () => {
         c.set("nome", n.value, true);                          // digitando não redesenha a tela; só atualiza o botão
@@ -256,7 +256,9 @@ T.L = (function () {
     window.open(T.cart.urlWhatsApp(), "_blank", "noopener");
     T.v.confete();
     const el = $('.layer[data-name="pedido"]');
-    if (el) { el._enviado = true; el._render(); const sc = $(".tela-scroll", el); if (sc) sc.scrollTop = 0; }
+    if (el) el._enviado = true;
+    T.cart.enviado();                                   // tira o pedido do carrinho (a mensagem já foi aberta no WhatsApp)
+    if (el) { el._render(); const sc = $(".tela-scroll", el); if (sc) sc.scrollTop = 0; }
   };
   T.acts["ver-cardapio"] = () => api.irPara("bebidas");
 
