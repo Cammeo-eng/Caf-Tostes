@@ -175,7 +175,7 @@ T.L = (function () {
       const c = T.cart, st = c.st, t = c.totais();
       const sc = $(".tela-scroll", el), y = sc ? sc.scrollTop : 0;
       let h = `<div class="tela-topo"><h2 class="titulo">${E(T.t("seuPedido"))}</h2><button type="button" class="fechar-tela" data-act="back" aria-label="${E(T.t("fechar"))}">×</button></div><div class="tela-scroll"><span class="mancha-xic" aria-hidden="true"></span>`;
-      if (!st.linhas.length) {
+      if (c.vazio()) {
         h += `<div class="vazio">${T.ilus("chapeu", "vazio-ilus")}${el._enviado ? "" : `<p>${E(T.t("pedidoVazio"))}</p>`}<button type="button" class="btn btn-vinho" data-act="ver-cardapio">${E(T.t("verCardapio"))}</button></div>`;
       } else {
         h += `<ul class="linhas">${st.linhas.map((l, i) => {
@@ -200,7 +200,16 @@ T.L = (function () {
               </div>
               <button type="button" class="link-rm" data-act="c-rm" data-i="${i}">${E(T.t("remover"))}</button>
             </div></li>`;
-        }).join("")}</ul>
+        }).join("")}${st.outras.map((o, i) => `<li class="linha linha-outra">
+            <div class="linha-topo"><p class="linha-nome"><b>${o.qtd}x</b> ${E(o.texto)}</p>
+              <p class="linha-preco"><strong>${T.money(T.r2(o.preco * o.qtd))}</strong></p></div>
+            <p class="linha-det">${E(T.t("daGelados"))}</p>
+            <div class="linha-acoes">
+              <div class="stepper stepper-p" role="group" aria-label="${E(T.t("quantidade"))}">
+                <button type="button" data-act="c-qtd-o" data-i="${i}" data-d="-1" aria-label="${E(T.t("diminuir"))}">−</button><output>${o.qtd}</output><button type="button" data-act="c-qtd-o" data-i="${i}" data-d="1" aria-label="${E(T.t("aumentar"))}">+</button>
+              </div>
+              <button type="button" class="link-rm" data-act="c-rm-o" data-i="${i}">${E(T.t("remover"))}</button>
+            </div></li>`).join("")}</ul>
         <dl class="resumo">
           <div><dt>${E(T.t("subtotal"))}</dt><dd>${T.money(t.subtotal)}</dd></div>
           ${t.desconto > 0 ? `<div><dt>${E(T.t("desconto"))}</dt><dd>−${T.money(t.desconto)}</dd></div>` : ""}
@@ -242,6 +251,8 @@ T.L = (function () {
   const semEnviado = () => { const el = $('.layer[data-name="pedido"]'); if (el) el._enviado = false; };
   T.acts["c-qtd"] = (b) => { semEnviado(); T.cart.setQtd(+b.dataset.i, +b.dataset.d); };
   T.acts["c-rm"] = (b) => { semEnviado(); T.cart.remover(+b.dataset.i); };
+  T.acts["c-qtd-o"] = (b) => { semEnviado(); T.cart.setQtdOutra(+b.dataset.i, +b.dataset.d); };
+  T.acts["c-rm-o"] = (b) => { semEnviado(); T.cart.removerOutra(+b.dataset.i); };
   T.acts["c-modo"] = (b) => { T.cart.st.modo = b.dataset.m; if (b.dataset.m === "viagem") T.cart.st.mesa = null; T.cart.set("modo", b.dataset.m); };
   T.acts["c-mesa"] = (b) => T.cart.set("mesa", +b.dataset.n);
   T.acts["c-limpar"] = () => { if (confirm(T.t("confirmaLimpar"))) T.cart.limpar(); };

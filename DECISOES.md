@@ -200,3 +200,9 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## Nossa história: foto dos avós (2026-11-16)
 - Foto dos avós na página "Por trás do chapéu" e texto novo escrito por mim a partir do que o Fabrício pediu (inspirado nos avós e nos trabalhadores; chapéu = de onde vem tudo). Textos em EN/ES também escritos por mim. O texto antigo (que citava o fundador) saiu. A foto virou retrato 4:5; o quadro usa padding-bottom por causa de um problema de altura de grid na tela.
+
+## 20/11 — Sacola única entre o cardápio principal e o dos gelados
+- Pedido do Fabrício: quem pede um Bauru no cardápio normal e um Latte gelado no dos gelados deve ter os dois na mesma sacola e enviar um só pedido.
+- Solução sem banco: passagem temporária via `sessionStorage` (`tostes.sacola`) só na troca de cardápio; lida e apagada na chegada; ignorada em recarga/abertura nova; validade de 30 min; apagada ao enviar. Mantém a regra de que o pedido nunca fica salvo para reenviar por engano.
+- Linhas do outro cardápio aparecem com +/− e Remover, somam no total e vão na mesma mensagem do WhatsApp (mesmo número).
+- Observação: o cardápio dos gelados ainda usa o nome `TOSTES&CO` na mensagem (`nomeLoja`); não mexi, aguardando confirmação.
