@@ -168,7 +168,8 @@ window.I18N.en = {
     "itemPausadoAviso": "This item is off the menu for now.",
     "chapeuTexto1": "This coffee was inspired by our grandparents and by all the workers who help coffee reach every cup.",
     "chapeuTexto2": "The straw hat is the symbol of this story: it reminds us where everything comes from, the land, the sun and the work of many hands.",
-    "chapeuTexto3": "Every cup that leaves here carries a little of that. Thank you for being part of this story."
+    "chapeuTexto3": "Every cup that leaves here carries a little of that. Thank you for being part of this story.",
+    "daGelados": "From the iced coffee menu"
   },
   "config": {
     "marquee": "coffee to the millimeter ✦ 84+ beans ✦ made to order ✦ Fazenda Rio Grande ✦",

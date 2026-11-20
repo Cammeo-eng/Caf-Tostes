@@ -152,7 +152,8 @@ window.I18N.pt = {
     "itemPausadoAviso": "Este item está fora do cardápio por enquanto.",
     "chapeuTexto1": "Este café foi inspirado nos nossos avós e em todos os trabalhadores e trabalhadoras que ajudam o café a chegar a cada xícara.",
     "chapeuTexto2": "O chapéu de palha é o símbolo dessa história: ele lembra de onde vem tudo, da terra, do sol e do trabalho de muitas mãos.",
-    "chapeuTexto3": "Cada xícara que sai daqui carrega um pouco disso. Obrigado por fazer parte dessa história."
+    "chapeuTexto3": "Cada xícara que sai daqui carrega um pouco disso. Obrigado por fazer parte dessa história.",
+    "daGelados": "Do cardápio dos gelados"
   },
   "quiz": {
     "textos": {
