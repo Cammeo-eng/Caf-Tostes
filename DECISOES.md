@@ -206,3 +206,7 @@ Formato: data · assunto · decisão · quem decidiu.
 - Solução sem banco: passagem temporária via `sessionStorage` (`tostes.sacola`) só na troca de cardápio; lida e apagada na chegada; ignorada em recarga/abertura nova; validade de 30 min; apagada ao enviar. Mantém a regra de que o pedido nunca fica salvo para reenviar por engano.
 - Linhas do outro cardápio aparecem com +/− e Remover, somam no total e vão na mesma mensagem do WhatsApp (mesmo número).
 - Observação: o cardápio dos gelados ainda usa o nome `TOSTES&CO` na mensagem (`nomeLoja`); não mexi, aguardando confirmação.
+
+## 21/11 — Opções com frango pausadas
+- Pedido do Fabrício: pausar todas as opções com frango. Entraram em `CONFIG.itensPausados`: croissants-frango-com-requeijao-e-queijo, gratinados-frango-cremoso, toast-frango-cremoso, brunches-omelete-de-frango-cremoso, waffle-mineiro-frango. Nada foi apagado.
+- O favorito (Cappuccino meio amargo + Gratinado de frango) fica oculto enquanto o gratinado estiver pausado; quiz usa a sugestão padrão na regra "amargo". Para escolher outro favorito, é só trocar `CONFIG.favorito`.
