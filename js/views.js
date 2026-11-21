@@ -33,8 +33,11 @@ T.acts.lang = (b) => T.setLang(b.dataset.l);
 /* ---------- o pedido favorito ---------- */
 T.v.favorito = () => {
   const f = CONFIG.favorito;
+  const sec = $("#favorito");
+  if (!f.itens.every((x) => T.item(x.id))) { sec.hidden = true; sec.innerHTML = ""; return; }   // item do favorito pausado: a faixa some
+  sec.hidden = false;
   const c = T.favorito();
-  $("#favorito").innerHTML = `
+  sec.innerHTML = `
     <article class="fav-card">
       <div class="fav-foto">
         ${T.foto(T.item(f.itens[0].id).foto, T.t("favoritoFotoAlt"), "bebidas", 480, 360, "fav-img fav-img-a", T.item(f.itens[0].id))}

@@ -252,6 +252,7 @@ T.checarDados = () => {
   MENU.forEach((i) => { if (ids.has(i.id)) erros.push(`Id repetido: "${i.id}".`); ids.add(i.id); });
   CONFIG.favorito.itens.forEach((f) => {
     const it = T.itens[f.id];
+    if (!it && T.todosItens[f.id]) return;   // item pausado: o favorito some enquanto isso
     if (!it) erros.push(`Favorito aponta para o item inexistente "${f.id}".`);
     else if (f.tamanho && !it.tamanhos.some((t) => t.rotulo === f.tamanho)) erros.push(`Favorito: "${f.id}" não tem o tamanho "${f.tamanho}".`);
   });
