@@ -210,3 +210,6 @@ Formato: data · assunto · decisão · quem decidiu.
 ## 21/11 — Opções com frango pausadas
 - Pedido do Fabrício: pausar todas as opções com frango. Entraram em `CONFIG.itensPausados`: croissants-frango-com-requeijao-e-queijo, gratinados-frango-cremoso, toast-frango-cremoso, brunches-omelete-de-frango-cremoso, waffle-mineiro-frango. Nada foi apagado.
 - O favorito (Cappuccino meio amargo + Gratinado de frango) fica oculto enquanto o gratinado estiver pausado; quiz usa a sugestão padrão na regra "amargo". Para escolher outro favorito, é só trocar `CONFIG.favorito`.
+
+## 23/11 — Opções com frango reativadas
+- A pedido do Fabrício, `itensPausados` voltou a ficar vazio. Os 5 itens com frango e a faixa "O pedido favorito" voltaram; o quiz volta a usar o gratinado de frango na regra "amargo".
