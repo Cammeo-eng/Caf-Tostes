@@ -213,3 +213,7 @@ Formato: data · assunto · decisão · quem decidiu.
 
 ## 23/11 — Opções com frango reativadas
 - A pedido do Fabrício, `itensPausados` voltou a ficar vazio. Os 5 itens com frango e a faixa "O pedido favorito" voltaram; o quiz volta a usar o gratinado de frango na regra "amargo".
+
+## 25/11 — Opções com frango ou tomate pausadas
+- Pedido: "pause temporariamente opções com frango e tomate". Interpretei como itens com frango OU tomate (10 itens, ver `CONFIG.itensPausados`). Nada foi apagado.
+- Favorito some enquanto o gratinado de frango estiver pausado; quiz cai na sugestão padrão onde o salgado da regra está pausado.
