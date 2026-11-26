@@ -55,10 +55,7 @@ const CONFIG = {
   categoriasPausadas: ["waffle-americano", "gelados"],
 
   // Itens indisponíveis por enquanto (ids). Nada é apagado; para voltar, tire o id da lista.
-  itensPausados: [
-    // pausados por pedido (25/11): todas as opções com frango ou tomate. Para voltar, tire os ids da lista e suba o ?v=
-    "croissants-frango-com-requeijao-e-queijo", "croissants-presunto-queijo-e-tomate", "sanduiches-bauru", "gratinados-frango-cremoso", "gratinados-bauru", "toast-frango-cremoso", "toast-tomate-queijo", "brunches-omelete-de-frango-cremoso", "waffle-mineiro-frango", "waffle-mineiro-tipo-bauru"
-  ],
+  itensPausados: [],
 
   // Sticker usado no lugar da foto quando o item ainda não tem foto
   stickerCategoria: {
